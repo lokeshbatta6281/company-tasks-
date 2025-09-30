@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Lokesh Naidu</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+          }  
+        header, nav, footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+        }
+         figure {
+            display: inline-block;
+            margin: 1em;
+         }
+        footer {
+            text-align: center;
+        }
+       
+    </style>
+</head>
+<body bgcolor="mistyrose">
+
+<header>
+    <h1><img src="logo.jpg" alt="Simple logo"></h1>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        <a href="#blog">Blog</a>
+        <a href="#faq">FAQ</a>
+    </nav>
+</header>
+
+<section id="about">
+    <h2>About Me</h2>
+    <img src="my phote.jpeg" alt="Profile Picture" width="200" height="200">
+    <p>Hello! I am Lokesh Naidu, an aspiring web developer and technology enthusiast.</p>
+    <dl>
+        <dt>Location:</dt>
+        <dd>Guntakal, Anantapur, AP, India</dd>
+        <dt>Degree:</dt>
+        <dd>Bachelor of Engineering in ECE</dd>
+        <dt>Email:</dt>
+        <dd>lokeshbatta8@gmail.com</dd>
+    </dl>
+</section>
+
+<section id="projects">
+    <h2>Projects</h2>
+    <table  border="1">
+        <caption>My Project</caption>
+        <thead>
+            <tr bgcolor="lightblue">
+                <th>Project Name</th>
+                <th>Description</th>
+                <th>Technologies</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Portfolio Website</td>
+                <td>A personal portfolio website</td>
+                <td>HTML, CSS</td>
+            </tr>
+            <tr>
+                <td>ToDo App</td>
+                <td>A task management app</td>
+                <td>HTML, JS</td>
+            </tr>
+            <tr>
+                <td>Blog Platform</td>
+                <td>Simple blog CMS</td>
+                <td>HTML, CSS, JS</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<section id="skills">
+    <h2>Skills</h2>
+    <label>HTML</label>
+    <progress value="90" max="100"></progress>
+    <label>CSS</label>
+    <progress value="80" max="100"></progress>
+    <label>JavaScript</label>
+    <progress value="70" max="100"></progress>
+</section>
+
+<section id="gallery">
+    <h2>Gallery</h2>
+    
+    <figure>
+        <picture>
+            <source media="(max-width:100px)" srcset="https://via.placeholder.com/100">
+            <img src="image.png" alt="Project 1">
+        </picture>
+        <figcaption>Portfolio Website</figcaption>
+    </figure>
+    <figure>
+        <picture>
+            <source media="(max-width: 100px)" srcset="https://via.placeholder.com/100">
+            <img src="todo-app.png" alt="Project 2" width="200" height="150">
+        </picture>
+        <figcaption>todo-app</figcaption>
+    </figure>
+    <figure>
+        <picture>
+            <source media="(max-width: 100px)" srcset="https://via.placeholder.com/100">
+            <img src="Blog Platform.jpg" alt="Project 3" width="200" height="150">
+        </picture>
+        <figcaption>Blog Platform</figcaption>
+    </figure>
+    
+</section>
+
+<section id="contact">
+    <h2>Contact Me</h2>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required> <br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone"><br><br>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <input type="submit" value="Send">
+    </form>
+</section>
+
+<section id="blog">
+    <h2>Blog</h2>
+    <article>
+        <h3>My First Blog Post</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet accumsan tortor.</p>
+    </article>
+    <aside>
+        <h4>Recent Posts</h4>
+        <ul>
+            <li>Building a Portfolio</li>
+            <li>Learning JavaScript</li>
+            <li>Web Design Tips</li>
+        </ul>
+    </aside>
+</section>
+
+<section id="faq">
+    <h2>FAQ</h2>
+    <details>
+        <summary>What technologies do you use?</summary>
+        <p>I mainly use HTML, CSS, and JavaScript for web development projects.</p>
+    </details>
+    <details>
+        <summary>How can I contact you?</summary>
+        <p>You can reach me via email at lokeshbatta8@gmail.com or through the contact form above.</p>
+    </details>
+</section>
+
+<section id="media">
+    <h2>Audio Intro</h2>
+    <audio controls>
+        <source src="soft-background.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio><br>
+    <iframe width="360" height="115" src="https://www.youtube.com/embed/BzYMFd-lQL4?si=AdWPYI8Nr6-ZIjwo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    
+</section>
+
+<footer>
+    <p>&copy; 2025 Lokesh Naidu. All rights reserved.</p>
+    <p>Guntakal, Anantapur, AP, India</p>
+    <p>Last Updated: <time datetime="2025-09-30">September 30, 2025</time></p>
+</footer>
+
+</body>
+</html>
