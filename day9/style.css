@@ -1,30 +1,43 @@
     /* Basic reset */
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{
-        height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;color:#222;background:#f7f8fb;line-height:1.4
+     height: 100%;
+    font-family: Inter, Arial;
+    color: #312b2b;
+    line-height: 1.4;
+    }
+    h1{
+        color:rgb(112, 112, 182) ;
+    }
+    h2{
+        color: rgb(101, 101, 181);
     }
     a{
-        color:inherit;text-decoration:none
+        color:inherit;
+        text-decoration:none
     }
     img{
+        box-shadow: 5px 5px 5px #0f1724;
         max-width:100%;height:auto;display:block
     }
-
+   
     /* Layout */
     .container{max-width:1100px;margin:0 auto;padding:24px}
-    header{background:#0f1724;color:#fff;padding:18px 0;border-radius:10px}
+    header{background:#0f1724;color:#f7f5f5;padding:18px 0;border-radius:10px}
     .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{width:48px;height:48px;border-radius:8px;background:linear-gradient(135deg,#6c5ce7,#00b894);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:20px}
     nav ul{display:flex;gap:12px;list-style:none}
     nav a{padding:8px 12px;border-radius:8px;transition:background .15s}
-    nav a:hover{background:rgba(255,255,255,0.06)}
-
+    nav a:hover{background:rgb(216, 101, 101)}
+    
     /* Hero */
     .hero{display:grid;grid-template-columns:1fr 340px;gap:28px;padding:28px 0;align-items:center}
-    .hero h1{font-size:2rem;margin-bottom:8px}
-    .hero p{color:#cbd5e1}
-
+    .hero h1{font-size:2rem;
+        margin-bottom:8px}
+    .hero p{color:#3a3f44}
+   
+    
     /* Card sections */
     section.card{background:#fff;padding:18px;border-radius:10px;margin-top:18px;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
     .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
@@ -61,10 +74,12 @@
         display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px
     }
     figure{
-        border-radius:8px;overflow:hidden;background:#f1f5f9
+        border-radius:8px;overflow:hidden;background:#c8dbef
     }
     figcaption{
         padding:10px;font-size:0.9rem
+    }
+    figure:hover{background:rgba(255,255,255,0.06)
     }
 
     /* Contact form */
@@ -82,17 +97,28 @@
         min-height:120px;resize:vertical
     }
     button{
+        
         background:#0f1724;color:#fff;border:0;padding:10px 14px;border-radius:8px;cursor:pointer
     }
+    div button:hover{background:red}
 
     /* Blog */
     article{
         padding:12px 0;border-bottom:1px dashed #e6edf3
     }
-    aside{
-        background:#fbfdff;padding:12px;border-radius:8px
+    article{
+        text-shadow: #111;
+        background:#c8dbef;padding:12px;border-radius:8px
     }
-
+    aside{
+        text-shadow: #111;
+        background:#c8dbef;padding:12px;border-radius:8px
+    }
+    article:hover{background:rgba(255,255,255,0.06)
+    }
+    aside:hover{background:rgba(255,255,255,0.06)
+    }
+   
     /* FAQ */
     details{
         margin-bottom:8px;padding:10px;border-radius:8px;background:#fff
@@ -108,14 +134,26 @@
 
     /* Footer */
     footer{
-        margin-top:18px;padding:18px;border-radius:10px;background:#0f1724;color:#fff;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center
+        margin-top:18px;
+        padding:18px;
+        border-radius:10px;
+        background:#0f1724;
+        color:#fff;
+        display:flex;
+        flex-wrap:wrap;
+        gap:12px;
+        justify-content:space-between;
+        align-items:center
     }
+
     footer .left{
         max-width:60%
     }
     @media (max-width:880px){
-      .hero{grid-template-columns:1fr;grid-auto-rows:auto}
+      .hero{grid-template-columns:1fr;
+        grid-auto-rows:auto}
       .two-col{grid-template-columns:1fr}
-      header .nav-inner{flex-direction:column;align-items:flex-start;gap:10px}
+      header .nav-inner{flex-direction:column;
+        align-items:flex-start;gap:10px}
       footer .left{max-width:100%}
     }

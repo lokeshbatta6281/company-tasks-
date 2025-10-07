@@ -6,6 +6,9 @@
   <title>Portfolio — Your Name</title>
   <meta name="description" content="Personal portfolio — projects, skills, blog, contact." />
     <link rel="stylesheet" href="style.css">
+    <style>
+       p a:hover{background-color: #ac7070;}
+    </style>
 </head>
 <body>
   <div class="container">
@@ -13,7 +16,7 @@
     <header>
       <div class="nav-inner">
         <div class="brand">
-          <div class="logo" aria-hidden="true">BLN</div>
+          <div class="logo">BLN</div>
           <div>
             <div style="font-weight:700">B Lokesh Naidu</div>
             <div style="font-size:0.85rem;color:#cbd5e1">Frontend Developer</div>
@@ -35,12 +38,12 @@
     <!-- Hero / Intro -->
     <section class="card hero" id="home" aria-labelledby="hero-heading">
       <div>
-        <h1 id="hero-heading">Hi — B Lokesh Naidu</h1>
+        <h1 id="hero-heading" >Hi — B Lokesh Naidu</h1>
         <p>I'm a frontend developer who builds clean, accessible interfaces and enjoys turning designs into pixel-perfect web pages.</p>
         <p style="margin-top:12px">
           <strong>Location:</strong>guntakal &nbsp; 
         </p>
-        <p style="margin-top:14px">
+        <p style="margin-top:14px" >
           <a href="#contact" style="display:inline-block;background:#0ea5a4;color:#fff;padding:10px 14px;border-radius:8px">Say Hello</a>
           <a href="#projects" style="display:inline-block;margin-left:8px;padding:10px 14px;border-radius:8px;border:1px solid #0ea5a4">See my projects</a>
         </p>
@@ -177,20 +180,20 @@
       <h2 id="blog-heading">Blog</h2>
       <div style="display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-top:12px">
         <div>
-          <article aria-labelledby="post1">
+          <article aria-labelledby="post1" background-radius="8px">
             <h3 id="post1">My First Blog Post</h3>
-            <p style="color:#475569">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet accumsan tortor.</p>
+            <p style="color:#508bdf" >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet accumsan tortor.</p>
           </article>
 
           <article aria-labelledby="post2">
             <h3 id="post2">Recent Posts</h3>
-            <p style="color:#475569">Short excerpt: How to choose breakpoints and serve the right image size to save bandwidth.</p>
+            <p style="color:#508bdf">Short excerpt: How to choose breakpoints and serve the right image size to save bandwidth.</p>
           </article>
         </div>
 
         <aside aria-labelledby="aside-heading">
           <h4 id="aside-heading">About the blog</h4>
-          <p style="color:#475569">this on frontend development ,written by me.</p>
+          <p style="color:#508bdf">this on frontend development ,written by me.</p>
         </aside>
       </div>
     </section>
@@ -234,7 +237,7 @@
     <!-- Contact -->
     <section class="card" id="contact" aria-labelledby="contact-heading">
       <h2 id="contact-heading">Contact</h2>
-      <p style="color:#475569;margin-top:8px">Use the form to send me a message — or email at <a href="mailto:you@example.com">you@example.com</a></p>
+      <p style="color:#475569;margin-top:8px">Use the form to send me a message — or email at <a href="mailto:you@example.com" style="color: #508bdf;">you@example.com</a></p>
 
       <form action="#" method="post" aria-label="Contact form" style="margin-top:12px">
         <div class="row">
@@ -270,7 +273,7 @@
             <span style="font-size:0.95rem">I agree to be contacted</span>
           </label>
           <div style="margin-left:auto">
-            <button type="submit">Send message</button>
+            <button type="submit" >Send message</button>
           </div>
         </div>
       </form>
@@ -284,17 +287,11 @@
       </div>
 
       <div>
-        <div style="font-size:0.9rem;color:#cbd5e1">Last updated: <time datetime="2025-10-06">October 6, 2025</time></div>
+        <div style="font-size:0.9rem;color:#cbd5e1">Last updated: <time datetime="2025-10-07">October 7, 2025</time></div>
       </div>
     </footer>
   </div>
 
-  <!-- small inline script to set year (optional and safe) -->
-  <script>
-    // This tiny script only updates the copyright year automatically.
-    try {
-      document.getElementById('year').textContent = new Date().getFullYear();
-    } catch(e){}
-  </script>
+
 </body>
 </html>
