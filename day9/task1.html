@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfolio — Your Name</title>
+  <meta name="description" content="Personal portfolio — projects, skills, blog, contact." />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="nav-inner">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">BLN</div>
+          <div>
+            <div style="font-weight:700">B Lokesh Naidu</div>
+            <div style="font-size:0.85rem;color:#cbd5e1">Frontend Developer</div>
+          </div>
+        </div>
+        <nav aria-label="Main Navigation">
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero / Intro -->
+    <section class="card hero" id="home" aria-labelledby="hero-heading">
+      <div>
+        <h1 id="hero-heading">Hi — B Lokesh Naidu</h1>
+        <p>I'm a frontend developer who builds clean, accessible interfaces and enjoys turning designs into pixel-perfect web pages.</p>
+        <p style="margin-top:12px">
+          <strong>Location:</strong>guntakal &nbsp; 
+        </p>
+        <p style="margin-top:14px">
+          <a href="#contact" style="display:inline-block;background:#0ea5a4;color:#fff;padding:10px 14px;border-radius:8px">Say Hello</a>
+          <a href="#projects" style="display:inline-block;margin-left:8px;padding:10px 14px;border-radius:8px;border:1px solid #0ea5a4">See my projects</a>
+        </p>
+      </div>
+
+      <aside style="background:#fff;padding:12px;border-radius:10px">
+        <div style="text-align:center">
+          <picture class="my" aria-hidden="true">
+            <img src="my phote.jpeg" alt="Portrait of Your Name">
+          </picture>
+          <div style="margin-top:10px;font-weight:700">B Lokesh Naidu</div>
+          <div style="color:#6b7280;font-size:0.95rem">Frontend Developer</div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- About -->
+    <section class="card" id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About</h2>
+      <div class="two-col" style="margin-top:12px">
+        <div>
+          <p>Hello! I am Lokesh Naidu, an aspiring web developer and technology enthusiast.</p>
+
+          <dl>
+            <dt>Tools</dt>
+            <dd>HTML, CSS, Git, </dd>
+
+            <dt>Interests</dt>
+            <dd>Design systems</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="card" id="projects" aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Projects</h2>
+      <p style="margin-top:8px;color:#475569">Selected projects where I handled frontend</p>
+
+      <table aria-describedby="projects-heading" style="margin-top:12px">
+        <thead>
+          <tr>
+            <th>Project Name</th>
+            <th>Description</th>
+            <th>Technologies</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Portfolio Website</td>
+            <td>A personal portfolio website</td>
+            <td>HTML, CSS</td>
+          </tr>
+          <tr>
+            <td>ToDo App</td>
+            <td>A task management app</td>
+            <td>HTML, JS</td>
+          </tr>
+          <tr>
+            <td>Blog Platform</td>
+                <td>Simple blog CMS</td>
+                <td>HTML, CSS, JS</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">More projects available on request — contact me below.</td>
+          </tr>
+        </tfoot>
+      </table>
+    </section>
+
+    <!-- Skills -->
+    <section class="card" id="skills" aria-labelledby="skills-heading">
+      <h2 id="skills-heading">Skills</h2>
+      <div style="margin-top:12px">
+        <div class="skill">
+          <label><span>HTML</span><span>90%</span></label>
+          <progress value="90" max="100">90%</progress>
+        </div>
+
+        <div class="skill">
+          <label><span>CSS</span><span>84%</span></label>
+          <progress value="84" max="100">84%</progress>
+        </div>
+
+         <div class="skill">
+          <label><span>JS</span><span>85%</span></label>
+          <progress value="85" max="100">85%</progress>
+        </div>
+
+        <div class="skill">
+          <label><span>Accessibility</span><span>85%</span></label>
+          <meter value="85" min="0" max="100">85/100</meter>
+        </div>
+
+        <div style="margin-top:12px;font-size:0.95rem;color:#475569">
+          <strong>Other:</strong> Git, Responsive design.
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="card" id="gallery" aria-labelledby="gallery-heading">
+      <h2 id="gallery-heading">Gallery</h2>
+      <p style="color:#475569;margin-top:8px">Responsive images using <code>&lt;picture&gt;</code> and <code>&lt;figure&gt;</code>.</p>
+
+      <div class="gallery-grid">
+        <figure>
+          <picture>
+            <img src="portfolio.jpg" alt="Project 1">
+          </picture>
+          <figcaption>Portfolio Website</figcaption>
+        </figure>
+
+        <figure>
+          <picture>
+            <img src="todo-app.png" alt="Project 2">
+          </picture>
+          <figcaption>todo-app</figcaption>
+        </figure>
+
+        <figure>
+          <picture>
+            <img src="Best-Blogging-Platforms.png" alt="Project 3">
+          </picture>
+          <figcaption>Blog Platform</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Blog -->
+    <section class="card" id="blog" aria-labelledby="blog-heading">
+      <h2 id="blog-heading">Blog</h2>
+      <div style="display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-top:12px">
+        <div>
+          <article aria-labelledby="post1">
+            <h3 id="post1">My First Blog Post</h3>
+            <p style="color:#475569">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet accumsan tortor.</p>
+          </article>
+
+          <article aria-labelledby="post2">
+            <h3 id="post2">Recent Posts</h3>
+            <p style="color:#475569">Short excerpt: How to choose breakpoints and serve the right image size to save bandwidth.</p>
+          </article>
+        </div>
+
+        <aside aria-labelledby="aside-heading">
+          <h4 id="aside-heading">About the blog</h4>
+          <p style="color:#475569">this on frontend development ,written by me.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="card" id="faq" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">FAQ</h2>
+      <div style="margin-top:12px">
+        <details>
+          <summary>What technologies do you use?</summary>
+          <div style="margin-top:8px;color:#475569">I mainly use HTML, CSS, and JavaScript for web development projects.</div>
+        </details>
+
+        <details>
+          <summary>How can I contact you?</summary>
+          <div style="margin-top:8px;color:#475569">You can reach me via email at lokeshbatta8@gmail.com or through the contact form above.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Media (YouTube + Audio) -->
+    <section class="card" id="media" aria-labelledby="media-heading">
+      <h2 id="media-heading">Media</h2>
+      <div style="margin-top:12px">
+        <div class="media-wrap" style="margin-bottom:12px">
+          <!-- Example YouTube embed (replace video id) -->
+         <iframe width="560" height="315" src="https://www.youtube.com/embed/BzYMFd-lQL4?si=AdWPYI8Nr6-ZIjwo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <div>
+          <p style="margin-bottom:8px">Audio intro:</p>
+          <!-- Replace src with your audio file -->
+          <audio controls preload="none">
+            <source src="strings-intro.mp3" type="audio/mp3"> 
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="card" id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Contact</h2>
+      <p style="color:#475569;margin-top:8px">Use the form to send me a message — or email at <a href="mailto:you@example.com">you@example.com</a></p>
+
+      <form action="#" method="post" aria-label="Contact form" style="margin-top:12px">
+        <div class="row">
+          <label>
+            <input type="text" name="name" placeholder="Full name" required aria-label="Full name">
+          </label>
+          <label>
+            <input type="email" name="email" placeholder="Email address" required aria-label="Email address">
+          </label>
+        </div>
+
+        <div class="row" style="margin-top:6px">
+          <label>
+            <input type="tel" name="phone" placeholder="Phone number" aria-label="Phone number">
+          </label>
+          <label>
+            <select name="subject" aria-label="Subject">
+              <option value="">Select subject</option>
+              <option>Project inquiry</option>
+              <option>Collaboration</option>
+              <option>Other</option>
+            </select>
+          </label>
+        </div>
+
+        <label style="margin-top:6px">
+          <textarea name="message" placeholder="Write your message..." required aria-label="Message"></textarea>
+        </label>
+
+        <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+          <label style="display:flex;gap:8px;align-items:center">
+            <input type="checkbox" name="agree" required>
+            <span style="font-size:0.95rem">I agree to be contacted</span>
+          </label>
+          <div style="margin-left:auto">
+            <button type="submit">Send message</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer role="contentinfo" aria-label="Footer">
+      <div class="left">
+        <div>&copy; <span id="year">2025</span> Your Name. All rights reserved.</div>
+        <div style="font-size:0.9rem;color:#cbd5e1;margin-top:6px">📍Guntakal, kurnool, Andhra Pradesh, India • contact: <a href="mailto:you@example.com" style="color:#a7f3d0">lokeshbatta8@gmail.com</a></div>
+      </div>
+
+      <div>
+        <div style="font-size:0.9rem;color:#cbd5e1">Last updated: <time datetime="2025-10-06">October 6, 2025</time></div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- small inline script to set year (optional and safe) -->
+  <script>
+    // This tiny script only updates the copyright year automatically.
+    try {
+      document.getElementById('year').textContent = new Date().getFullYear();
+    } catch(e){}
+  </script>
+</body>
+</html>
