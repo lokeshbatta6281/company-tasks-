@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+}
+
+.external-box {
+    background-color: lightblue;
+    border: 2px solid rgb(59, 59, 148);
+    padding: 15px;
+}
+
+h2 {
+    font-family: Georgia, serif;
+}
+
+p {
+    font-size: 14px;
+}

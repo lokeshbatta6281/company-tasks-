@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector Playground</title>
+    <style>
+        p{
+            color: #ff5722;
+            font-size: 18px;
+        }
+        body {
+            
+            background-color: #e7d3ef;
+            margin: 20px;
+        }
+    </style>
+   <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <h1>CSS Selector Playground</h1>
+
+    <h2> Element Selector</h2>
+    <p>This paragraph  <strong>p</strong> element selector.</p>
+
+    <h2> Class Selector</h2>
+    <p class="highlight">This paragraph uses the <code>.highlight</code> class selector.</p>
+
+    <h2> ID Selector</h2>
+    <p id="special">This paragraph uses the <code>#special</code> ID selector.</p>
+
+    <h2>Grouping Selector</h2>
+    <h3>This heading (h3) shares styles with h2 because of grouping (h2, h3).</h3>
+
+    <h2>Descendant Selector</h2>
+    <div>
+        <p>This paragraph is inside a div, styled by <code>div p</code>.</p>
+    </div>
+
+    <h2> Child Selector</h2>
+    <ul>
+        <li>Direct child list item</li>
+        <li>Another list item</li>
+    </ul>
+
+    <h2>Attribute Selector</h2>
+    <input type="text" placeholder="Type something...">
+
+    <h2>Pseudo-class Selector</h2>
+    <p style="color: rgb(244, 181, 133);">Hover over this <a href="#">link</a> to see the pseudo-class <code>:hover</code> in action.</p>
+
+    <h2>Pseudo-element Selector</h2>
+    <p style="color: rgb(237, 176, 126);">This paragraph demonstrates the <code>::first-letter</code> pseudo-element.</p>
+</body>
+</html>
