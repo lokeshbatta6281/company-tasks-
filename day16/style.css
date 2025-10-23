@@ -1,0 +1,74 @@
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(117, 117, 217);
+    transform:translateX(60px) ;
+    border: 2px solid black;
+    color: #fff;
+    margin: 30px 0px;
+    transition: transform 1 ease;
+}
+.box:hover{
+    
+    transform: rotate(125deg);
+    transition: transform 3s ease;
+}
+.button{
+    padding: 10px 20px ;
+    font-size: 18px;
+    background-color: blueviolet;
+    color: rgb(246, 243, 243);
+    border: 2px solid black ;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform o.3s ease-in-out;
+    margin: 30px 50px;
+}
+.button:hover{
+    transform: scale(1.2);
+}
+.circle{
+    width: 100px;
+    height: 100px;
+    background-color: blanchedalmond;
+    transition: transform 0.5s ease;
+    border-radius: 50px;
+    border: #000;
+    margin: 30px 20px ;
+    text-align:center;
+    font-size: 22px;
+}
+.circle:hover {
+    transform: rotate(360deg);
+    transition:3s ease-in-out ;
+}
+.floating-shape{
+    width: 100px ;
+    height: 100px;
+    background-color: brown;
+    position: relative;
+    border-radius: 10px;
+    margin: 30px 20px;
+    animation-name: float;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+@keyframes float {
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(-20px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+.img{
+    margin: 100px 20px;
+    transition: transform 0.4s ease;
+}
+.img:hover{
+    transform: scale(1.5) rotate(30deg);
+}
