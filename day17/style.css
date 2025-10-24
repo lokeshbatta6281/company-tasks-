@@ -1,0 +1,175 @@
+:root {
+    --color-bg: rgb(224, 185, 134);
+    --font-color: rgb(16, 16, 16);
+}
+body{
+    font-family: "Work Sans";
+    background-color: rgb(91, 151, 124);
+}
+ header {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--color-bg);
+    align-items: center;
+    color: var(--font-color);
+    
+}
+.header1 {
+    margin-left: 160px;
+}
+nav {
+    padding: 20px;
+}
+ nav a {
+    margin-left: 20px;
+    padding: 0px 20px;
+    text-decoration: none;
+    font-size: 20px;
+    color: var(--font-color);
+}
+nav a:hover {
+    border-bottom: 3px solid var(--font-color);
+}
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 65px 100px;
+}
+
+.fade-slide-card {
+  width: 300px;
+  margin: 0px 200px 60px 0px;
+  padding: 50px 50px;
+  background-color: rgb(213, 188, 165);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInSlideUp 1s ease-out forwards;
+}
+@keyframes fadeInSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.button {
+  padding: 20px 30px;
+  border: 2px solid black;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.5s ease;
+  margin: 10px;
+}
+
+.button.red {
+  background-color: #ad2f18;
+}
+.button.red:hover {
+  background-color: #c0846f;
+}
+
+.button.blue {
+  background-color: #086cbe;
+}
+.button.blue:hover {
+  background-color: #5d8cbc;
+}
+
+.button.green {
+  background-color: #0c9c4d;
+}
+.button.green:hover {
+  background-color: #64b486;
+}
+.card {
+  position: relative;
+    width: 400px;
+    height: 220px;
+    margin: 10px 0px 90px
+}
+
+/* front and back faces */
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* hides the other side when flipped */
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: rgb(67, 52, 52);
+}
+
+/* front design */
+.front {
+  background-color: rgb(218, 176, 99);
+}
+
+/* back design */
+.back {
+  background-color: crimson;
+  transform: rotateY(180deg);
+}
+
+/* flipping animation */
+.card:hover {
+  animation: flip 2s ease forwards;
+}
+
+@keyframes flip {
+  from { 
+    transform: rotateY(0deg); 
+}
+  to { 
+    transform: rotateY(180deg); 
+}
+}
+.button1 {
+  padding: 40px 60px;
+  border:2px solid black;
+  color: white;
+  background-color: #4c75af;
+  font-size: 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.spinner {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #ec0808;
+  animation: spin 1s ease-in-out infinite;
+}
+
+.button1:hover .spinner {
+  display: block;
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+footer{
+    background-color: var(--color-bg);
+    text-align: center;
+    color: var(--font-color);
+    padding: 20px;
+    font-size:20px ;
+    margin: 0px 0px -10px;
+}
