@@ -1,0 +1,33 @@
+
+body{
+        text-align: center;
+        margin-top: 100px;
+    }
+
+    #increase {
+        padding: 12px;
+        background-color: rgb(81, 202, 85);
+        border-radius: 10px;
+        border: none;
+    }
+
+    #increase:hover{
+        background-color: rgb(55, 167, 68);
+    }
+
+    #decrease {
+        padding: 12px;
+        background-color: rgb(67, 147, 163);
+        border-radius: 10px;
+        border: none;
+    }
+    
+    #decrease:hover{
+        background-color: rgb(68, 66, 157);
+        
+
+    }
+
+    h2{
+        font-size: 25px;
+    }

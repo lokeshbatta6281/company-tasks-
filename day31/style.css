@@ -1,0 +1,61 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    max-width: 400px;
+    margin: 20px auto;
+    margin-top: 200px;
+}
+
+#todo-input {
+    padding: 8px;
+    width: 70%;
+}
+
+button {
+    padding: 8px;
+     
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    background: #f4f4f4;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+li button {
+    background: rgb(150, 138, 138);
+    color: white;
+    border: 3px solid black;
+    cursor: pointer;
+}
+
+#search {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+    font-size: 16px;
+}
+
+#itemList {
+    padding: 0;
+    width: 200px;
+}
+
+#itemList li {
+    padding: 15px;
+    border: 5px solid #949393;
+    border-radius: 10px;
+    margin-top: -1px;
+    background-color: #f6f6f6;
+}
