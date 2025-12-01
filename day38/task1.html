@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Signal (Red, Yellow and Green)</title>
+    <style>
+        body{
+            background-color: rgb(240, 207, 123);
+        }
+
+        .signal{
+            width: 140px;
+            padding: 60px 50px;
+            background:black;
+            border-radius: 100px;
+            margin: auto;
+            margin-top: 70px;
+        }
+        .red{
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: darkred;
+            margin: 10px auto;
+        }
+        .yellow{
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: darkgoldenrod;
+            margin: 10px auto;
+            margin-top: 50px; 
+        }
+        .green{
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: darkgreen;
+            margin: 10px auto;
+            margin-top: 50px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="signal">
+        <div class="red" id="redsignal"> </div>
+        <div class="yellow" id="yellowsignal"> </div>
+        <div class="green" id="greensignal"> </div>
+    </div>
+
+    <script src="day38.1.js"></script>
+</body>
+</html>
