@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing test for 2 minutes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Typing Test for 2 minutes</h2>
+    <div class="text-box" id="text">
+        A typing test is a simple assessment designed to measure how many words you can type in one minute,
+         also known as your Words Per Minute or WPM score. It also evaluates how accurately you type those words.
+        You will typically see a passage of text that you need to type as quickly and correctly as possible.
+    </div>
+
+    <textarea id="input" placeholder="Start typing here..."></textarea>
+
+    <div class="info">
+        Time Left:<span id="time"> 120 </span>sec | 
+        WPM:<span id="wpm">0</span>
+    </div>
+
+    <button onclick="restartTest()">Restart</button>
+
+  </div>
+<script src="task.js"></script>  
+</body>
+</html>

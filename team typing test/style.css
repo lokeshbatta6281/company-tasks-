@@ -1,0 +1,49 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image:url(portfolio2.jpg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: #eecbcb;
+    width: 435px;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    
+}
+
+.text-box {
+    background: #b1c2d3;
+    padding: 17px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 15px
+}
+
+textarea {
+    width: 96%;
+    height: 90px;
+    padding: 8px;
+    font-size: 15px;
+}
+
+.info {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 15px 40px;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 17px;
+}
