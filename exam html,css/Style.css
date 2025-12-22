@@ -13,6 +13,9 @@ header{
     justify-self: space-between;
 
 }
+.grid{
+    display: flex;
+}
 aside{
     grid-area: sidebar;
     background-color: aliceblue;
@@ -34,5 +37,8 @@ footer{
 }
 .card{
     background: #ffff;
-    border:1px solid #
+    border:1px solid black;
+    padding: 20px;
+    margin-top: 15px;
+    box-shadow: 0px 2px 4px rgb(111, 107, 107);
 }
