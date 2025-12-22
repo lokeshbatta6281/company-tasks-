@@ -1,0 +1,38 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(62, 111, 111);
+    line-height: 1.5;
+}
+
+header{
+    background-color: rgb(27, 42, 69);
+    color: white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-self: space-between;
+
+}
+aside{
+    grid-area: sidebar;
+    background-color: aliceblue;
+    padding: 2rem;
+    border-right: 1px solid rgb(82, 110, 135) ;
+}
+main{
+    grid-area: main;
+    background-color: #ffff;
+    padding: 2rem;
+}
+footer{
+    grid-area: footer;
+    background-color: rgb(226, 215, 215);
+    color: rgb(32, 54, 73);
+    padding: 2rem;
+    text-align: center;
+
+}
+.card{
+    background: #ffff;
+    border:1px solid #
+}
