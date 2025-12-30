@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us.com</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link href="bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .demo-count-box{
+  position: fixed;
+  right: 2px;
+  bottom: 160px; 
+  background: #fff;
+  padding: 16px 18px;
+  border-radius: 1px;
+  text-align: center;
+  display: flex;
+
+}
+
+.demo-count-box h3{
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: #000;
+}
+
+.demo-count-box p{
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* BUY NOW button */
+.buy-now-btn{
+  position: fixed;
+  right: 2px;
+  bottom: 95px; 
+  background: #e8685f;
+  color: #fff;
+  text-decoration: none;
+  padding: 16px 26px;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+.buy-now-btn:hover{
+  background: #8f271f;
+}
+/* BACK TO TOP BUTTON */
+#backToTop{
+  position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 5px solid #bab4b4;
+    background: white;
+    color: #8c8484;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+}
+    </style>
+    <script src="home.js"></script>
+</head>
+
+<body>
+
+    <div class="first-page">
+        <div class="header-container">
+            <a href="home.html" class="logo-img"><img  src="assets/brdg-logo.png" alt="logo" class="logo-img"></a>
+            <div class="align-right-most">
+                <div class="menu-items">
+                    <nav class="nav_bar">
+                        <ul class="nav_bar_list">
+                            <li class="nav_bar_list_item">
+                                <a class="anchor1" href="home.html"
+                                    style="text-decoration: none; color: #212121;">Home</a>
+                            </li>
+                            <li class="nav_bar_list_item"><a class="anchor" href="courses.html">Courses</a></li>
+                            <li class="nav_bar_list_item"><a class="anchor" href="instructor.html">Instructor</a></li>
+                            <li class="nav_bar_list_item"><a class="anchor" href="about-us.html">About Us</a></li>
+                            <li class="nav_bar_list_item"><a class="anchor" href="pricing.html">Pricing</a></li>
+                            <li class="nav_bar_list_item"><a class="anchor" href="contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="register-now">
+                    <button class="btn btn-primary" href="#">Register now</button>
+                </div>
+            </div>
+        </div>
+        <div class="instructor-first-page">
+            <p class="text-above-title">About our school</p>
+            <h1 class="title-large-size">At home, we believe that<br>
+                each student is unique.</h1>
+        </div>
+    </div>
+    <!-- second page -->
+    <div class="second-page" id="second-page" style="height:600px;">
+        <div class="second-page-inner">
+            <h6 class="online-courses" style="text-align:center;">ONLINE COURSES</h6>
+            <h2 class="essential-fast-facts" style="text-align: center;">Our fast services</h2>
+            <h5 class="main-heading" style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipisicing
+                elit, sed do<br>
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
+
+            <div class="seond-page-container">
+                <div class="image-gallery" style="gap: 120px;">
+                    <div class="gallery-item">
+                        <img src="assets/notifications.png" alt="notification-image" width="128" height="125">
+                        <h4 class="heading">Notification & Emails</h4>
+                        <p class="text">
+                            Duis aute irure dolor in reprehenderit in<br>
+                            voluptate velit esse cillum dolore eu fugiat<br>
+                            nulla pariatur. Excepteur sint.
+                        </p>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="assets/certification.png" alt="notification-image" width="128" height="125">
+                        <h4 class="heading">Certification</h4>
+                        <p class="text">
+                            Duis aute irure dolor in reprehenderit in<br>
+                            voluptate velit esse cillum dolore eu fugiat<br>
+                            nulla pariatur. Excepteur sint.
+                        </p>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="assets/europe-campus.png" alt="notification-image" width="128" height="125">
+                        <h4 class="heading">Europe Campus</h4>
+                        <p class="text">
+                            Duis aute irure dolor in reprehenderit in<br>
+                            voluptate velit esse cillum dolore eu fugiat<br>
+                            nulla pariatur. Excepteur sint.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- third page -->
+    <div class="sixth-page-container" style="display: flex;flex-direction: row;align-items: center; gap: 110px;">
+        <div class="video-image" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-left: 115px;">
+            <div class="video-container" style="position: relative; width: 640px; max-width: 100%;">
+                <a href="#" id="playVideoBtn"
+                    onclick="document.getElementById('aboutVideo').style.display='block'; this.style.display='none'; return false;"
+                    style="display: block; position: relative;">
+                    <img src="assets/about2.jpg" alt="Video Thumbnail"
+                        style="width:100%; display:block; border-radius:none;">
+                    <span
+                        style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:48px;color:#ffbe30;background:white;border-radius:50%;padding:8px 28px;">
+                        <span class="icon-inline" style="padding: 23px 23px 23px 0px;" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" style="font-size: 20px;"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M187.2 100.9C174.8 94.1 159.8 94.4 147.6 101.6C135.4 108.8 128 121.9 128 136L128 504C128 518.1 135.5 531.2 147.6 538.4C159.7 545.6 174.8 545.9 187.2 539.1L523.2 355.1C536 348.1 544 334.6 544 320C544 305.4 536 291.9 523.2 284.9L187.2 100.9z"/></svg></span>
+                    </span>
+                </a>
+                <iframe id="aboutVideo" title="vimeo-player" src="https://player.vimeo.com/video/291919936?h=06fa19a8de"
+                    width="640" height="360" frameborder="0" referrerpolicy="strict-origin-when-cross-origin"
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                    allowfullscreen
+                    style="display:none; border-radius:8px; width:100%; max-width:640px;">
+                </iframe>
+            </div>
+        </div>
+        <div class="sixth-page-container_1" style="display: flex;flex-direction: column;align-items: flex-start;">
+            <h6 class="online-courses" style="color: #151314;">Online courses</h6>
+            <h2 class="sixth-page-heading1">Individual Attention</h2>
+            <h5 class="sixth-page-text1">Lorem ipsum dolor sit amet, consectetur
+                adipisicing<br>
+                elit, sed do eiusmod tempor</h5>
+            <p class="elementor-text">Lorem ipsum dolor sit amet, consectetur adipisicing
+                elit, sed<br>
+                do eiusmod tempor incididunt ut labore et dolore magna<br>
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation<br>
+                ullamco labore et dolore minim.</p>
+            <button class="btn btn-primary" id="button">Contact us</button>
+        </div>
+    </div>
+    <!-- fourth page -->
+    <div class="fourth-elementor">
+        <div class="tabs-container">
+            <div class="tab-btn active" onclick="toggleTab(0)">Education Center</div>
+            <div class="tab-btn" onclick="toggleTab(1)">We're already there</div>
+            <div class="tab-btn" onclick="toggleTab(2)">Your financial home</div>
+            <div class="tab-btn" onclick="toggleTab(3)">Quality in everything we do</div>
+            <div class="tab-btn" onclick="toggleTab(4)">Turning banking on its head</div>
+        </div>
+        <!-- first-tab -->
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane active">
+                <h6 class="tab-text">online courses</h6>
+                <h2 class="text-heading">Individual Attention</h2>
+                <h5 class="sub-text">Lorem ipsum dolor sit amet, consectetur<br>adipisicing elit, sed do eiusmod tempor.
+                </h5>
+            </div>
+            <div class="list-items">
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>The trusted name
+                    for specialized training.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span> We Enrich Lives
+                    Through Learning.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>People teach.
+                    People learn. This is where they.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>Maximizing
+                    potential through attention.</p>
+            </div>
+            <div class="list-images">
+                <img src="assets/about us-img-1.png" alt="List Image" width="378" height="351"
+                    style="margin-right:20px;">
+            </div>
+        </div>
+        <!-- second tab -->
+        <div class="tab-content" style="display: none;">
+            <div id="tab1" class="tab-pane active">
+                <h6 class="tab-text">online courses</h6>
+                <h2 class="text-heading">Programme<br>structure</h2>
+                <h5 class="sub-text">Lorem ipsum dolor sit amet, consectetur<br>adipisicing elit, sed do eiusmod tempor.
+                </h5>
+            </div>
+            <div class="list-items">
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>The trusted name
+                    for specialized training.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span> We Enrich Lives
+                    Through Learning.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>People teach.
+                    People learn. This is where they.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>Maximizing
+                    potential through attention.</p>
+            </div>
+            <div class="list-images">
+                <img src="assets/about us-img-2.png" alt="List Image" width="378" height="351"
+                    style="margin-right:20px;">
+            </div>
+        </div>
+        <!-- third tab -->
+        <div class="tab-content" style="display: none;">
+            <div id="tab1" class="tab-pane active">
+                <h6 class="tab-text">online courses</h6>
+                <h2 class="text-heading">Applied Studies</h2>
+                <h5 class="sub-text">Lorem ipsum dolor sit amet, consectetur<br>adipisicing elit, sed do eiusmod tempor.
+                </h5>
+            </div>
+            <div class="list-items">
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>The trusted name
+                    for specialized training.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span> We Enrich Lives
+                    Through Learning.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>People teach.
+                    People learn. This is where they.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>Maximizing
+                    potential through attention.</p>
+            </div>
+            <div class="list-images">
+                <img src="assets/about us-img-3.png" alt="List Image" width="378" height="351"
+                    style="margin-right:20px;">
+            </div>
+        </div>
+        <!-- fourth tab -->
+        <div class="tab-content" style="display: none;">
+            <div id="tab1" class="tab-pane active">
+                <h6 class="tab-text">online courses</h6>
+                <h2 class="text-heading">Executive<br>Development</h2>
+                <h5 class="sub-text">Lorem ipsum dolor sit amet, consectetur<br>adipisicing elit, sed do eiusmod tempor.
+                </h5>
+            </div>
+            <div class="list-items">
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>The trusted name
+                    for specialized training.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span> We Enrich Lives
+                    Through Learning.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>People teach.
+                    People learn. This is where they.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>Maximizing
+                    potential through attention.</p>
+            </div>
+            <div class="list-images">
+                <img src="assets/about us-img-4.png" alt="List Image" width="378" height="351"
+                    style="margin-right:20px;">
+            </div>
+        </div>
+        <!-- fifth tab -->
+        <div class="tab-content" style="display: none;">
+            <div id="tab1" class="tab-pane active">
+                <h6 class="tab-text">online courses</h6>
+                <h2 class="text-heading">Programme of studies</h2>
+                <h5 class="sub-text">Lorem ipsum dolor sit amet, consectetur<br>adipisicing elit, sed do eiusmod tempor.
+                </h5>
+            </div>
+            <div class="list-items">
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>The trusted name
+                    for specialized training.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span> We Enrich Lives
+                    Through Learning.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>People teach.
+                    People learn. This is where they.</p>
+                <p><span class="icon-inline" style="color: #fea9ae; margin-right: 8px; font-size:19px; font-weight:100;" aria-hidden="true">✓</span>Maximizing
+                    potential through attention.</p>
+            </div>
+            <div class="list-images">
+                <img src="assets/about us-img-5.png" alt="List Image" width="378" height="351"
+                    style="margin-right:20px;">
+            </div>
+        </div>
+
+    </div>
+
+    <!-- fifth page -->
+    <div class="fifth-page">
+        <div style="display: flex; flex-direction: column; justify-content: center;">
+            <h6 class="online-courses" style="text-align:center;margin-top: 150px;">ONLINE COURSES</h6>
+            <h2 class="fifth-page-heading" style="text-align: center; font-weight: 500px;">Best tutors you can find</h2>
+            <div style="text-align:center; width: 700px; margin: 0 auto;">
+                <h5 class="fifth-page-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua.</h5>
+            </div>
+        </div>
+
+        <div class="fifth-page-container">
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="assets/Teacher1.png" alt="notification-image" width="150px" height="150px">
+                    <h4 class="heading">Brenda Harris</h4>
+                    <h6 class="teacher">Teacher</h6>
+                    <p class="text">
+                        Lorem ipsum dolor sit amet, consect
+                        etur adipisicing elit, sed do eiusmodem
+                        por incididun ut labore et.
+                    </p>
+                    <div>
+                        <i class="fab fa-twitter icon-inline" style="margin: 0 10px; font-size: 18px;"></i>
+                            <i class="fab fa-instagram icon-inline" style="margin: 0 10px; font-size: 18px;"></i>
+                            <i class="fab fa-facebook-f icon-inline" style="margin: 0 10px; font-size: 18px;"></i>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="assets/Teacher2.png" alt="notification-image" width="150" height="150">
+                    <h4 class="heading">Sherlock Anderson</h4>
+                    <h6 class="teacher">Teacher</h6>
+                    <p class="text">
+                        Lorem ipsum dolor sit amet, consect etur adipisicing elit, sed do eiusmodem por incididun ut
+                        labore et.
+                    </p>
+                    <div>
+                        <i class="fab fa-twitter icon-inline" style="margin: 0 10px; font-size: 18px;"></i>
+                            <i class="fab fa-instagram icon-inline" style="margin: 0 10px; font-size: 18px;"></i>
+                            <i class="fab fa-facebook-f icon-inline" style="margin: 0 10px; font-size: 18px;"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/Teacher3.png" alt="notification-image" width="150" height="150">
+                    <h4 class="heading">Simona Rider</h4>
+                    <h6 class="teacher">Teacher</h6>
+                    <p class="text">
+                        Lorem ipsum dolor sit amet, consect etur adipisicing elit, sed do eiusmodem por incididun ut
+                        labore et.
+                    </p>
+                    <div>
+                        <i class="fab fa-twitter icon-inline" style="margin: 0 10px; font-size: 18px;"></i>
+                            <i class="fab fa-instagram icon-inline" style="margin: 0 10px; font-size: 18px;"></i>
+                            <i class="fab fa-facebook-f icon-inline" style="margin: 0 10px; font-size: 18px;"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/Teacher4.png" alt="notification-image" width="150" height="150">
+                    <h4 class="heading">Victor Green</h4>
+                    <h6 class="teacher">Teacher</h6>
+                    <p class="text">
+                        Lorem ipsum dolor sit amet, consect etur adipisicing elit, sed do eiusmodem por incididun ut
+                        labore et.
+                    </p>
+                    <div>
+                        <i class="fab fa-twitter icon-inline" style="margin: 0 10px; font-size: 18px;"></i>
+                            <i class="fab fa-instagram icon-inline" style="margin: 0 10px; font-size: 18px;"></i>
+                            <i class="fab fa-facebook-f icon-inline" style="margin: 0 10px; font-size: 18px;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sixth page -->
+    <div class="sixth-page-elementor">
+        <div class="sixth-page-elementor-row"
+            style="display: flex; justify-content: center; align-items: center; height: 100%;"></div>
+        <div>
+            <h2 class="sixth-page-elementor-text">Stay in Touch. Update your Information.</h2>
+        </div>
+        <div class="register-now" style="margin: -50px 0px 0px 1150px;">
+            <button class="btn btn-primary" href="#">Register now</button>
+        </div>
+    </div>
+    </div>
+    <!-- seventh page -->
+    <footer>
+        <div class="eighth-page-container">
+            <div class="column1">
+                <h5 class="column-heading">About School</h5>
+                <p class="column1-text1">
+                    Donec vitae sapien ut libero venenatis<br>
+                    faucibus. Nullam quis ante. Etiam sit<br>
+                    amet orci eget eros
+                </p>
+                <h5 class="column1-heading1">Contact details</h5>
+                <p class="icon-title">
+                    <span class="icon-inline" style="color: #ffbd2f; margin-right: 8px;" aria-hidden="true">📍</span>
+                    Langebrogade 1DK, Copenhagen
+                </p>
+                <p class="icon-title">
+                    <span class="icon-inline" style="color: #ffbd2f; margin-right: 8px;" aria-hidden="true">📞</span>
+                    +0080-33-666-234
+                </p>
+                <p class="icon-title">
+                    <span class="icon-inline" style="color: #ffbd2f; margin-right: 8px;" aria-hidden="true">✉️</span>
+                    home@example.com
+                </p>
+            </div>
+            <div class="column2">
+                <h5 class="column-heading">Popular Courses</h5>
+                <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                    Computer Science
+                </a>
+                <span class="instructor">Brenda Harris</span>
+                <br>
+                <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                    Business English
+                </a>
+                <span class="instructor">Brenda Harris</span>
+                <br>
+                <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                    Photoshop Tutorial
+                </a>
+                <span class="instructor">Sarah Rogers</span>
+                <br>
+                <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                    Business Course
+                </a>
+                <span class="instructor">Sarah Rogers</span>
+            </div>
+            <div class="column3">
+                <h5 class="column-heading">Useful Links</h5>
+                <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                    Building an Excellence
+                </a>
+                <br>
+                <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                    Choose Your Destination
+                </a>
+                <br>
+                <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                    Belive in Yourself
+                </a>
+                <br>
+                <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                    Fast Way of Learning!
+                </a>
+                <br>
+                <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                    Educating Leaders
+                </a>
+            </div>
+            <div class="column4">
+                <h5 class="column-heading">Our Place</h5>
+                <img src="assets/footer-map-300x235.png" alt="Our Place Map" width="100%" height="235"
+                    style="object-fit: cover; border: 0;">
+            </div>
+        </div>
+
+        <div class="bottom-text">
+            <div class="bottomText-left">Copyright 2020 Qode Interactive.</div>
+            <div class="bottomText-right">
+                <span>call Center: (555) 789 6754 </span>
+                <span class=" fab fa-twitter icon-inline" style="color: #464c55;margin: 0 10px 0 10px;font-size: 15px;color: #464c55;" aria-hidden="true"></span>
+                <span class="fab fa-instagram icon-inline" style="color: #464c55;margin: 0 10px 0 10px;font-size: 15px;color: #464c55;" aria-hidden="true"></span>
+                <span class="fab fa-facebook-f icon-inline" style="color: #464c55;margin: 0 10px 0 10px;font-size: 15px;color: #464c55;" aria-hidden="true"></span>
+            </div>
+        </div>
+    </footer>
+    <!-- 630+ Bridge demos box -->
+        <div class="demo-count-box">
+            <h3>630+</h3>
+            <p>Bridge demos</p>
+        </div>
+        
+        <!-- Buy now button -->
+        <a href="#" class="buy-now-btn">
+            👜 BUY NOW $69
+        </a>
+        
+        <!-- BACK TO TOP -->
+        <button id="backToTop">↑</button>
+        
+        <!-- JS FILE -->
+        <script>
+            const btn = document.getElementById("backToTop");
+
+            window.onscroll = () => {
+                btn.style.display = window.scrollY > 300 ? "block" : "none";
+            };
+
+            btn.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+        </script>
+</body>
+<style>
+    .instructor-first-page {
+        background-image: url('assets/about1.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 900px;
+        padding: 300px 0px 100px 180px;
+    }
+
+    .text-above-title {
+        color: #ffbe30;
+        font-family: Roboto;
+        font-weight: 500;
+        font-style: normal;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 12px;
+        line-height: 1.4em;
+    }
+
+    .title-large-size {
+        color: #000;
+        font-family: "Noto Sans JP", sans sarief;
+        font-size: 50px;
+        line-height: 60px;
+        font-weight: 500;
+        letter-spacing: 0px;
+        text-transform: none;
+    }
+
+    #button {
+        border-radius: 0;
+        width: 150px;
+        height: 50px;
+        background-color: rgb(248, 160, 175);
+        border: none;
+    }
+
+    .elementor-text {
+        color: #707070;
+        font-family: 'Poppins', sans-serif;
+        font-size: 17px;
+        line-height: 28px;
+        font-style: normal;
+        font-weight: 400;
+    }
+
+    .sixth-page-elementor {
+        background-image: url(assets/call-to-action-img-1.png);
+        height: 250px;
+    }
+    .icon-inline:hover{
+        color: #ffbd2f;
+        
+    }
+    .sixth-page-elementor-text {
+        color: #000000;
+        font-family: 'Noto Sans JP', sans-serif;
+        font-size: 40px;
+        line-height: 50px;
+        font-style: normal;
+        font-weight: 500;
+        letter-spacing: 0px;
+        text-transform: none;
+        display: flex;
+        flex-direction: column;
+        margin: -150px 650px 0px 100px;
+        padding-left: 0px;
+    }
+
+    /* tabs nav */
+    .fourth-elementor {
+        height: 750px;
+        background-color: #272d3c;
+    }
+
+
+    .tabs-container {
+        font-family: "Noto Sans JP", sans-serif;
+        color: white;
+        font-size: 18px;
+        text-transform: none;
+        border: none;
+        text-align: left;
+        padding: 150px 0px 31px 150px;
+        border-right: 6px solid transparent;
+        box-sizing: border-box;
+        line-height: 80px;
+    }
+
+    .tab-btn:hover {
+        border-color: transparent;
+        background-color: #fff;
+        border-radius: 0;
+        border: none;
+        border-right: 6px solid #ffbe30;
+        color: #000;
+
+    }
+
+    .tab-btn {
+        padding: 2px 8px 2px 30px;
+        margin: 0px 900px 0px 0px;
+    }
+
+    .tab-content {
+        margin: -450px 0px 0px 650px;
+    }
+
+    .tab-text {
+        color: #ffbe30;
+        font-family: 'Roboto', sans-serif;
+        font-size: 12px;
+        line-height: 18px;
+        font-style: normal;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: left;
+    }
+
+    .text-heading {
+        color: #ffffff;
+        font-family: 'Noto Sans JP', sans-serif;
+        font-size: 40px;
+        line-height: 50px;
+        font-style: normal;
+        font-weight: 500;
+        letter-spacing: 0px;
+        text-transform: none;
+        text-align: left;
+    }
+
+    .sub-text {
+        color: #ffffff;
+        font-family: 'Poppins', sans-serif;
+        font-size: 18px;
+        line-height: 31px;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: 0px;
+        text-transform: none;
+        text-align: left;
+    }
+
+    .list-items {
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 400;
+        margin-top: 50px;
+    }
+
+    .list-images {
+        margin: -350px 0px 0px 380px;
+    }
+</style>
+
+</html>

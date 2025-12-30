@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>home.com</title>
+        
+        <link rel="stylesheet" href="home.css">
+        <link href="bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+        <script>
+            const slides = document.querySelectorAll(".slide");
+            const dots = document.querySelectorAll(".dot");
+            const prevBtn = document.querySelector(".prev");
+            const nextBtn = document.querySelector(".next");
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            function showSlide(index) {
+              // Handle wrapping around the slides
+              if (index >= totalSlides) {
+                currentSlide = 0;
+              } else if (index < 0) {
+                currentSlide = totalSlides - 1;
+              } else {
+                currentSlide = index;
+              }
+
+              slides.forEach((slide) => slide.classList.remove("active"));
+              dots.forEach((dot) => dot.classList.remove("active"));
+              slides[currentSlide].classList.add("active");
+              dots[currentSlide].classList.add("active");
+            }
+
+            // Event listeners for navigation buttons
+            prevBtn.addEventListener("click", () => {
+              showSlide(currentSlide - 1);
+              resetAutoSlide();
+            });
+
+            nextBtn.addEventListener("click", () => {
+              showSlide(currentSlide + 1);
+              resetAutoSlide();
+            });
+
+            // Event listeners for dots
+            dots.forEach((dot, index) => {
+              dot.addEventListener("click", () => {
+                showSlide(index);
+                resetAutoSlide();
+              });
+            });
+
+            // Automatic slideshow
+            let autoSlideInterval = setInterval(() => {
+              showSlide(currentSlide + 1);
+            }, 5000); // Change slide every 5 seconds
+
+            // Reset the timer when a button or dot is clicked
+            function resetAutoSlide() {
+              clearInterval(autoSlideInterval);
+              autoSlideInterval = setInterval(() => {
+                showSlide(currentSlide + 1);
+              }, 5000);
+            }
+            // tabs nav
+            const tabData = [
+                  {
+                    title: "About School",
+                    text: "Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros.",
+                    img: "assets/about1.jpg"
+                  },
+                  {
+                    title: "Popular Courses",
+                    text: "Computer Science, Business English, Photoshop Tutorial, Business Course.",
+                    img: "assets/certification.png"
+                  },
+                  {
+                    title: "Useful Links",
+                    text: "Building an Excellence, Choose Your Destination, Belive in Yourself, Fast Way of Learning!",
+                    img: "assets/europe-campus.png"
+                  },
+                  {
+                    title: "Our Place",
+                    text: "Langebrogade 1DK, Copenhagen. Visit us for more information.",
+                    img: "assets/footer-map-300x235.png"
+                  },
+                  {
+                    title: "Contact Us",
+                    text: "Phone: +0080-33-666-234<br>Email: home@example.com",
+                    img: "assets/notifications.png"
+                  }
+                ];
+
+                function showTab(idx) {
+                  // Update nav active state
+                  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+                    btn.classList.toggle('active', i === idx);
+                  });
+                  // Update content
+                  const tab = tabData[idx];
+                  document.getElementById('tabs-content').innerHTML = `
+                    <img src="${tab.img}" alt="${tab.title}" class="tab-image">
+                    <div class="tab-title">${tab.title}</div>
+                    <p class="tab-text">${tab.text}</p>
+                  `;
+                }
+
+                // Show first tab on load
+                showTab(0);
+
+            function toggleTab(index) {
+                // Remove 'active' from all tab buttons
+                document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+                    btn.classList.toggle('active', i === index);
+                });
+                // Show only the corresponding tab-pane
+                document.querySelectorAll('.tab-content').forEach((pane, i) => {
+                    pane.classList.toggle('active', i === index);
+                    pane.style.display = i === index ? 'block' : 'none';
+                });
+            }
+        </script>
+        <style>
+            /* --- Style added to move the register button to the right --- */
+            .align-right-most {
+                margin-right: 40px; /* Adjust this value to change the button's distance from the right edge */
+            }
+            .anchor1:hover{
+                color: rgb(235, 186, 96);
+            }
+            .new-contact-form-container button:hover {
+                background-color: #ef5454;
+            }
+
+            .new-contact-form-container button {
+                background-color: rgb(231, 171, 60);
+                color: #fff;
+                padding: 15px;
+                border: none;
+                cursor: pointer;
+                font-size: 1rem;
+                font-weight: bold;
+                text-transform: uppercase;
+                transition: background-color 0.3s ease;
+            }
+
+            .new-contact-form-container h2 {
+                text-align: center;
+                margin-bottom: 25px;
+                color: #333;
+                font-weight: 500;
+                font-family: 'Poppins', sans-serif;
+                /* A modern font */
+            }
+
+            .new-contact-form-container form {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .new-contact-form-container input[type="text"],
+            .new-contact-form-container input[type="email"],
+            .new-contact-form-container input[type="tel"],
+            .new-contact-form-container textarea {
+                width: 100%;
+                padding: 12px 15px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 1rem;
+                background-color: #f9f9f9;
+                box-sizing: border-box;
+                /* To ensure padding is included in width */
+            }
+
+            .new-contact-form-container input::placeholder,
+            .new-contact-form-container textarea::placeholder {
+                color: #999;
+            }
+
+            /* New Contact Form Styles based on the image */
+            .new-contact-form-container {
+                background-color: #fff;
+                padding: 40px;
+                width: 100%;
+                max-width: 400px;
+                margin: 20px;
+                /* Adjust as needed */
+            }
+            .icon-inline:hover{
+                color: #ffbd2f;
+            }
+            /* 630+ Bridge demos box */
+.demo-count-box{
+  position: fixed;
+  right: 2px;
+  bottom: 160px; 
+  background: #fff;
+  padding: 16px 18px;
+  border-radius: 1px;
+  text-align: center;
+  display: flex;
+
+}
+
+.demo-count-box h3{
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: #000;
+}
+
+.demo-count-box p{
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #555;
+}
+
+/* BUY NOW button */
+.buy-now-btn{
+  position: fixed;
+  right: 2px;
+  bottom: 95px; 
+  background: #e8685f;
+  color: #fff;
+  text-decoration: none;
+  padding: 16px 26px;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+.buy-now-btn:hover{
+  background: #8f271f;
+}
+/* BACK TO TOP BUTTON */
+#backToTop{
+  position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 5px solid #bab4b4;
+    background: white;
+    color: #8c8484;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+    z-index: 1000;
+}
+        </style>
+    </head>
+
+    <body class="main-body">
+
+        <div class="first-page">
+            <div class="header-container">
+                <a href="home.html" class="logo-img"><img  src="assets/brdg-logo.png" alt="logo" class="logo-img"></a>
+                <div class="align-right-most">
+                    <div class="menu-items">
+                        <nav class="nav_bar">
+                            <ul class="nav_bar_list">
+                                <li class="nav_bar_list_item">
+                                    <a class="anchor1" style="color: #ffbe30;text-decoration: none;" href="home.html">Home</a>
+                                </li>
+                                <li class="nav_bar_list_item"><a class="anchor" href="courses.html">Courses</a></li>
+                                <li class="nav_bar_list_item"><a class="anchor" href="instructor.html">Instructor</a></li>
+                                <li class="nav_bar_list_item"><a class="anchor" href="about-us.html">About Us</a></li>
+                                <li class="nav_bar_list_item"><a class="anchor" href="pricing.html">Pricing</a></li>
+                                <li class="nav_bar_list_item"><a class="anchor" href="contact.html">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="register-now">
+                        <button class="btn btn-primary" href="#">Register now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="carouselExample" class="carousel slide carousel-custom-css" data-bs-ride="carousel" style="width:100%">
+                <div class="carousel-inner w-75">
+                    <div class="carousel-item active">
+                        <div class="one-slide">
+                            <div class="one-slide-left">
+                                <p style="color: #ffbe30;align-items: left;font-size: 12px;font-family: Roboto;font-weight: 500;padding-top: -10px;">HELLO WORLD</p>
+                                <h1>Learn the language, </h1>
+                                <h1>not just words. </h1>
+                                <p style="font-size: 23px;text-align: left;color: rgb(72, 72, 72);">
+                                    Ipsum dolor sit amet, consectetur adipisicing elit, <br>do eiusmod tempor incididunt ut
+                                    labore et.
+                                </p>
+                                <button class="btn btn-primary"> Read more</button>
+                            </div>
+                            <div class="one-slide-right">
+                                <img class="one-slide-right-image" width=793 height=785 src="assets/first page image.png">
+                                <div class="small-circle">
+                                    <img src="assets/slider-small-img-3.png" width="170px" style="margin: 30px 0px 0px 60px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="one-slide">
+                            <div class="one-slide-left">
+                                <p style="color: #ffbe30;align-items: left;font-size: 12px;font-family: Roboto;font-weight: 500;padding-top: -10px;">HELLO WORLD</p>
+                                <h1>Explore and complete</h1>
+                                <h1>a Guided Project</h1>
+                                <p style="font-size: 23px ;text-align: left;color: rgb(72, 72, 72);">
+                                    Ipsum dolor sit amet, consectetur adipisicing elit, <br> do eiusmod tempor incididunt ut
+                                    labore et.
+                                </p>
+                                <button class="btn btn-primary"> Read more</button>
+                            </div>
+                            <div class="one-slide-right">
+                                <img class="one-slide-right-image" width=793 height=785 src="assets/slider-img-2.png">
+                                <div class="small-circle">
+                                    <img src="assets/slider-small-img-2.png" width="170px" style="margin: 30px 0px 0px 10px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="one-slide">
+                            <div class="one-slide-left">
+                                <p style="color: #ffbe30;align-items: left;font-size: 12px;font-family: Roboto;font-weight: 500;padding-top: -10px;">HELLO WORLD</p>
+                                <h1>Kids love technology </h1>
+                                <h1>and digital learning </h1>
+                                <p style="font-size: 23px;text-align: left;color: rgb(72, 72, 72);">
+                                    Ipsum dolor sit amet, consectetur adipisicing elit, <br>do eiusmod tempor incididunt ut
+                                    labore et.
+                                </p>
+                                <button class="btn btn-primary"> Read more</button>
+                            </div>
+                            <div class="one-slide-right">
+                                <img class="one-slide-right-image" width=793 height=785 src="assets/slider-img-3.png">
+                                <div class="small-circle">
+                                    <img src="assets/slider-img-6.png" width="170px" style="margin-left: 60px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-buttons">
+                    <button class="carousel-control-prev move-left" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(1);"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(1);"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="first-page-options">
+                <div class="first-page-circles">
+                    <img src="assets/language logo.png">
+                </div>
+                <div class="first-page-circles">
+                    <img src="assets/business.png">
+                </div>
+                <div class="first-page-circles">
+                    <img src="assets/literature.png">
+                </div>
+                <div class="first-page-circles">
+                    <img src="assets/software.png">
+                </div>
+                <div class="first-page-circles">
+                    <img src="assets/design.png">
+                </div>
+                <div class="first-page-circles">
+                    <img src="assets/coaching.png">
+                </div>
+            </div>
+        </div>
+
+        <div class="second-page" id="second-page">
+            <div class="second-page-inner">
+                <h6 class="online-courses" style="text-align:center;">ONLINE COURSES</h6>
+                <h2 class="essential-fast-facts" style="text-align: center;">Essential Fast Facts</h2>
+                <h5 class="main-heading" style="text-align: center;">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod<br> tempor incididunt ut labore et dolore magna aliqua.
+                </h5>
+
+                <div class="seond-page-container">
+                    <div class="image-gallery" style="gap: 120px;">
+                        <div class="gallery-item">
+                            <img src="assets/notifications.png" alt="notification-image" width="128" height="125">
+                            <h4 class="heading">Notification & Emails</h4>
+                            <p class="text">
+                                Duis aute irure dolor in reprehenderit in<br> voluptate velit esse cillum dolore eu fugiat<br> nulla pariatur. Excepteur sint.
+                            </p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/certification.png" alt="notification-image" width="128" height="125">
+                            <h4 class="heading">Certification</h4>
+                            <p class="text">
+                                Duis aute irure dolor in reprehenderit in<br> voluptate velit esse cillum dolore eu fugiat<br> nulla pariatur. Excepteur sint.
+                            </p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="assets/europe-campus.png" alt="notification-image" width="128" height="125">
+                            <h4 class="heading">Europe Campus</h4>
+                            <p class="text">
+                                Duis aute irure dolor in reprehenderit in<br> voluptate velit esse cillum dolore eu fugiat<br> nulla pariatur. Excepteur sint.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="third-page">
+            <div style="display: flex; flex-direction: column; justify-content: center;">
+                <h6 class="online-courses" style="text-align:center;margin-top: 100px;color: black;">ONLINE COURSES</h6>
+                <h2 class="fifth-page-heading" style="text-align: center; font-weight: 500px;">Wide range online courses</h2>
+                <div style="text-align:center; width: 700px; margin: 0 auto;">
+                    <h5 class="fifth-page-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
+                </div>
+            </div>
+
+            <div class="third-page-container">
+                <div class="third-page-gallery">
+                    <div class="third-page-item">
+                        <div class="third-page-price-container"><span>Free</span></div>
+                        <img src="assets/3rdPage-learn.jpg" alt="3rdPage-image" width="414" height="277">
+                        <div class="third-page-mini-container">
+                            <div style="margin: 29px 29px 0px">
+                                <h5 class="thirdPage-heading1">Computer Science</h5>
+                                <span class="thirdPage-heading2">Brenda Harris</span>
+                                <p class="thirdPage-text">
+                                    Lorem Ipsn gravida nibh vel velit auctor<br> aliquet.Aenean sollicitudin, lorem quis<br> bibendum auci elit conse
+                                </p>
+                            </div>
+                            <hr style="border: 0.3px solid #030202; margin: 0 30px; opacity: 0.2;">
+                            <div class="third-page-buttons-contianer">
+                                <div class="third-page-button" style="background-color: rgb(155, 220, 225);">
+                                    <a>Software</a>
+                                </div>
+                                <div>
+                                    <i class="fas fa-user icon-inline"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="third-page-item">
+                        <div class="third-page-price-container"><span>$200</span></div>
+                        <img src="assets/3rdPage-books.jpg" alt="3rdPage-image" width="414" height="277">
+                        <div class="third-page-mini-container">
+                            <div style="margin: 29px 29px 0px">
+                                <h5 class="thirdPage-heading1">Computer Science</h5>
+                                <span class="thirdPage-heading2">Brenda Harris</span>
+                                <p class="thirdPage-text">
+                                    Lorem Ipsn gravida nibh vel velit auctor<br> aliquet.Aenean sollicitudin, lorem quis<br> bibendum auci elit conse
+                                </p>
+                            </div>
+                            <hr style="border: 0.3px solid #030202; margin: 0 30px; opacity: 0.2;">
+                            <div class="third-page-buttons-contianer">
+                                <div class="third-page-button" style="background-color:  rgb(58, 173, 81);">
+                                    <a>Languages</a>
+                                </div>
+                                <div>
+                                    <i class="fas fa-user icon-inline"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="third-page-item">
+                        <div class="third-page-price-container"><span>$200</span></div>
+                        <img src="assets/3rdPage-colors.jpg" alt="3rdPage-image" width="414" height="277">
+                        <div class="third-page-mini-container">
+                            <div style="margin: 29px 29px 0px">
+                                <h5 class="thirdPage-heading1">Computer Science</h5>
+                                <span class="thirdPage-heading2">Brenda Harris</span>
+                                <p class="thirdPage-text">
+                                    Lorem Ipsn gravida nibh vel velit auctor<br> aliquet.Aenean sollicitudin, lorem quis<br> bibendum auci elit conse
+                                </p>
+                            </div>
+                            <hr style="border: 0.3px solid #030202; margin: 0 30px; opacity: 0.2;">
+                            <div class="third-page-buttons-contianer">
+                                <div class="third-page-button" style="background-color: rgb(243, 172, 175);">
+                                    <a>Business</a>
+                                </div>
+                                <div>
+                                    <i class="fas fa-user icon-inline"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fourth-page">
+            <div class="slider-container">
+                <div id="carouselExampleAutoplaying2" class="carousel slide fourth-page-corousel" data-bs-ride="carousel">
+                    <div class="carousel-indicators" style="position: absolute; padding-bottom: 125px;">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; border: none; margin: 4px;"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; border: none; margin: 4px;"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3" style="width: 12px; height: 12px; border-radius: 50%; background-color: #ccc; border: none; margin: 4px;"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="slide">
+                                <img src="assets/4th page image1.png" alt="image">
+                                <div class="slide-content">
+                                    <p>
+                                        home is a life saver. I don't have the time or money for a college<br> education. My goal is to become a freelance web developer, and<br> thanks to home, I'm really close.
+                                    </p>
+                                    <p class="author">ARLIE BOURLAND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="slide">
+                                <img src="assets/4th page image1.png" alt="image">
+                                <div class="slide-content">
+                                    <p>
+                                        home is a life saver. I don't have the time or money for a college<br> education. My goal is to become a freelance web developer, and<br> thanks to home, I'm really close.
+                                    </p>
+                                    <p class="author">ARLIE BOURLAND</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="slide">
+                                <img src="assets/4th page image1.png" alt="image">
+                                <div class="slide-content">
+                                    <p>
+                                        home is a life saver. I don't have the time or money for a college<br> education. My goal is to become a freelance web developer, and<br> thanks to home, I'm really close.
+                                    </p>
+                                    <p class="author">ARLIE BOURLAND</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fifth-page">
+            <div style="display: flex; flex-direction: column; justify-content: center;">
+                <h6 class="online-courses" style="text-align:center;margin-top: 150px;">ONLINE COURSES</h6>
+                <h2 class="fifth-page-heading" style="text-align: center; font-weight: 500px;">Best tutors you can find</h2>
+                <div style="text-align:center; width: 700px; margin: 0 auto;">
+                    <h5 class="fifth-page-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
+                </div>
+            </div>
+
+            <div class="fifth-page-container">
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="assets/Teacher1.png" alt="notification-image" width="150px" height="150px">
+                        <h4 class="heading">Brenda Harris</h4>
+                        <h6 class="teacher">Teacher</h6>
+                        <p class="text">
+                            Lorem ipsum dolor sit amet, consect etur adipisicing elit, sed do eiusmodem por incididun ut labore et.
+                        </p>
+                        <div>
+                            <a href="home.html" class="fab" style="color: #000;"><i class="fab fa-twitter icon-inline" style="margin: 0 10px; font-size: 18px; "></i></a>
+                            <a href="home.html" class="fab" style="color: #000;"><i class="fab fa-instagram icon-inline" style="margin: 0 10px; font-size: 18px;"></i></a>
+                            <a href="home.html" class="fab" style="color: #000;"><i class="fab fa-facebook-f icon-inline" style="margin: 0 10px; font-size: 18px;"></i></a>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="assets/Teacher2.png" alt="notification-image" width="150" height="150">
+                        <h4 class="heading">Sherlock Anderson</h4>
+                        <h6 class="teacher">Teacher</h6>
+                        <p class="text">
+                            Lorem ipsum dolor sit amet, consect etur adipisicing elit, sed do eiusmodem por incididun ut labore et.
+                        </p>
+                        <div>
+                            <a href="home.html" class="fab" style="color: #000;"><i class="fab fa-twitter icon-inline" style="margin: 0 10px; font-size: 18px; "></i></a>
+                            <a href="home.html" class="fab" style="color: #000;"><i class="fab fa-instagram icon-inline" style="margin: 0 10px; font-size: 18px;"></i></a>
+                            <a href="home.html" class="fab" style="color: #000;"><i class="fab fa-facebook-f icon-inline" style="margin: 0 10px; font-size: 18px;"></i></a>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="assets/Teacher3.png" alt="notification-image" width="150" height="150">
+                        <h4 class="heading">Simona Rider</h4>
+                        <h6 class="teacher">Teacher</h6>
+                        <p class="text">
+                            Lorem ipsum dolor sit amet, consect etur adipisicing elit, sed do eiusmodem por incididun ut labore et.
+                        </p>
+                        <div>
+                            <a href="home.html" class="fab" style="color: #000;"><i class="fab fa-twitter icon-inline" style="margin: 0 10px; font-size: 18px; "></i></a>
+                            <a href="home.html" class="fab" style="color: #000;"><i class="fab fa-instagram icon-inline" style="margin: 0 10px; font-size: 18px;"></i></a>
+                            <a href="home.html" class="fab" style="color: #000;"><i class="fab fa-facebook-f icon-inline" style="margin: 0 10px; font-size: 18px;"></i></a>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="assets/Teacher4.png" alt="notification-image" width="150" height="150">
+                        <h4 class="heading">Victor Green</h4>
+                        <h6 class="teacher">Teacher</h6>
+                        <p class="text">
+                            Lorem ipsum dolor sit amet, consect etur adipisicing elit, sed do eiusmodem por incididun ut labore et.
+                        </p>
+                        <div>
+                            <a href="home.html" class="fab" style="color: #000;"><i class="fab fa-twitter icon-inline" style="margin: 0 10px; font-size: 18px; "></i></a>
+                            <a href="home.html" class="fab" style="color: #000;"><i class="fab fa-instagram icon-inline" style="margin: 0 10px; font-size: 18px;"></i></a>
+                            <a href="home.html" class="fab" style="color: #000;"><i class="fab fa-facebook-f icon-inline" style="margin: 0 10px; font-size: 18px;"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sixth-page-container" style="background-image: url(assets/background-img-2.jpg);height: 734px;padding: 100px 100px 0px 100px;">
+            <div class="new-contact-form-container">
+                <h2>Get Your Online Courses</h2>
+                <p style="text-align: center;">The best tutors in town.</p>
+                <form action="#" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                    <button type="submit">register now</button>
+                </form>
+            </div>
+            <div class="sixth-page-container1">
+                <h6 class="online-courses" style="color: #151314;">Online courses</h6>
+                <h2 class="sixth-page-heading1">Register now and save.</h2>
+                <h5 class="sixth-page-text1">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do<br> eiusmod tempor incididunt ut.</h5>
+                <div class="sixth-page-numbers">
+                    <div style="display: flex;flex-direction: row;justify-content: space-between;gap: 10px;align-items: baseline;">
+                        <p id="membersCount1" style="color: green;font-size: 50px;font-weight: 400;">0</p>
+                        <p style="font-size: 20px;font-weight: 400;">Members</p>
+                    </div>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            let count = 0;
+                            const target = 168;
+                            const duration = 3000;
+                            const stepTime = Math.abs(Math.floor(duration / target));
+                            const el = document.getElementById("membersCount1");
+                            const timer = setInterval(function() {
+                                count++;
+                                el.textContent = count;
+                                if (count >= target) clearInterval(timer);
+                            }, stepTime);
+                        });
+                    </script>
+                    <div style="display: flex;flex-direction: row;justify-content: space-between;gap: 10px;align-items: baseline;">
+                        <p id="membersCount2" style="color: green;font-size: 50px;font-weight: 400;">73</p>
+                        <p style="font-size: 20px;font-weight: 400;">Classes</p>
+                    </div>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            let count = 0;
+                            const target = 73;
+                            const duration = 3000;
+                            const stepTime = Math.abs(Math.floor(duration / target));
+                            const el = document.getElementById("membersCount2");
+                            const timer = setInterval(function() {
+                                count++;
+                                el.textContent = count;
+                                if (count >= target) clearInterval(timer);
+                            }, stepTime);
+                        });
+                    </script>
+                    <div style="display: flex;flex-direction: row;justify-content: space-between;gap: 10px;align-items: baseline;">
+                        <p id="membersCount3" style="color: green;font-size: 50px;font-weight: 400;">34</p>
+                        <p style="font-size: 20px;font-weight: 400;">Videos</p>
+                    </div>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            let count = 0;
+                            const target = 34;
+                            const duration = 3000;
+                            const stepTime = Math.abs(Math.floor(duration / target));
+                            const el = document.getElementById("membersCount3");
+                            const timer = setInterval(function() {
+                                count++;
+                                el.textContent = count;
+                                if (count >= target) clearInterval(timer);
+                            }, stepTime);
+                        });
+                    </script>
+                    <div style="display: flex;flex-direction: row;justify-content: space-between;gap: 10px;align-items: baseline;">
+                        <p id="membersCount4" style="color: green;font-size: 50px;font-weight: 400;">5</p>
+                        <p style="font-size: 20px;font-weight: 400;">Score</p>
+                    </div>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            let count = 0;
+                            const target = 5;
+                            const duration = 3000;
+                            const stepTime = Math.abs(Math.floor(duration / target));
+                            const el = document.getElementById("membersCount4");
+                            const timer = setInterval(function() {
+                                count++;
+                                el.textContent = count;
+                                if (count >= target) clearInterval(timer);
+                            }, stepTime);
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <div class="seventh-page-container">
+            <div class="seventh-page-images">
+                <img src="assets/7th page-image1.png" alt="brainLab" width="220" height="144">
+                <img src="assets/7th page-image2.png" alt="pocketBook" width="220" height="144">
+                <img src="assets/7th page-image3.png" alt="royalAcademy" width="220" height="144">
+                <img src="assets/7th page-image4.png" alt="whaleBook" width="220" height="144">
+                <img src="assets/7th page-image5.png" alt="quickIdea" width="220" height="144">
+            </div>
+        </div>
+
+        <footer>
+            <div class="eighth-page-container">
+                <div class="column1">
+                    <h5 class="column-heading">About School</h5>
+                    <p class="column1-text1">
+                        Donec vitae sapien ut libero venenatis<br> faucibus. Nullam quis ante. Etiam sit<br> amet orci eget eros
+                    </p>
+                    <h5 class="column1-heading1">Contact details</h5>
+                    <p class="icon-title">
+                        <i class="fas fa-map-marker-alt icon-inline" style="color: #ffbd2f; margin-right: 8px; width: 1em;"></i>
+                        Langebrogade 1DK, Copenhagen
+                    </p>
+                    <p class="icon-title">
+                        <i class="fas fa-phone icon-inline" style="color: #ffbd2f; margin-right: 8px;"></i>
+                        +0080-33-666-234
+                    </p>
+                    <p class="icon-title">
+                        <i class="fas fa-envelope icon-inline" style="color: #ffbd2f; margin-right: 8px;"></i>
+                        home@example.com
+                    </p>
+                </div>
+                <div class="column2">
+                    <h5 class="column-heading">Popular Courses</h5>
+                    <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                        Computer Science
+                    </a>
+                    <span class="instructor">Brenda Harris</span>
+                    <br>
+                    <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                        Business English
+                    </a>
+                    <span class="instructor">Brenda Harris</span>
+                    <br>
+                    <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                        Photoshop Tutorial
+                    </a>
+                    <span class="instructor">Sarah Rogers</span>
+                    <br>
+                    <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                        Business Course
+                    </a>
+                    <span class="instructor">Sarah Rogers</span>
+                </div>
+                <div class="column3">
+                    <h5 class="column-heading">Useful Links</h5>
+                    <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                        Building an Excellence
+                    </a>
+                    <br>
+                    <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                        Choose Your Destination
+                    </a>
+                    <br>
+                    <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                        Belive in Yourself
+                    </a>
+                    <br>
+                    <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                        Fast Way of Learning!
+                    </a>
+                    <br>
+                    <a href="http://192.168.0.89:5500/23Sept-Final%20Project/home.html" class="custom-link">
+                        Educating Leaders
+                    </a>
+                </div>
+                <div class="column4">
+                    <h5 class="column-heading">Our Place</h5>
+                    <img src="assets/footer-map-300x235.png" alt="Our Place Map" width="100%" height="235" style="object-fit: cover; border: 0;">
+                </div>
+            </div>
+
+            <div class="bottom-text">
+                <div class="bottomText-left">Copyright 2020 Qode Interactive.</div>
+                <div class="bottomText-right">
+                    <span> Center: (555) 789 6754 </span>
+                    <i class="fab fa-facebook-f icon-inline" style="color: #464c55; margin: 0 10px; font-size: 15px;"></i>
+                    <i class="fab fa-twitter icon-inline" style="color: #464c55; margin: 0 10px; font-size: 15px;"></i>
+                    <i class="fab fa-instagram icon-inline" style="color: #464c55; margin: 0 10px; font-size: 15px;"></i>
+                </div>
+            </div>
+        </footer>
+        <!-- 630+ Bridge demos box -->
+        <div class="demo-count-box">
+            <h3>630+</h3>
+            <p>Bridge demos</p>
+        </div>
+        
+        <!-- Buy now button -->
+        <a href="#" class="buy-now-btn">
+            👜 BUY NOW $69
+        </a>
+        
+        <!-- BACK TO TOP -->
+        <button id="backToTop">↑</button>
+        
+        <!-- JS FILE -->
+        <script>
+            const btn = document.getElementById("backToTop");
+
+            window.onscroll = () => {
+                btn.style.display = window.scrollY > 300 ? "block" : "none";
+            };
+
+            btn.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+        </script>
+        <script src="bootstrap-5.3.8-dist/js/bootstrap.min.js"></script>
+    </body>
+
+</html>
