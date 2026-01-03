@@ -1,0 +1,179 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    margin: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+h1,
+h2 {
+    margin-bottom: 10px;
+}
+
+hr {
+    margin: 20px 0;
+}
+
+/* ===== NAV ===== */
+nav {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+nav a {
+    margin: 0 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* ===== GRID ===== */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.box {
+    background: #fff;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.btn {
+    background: white;
+    border: 2px solid #6767db;
+    padding: 10px 229px;
+    font-size: 19px;
+    font-weight: 400;
+}
+
+/* ===== TODO ===== */
+.todo input {
+    padding: 6px;
+    width: 75%;
+}
+
+.todo button {
+    padding: 6px 31px;
+    color: #4e4ee5;
+    background: white;
+    border: 2px solid #c1b6b6;
+    font-size: 15px;
+}
+
+.todo button:hover {
+    background: darkblue;
+    color: white;
+}
+
+.todo ul {
+    list-style: none;
+    padding: 0;
+}
+
+.todo li {
+    margin: 6px 0;
+}
+
+.todo li button {
+    float: right;
+}
+
+/* ===== TIMER ===== */
+.timer {
+    text-align: center;
+}
+
+.timer button {
+    margin: 5px;
+    padding: 6px 31px;
+    color: #fefeff;
+    background: rgb(69, 73, 169);
+    border: 2px solid #c1b6b6;
+    font-size: 15px;
+}
+
+.maps .btn {
+    background: white;
+    border: 2px solid #6767db;
+    padding: 10px 209px;
+    font-size: 19px;
+    font-weight: 400;
+    color: black;
+}
+/* ===== FORM ===== */
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input {
+    width: 2%;
+    padding: 8px;
+    margin-top: 4px;
+}
+
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+}
+
+textarea {
+    height: 80px;
+    width: 100%;
+}
+
+.error {
+    color: #c0392b;
+    font-size: 13px;
+}
+
+.success {
+    color: green;
+    margin-top: 10px;
+}
+
+.check-group {
+    margin-top: 10px;
+}
+
+button.clear {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background: white;
+    border: 2px solid #a89f9f;
+    font-size: 15px;
+}
+
+button.clear:hover {
+    background: #37379a;
+    color: white;
+}
+
+/* ===== MAP ===== */
+.map iframe {
+    width: 100%;
+    height: 250px;
+    border: 0;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 15px;
+    font-weight: 600;
+}
+h2{
+    text-align: start;
+}
