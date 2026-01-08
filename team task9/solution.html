@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .navbar-brand img {
+            width: 200px;
+
+        }
+
+        .nav-link {
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #f97216 !important;
+        }
+
+        .nav-item .btn {
+            background: #f97216;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .btn {
+            background: #f97216;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .nav-item .btn:hover {
+            background-color: #e55f14;
+            transform: scale(1.05);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            cursor: pointer;
+        }
+        
+        /* Dropdown box */
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            min-width: 180px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            display: none;
+            z-index: 999;
+        }
+        
+        /* Dropdown links */
+        .dropdown-content a {
+            display: block;
+            padding: 12px 18px;
+            color: #111;
+            font-weight: 500;
+            transition: 0.3s;
+            text-decoration: none;
+            text-align:center ;
+
+        }
+
+        /* Hover effects */
+        .dropdown-content a:hover {
+            background: white;
+            color: #f08a2f;
+        }
+
+        /* SHOW ON HOVER */
+        .dropdown:hover .dropdown-content {
+            display: block;
+            color: #f08a2f;
+        }
+
+        .about-hero {
+            position: relative;
+            height: 368px;
+            background: url(imgs/breadcrumb-bg.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 78px;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        .about-content {
+            position: relative;
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+        }
+
+        .about-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            margin-left: 60px;
+        }
+
+        .breadcrumb a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-align: center;
+
+        }
+
+        .breadcrumb a:hover {
+            color: #ff7a00;
+        }
+
+        .breadcrumb span {
+            margin: 0 8px;
+            color: #ff7a00;
+        }
+
+        .breadcrumb .active {
+            color: #ff7a00;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .highlight {
+            color: #f39c12;
+        }
+
+        .hero-text p {
+            color: #cfcfcf;
+            max-width: 520px;
+        }
+
+        .rating i {
+            color: #f39c12;
+        }
+
+        .hero-img img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .section-text2 {
+            padding: 80px 0;
+        }
+
+        .highlight {
+            color: #f08a2f;
+        }
+
+        .section-text2 p {
+            color: #666;
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .solution-card {
+            border: 2px solid #201f1f;
+            border-radius: 10px;
+            padding: 25px;
+            height: 100%;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .solution-card h5 {
+            color: #f08a2f;
+            font-weight: 600;
+            font-size: 24px;
+        }
+
+        .solution-card p {
+            font-size: 17px;
+            color: #2b2828;
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: #f89339;
+        }
+
+        .text3-desc {
+            position: relative;
+            padding-left: 25px;
+            color: #232121;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .text3-desc::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 3px;
+            height: 85%;
+            background-color: #f3933f;
+            border-radius: 2px;
+        }
+
+        .footer {
+            background: #0f172a;
+            padding: 60px 0 30px;
+            position: relative;
+        }
+
+        .footer h6 {
+            color: #f97316;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .footer p,
+        .footer li {
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer ul li a {
+            text-decoration: none;
+            color: #fafafa;
+            transition: .3s;
+        }
+
+        .footer ul li a:hover {
+            color: #f97316;
+        }
+
+        /* Logo section */
+        .footer-logo img {
+            width: 120px;
+            margin-bottom: 15px;
+        }
+
+        /* Government strip */
+        .gov-strip {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 40px;
+
+        }
+
+        .lo {
+            margin-top: 10px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            width: 93%;
+            margin-left: 42px;
+        }
+
+        .gov-strip img {
+            height: 100px;
+            object-fit: contain;
+        }
+
+        /* Bottom text */
+        .footer-bottom {
+            margin-top: 25px;
+            border-top: 1px solid #1e293b;
+            padding-top: 15px;
+            font-size: 17px;
+            color: #f6f7f8;
+
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container" style="max-width: 1485px;">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="imgs/oppty.png" alt="...">
+            </a>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="About us.html">About Us</a></li>
+                    
+                        <div class="dropdown">
+                            <a href="our services.html" class="dropbtn" style="color: #716e6e;text-transform: lowercase;text-decoration: none;font-size: 18px;padding: 0px 9px; font-weight: 500;">OUR SERVICES</a>
+
+                            <div class="dropdown-content">
+                                <a href="solution.html">Solutions</a>
+                            </div>
+                        </div>
+                    
+                    <li class="nav-item"><a class="nav-link" href="contact us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="academy.html">Academy</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="index.html">Training Partner</a>
+                    </li>
+                    >
+
+                    <li class="nav-item" style="display: flex;"><a class="nav-link" href="tel:+919491209900"><img src="imgs/1f4de.svg"
+                                alt="..." width="10px"> +91 9491209900</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="about-hero">
+        <div class="overlay"></div>
+
+        <div class="about-content">
+            <h1>SOLUTION</h1>
+
+            <nav class="breadcrumb">
+                <a href="index.html">HOME</a>
+                <span>/</span>
+                <a href="#">SOLUTION</a>
+            </nav>
+        </div>
+    </section>
+    <section style="background: #222327; padding: 100px 0px;">
+        <div class="hero-section container" style="max-width: 1418px;">
+            <div class="row align-items-center w-100">
+
+                <!-- Left Content -->
+                <div class="col-lg-6 hero-text">
+                    <h1 class="fw-bold display-5" style="color: white;">
+                        SOLUTIONS<br>
+                        TAILORED<br>
+                        <span class="highlight">FOR</span> YOUR SUCCESS
+                    </h1>
+
+                    <p class="mt-4">
+                        At Oppty TechHub, we deliver customized, industry-leading solutions powered by
+                        advanced technology and deep domain expertise to drive your business forward
+                        in a competitive landscape.
+                    </p>
+
+                    <div class="d-flex align-items-center mt-4 rating">
+                        <div class="me-3">
+                            <img src="imgs/grouped-image.png" class="rounded-circle me-1">
+
+                        </div>
+                        <div>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-half"></i>
+                            <span class="ms-2">4.1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Image -->
+                <div class="col-lg-6 text-center hero-img mt-5 mt-lg-0">
+                    <img src="imgs/Services-image-slider-1.jpg" alt="AI Head">
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="section-text2" style="background: white;">
+        <div class="container">
+
+            <!-- Heading -->
+            <div class="text-center mb-5">
+                <h2 class="fw-bold" style="font-size: 40px;">
+                    INNOVATIVE SOLUTIONS <span class="highlight">FOR</span><br>
+                    <span class="highlight">DYNAMIC</span> NEEDS
+                </h2>
+                <p class="mt-3">
+                    Our solutions are designed to address complex business challenges, leveraging
+                    cutting-edge technologies to ensure scalability, efficiency, and market leadership.
+                </p>
+            </div>
+
+            <!-- Cards -->
+            <div class="row g-4" style="max-width:1187px ; margin-left: 62px;">
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="solution-card">
+                        <h5>Data Visualization</h5>
+                        <p>
+                            Access real-time, actionable analytics to elevate performance and guide
+                            strategic choices that accelerate business growth.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="solution-card">
+                        <h5>Advanced Analytics</h5>
+                        <p>
+                            Gain real-time, data-driven insights to enhance performance and make
+                            strategic decisions that fuel your business growth.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="solution-card">
+                        <h5>Predictive Analytics</h5>
+                        <p>
+                            Leverage tailored forecasting models, including customer churn and transaction
+                            risk analysis, to stay ahead of market trends.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="solution-card">
+                        <h5>Virtual Assistants</h5>
+                        <p>
+                            Boost engagement with intelligent virtual agents, offering seamless,
+                            round-the-clock support for your customers’ needs.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="solution-card">
+                        <h5>Dashboards</h5>
+                        <p>
+                            Access real-time or offline dashboards customized to your industry,
+                            powered by modern interface technologies.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="solution-card">
+                        <h5>Machine Learning</h5>
+                        <p>
+                            Utilize AI to discover hidden patterns, reduce risks, and achieve
+                            continuous improvement with smart automation.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="solution-card">
+                        <h5>Text Processing</h5>
+                        <p>
+                            Streamline workflows with automated text annotation, handling
+                            diverse formats with precision and speed.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="solution-card">
+                        <h5>Chatbot Solutions</h5>
+                        <p>
+                            Boost customer satisfaction with intelligent chatbot agents that
+                            deliver personalized and efficient support.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="section-text3" style="padding-bottom: 70px;">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Left Heading -->
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="fw-bold text-uppercase mb-0">
+                        Expertly Crafted<br>
+                        <span class="highlight">Solutions</span>
+                    </h2>
+                </div>
+
+                <!-- Right Description -->
+                <div class="col-lg-6">
+                    <p class="text3-desc mb-0">
+                        Our team of technology and domain experts designs, develops, and deploys
+                        solutions that align with your unique business goals, ensuring innovation
+                        and excellence at every step.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" style="background: #222327;">
+        <div class="container">
+            <div class="row g-4" style="padding: 50px 50px 0px 50px;">
+
+                <!-- Company Info -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-logo">
+                        <img src="imgs/322343.png" alt="Logo">
+                    </div>
+                    <p>
+                        Power up your success with innovative IT, BPO, E-commerce,
+                        Web Development, and AI solutions tailored to your vision.
+                    </p>
+                </div>
+
+                <!-- Hyderabad -->
+                <div class="col-lg-3 col-md-6">
+                    <h6>HYDERABAD LOCATIONS</h6>
+                    <p>
+                        Flat No 601, Mahitha’s Green Galaxy,
+                        CBID Colony, NRSA Colony,
+                        Baghath Singh Nagar Phase-2,
+                        Kukatpally, Hyderabad,
+                        Telangana – 500085
+                    </p>
+                </div>
+
+                <!-- Udaipur -->
+                <div class="col-lg-2 col-md-6">
+                    <h6>UDAIPUR LOCATIONS</h6>
+                    <p>
+                        Plot No: 26, 100 Feet Rd,
+                        Shobhagpura, Udaipur,
+                        Rajasthan – 313011
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6>CONTACT US</h6>
+                    <p>
+                        info@oppty.in <br>
+                        +91-9491209900
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-1 col-md-6" style="margin-left: -129px;width: 10%;">
+                    <h6>QUICK LINKS</h6>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="lo">
+
+            </div>
+            <!-- Government Logos -->
+            <div class="gov-strip text-center" style="margin: 0px 50px;">
+                <div class="row align-items-center g-3" style="margin: 0px 235px;">
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/png-clipart-government-of-india-ministry-of-micro-small-and-medium-enterprises-small-business-india-text-logo__1_-removebg-preview.png"
+                            class="img-fluid">
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/Ministry-for-Corporate-AffairS-1-removebg-preview.png" class="img-fluid">
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/36662669-1685562943668-bf31f5769c66e.jpg" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="footer-bottom ">
+                © <span id="year"></span> Oppty. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="whatsapp-btn">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+    </script>
+</body>
+
+</html>

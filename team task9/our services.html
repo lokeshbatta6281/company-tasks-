@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .navbar-brand img {
+            width: 200px;
+
+        }
+
+        .nav-link {
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #f97216 !important;
+        }
+
+        .nav-item .btn {
+            background: #f97216;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .btn {
+            background: #f97216;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .nav-item .btn:hover {
+            background-color: #e55f14;
+            transform: scale(1.05);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            cursor: pointer;
+        }
+        
+        /* Dropdown box */
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            min-width: 180px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            display: none;
+            z-index: 999;
+        }
+        
+        /* Dropdown links */
+        .dropdown-content a {
+            display: block;
+            padding: 12px 18px;
+            color: #111;
+            font-weight: 500;
+            transition: 0.3s;
+            text-decoration: none;
+            text-align:center ;
+
+        }
+
+        /* Hover effects */
+        .dropdown-content a:hover {
+            background: white;
+            color: #f08a2f;
+        }
+
+        /* SHOW ON HOVER */
+        .dropdown:hover .dropdown-content {
+            display: block;
+            color: #f08a2f;
+        }
+
+        .about-hero {
+            position: relative;
+            height: 368px;
+            background: url(imgs/breadcrumb-bg.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 78px;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        .about-content {
+            position: relative;
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+        }
+
+        .about-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            margin-left: 60px;
+        }
+
+        .breadcrumb a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-align: center;
+
+        }
+
+        .breadcrumb a:hover {
+            color: #ff7a00;
+        }
+
+        .breadcrumb span {
+            margin: 0 8px;
+            color: #ff7a00;
+        }
+
+        .breadcrumb .active {
+            color: #ff7a00;
+        }
+
+        .text {
+            background: white;
+            color: #fff;
+            padding: 100px 0 0;
+        }
+
+        .text h5:hover {
+            color: #db822f;
+
+        }
+
+        .text h6 {
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #fbfaf8;
+            font-size: 20px;
+        }
+
+        .text h2 span {
+            color: #ffc107;
+        }
+
+        .text p {
+            color: #fbfbfc;
+            font-size: 17px;
+            line-height: 1.7;
+        
+        }
+
+        .text .divider {
+            width: 3px;
+            height: 70px;
+            background: #ffc107;
+            margin: 20px 0;
+        }
+
+        .text .number {
+            font-size: 50px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .text .number:hover {
+            color: #db822f;
+        }
+
+        @media (max-width: 768px) {
+            .text {
+                text-align: center;
+            }
+        }
+
+        .text4 {
+            background: white;
+        }
+
+        .text4 h6 {
+            color: #f87b05;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .text4 h2 {
+            font-size: 60px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .text4 .stars {
+            color: #e77729;
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .text4 p {
+            font-size: 30px;
+            color: #201e1e;
+            max-width: 770px;
+            font-weight: 600;
+        }
+
+        .text4 hr {
+            border-top: 2px solid #c96f2b;
+            width: 100%;
+            margin: 30px 0;
+        }
+
+        .text4 .client-name {
+            font-weight: 700;
+        }
+
+        .text4 .client-role {
+            font-size: 18px;
+            color: #e0a80d;
+        }
+
+        .text4 .quote-icon {
+            font-size: 130px;
+            color: #121010;
+            opacity: 1.3;
+        }
+
+        .text4 .quote-icon:hover {
+            color: #c96f2b;
+        }
+
+        .content1 {
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+            max-width: 1418px;
+            margin-left: 50px;
+        }
+
+        .content2 {
+            display: flex;
+            white-space: nowrap;
+            animation: content2 15s linear infinite;
+            align-items: center;
+        }
+
+        .service {
+            display: flex;
+            align-items: center;
+            margin-right: 5px;
+        }
+
+        .service span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #000000;
+            padding: 0 3px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, color 0.3s ease;
+            line-height: 1;
+        }
+
+        .service .separator {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000000;
+            margin: 0 3px;
+            line-height: 1;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        /* Marquee Section Styling */
+        .content1 {
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+            max-width: 1418px;
+            margin-left: 50px;
+        }
+
+        .content2 {
+            display: flex;
+            white-space: nowrap;
+            animation: content2 15s linear infinite;
+            align-items: center;
+            /* Vertically align items */
+        }
+
+        .content2 .service {
+            display: flex;
+            align-items: center;
+            margin-right: 5px;
+            /* Tight space between service phrases */
+        }
+
+        .content2 span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #000000;
+            padding: 0 3px;
+            /* Tight text spacing */
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, color 0.3s ease;
+            line-height: 1;
+            /* Ensure consistent baseline */
+        }
+
+        .content2 span:hover {
+            transform: scale(1.1) rotate(2deg);
+            color: #333333;
+        }
+
+        /* Separator (Between Service Phrases) */
+        .content2 .separator {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            /* Slightly smaller than text for balance */
+            font-weight: 700;
+            color: #000000;
+            margin: 0 3px;
+            /* Tight separator spacing */
+            line-height: 1;
+            /* Match text baseline */
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        /* Animation Keyframes */
+        @keyframes content2 {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+
+            /* Full width to ensure seamless loop */
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .content2 span {
+                font-size: 1.4rem;
+                padding: 0 2px;
+            }
+
+            .content2 .separator {
+                font-size: 1.2rem;
+                margin: 0 2px;
+            }
+
+            .content2 .service {
+                margin-right: 4px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content2 span {
+                font-size: 1.1rem;
+                padding: 0 2px;
+            }
+
+            .content2 .separator {
+                font-size: 0.9rem;
+                margin: 0 2px;
+            }
+
+            .content2 .service {
+                margin-right: 3px;
+            }
+
+            .content1 {
+                padding: 10px 0;
+            }
+        }
+        .text2 {
+  padding: 0  0 100px 0;
+  background: #f8f9fa;
+}
+
+.text2 .img-box {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Black & White Image */
+.text2 img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  transition: all 0.4s ease;
+}
+.text2 img:hover{
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: all 0.4s ease;
+}
+/* Hover Effect */
+.text2 .img-box:hover img {
+  transform: scale(1.1);
+  filter: grayscale(100%);
+}
+
+/* Overlay */
+.text2 .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.text2 .img-box:hover .overlay {
+  opacity: 1;
+}
+
+/* Icon */
+.text2 .overlay i {
+  font-size: 40px;
+  color: #fff;
+  background: #ffc107;
+  padding: 18px;
+  border-radius: 50%;
+}
+        .footer {
+            background: #0f172a;
+            padding: 60px 0 30px;
+            position: relative;
+        }
+
+        .footer h6 {
+            color: #f97316;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .footer p,
+        .footer li {
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer ul li a {
+            text-decoration: none;
+            color: #fafafa;
+            transition: .3s;
+        }
+
+        .footer ul li a:hover {
+            color: #f97316;
+        }
+
+        /* Logo section */
+        .footer-logo img {
+            width: 120px;
+            margin-bottom: 15px;
+        }
+
+        /* Government strip */
+        .gov-strip {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 40px;
+
+        }
+
+        .lo {
+            margin-top: 10px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            width: 93%;
+            margin-left: 42px;
+        }
+
+        .gov-strip img {
+            height: 100px;
+            object-fit: contain;
+        }
+
+        /* Bottom text */
+        .footer-bottom {
+            margin-top: 25px;
+            border-top: 1px solid #1e293b;
+            padding-top: 15px;
+            font-size: 17px;
+            color: #f6f7f8;
+
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container" style="max-width: 1485px;">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="imgs/oppty.png" alt="...">
+            </a>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="About us.html">About Us</a></li>
+                    <div class="dropdown">
+                            <a href="our services.html" class="dropbtn" style="color: #716e6e;text-transform: lowercase;text-decoration: none;font-size: 18px;padding: 0px 9px; font-weight: 500;">OUR SERVICES</a>
+
+                            <div class="dropdown-content">
+                                <a href="solution.html">Solutions</a>
+                            </div>
+                        </div>
+                    <li class="nav-item"><a class="nav-link" href="contact us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="academy.html">Academy</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="index.html">Training Partner</a>
+                    </li>
+                    
+
+                    <li class="nav-item" style="display: flex;"><a class="nav-link" href="tel:+919491209900"><img src="imgs/1f4de.svg"
+                                alt="..." width="10px"> +91 9491209900</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="about-hero">
+        <div class="overlay"></div>
+
+        <div class="about-content">
+            <h1>OUR SERVICES</h1>
+
+            <nav class="breadcrumb">
+                <a href="index.html">HOME</a>
+                <span>/</span>
+                <a href="#">OUR SERVICES</a>
+            </nav>
+        </div>
+    </section>
+    <section class="text">
+        <div class="container" style="background: #1b1b1b; padding: 100px 146px; max-width: 1418px;">
+            <!-- LEFT CONTENT -->
+            <div class="row" style="display: flex;">
+                <div class="col-5">
+                    <h6>Services</h6>
+                    <h2 class="fw-bold" style="font-size: 40px;">
+                        SOLUTION WE <span>PROVIDE</span>
+                    </h2>
+                </div>
+
+                <div class="col-lg-6" style="margin-top: 20px;border-left: 3px solid #f4a51c;padding-left: 20px;">
+        <p>
+          Unlock your business potential with our innovative, SEO-optimized solutions designed for success.
+        </p>
+      </div>
+            </div>
+            <div class="row align-items-center g-5"
+                style="padding-top: 100px;border-bottom: 2px solid #524c4c;padding-bottom: 21px;">
+                <!-- RIGHT CONTENT -->
+                <div class="col-lg-4">
+                    <h5 class="fw-semibold mb-3">IT SERVICES</h5>
+                </div>
+                <div class="col-5" >
+                    <p>
+                        Boost your business with a robust IT infrastructure tailored for
+                        scalability and performance. Our advanced cybersecurity solutions
+                        safeguard your data against threats, ensuring compliance and security.
+                    </p>
+                    <p>
+                        Experience seamless operations with our 24/7 technical support,
+                        always ready to resolve issues and minimize downtime.
+                    </p>
+                </div>
+                <!-- NUMBER -->
+                <div class="col-lg-3 text-end d-none d-lg-block">
+                    <div class="number">01</div>
+                </div>
+
+            </div>
+            <div class="row align-items-center g-5"
+                style="padding-top: 20px;border-bottom: 2px solid #524c4c;padding-bottom: 21px;">
+                <!-- RIGHT CONTENT -->
+                <div class="col-lg-4">
+                    <h5 class="fw-semibold mb-3">BOP</h5>
+                </div>
+                <div class="col-5">
+                    <p>
+                        Boost your business with a robust IT infrastructure tailored for
+                        scalability and performance. Our advanced cybersecurity solutions
+                        safeguard your data against threats, ensuring compliance and security.
+                    </p>
+                    <p>
+                        Experience seamless operations with our 24/7 technical support,
+                        always ready to resolve issues and minimize downtime.
+                    </p>
+                </div>
+                <!-- NUMBER -->
+                <div class="col-lg-3 text-end d-none d-lg-block">
+                    <div class="number">02</div>
+                </div>
+
+            </div>
+            <div class="row align-items-center g-5"
+                style="padding-top: 20px;border-bottom: 2px solid #524c4c;padding-bottom: 21px;">
+                <!-- RIGHT CONTENT -->
+                <div class="col-lg-4">
+                    <h5 class="fw-semibold mb-3">E-COMMERSES</h5>
+                </div>
+                <div class="col-5">
+                    <p>
+                        Boost your business with a robust IT infrastructure tailored for
+                        scalability and performance. Our advanced cybersecurity solutions
+                        safeguard your data against threats, ensuring compliance and security.
+                    </p>
+                    <p>
+                        Experience seamless operations with our 24/7 technical support,
+                        always ready to resolve issues and minimize downtime.
+                    </p>
+                </div>
+                <!-- NUMBER -->
+                <div class="col-lg-3 text-end d-none d-lg-block">
+                    <div class="number">03</div>
+                </div>
+
+            </div>
+            <div class="row align-items-center g-5"
+                style="padding-top: 20px;border-bottom: 2px solid #524c4c;padding-bottom: 21px;">
+                <!-- RIGHT CONTENT -->
+                <div class="col-lg-4">
+                    <h5 class="fw-semibold mb-3">WEB DEVELOPMENT</h5>
+                </div>
+                <div class="col-5">
+                    <p>
+                        Boost your business with a robust IT infrastructure tailored for
+                        scalability and performance. Our advanced cybersecurity solutions
+                        safeguard your data against threats, ensuring compliance and security.
+                    </p>
+                    <p>
+                        Experience seamless operations with our 24/7 technical support,
+                        always ready to resolve issues and minimize downtime.
+                    </p>
+                </div>
+                <!-- NUMBER -->
+                <div class="col-lg-3 text-end d-none d-lg-block">
+                    <div class="number">04</div>
+                </div>
+
+            </div>
+            <div class="row align-items-center g-5" style="padding-top: 20px;">
+                <!-- RIGHT CONTENT -->
+                <div class="col-lg-4">
+                    <h5 class="fw-semibold mb-3">AI SOLUTIONS</h5>
+                </div>
+                <div class="col-5">
+                    <p>
+                        Boost your business with a robust IT infrastructure tailored for
+                        scalability and performance. Our advanced cybersecurity solutions
+                        safeguard your data against threats, ensuring compliance and security.
+                    </p>
+                    <p>
+                        Experience seamless operations with our 24/7 technical support,
+                        always ready to resolve issues and minimize downtime.
+                    </p>
+                </div>
+                <!-- NUMBER -->
+                <div class="col-lg-3 text-end d-none d-lg-block">
+                    <div class="number">05</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="text4">
+        <div class="container"
+            style="padding: 100px 115px; background-color: transparent; background-image: linear-gradient(180deg, #E9F8FF 0%, #E8AA8C50 100%);opacity: 1; max-width: 1418px;">
+            <div class="row align-items-center">
+                <div class="">
+
+                    <div id="reviewSlider" class="carousel slide" data-bs-ride="carousel">
+                        <!-- Slides -->
+                        <div class="carousel-inner">
+
+                            <!-- Slide 1 -->
+                            <div class="carousel-item active">
+                                <h6>Client Says</h6>
+                                <h2>Review & Ratings</h2>
+
+                                <div class="stars">★★★★★</div>
+                                <p>Oppty’s innovative solutions transformed our business</p>
+
+                                <hr>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <div class="client-name" style="font-size: 18px;">Arjun Mehta</div>
+                                        <div class="client-role">E-Commerce Entrepreneur</div>
+                                    </div>
+                                    <div class="quote-icon">”</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="background: white;">
+        <div class="content1">
+            <div class="content2">
+                <div class="Service">
+                    <span>IT SERVICES</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>BOP</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>E-commeres</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>Web Developement</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>AI solutions</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>IT SERVICES</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>BOP</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>E-commeres</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>Web Developement</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>AI solutions</span>
+                </div>
+                <span class="separator">•</span>
+            </div>
+        </div>
+    </section>
+    <section class="text2">
+        <div class="container" style="max-width: 1418px;">
+            <div class="row g-4">
+
+                <div class="col" style="padding: 0px 2px;">
+                    <div class="img-box">
+                        <img src="imgs/Hai-insta-img-01.jpg" alt="...">
+                        <div class="overlay">
+                            <i class="bi bi-instagram"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col" style="padding: 0px 2px;">
+                    <div class="img-box">
+                        <img src="imgs/Hai-insta-img-02.jpg" alt="...">
+                        <div class="overlay">
+                            <i class="bi bi-instagram"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col" style="padding: 0px 2px;">
+                    <div class="img-box">
+                        <img src="imgs/Hai-insta-img-03.jpg" alt="...">
+                        <div class="overlay">
+                            <i class="bi bi-instagram"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col" style="padding: 0px 2px;">
+                    <div class="img-box">
+                        <img src="imgs/Hai-insta-img-04.jpg" alt="...">
+                        <div class="overlay">
+                            <i class="bi bi-instagram"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col" style="padding: 0px 2px;">
+                    <div class="img-box">
+                        <img src="imgs/Hai-insta-img-06.jpg" alt="...">
+                        <div class="overlay">
+                            <i class="bi bi-instagram"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer" style="background: #222327;">
+        <div class="container">
+            <div class="row g-4" style="padding: 50px 50px 0px 50px;">
+
+                <!-- Company Info -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-logo">
+                        <img src="imgs/322343.png" alt="Logo">
+                    </div>
+                    <p>
+                        Power up your success with innovative IT, BPO, E-commerce,
+                        Web Development, and AI solutions tailored to your vision.
+                    </p>
+                </div>
+
+                <!-- Hyderabad -->
+                <div class="col-lg-3 col-md-6">
+                    <h6>HYDERABAD LOCATIONS</h6>
+                    <p>
+                        Flat No 601, Mahitha’s Green Galaxy,
+                        CBID Colony, NRSA Colony,
+                        Baghath Singh Nagar Phase-2,
+                        Kukatpally, Hyderabad,
+                        Telangana – 500085
+                    </p>
+                </div>
+
+                <!-- Udaipur -->
+                <div class="col-lg-2 col-md-6">
+                    <h6>UDAIPUR LOCATIONS</h6>
+                    <p>
+                        Plot No: 26, 100 Feet Rd,
+                        Shobhagpura, Udaipur,
+                        Rajasthan – 313011
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6>CONTACT US</h6>
+                    <p>
+                        info@oppty.in <br>
+                        +91-9491209900
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-1 col-md-6" style="margin-left: -129px;width: 10%;">
+                    <h6>QUICK LINKS</h6>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="lo">
+
+            </div>
+            <!-- Government Logos -->
+            <div class="gov-strip text-center" style="margin: 0px 50px;">
+                <div class="row align-items-center g-3" style="margin: 0px 235px;">
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/png-clipart-government-of-india-ministry-of-micro-small-and-medium-enterprises-small-business-india-text-logo__1_-removebg-preview.png"
+                            class="img-fluid">
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/Ministry-for-Corporate-AffairS-1-removebg-preview.png" class="img-fluid">
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/36662669-1685562943668-bf31f5769c66e.jpg" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="footer-bottom ">
+                © <span id="year"></span> Oppty. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="whatsapp-btn">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script></script>
+</body>
+
+</html>

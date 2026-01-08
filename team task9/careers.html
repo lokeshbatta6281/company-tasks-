@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .navbar-brand img {
+            width: 200px;
+
+        }
+
+        .nav-link {
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #f97216 !important;
+        }
+
+        .nav-item .btn {
+            background: #f97216;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .btn {
+            background: #f97216;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .nav-item .btn:hover {
+            background-color: #e55f14;
+            transform: scale(1.05);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            cursor: pointer;
+        }
+        
+        /* Dropdown box */
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            min-width: 180px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            display: none;
+            z-index: 999;
+        }
+        
+        /* Dropdown links */
+        .dropdown-content a {
+            display: block;
+            padding: 12px 18px;
+            color: #111;
+            font-weight: 500;
+            transition: 0.3s;
+            text-decoration: none;
+            text-align:center ;
+
+        }
+
+        /* Hover effects */
+        .dropdown-content a:hover {
+            background: white;
+            color: #f08a2f;
+        }
+
+        /* SHOW ON HOVER */
+        .dropdown:hover .dropdown-content {
+            display: block;
+            color: #f08a2f;
+        }
+
+        .about-hero {
+            position: relative;
+            height: 368px;
+            background: url(imgs/breadcrumb-bg.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 78px;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        .about-content {
+            position: relative;
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+        }
+
+        .about-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            margin-left: 60px;
+        }
+
+        .breadcrumb a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-align: center;
+
+        }
+
+        .breadcrumb a:hover {
+            color: #ff7a00;
+        }
+
+        .breadcrumb span {
+            margin: 0 8px;
+            color: #ff7a00;
+        }
+
+        .breadcrumb .active {
+            color: #ff7a00;
+        }
+
+        
+
+        .text-form {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-form .form-label {
+            font-weight: 600;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .text-form .form-label span {
+            color: rgb(22, 22, 22);
+        }
+
+        .text-form .form-control,
+        .text-form .form-select {
+            border-radius: 6px;
+            padding: 10px;
+        }
+
+        .text-form .btn-primary {
+            background-color: #4da0ea;
+    border: none;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 31px;
+        }
+
+        .text-form .btn-primary:hover {
+            background-color: #155a96;
+        }
+
+        .anime {
+            width: 100%;
+            overflow: hidden;
+            max-width: 1300px;
+            margin-left: 100px;
+        }
+
+        .company {
+            display: flex;
+            gap: 4px;
+            width: max-content;
+            animation: scroll 35s linear infinite;
+            touch-action: pan-y;
+        }
+
+        .company img {
+            width: 160px;
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        .text {
+            background: #f8f9fb;
+        }
+
+        .text h2 {
+            font-size: 44px;
+            color: #111;
+        }
+
+        .text h2 span {
+            color: #f4a51c;
+        }
+
+        .text p {
+            color: #666;
+            line-height: 1.7;
+            font-size: 1rem;
+            border-left: 3px solid #f4a51c;
+            padding-left: 20px;
+        }
+
+        .icon-box {
+            width: 100px;
+            height: 100px;
+            background: #fff3dc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-box i {
+            font-size: 60px;
+            color: #f4a51c;
+        }
+
+        /* Animation */
+        .text {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .text.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .footer {
+            background: #0f172a;
+            padding: 60px 0 30px;
+            position: relative;
+        }
+
+        .footer h6 {
+            color: #f97316;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .footer p,
+        .footer li {
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer ul li a {
+            text-decoration: none;
+            color: #fafafa;
+            transition: .3s;
+        }
+
+        .footer ul li a:hover {
+            color: #f97316;
+        }
+
+        /* Logo section */
+        .footer-logo img {
+            width: 120px;
+            margin-bottom: 15px;
+        }
+
+        /* Government strip */
+        .gov-strip {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 40px;
+
+        }
+
+        .lo {
+            margin-top: 10px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            width: 93%;
+            margin-left: 42px;
+        }
+
+        .gov-strip img {
+            height: 100px;
+            object-fit: contain;
+        }
+
+        /* Bottom text */
+        .footer-bottom {
+            margin-top: 25px;
+            border-top: 1px solid #1e293b;
+            padding-top: 15px;
+            font-size: 17px;
+            color: #f6f7f8;
+
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container" style="max-width: 1485px;">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="imgs/oppty.png" alt="...">
+            </a>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="About us.html">About Us</a></li>
+                    <div class="dropdown">
+                            <a href="our services.html" class="dropbtn" style="color: #716e6e;text-transform: lowercase;text-decoration: none;font-size: 18px;padding: 0px 9px; font-weight: 500;">OUR SERVICES</a>
+
+                            <div class="dropdown-content">
+                                <a href="solution.html">Solutions</a>
+                            </div>
+                        </div>></li>
+                    <li class="nav-item"><a class="nav-link" href="contact us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="academy.html">Academy</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="index.html">Training Partner</a>
+                    </li>
+                    
+
+                    <li class="nav-item" style="display: flex;"><a class="nav-link" href="tel:+919491209900"><img src="imgs/1f4de.svg"
+                                alt="..." width="10px"> +91 9491209900</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="about-hero">
+        <div class="overlay"></div>
+
+        <div class="about-content">
+            <h1>CAREERS</h1>
+
+            <nav class="breadcrumb">
+                <a href="index.html">HOME</a>
+                <span>/</span>
+                <a href="#">CARRERS</a>
+            </nav>
+        </div>
+    </section>
+    <section class="text py-5">
+        <div class="container">
+            <div class="row align-items-center g-4">
+
+                <!-- Left Content -->
+                <div class="col-lg-6 d-flex gap-3 align-items-start">
+                    <div class="icon-box">
+                        <i class="bi bi-lightbulb"></i>
+                    </div>
+                    <div>
+                        <h2 class="fw-bold">
+                            Join the <span>Future</span> at <br> Oppty TechHub
+                        </h2>
+                    </div>
+                </div>
+
+                <!-- Right Content -->
+                <div class="col-lg-6">
+                    <p>
+                        Launch your career with a dynamic team passionate about innovation and growth.
+                        At Oppty TechHub, we offer exciting opportunities in IT, AI, web development,
+                        and more, empowering you to shape the future while growing professionally in
+                        a collaborative, forward-thinking environment.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="" style="padding: 100px 0px; background-color: transparent;background-image: linear-gradient(180deg, #E9F8FF 0%, #E8AA8C50 66%);opacity: 1;">
+        <div class="container " style="background: #f5f7fa;">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8">
+                    <div class="card text-form ">
+                        <div class="card-body p-4">
+
+                            <form id="instituteForm">
+
+                                <div class="mb-3">
+                                    <label class="form-label">Email<span>*</span></label>
+                                    <input type="email" class="form-control" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Who are you?<span>*</span></label>
+                                    <select class="form-select">
+                                        <option>Student</option>
+                                        <option>College</option>
+                                        <option>Institute</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Name of the College / University /
+                                        Institute<span>*</span></label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Contact Person<span>*</span></label>
+                                    <select class="form-select">
+                                        <option>Principal</option>
+                                        <option>HOD</option>
+                                        <option>Placement Officer</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Designation<span>*</span></label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Contact Number<span>*</span></label>
+                                    <input type="tel" class="form-control" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Services Required<span>*</span></label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox">
+                                        <label class="form-check-label">CRT Training</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox">
+                                        <label class="form-check-label">Technical Training</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox">
+                                        <label class="form-check-label">Both Technical & CRT Training</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox">
+                                        <label class="form-check-label">Placement Drive</label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Website Link</label>
+                                    <input type="url" class="form-control">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label">
+                                        Submit your College / University / Institute Profile (PDF/DOC)
+                                    </label>
+                                    <input type="file" class="form-control">
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        Submit
+                                    </button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="anime" style="background: white;">
+        <div class="company">
+            <img src="./imgs/o1-150x150.png" class="com">
+            <img src="./imgs/o2-150x150.png" class="com">
+            <img src="./imgs/o3-150x150.png" class="com">
+            <img src="./imgs/o4-150x150.png" class="com">
+            <img src="./imgs/o5-150x150.png" class="com">
+            <img src="./imgs/apollo-pharmacy-logo-150x150.png" class="com">
+            <img src="./imgs/o7-150x150.png" class="com">
+            <img src="./imgs/o8-150x150.png" class="com">
+            <img src="./imgs/o9-150x150.png" class="com">
+
+            <img src="./imgs/o1-150x150.png" class="com">
+            <img src="./imgs/o2-150x150.png" class="com">
+            <img src="./imgs/o3-150x150.png" class="com">
+            <img src="./imgs/o4-150x150.png" class="com">
+            <img src="./imgs/o5-150x150.png" class="com">
+            <img src="./imgs/o6.png" class="com">
+            <img src="./imgs/o7-150x150.png" class="com">
+            <img src="./imgs/o8-150x150.png" class="com">
+            <img src="./imgs/o9-150x150.png" class="com">
+
+        </div>
+    </section>
+    <footer class="footer" style="background: #222327;">
+        <div class="container">
+            <div class="row g-4" style="padding: 50px 50px 0px 50px;">
+
+                <!-- Company Info -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-logo">
+                        <img src="imgs/322343.png" alt="Logo">
+                    </div>
+                    <p>
+                        Power up your success with innovative IT, BPO, E-commerce,
+                        Web Development, and AI solutions tailored to your vision.
+                    </p>
+                </div>
+
+                <!-- Hyderabad -->
+                <div class="col-lg-3 col-md-6">
+                    <h6>HYDERABAD LOCATIONS</h6>
+                    <p>
+                        Flat No 601, Mahitha’s Green Galaxy,
+                        CBID Colony, NRSA Colony,
+                        Baghath Singh Nagar Phase-2,
+                        Kukatpally, Hyderabad,
+                        Telangana – 500085
+                    </p>
+                </div>
+
+                <!-- Udaipur -->
+                <div class="col-lg-2 col-md-6">
+                    <h6>UDAIPUR LOCATIONS</h6>
+                    <p>
+                        Plot No: 26, 100 Feet Rd,
+                        Shobhagpura, Udaipur,
+                        Rajasthan – 313011
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6>CONTACT US</h6>
+                    <p>
+                        info@oppty.in <br>
+                        +91-9491209900
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-1 col-md-6" style="margin-left: -129px;width: 10%;">
+                    <h6>QUICK LINKS</h6>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="lo">
+
+            </div>
+            <!-- Government Logos -->
+            <div class="gov-strip text-center" style="margin: 0px 50px;">
+                <div class="row align-items-center g-3" style="margin: 0px 235px;">
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/png-clipart-government-of-india-ministry-of-micro-small-and-medium-enterprises-small-business-india-text-logo__1_-removebg-preview.png"
+                            class="img-fluid">
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/Ministry-for-Corporate-AffairS-1-removebg-preview.png" class="img-fluid">
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/36662669-1685562943668-bf31f5769c66e.jpg" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="footer-bottom ">
+                © <span id="year"></span> Oppty. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="whatsapp-btn">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener("load", () => {
+            document.querySelector(".text").classList.add("show");
+        });
+        document.getElementById("instituteForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            alert("Form submitted successfully!");
+        });
+    </script>
+</body>
+
+</html>

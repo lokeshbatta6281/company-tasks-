@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .navbar-brand img {
+            width: 200px;
+
+        }
+
+        .nav-link {
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #f97216 !important;
+        }
+
+        .nav-item .btn {
+            background: #f97216;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .btn {
+            background: #f97216;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .nav-item .btn:hover {
+            background-color: #e55f14;
+            transform: scale(1.05);
+        }
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            cursor: pointer;
+        }
+        
+        /* Dropdown box */
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            min-width: 180px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            display: none;
+            z-index: 999;
+        }
+        
+        /* Dropdown links */
+        .dropdown-content a {
+            display: block;
+            padding: 12px 18px;
+            color: #111;
+            font-weight: 500;
+            transition: 0.3s;
+            text-decoration: none;
+            text-align: center;
+
+        }
+
+        /* Hover effects */
+        .dropdown-content a:hover {
+            background: white;
+            color: #f08a2f;
+        }
+
+        /* SHOW ON HOVER */
+        .dropdown:hover .dropdown-content {
+            display: block;
+            color: #f08a2f;
+        }
+
+
+        .about-hero {
+            position: relative;
+            height: 368px;
+            background: url(imgs/breadcrumb-bg.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 78px;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        .about-content {
+            position: relative;
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+        }
+
+        .about-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            margin-left: 60px;
+        }
+
+        .breadcrumb a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-align: center;
+
+        }
+
+        .breadcrumb a:hover {
+            color: #ff7a00;
+        }
+
+        .breadcrumb span {
+            margin: 0 8px;
+            color: #ff7a00;
+        }
+
+        .breadcrumb .active {
+            color: #ff7a00;
+        }
+
+        .text {
+            min-height: 90vh;
+            background: url(imgs/career-detail-image-1.jpg) center/cover no-repeat;
+            position: relative;
+        }
+
+        .text .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+        }
+
+        .text h1 {
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        .text .highlight {
+            color: #f38212;
+        }
+
+        .text .content-box {
+            max-width: 894px;
+            margin-top: 30px;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .text .content-box p {
+            position: relative;
+            padding-left: 20px;
+            font-size: 16px;
+        }
+
+        .text .content-box p::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 4px;
+            height: 80%;
+            background: #f39c12;
+        }
+
+        @media (max-width: 768px) {
+            .text h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .text2 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .course-card {
+            background: #0f0f0f;
+            color: #fff;
+            border-radius: 10px;
+            padding: 40px;
+            min-height: 280px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .course-number {
+            font-size: 36px;
+            font-weight: 700;
+            opacity: 0.9;
+        }
+
+        .course-title {
+            position: absolute;
+            bottom: 30px;
+            left: 40px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* Decorative Icons */
+        .icon-circle,
+        .icon-sun,
+        .icon-atom,
+        .icon-globe {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+        }
+
+        /* Circle */
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #d4af37;
+            border-radius: 50%;
+        }
+
+        /* Sun */
+        .icon-sun {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px dashed #d4af37;
+        }
+
+        /* Atom */
+        .icon-atom {
+            width: 45px;
+            height: 45px;
+            border: 2px solid #d4af37;
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+
+        /* Globe */
+        .icon-globe {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #d4af37;
+            border-radius: 50%;
+            background: repeating-linear-gradient(to bottom,
+                    transparent,
+                    transparent 4px,
+                    #d4af37 5px);
+        }
+
+        .text3 {
+            padding: 70px 0;
+            background: #f9f9f9;
+        }
+
+        .text3 h2 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .text3 p.subtitle {
+            color: #666;
+            margin-bottom: 50px;
+        }
+
+        .plan-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            height: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .plan-title {
+            color: #f57c00;
+            font-weight: 700;
+        }
+
+        .plan-subtitle {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .plan-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .plan-list li {
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .plan-list li span {
+            color: #f57c00;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .text3 ul li::before {
+            content: "✔";
+            color: #e67e22;
+            margin-right: 10px;
+        }
+
+        .btn-enroll {
+            background: linear-gradient(45deg, #f57c00, #ff4800eb);
+            color: #131212;
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        .btn-enroll:hover {
+            background: linear-gradient(45deg, #ff9800, #e5cb3a);
+        }
+
+        .footer {
+            background: #0f172a;
+            padding: 60px 0 30px;
+            position: relative;
+        }
+
+        .footer h6 {
+            color: #f97316;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .footer p,
+        .footer li {
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer ul li a {
+            text-decoration: none;
+            color: #fafafa;
+            transition: .3s;
+        }
+
+        .footer ul li a:hover {
+            color: #f97316;
+        }
+
+        /* Logo section */
+        .footer-logo img {
+            width: 120px;
+            margin-bottom: 15px;
+        }
+
+        /* Government strip */
+        .gov-strip {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 40px;
+
+        }
+
+        .lo {
+            margin-top: 10px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            width: 93%;
+            margin-left: 42px;
+        }
+
+        .gov-strip img {
+            height: 100px;
+            object-fit: contain;
+        }
+
+        /* Bottom text */
+        .footer-bottom {
+            margin-top: 25px;
+            border-top: 1px solid #1e293b;
+            padding-top: 15px;
+            font-size: 17px;
+            color: #f6f7f8;
+
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container" style="max-width: 1485px;">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="imgs/oppty.png" alt="...">
+            </a>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="About us.html">About Us</a></li>
+                    <div class="dropdown">
+                            <a href="our services.html" class="dropbtn" style="color: #716e6e;text-transform: lowercase;text-decoration: none;font-size: 18px;padding: 0px 9px; font-weight: 500;">OUR SERVICES</a>
+
+                            <div class="dropdown-content">
+                                <a href="solution.html">Solutions</a>
+                            </div>
+                        </div>
+                    <li class="nav-item"><a class="nav-link" href="contact us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="academy.html">Academy</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="index.html">Training Partner</a>
+                    </li>
+                    
+
+                    <li class="nav-item" style="display: flex;"><a class="nav-link" href="tel:+919491209900"><img src="imgs/1f4de.svg"
+                                alt="..." width="10px"> +91 9491209900</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="about-hero">
+        <div class="overlay"></div>
+
+        <div class="about-content">
+            <h1>ACADEMY</h1>
+
+            <nav class="breadcrumb">
+                <a href="index.html">HOME</a>
+                <span>/</span>
+                <a href="#">ACADEMY</a>
+            </nav>
+        </div>
+    </section>
+    <section style="padding: 100px 50px;">
+        <div class="text d-flex align-items-center">
+            <div class="overlay"></div>
+
+            <div class="container position-relative" style="padding: 100px 50px;">
+                <div class="row justify-content-center">
+                    <div class="col-lg-9 text-center text-white">
+
+                        <h1 class="fw-bold " style="margin-bottom: 60px;">
+                            EMPOWER YOUR FUTURE <span class="highlight">WITH</span><br>
+                            OPPTY ACADEMY
+                        </h1>
+
+                        <div class="content-box text-start mx-auto">
+                            <p>
+                                Unlock your potential with industry-ready AI, Data Science, and tech courses designed to
+                                propel your career forward. At Oppty Academy, we bridge the gap between aspiration and
+                                achievement through practical, project-based learning.
+
+
+                            </p>
+
+                            <p>
+                                Our cutting-edge training programs are crafted to align with market demands, empowering
+                                individuals and teams with the skills to lead in AI, Data Science, and emerging
+                                technologies. Whether you’re a student, professional, or business leader, our courses
+                                deliver real-world expertise for tangible results.
+                            </p>
+
+                            <p>
+                                We focus on hands-on, industry-relevant learning that combines foundational knowledge
+                                with advanced applications. Our mentor-led, hybrid learning model ensures flexibility
+                                and personalized growth, preparing you to excel in a tech-driven world.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-5  text2">
+        <div class="container">
+
+            <!-- Section Heading -->
+            <div class="text-center mb-5">
+                <h2 class="fw-bold" style="font-size: 38px;">OUR COURSES</h2>
+                <p class="text-muted" style="margin: 20px 368px;font-size: 18px;">
+                    Explore our dynamic courses tailored to make you job-ready in AI and Data Science.
+                </p>
+            </div>
+
+            <!-- Course Cards -->
+            <div class=" g-4" style="margin-left: 128px;">
+
+                <div class="col-lg-6">
+                    <div class="course-card">
+                        <span class="course-number">01</span>
+                        <h5 class="course-title">DATA SCIENCE</h5>
+                        <div class="icon-circle"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="course-card">
+                        <span class="course-number">02</span>
+                        <h5 class="course-title">MACHINE LEARNING</h5>
+                        <div class="icon-sun"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="course-card">
+                        <span class="course-number">03</span>
+                        <h5 class="course-title">ARTIFICIAL INTELLIGENCE</h5>
+                        <div class="icon-atom"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="course-card">
+                        <span class="course-number">04</span>
+                        <h5 class="course-title">APPLIED DEEP LEARNING</h5>
+                        <div class="icon-globe"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="text3">
+        <div class="container">
+
+            <div class="text-center">
+                <h2>Training Plans</h2>
+                <p class="subtitle">
+                    Choose the plan that fits your goals. Each plan includes project-based learning, certifications, and
+                    career support.
+                </p>
+            </div>
+
+            <div class="row g-4" style="    max-width: 1094px;margin-left: 101px;">
+
+                <!-- Data Science -->
+                <div class="col-lg-6">
+                    <div class="plan-card">
+                        <h4 class="plan-title">Data Science</h4>
+                        <p class="plan-subtitle">Online/In-House | Data Analytics + Machine Learning</p>
+                        <ul class="plan-list">
+                            <li>Pre & Post Assessments</li>
+                            <li>Foundation & Advanced Modules</li>
+                            <li>100-Hour Engagement</li>
+                            <li>20 Weeks, 60 Sessions</li>
+                            <li>2 Mini + 1 Industry Project</li>
+                            <li>Hackathon & Certification</li>
+                            <li>Internship & Job Placement Support</li>
+                            <li>Access to Oppty AI Community</li>
+                        </ul>
+                        <button class="btn btn-enroll">Enroll Now</button>
+                    </div>
+                </div>
+
+                <!-- Machine Learning -->
+                <div class="col-lg-6">
+                    <div class="plan-card">
+                        <h4 class="plan-title">Machine Learning</h4>
+                        <p class="plan-subtitle">Online/In-House | ML + AI Concepts</p>
+                        <ul class="plan-list">
+                            <li>Pre & Post Assessments</li>
+                            <li>Foundation & Advanced Modules</li>
+                            <li>80-Hour Engagement</li>
+                            <li>12 Weeks, 36 Sessions</li>
+                            <li>1 Mini + 1 Industry Project</li>
+                            <li>Hackathon & Certification</li>
+                            <li>Internship & Job Placement Support</li>
+                            <li>Access to Oppty AI Community</li>
+                        </ul>
+                        <button class="btn btn-enroll">Enroll Now</button>
+                    </div>
+                </div>
+
+                <!-- Artificial Intelligence -->
+                <div class="col-lg-6">
+                    <div class="plan-card">
+                        <h4 class="plan-title">Artificial Intelligence</h4>
+                        <p class="plan-subtitle">Online/In-House | Advanced ML + Neural Networks</p>
+                        <ul class="plan-list">
+                            <li>Pre & Post Assessments</li>
+                            <li>>Foundation & Advanced Modules</li>
+                            <li>120-Hour Engagement</li>
+                            <li>16 Weeks, 48 Sessions</li>
+                            <li>2 Mini + 1 Industry Project</li>
+                            <li>Hackathon & Certification</li>
+                            <li>Internship & Job Placement Support</li>
+                            <li>Access to Oppty AI Community</li>
+                        </ul>
+                        <button class="btn btn-enroll">Enroll Now</button>
+                    </div>
+                </div>
+
+                <!-- Applied Deep Learning -->
+                <div class="col-lg-6">
+                    <div class="plan-card">
+                        <h4 class="plan-title">Applied Deep Learning</h4>
+                        <p class="plan-subtitle">Online/In-House | Deep Learning Algorithms</p>
+                        <ul class="plan-list">
+                            <li>Pre & Post Assessments</li>
+                            <li>Foundation & Advanced Modules</li>
+                            <li>110-Hour Engagement</li>
+                            <li>14 Weeks, 42 Sessions</li>
+                            <li>2 Mini + 1 Industry Project</li>
+                            <li>Hackathon & Certification</li>
+                            <li>Internship & Job Placement Support</li>
+                            <li>Access to Oppty AI Community</li>
+                        </ul>
+                        <button class="btn btn-enroll">Enroll Now</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer" style="background: #222327;">
+        <div class="container">
+            <div class="row g-4" style="padding: 50px 50px 0px 50px;">
+
+                <!-- Company Info -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-logo">
+                        <img src="imgs/322343.png" alt="Logo">
+                    </div>
+                    <p>
+                        Power up your success with innovative IT, BPO, E-commerce,
+                        Web Development, and AI solutions tailored to your vision.
+                    </p>
+                </div>
+
+                <!-- Hyderabad -->
+                <div class="col-lg-3 col-md-6">
+                    <h6>HYDERABAD LOCATIONS</h6>
+                    <p>
+                        Flat No 601, Mahitha’s Green Galaxy,
+                        CBID Colony, NRSA Colony,
+                        Baghath Singh Nagar Phase-2,
+                        Kukatpally, Hyderabad,
+                        Telangana – 500085
+                    </p>
+                </div>
+
+                <!-- Udaipur -->
+                <div class="col-lg-2 col-md-6">
+                    <h6>UDAIPUR LOCATIONS</h6>
+                    <p>
+                        Plot No: 26, 100 Feet Rd,
+                        Shobhagpura, Udaipur,
+                        Rajasthan – 313011
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6>CONTACT US</h6>
+                    <p>
+                        info@oppty.in <br>
+                        +91-9491209900
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-1 col-md-6" style="margin-left: -129px;width: 10%;">
+                    <h6>QUICK LINKS</h6>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="lo">
+
+            </div>
+            <!-- Government Logos -->
+            <div class="gov-strip text-center" style="margin: 0px 50px;">
+                <div class="row align-items-center g-3" style="margin: 0px 235px;">
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/png-clipart-government-of-india-ministry-of-micro-small-and-medium-enterprises-small-business-india-text-logo__1_-removebg-preview.png"
+                            class="img-fluid">
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/Ministry-for-Corporate-AffairS-1-removebg-preview.png" class="img-fluid">
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/36662669-1685562943668-bf31f5769c66e.jpg" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="footer-bottom ">
+                © <span id="year"></span> Oppty. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    <a href="#" class="whatsapp-btn">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.enroll-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                alert('Enrollment process coming soon!');
+            });
+        });
+    </script>
+</body>
+
+</html>

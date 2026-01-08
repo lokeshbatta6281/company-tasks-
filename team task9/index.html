@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Oppty – Innovative Solutions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container" style="max-width: 1485px;">
+            <a class="navbar-brand fw-bold" href="#">
+                <img src="imgs/oppty.png" alt="...">
+            </a>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="About us.html">About Us</a></li>
+                    <div class="dropdown">
+                            <a href="our services.html" class="dropbtn" style="color: #716e6e;text-transform: lowercase;text-decoration: none;font-size: 18px;padding: 0px 9px; font-weight: 500;">OUR SERVICES</a>
+
+                            <div class="dropdown-content">
+                                <a href="solution.html">Solutions</a>
+                            </div>
+                        </div>
+                    <li class="nav-item"><a class="nav-link" href="contact us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="academy.html">Academy</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="index.html">Training Partner</a>
+                    </li>
+                    
+
+                    <li class="nav-item" style="display: flex;"><a class="nav-link" href="tel:+919491209900"><img src="imgs/1f4de.svg"
+                                alt="..." width="10px"> +91 9491209900</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero-section d-flex align-items-center" style="padding: 110px 0px 0px 0px;">
+
+        <div class="container">
+            <div class="background-overlay"></div>
+            <div class="row align-items-center">
+
+                <!-- LEFT CONTENT -->
+                <div class="col-lg-6 text-white">
+                    <div class="background-overlay"></div>
+                    <div id="heroCarousel" class="carousel slides carousel-fade" data-bs-ride="carousel">
+
+                        <!-- Indicators -->
+                        <div class="carousel-indicators" style="margin-bottom: -51px;margin-left: -64%;">
+                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0"
+                                class="active"></button>
+                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+                        </div>
+
+                        <div class="carousel-inner">
+
+                            <!-- Slide 1 -->
+                            <div class="carousel-item active">
+
+                                <div class="container">
+                                    <div class="hero-content text-white">
+                                        <h1>Elevate Online<br>Presence</h1>
+                                        <div class="hero-features mt-4">
+                                            <span>
+                                                <div class="hero-dot"></div> Stunning Websites
+                                            </span>
+                                            <span>
+                                                <div class="hero-dot"></div> Robust Security
+                                            </span>
+                                            <span>
+                                                <div class="hero-dot"></div> E-Commerce Optimization
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Slide 2 -->
+                            <div class="carousel-item">
+
+                                <div class="container">
+                                    <div class="hero-content text-white">
+                                        <h1>Grow Your<br>Business</h1>
+                                        <div class="hero-features mt-4">
+                                            <span>
+                                                <div class="hero-dot"></div> Modern UI
+                                            </span>
+                                            <span>
+                                                <div class="hero-dot"></div> Fast Performance
+                                            </span>
+                                            <span>
+                                                <div class="hero-dot"></div> SEO Ready
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Slide 3 -->
+                            <div class="carousel-item">
+
+                                <div class="container">
+                                    <div class="hero-content text-white">
+                                        <h1>Digital<br>Solutions</h1>
+                                        <div class="hero-features mt-4">
+                                            <span>
+                                                <div class="hero-dot"></div> Custom Design
+                                            </span>
+                                            <span>
+                                                <div class="hero-dot"></div> Secure Systems
+                                            </span>
+                                            <span>
+                                                <div class="hero-dot"></div> Scalable Apps
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT IMAGE -->
+                <div class="col-lg-6 text-center">
+                    <img src="imgs/slider-3-image.png" class="img-fluid hero-img" alt="Business Team">
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="content" style="background: #1B1B1B;">
+        <div class="container" style="max-width: 1418px;">
+            <h1
+                style="color: white; font-weight: 700;color: white;margin-left: 95px;text-transform: uppercase; font-size: 47px;">
+                Ignite Your Business <br> with Oppty TechHub</h1>
+            <div class="row">
+                <div class="col-5">
+                    <img src="imgs/Hai-Home3-filler-1-img.jpg" alt="..." width="563px" height="711px">
+                </div>
+                <div class="col-7">
+                    <div class="row text">
+                        <div class="col-6">
+                            <p>Power up your success with innovative IT, BPO, E-commerce, Web Development, and AI
+                                solutions tailored to your vision. Partner with us to transform challenges into
+                                opportunities and drive growth with cutting-edge technology.</p>
+
+                            <a class="btn btn-warning rounded-pill px-4">know more</a>
+                        </div>
+                        <div class="col-6">
+                            <img src="imgs/Hai-Home3-filler-fixed-img.png" alt="...">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3 text1">
+                            <h1>2K</h1>
+                            <p>project complete</p>
+                        </div>
+                        <div class="col-3 text1">
+                            <h1>200+</h1>
+                            <p>Happy Customers</p>
+                        </div>
+                        <div class="col-3 text1">
+                            <h1>10+</h1>
+                            <p>Awards Achieve</p>
+                        </div>
+                        <div class="col-3 text1">
+                            <h1>+5</h1>
+                            <p>Global Branches</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="steps-section text-white">
+        <div class="overlay"></div>
+
+        <div class="container position-relative">
+            <h2 class="text-center fw-bold mb-5" style="font-size: 40px;">
+                FIVE STEPS TO <span class="text-warning">TRANSFORM</span><br>
+                YOUR BUSINESS WITH OPPTY TECHHUB
+            </h2>
+
+            <div class="row text-center gy-4">
+
+                <div class="col-md">
+                    <div class="step-box">
+                        <i class="bi bi-lightbulb step-icon"></i>
+
+                        <h5 class="text-2">1. Discover Your Needs</h5>
+                        <p class="text-mute" style="text-align: left;">
+                            Analyze your business goals with our experts to identify tailored IT and AI solutions for
+                            maximum impact.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md">
+                    <div class="step-box">
+                        <i class="bi bi-diagram-3 step-icon"></i>
+                        <h5 class="text-2">2. Strategize & Plan</h5>
+                        <p class="text-mute" style="text-align: left;">
+                            Craft a customized roadmap using cutting-edge technology to drive efficiency and growth.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md">
+                    <div class="step-box">
+                        <i class="bi bi-person-check step-icon"></i>
+                        <h5 class="text-2">3. Implement Solutions</h5>
+                        <p class="text-mute" style="text-align: left;">
+                            Deploy secure IT, BPO, e-commerce, or web development services with seamless integration.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md">
+                    <div class="step-box">
+                        <i class="bi bi-gear step-icon"></i>
+                        <h5 class="text-2">4. Optimize Performance</h5>
+                        <p class="text-mute" style="text-align: left;">
+                            Leverage AI-driven insights and AIOps to enhance operations and reduce downtime.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-warning px-4 py-2 rounded-pill">
+                    Follow Us On LinkedIn
+                </a>
+            </div>
+
+        </div>
+    </section>
+    <section class="services-section py-5">
+        <div class="container">
+            <div style="display: flex; margin-left: 78px;">
+                <div>
+                    <span class="text-warning fw-semibold" style="display: flex;">Services</span>
+                    <h2 class="text-white fw-bold mt-2">
+                        SOLUTION WE <span class="text-3">PROVIDES</span>
+                    </h2>
+                </div>
+                <div style="margin-left: 130px; border-left: 2px solid orange ;">
+
+                    <p class="text-secondary mt-3" style="margin-left: 50px;">
+                        Unlock your business potential with <br> our innovative,
+                        SEO-optimized <br>solutions designed for success.
+                    </p>
+                </div>
+                <div style="margin-left: 100px;">
+                    <button class="btns">
+                        View All Services →
+                    </button>
+                </div>
+            </div>
+            <div class="row align-items-center">
+
+                <!-- LEFT IMAGE -->
+                <div class="col-5 mb-4 mb-lg-0">
+                    <img src="imgs/service-bg-h3.png" class="img-fluid rounded-4 shadow-lg" alt="IT Services"
+                        style="background-position-x: 0.357124%;background-position-y: 0.357124%">
+                </div>
+
+                <!-- RIGHT CONTENT -->
+                <div class="col-7">
+
+
+                    <div class="service-list mt-4">
+
+                        <div class="service-item">
+                            <span class="service-title">IT SERVICES</span>
+                            <span class="service-number">01</span>
+                        </div>
+
+                        <div class="service-item active">
+                            <span class="service-title text-warning">BPO</span>
+                            <span class="service-number">02</span>
+                        </div>
+
+                        <div class="service-item">
+                            <span class="service-title">E-COMMERCE</span>
+                            <span class="service-number">03</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-title">WEB <br> DEVELOPMENT</span>
+                            <span class="service-number">04</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-title">AI SOLUTIONS</span>
+                            <span class="service-number">05</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="background: white;">
+        <div class="content1">
+            <div class="content2">
+                <div class="Service">
+                    <span>IT SERVICES</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>BOP</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>E-commeres</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>Web Developement</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>AI solutions</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>IT SERVICES</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>BOP</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>E-commeres</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>Web Developement</span>
+                </div>
+                <span class="separator">•</span>
+                <div class="Service">
+                    <span>AI solutions</span>
+                </div>
+                <span class="separator">•</span>
+            </div>
+        </div>
+    </section>
+    <section class="service-3 py-5" style="padding: 100px 0px;">
+        <div class="container">
+
+            <div class="text-center mb-5">
+                <small class="text-mute" style="color: white;font-size: 25px;">Testimonials</small>
+                <h2 class="fw-bold text-white" style="font-size: 48px;">
+                    OUR CLIENTS <span class="text-warning">REVIEWS</span>
+                </h2>
+            </div>
+
+            <div id="testimonialSlider" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                    <!-- Slide 1 -->
+                    <div class="carousel-item active">
+                        <div class="row g-4 justify-content-center">
+
+                            <div class="col-md-5">
+                                <div class="testimonial-card">
+                                    <h6>Rohan Patel, <span>Tech Entrepreneur</span></h6>
+                                    <div class="stars">★★★★★</div>
+                                    <p>
+                                        Their AI-driven solutions optimized our workflows,
+                                        saving us significant costs.
+                                    </p>
+                                    <div class="quote">“</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="testimonial-card">
+                                    <h6>Priyanka Reddy, <span>Marketing Head</span></h6>
+                                    <div class="stars">★★★★★</div>
+                                    <p>
+                                        The responsive website Optty built for us perfectly
+                                        captures our brand’s essence.
+                                    </p>
+                                    <div class="quote">“</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="carousel-item">
+                        <div class="row g-4 justify-content-center">
+
+                            <div class="col-md-5">
+                                <div class="testimonial-card">
+                                    <h6>Arjun Mehta, <span>Startup Founder</span></h6>
+                                    <div class="stars">★★★★★</div>
+                                    <p>
+                                        Excellent support and modern UI solutions.
+                                        Highly professional team.
+                                    </p>
+                                    <div class="quote">“</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="testimonial-card">
+                                    <h6>Anjali Sharma, <span>Product Manager</span></h6>
+                                    <div class="stars">★★★★★</div>
+                                    <p>
+                                        Clean design, smooth animations, and fast delivery.
+                                        Highly recommended.
+                                    </p>
+                                    <div class="quote">“</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row g-4 justify-content-center">
+
+                            <div class="col-md-5">
+                                <div class="testimonial-card">
+                                    <h6>Arjun Mehta, <span>Startup Founder</span></h6>
+                                    <div class="stars">★★★★★</div>
+                                    <p>
+                                        Excellent support and modern UI solutions.
+                                        Highly professional team.
+                                    </p>
+                                    <div class="quote">“</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="testimonial-card">
+                                    <h6>Anjali Sharma, <span>Product Manager</span></h6>
+                                    <div class="stars">★★★★★</div>
+                                    <p>
+                                        Clean design, smooth animations, and fast delivery.
+                                        Highly recommended.
+                                    </p>
+                                    <div class="quote">“</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row g-4 justify-content-center">
+
+                            <div class="col-md-5">
+                                <div class="testimonial-card">
+                                    <h6>Arjun Mehta, <span>Startup Founder</span></h6>
+                                    <div class="stars">★★★★★</div>
+                                    <p>
+                                        Excellent support and modern UI solutions.
+                                        Highly professional team.
+                                    </p>
+                                    <div class="quote">“</div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="testimonial-card">
+                                    <h6>Anjali Sharma, <span>Product Manager</span></h6>
+                                    <div class="stars">★★★★★</div>
+                                    <p>
+                                        Clean design, smooth animations, and fast delivery.
+                                        Highly recommended.
+                                    </p>
+                                    <div class="quote">“</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Dots -->
+                <div class="carousel-indicators position-static mt-4">
+                    <button type="button" data-bs-target="#testimonialSlider" data-bs-slide-to="0"
+                        class="active"></button>
+                    <button type="button" data-bs-target="#testimonialSlider" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#testimonialSlider" data-bs-slide-to="2"></button>
+                    <button type="button" data-bs-target="#testimonialSlider" data-bs-slide-to="3"></button>
+
+                </div>
+
+            </div>
+            <div class="text-center mb-5">
+                <small class="text-mute" style="color: white;font-size: 25px; font-weight: 600;">We are proud to partner
+                    with industry leaders.</small>
+                <h2 class="fw-bold text-white" style="font-size: 48px;">
+                    Our Valued <span class="text-warning">CLIENTS</span>
+                </h2>
+            </div>
+        </div>
+    </section>
+    <section class="anime" style="background: white;">
+        <div class="company">
+            <img src="./imgs/o1-150x150.png" class="com">
+            <img src="./imgs/o2-150x150.png" class="com">
+            <img src="./imgs/o3-150x150.png" class="com">
+            <img src="./imgs/o4-150x150.png" class="com">
+            <img src="./imgs/o5-150x150.png" class="com">
+            <img src="./imgs/apollo-pharmacy-logo-150x150.png" class="com">
+            <img src="./imgs/o7-150x150.png" class="com">
+            <img src="./imgs/o8-150x150.png" class="com">
+            <img src="./imgs/o9-150x150.png" class="com">
+
+            <img src="./imgs/o1-150x150.png" class="com">
+            <img src="./imgs/o2-150x150.png" class="com">
+            <img src="./imgs/o3-150x150.png" class="com">
+            <img src="./imgs/o4-150x150.png" class="com">
+            <img src="./imgs/o5-150x150.png" class="com">
+            <img src="./imgs/o6.png" class="com">
+            <img src="./imgs/o7-150x150.png" class="com">
+            <img src="./imgs/o8-150x150.png" class="com">
+            <img src="./imgs/o9-150x150.png" class="com">
+
+        </div>
+    </section>
+
+    <footer class="footer" style="background: #222327;">
+        <div class="container">
+            <div class="row g-4" style="padding: 50px 50px 0px 50px;">
+
+                <!-- Company Info -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-logo">
+                        <img src="imgs/322343.png" alt="Logo">
+                    </div>
+                    <p>
+                        Power up your success with innovative IT, BPO, E-commerce,
+                        Web Development, and AI solutions tailored to your vision.
+                    </p>
+                </div>
+
+                <!-- Hyderabad -->
+                <div class="col-lg-3 col-md-6">
+                    <h6>HYDERABAD LOCATIONS</h6>
+                    <p>
+                        Flat No 601, Mahitha’s Green Galaxy,
+                        CBID Colony, NRSA Colony,
+                        Baghath Singh Nagar Phase-2,
+                        Kukatpally, Hyderabad,
+                        Telangana – 500085
+                    </p>
+                </div>
+
+                <!-- Udaipur -->
+                <div class="col-lg-2 col-md-6">
+                    <h6>UDAIPUR LOCATIONS</h6>
+                    <p>
+                        Plot No: 26, 100 Feet Rd,
+                        Shobhagpura, Udaipur,
+                        Rajasthan – 313011
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6>CONTACT US</h6>
+                    <p>
+                        info@oppty.in <br>
+                        +91-9491209900
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-1 col-md-6" style="margin-left: -129px;width: 10%;">
+                    <h6>QUICK LINKS</h6>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="lo">
+
+            </div>
+            <!-- Government Logos -->
+            <div class="gov-strip text-center" style="margin: 0px 50px;">
+                <div class="row align-items-center g-3" style="margin: 0px 235px;">
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/png-clipart-government-of-india-ministry-of-micro-small-and-medium-enterprises-small-business-india-text-logo__1_-removebg-preview.png"
+                            class="img-fluid">
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/Ministry-for-Corporate-AffairS-1-removebg-preview.png" class="img-fluid">
+                    </div>
+                    <div class="col-md-4 col-6">
+                        <img src="imgs/36662669-1685562943668-bf31f5769c66e.jpg" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="footer-bottom ">
+                © <span id="year"></span> Oppty. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="#" class="whatsapp-btn">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
