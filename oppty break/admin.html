@@ -1,133 +1,631 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>Admin Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-<style>
-body{font-family: Poppins;
-    background: linear-gradient(135deg, #cde493, #924b7b);
-    padding: 30px;}
+    <style>
+        * {
+            box-sizing: border-box
+        }
 
-.backBtn{
-    padding:10px 18px;
-    margin-bottom:15px;
-    border:none;
-    border-radius:10px;
-    background:linear-gradient(135deg,#444,#111);
-    color:white;
-    cursor:pointer;
-    transition:0.3s ease;
+        body {
+            font-family: Poppins;
+            margin: 0;
+            background: linear-gradient(307deg, #484945, #ef6f41);
+        }
+
+        /* ===== LAYOUT ===== */
+        .wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 240px;
+            background: #2f2f7a;
+            color: #fff;
+            padding: 25px 20px;
+        }
+
+        .sidebar img {
+            width: 140px;
+            margin-bottom: 40px;
+        }
+
+        .sidebar h4 {
+            margin: 20px 0 10px;
+            font-weight: 600;
+            opacity: .8;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #6c63ff;
+        }
+
+        /* ===== MAIN AREA ===== */
+        .main {
+            flex: 1;
+        }
+
+        /* ---------- NAVBAR ---------- */
+        .navbar {
+            background: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .1);
+        }
+
+        .navbar button {
+            background: #ff5c5c;
+            border: none;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .navbar button:hover {
+            opacity: .85
+        }
+
+        /* ---------- CONTENT ---------- */
+        .container {
+            padding: 30px;
+            max-width: 1100px;
+        }
+
+        /* ---------- CARD ---------- */
+        .card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+        }
+
+        h2,
+        h3 {
+            margin-top: 0;
+            color: #534dbb
+        }
+
+        /* ---------- FORM ---------- */
+        input {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 15px;
+            width: 220px;
+            margin-right: 10px;
+        }
+
+        /* ---------- TABLE ---------- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left
+        }
+
+        th {
+            background: #6c63ff;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background: #f6f6f6
+        }
+
+        /* ---------- BADGES ---------- */
+        .badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .green {
+            background: #d4f8e8;
+            color: #0a7d5d
+        }
+
+        .red {
+            background: #ffe1e1;
+            color: #c0392b
+        }
+
+        /* ---------- BUTTONS ---------- */
+        button {
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .add {
+            background: #2ecc71;
+            color: #fff
+        }
+
+        .delete {
+            background: #e74c3c;
+            color: #fff
+        }
+
+        .download {
+            background: #6c63ff;
+            color: #fff;
+            margin-right: 10px
+        }
+
+        button:hover {
+            opacity: .9
+        }
+        /* ===== SECTION WRAPPER ===== */
+.section {
+    animation: fadeSlide .35s ease;
 }
-.backBtn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 8px 20px rgba(0,0,0,0.35);
+
+/* Smooth animation when switching sections */
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.card{
-    background:#fff;
-    padding:25px;
-    border-radius:14px;
-    margin-bottom:25px;
-    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+/* USERS LIST STYLE */
+#userList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-table{width:100%;border-collapse:collapse;}
-th,td{padding:12px;border-bottom:1px solid #ddd;}
-
-th{background:#6C63FF;color:#fff;}
-
-.green{color:#00C9A7;font-weight:600;}
-.red{color:#FF5C5C;font-weight:600;}
-
-button{
-    padding:10px 20px;
-    border:none;
-    border-radius:8px;
-    background:#d35e1a;
-    color:#fff;
-    cursor:pointer;
+#userList li {
+    background: #f4f5ff;
+    margin-bottom: 10px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all .25s ease;
 }
 
-.logout{float:right;
-background:#FF5C5C;
-font-size: 20px;}
-#uname,#upass{
-    font-size: 15px;
-    padding: 10px;
+#userList li:hover {
+    background: #6c63ff;
+    color: #fff;
+    transform: translateX(5px);
 }
-h2:hover,h3:hover{
-    color: #548ddc;
-    text-decoration: underline;
+
+/* USER DETAILS BOX */
+#userDetails {
+    border-left: 6px solid #6c63ff;
 }
-    
-</style>
+
+/* BREAK REPORT TABLE */
+#breakSection table {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#breakSection td,
+#breakSection th {
+    font-size: 14px;
+}
+
+/* EMPTY STATE */
+.empty {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 20px;
+}
+    </style>
 </head>
 
 <body>
 
-<button class="backBtn " onclick="goBack()">← Back</button>
+    <div class="wrapper">
 
-<h2 style="color: #534dbb;">Admin Dashboard
-<button class="logout " onclick="logout()">Logout</button>
-</h2>
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <img src="oppty.png">
+            <h4>ADMIN PANEL</h4>
+            <a class="active" onclick="showSection('dashboard')">Dashboard</a>
+            <a onclick="showSection('users')">Users</a>
+            <a onclick="showSection('breaks')">Break Reports</a>
+            <a onclick="logout()">Logout</a>
+        </div>
 
-<div class="card">
-<h3>Add User</h3>
-<input id="uname" placeholder="Username">
-<input id="upass" placeholder="Password">
-<br><br>
-<button onclick="addUser()">Add User</button>
-</div>
+        <!-- MAIN -->
+        <div class="main">
 
-<div class="card">
-<h3>Users Status</h3>
-<table>
-<thead>
-<tr>
-<th>Username</th><th>Role</th><th>Status</th><th>Break</th><th>Action</th>
-</tr>
-</thead>
-<tbody id="userTable"></tbody>
-</table>
-</div>
+            <!-- NAVBAR -->
+            <div class="navbar">
+                <h3>Admin Dashboard</h3>
+                <button onclick="logout()">Logout</button>
+            </div>
 
-<script>
-if(localStorage.getItem("role")!=="admin") location="login.html";
+            <div class="container">
+                <div id="dashboardSection" class="section">
+                    <!-- ADD USER -->
+                    <div class="card">
+                        <h3>Add User</h3>
+                        <input id="uname" placeholder="Username">
+                        <input id="upass" placeholder="Password">
+                        <button class="add" onclick="addUser()">Add User</button>
+                    </div>
 
-let users=JSON.parse(localStorage.getItem("users"))||[];
 
-function renderUsers(){
-    let html="";
-    users.forEach((u,i)=>{
-        html+=`
-        <tr>
-        <td>${u.username}</td>
-        <td>${u.role}</td>
-        <td class="${u.status==="ONLINE"?"green":"red"}">${u.status}</td>
-        <td>${u.breakType||"-"}</td>
-        <td><button onclick="deleteUser(${i})">Delete</button></td>
-        </tr>`;
+                    <input type="text" id="userFilter" placeholder="Search user..." onkeyup="filterUsers()"
+                        style="margin-bottom:15px;width:250px;">
+                    <!-- USERS TABLE -->
+                    <div class="card">
+                        <h3>Users Status</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Break</th>
+                                    <th>Download</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userTable"></tbody>
+                        </table>
+                    </div>
+                    <!-- DOWNLOAD -->
+                    <div class="card">
+                        <h3>Download Users Data</h3>
+                        <button class="download" onclick="downloadAllJSON()">Download All (JSON)</button>
+                        <button class="download" onclick="downloadAllCSV()">Download All (CSV)</button>
+                    </div>
+                </div>
+
+                <!-- USERS LIST -->
+                <div id="usersSection" class="section" style="display:none">
+                    <div class="card">
+                        <h3>All Users</h3>
+                        <ul id="userList"></ul>
+                    </div>
+
+                    <div class="card" id="userDetails" style="display:none">
+                        <h3>User Break Details</h3>
+                        <p id="detailData"></p>
+                    </div>
+                </div>
+
+                <!-- BREAK REPORTS -->
+                <div id="breakSection" class="section" style="display:none">
+                    <div class="card">
+                        <h3>Break Duration Report</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Break Type</th>
+                                    <th>Break In</th>
+                                    <th>Break Out</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody id="breakTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- EDIT USER MODAL -->
+    <div id="editModal" style="display:none;
+position:fixed;inset:0;
+background:rgba(0,0,0,.6);
+display:flex;align-items:center;justify-content:center;">
+
+        <div style="background:#fff;padding:25px;border-radius:15px;width:360px;">
+            <h3>Edit User</h3>
+
+            <input id="editName" placeholder="Username"><br><br>
+            <input id="editPass" placeholder="Password"><br><br>
+
+            <select id="editRole" style="width:100%;padding:10px;border-radius:8px">
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+            </select><br><br>
+
+            <select id="editStatus" style="width:100%;padding:10px;border-radius:8px">
+                <option value="ONLINE">ONLINE</option>
+                <option value="OFFLINE">OFFLINE</option>
+            </select><br><br>
+
+            <button class="add" onclick="saveUser()">Save</button>
+            <button class="delete" onclick="closeEdit()">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        function showSection(section) {
+            dashboardSection.style.display = "none";
+            usersSection.style.display = "none";
+            breakSection.style.display = "none";
+
+            if (section === "dashboard") dashboardSection.style.display = "block";
+            if (section === "users") {
+                usersSection.style.display = "block";
+                renderUserList();
+            }
+            if (section === "breaks") {
+                breakSection.style.display = "block";
+                renderBreakReport();
+            }
+
+            document.querySelectorAll(".sidebar a").forEach(a => a.classList.remove("active"));
+            event.target.classList.add("active");
+        }
+        function renderUserList() {
+            let html = "";
+            users.forEach((u, i) => {
+                html += `<li style="cursor:pointer;padding:8px"
+                     onclick="showUserDetails(${i})">
+                     ${u.username}
+                 </li>`;
+            });
+            userList.innerHTML = html;
+        }
+        function showUserDetails(i) {
+            let u = users[i];
+            userDetails.style.display = "block";
+
+            let duration = getBreakDuration(u);
+
+            detailData.innerHTML = `
+        <b>Username:</b> ${u.username}<br>
+        <b>Status:</b> ${u.status}<br>
+        <b>Break Type:</b> ${u.breakType || "—"}<br>
+        <b>Break In:</b> ${u.breakIn || "—"}<br>
+        <b>Break Out:</b> ${u.breakOut || "—"}<br>
+        <b>Duration:</b> ${duration}
+    `;
+        }
+        function getBreakDuration(u) {
+            if (!u.breakStartTS) return "—";
+
+            let end = u.breakOut ? new Date().getTime() : new Date().getTime();
+            let diff = Math.floor((end - u.breakStartTS) / 1000);
+
+            let min = Math.floor(diff / 60);
+            let sec = diff % 60;
+
+            return `${min} min ${sec} sec`;
+        }
+        function renderBreakReport() {
+    let html = "";
+
+    users.forEach(u => {
+        (u.breakLogs || []).forEach(b => {
+            html += `
+            <tr>
+                <td>${u.username}</td>
+                <td>${b.type}</td>
+                <td>${b.in}</td>
+                <td>${b.out}</td>
+                <td>${b.duration}</td>
+            </tr>`;
+        });
     });
-    userTable.innerHTML=html;
-    localStorage.setItem("users",JSON.stringify(users));
+
+    breakTable.innerHTML =
+        html || "<tr><td colspan='5'>No break records</td></tr>";
 }
+        let editIndex = null;
 
-setInterval(()=>{users=JSON.parse(localStorage.getItem("users"))||[];renderUsers();},2000);
+        function editUser(i) {
+            editIndex = i;
+            let u = users[i];
 
-function addUser(){
-    if(!uname.value||!upass.value) return;
-    users.push({username:uname.value,password:upass.value,role:"USER",status:"ONLINE",breakType:null});
-    uname.value=upass.value="";
+            editName.value = u.username;
+            editPass.value = u.password;
+            editRole.value = u.role;
+            editStatus.value = u.status;
+
+            editModal.style.display = "flex";
+        }
+
+        function saveUser() {
+            if (editIndex === null) return;
+
+            users[editIndex] = {
+                ...users[editIndex],
+                username: editName.value,
+                password: editPass.value,
+                role: editRole.value,
+                status: editStatus.value
+            };
+
+            closeEdit();
+            renderUsers();
+        }
+
+        function closeEdit() {
+            editModal.style.display = "none";
+            editIndex = null;
+        }
+
+        function filterUsers() {
+            let q = userFilter.value.toLowerCase();
+            let rows = document.querySelectorAll("#userTable tr");
+
+            rows.forEach(r => {
+                r.style.display =
+                    r.innerText.toLowerCase().includes(q) ? "" : "none";
+            });
+        }
+        if (localStorage.getItem("role") !== "admin") location = "login.html";
+
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        function renderUsers() {
+            let html = "";
+            users.forEach((u, i) => {
+                html += `
+        <tr>
+            <td>${u.username}</td>
+            <td>${u.role}</td>
+            <td>
+              <span class="badge ${u.status === "ONLINE" ? "green" : "red"}">
+                ${u.status}
+              </span>
+            </td>
+            <td>${u.breakType || "Working"}</td>
+            <td>
+              <button class="download" onclick="downloadUser('${u.username}')">
+                Download
+              </button>
+            </td>
+            <td>
+               <button class="add" onclick="editUser(${i})">Edit</button>
+               <button class="delete" onclick="deleteUser(${i})">Delete</button>
+            </td>
+        </tr>`;
+            });
+            userTable.innerHTML = html;
+            localStorage.setItem("users", JSON.stringify(users));
+        }
+
+        function addUser() {
+    if (!uname.value || !upass.value) return alert("Enter details");
+
+    users.push({
+        username: uname.value,
+        password: upass.value,
+        role: "USER",
+        status: "ONLINE",
+        breakType: null,
+        breakIn: null,
+        breakOut: null,
+        breakStartTS: null,
+        breakLogs: []   // ✅ HISTORY STORAGE
+    });
+
+    uname.value = upass.value = "";
     renderUsers();
 }
 
-function deleteUser(i){users.splice(i,1);renderUsers();}
-function logout(){localStorage.clear();location="login.html";}
-function goBack(){location="login.html";}
+        function deleteUser(i) {
+            users.splice(i, 1);
+            renderUsers();
+        }
 
-renderUsers();
-</script>
+        function downloadAllJSON() {
+            let blob = new Blob([JSON.stringify(users, null, 2)], { type: "application/json" });
+            download(blob, "all_users.json");
+        }
+
+        function downloadAllCSV() {
+    let csv = "Username,Date,Break Type,Break In,Break Out,Duration\n";
+
+    users.forEach(u => {
+        (u.breakLogs || []).forEach(b => {
+            csv += `${u.username},${b.date},${b.type},${b.in},${b.out},${b.duration}\n`;
+        });
+    });
+
+    let blob = new Blob([csv], { type: "text/csv" });
+    download(blob, "break_report.csv");
+}
+
+        function downloadUser(username) {
+            let u = users.filter(x => x.username === username);
+            let blob = new Blob([JSON.stringify(u, null, 2)], { type: "application/json" });
+            download(blob, `${username}_data.json`);
+        }
+
+        function download(blob, filename) {
+            let a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = filename;
+            a.click();
+        }
+
+        function logout() {
+    let currentUser = localStorage.getItem("currentUser");
+
+    users.forEach(u => {
+        if (u.username === currentUser && u.breakType) {
+            u.breakOut = new Date().toLocaleTimeString();
+            storeBreakLog(u);
+
+            // reset live break
+            u.breakType = null;
+            u.breakIn = null;
+            u.breakOut = null;
+            u.breakStartTS = null;
+            u.status = "OFFLINE";
+        }
+    });
+
+    localStorage.setItem("users", JSON.stringify(users));
+    localStorage.clear();
+    location = "login.html";
+}
+function storeBreakLog(u) {
+    if (!u.breakIn || !u.breakStartTS) return;
+
+    let endTS = u.breakOut
+        ? new Date(`1970-01-01 ${u.breakOut}`).getTime()
+        : new Date().getTime();
+
+    let diff = Math.floor((endTS - u.breakStartTS) / 1000);
+    let min = Math.floor(diff / 60);
+    let sec = diff % 60;
+
+    u.breakLogs = u.breakLogs || [];
+    u.breakLogs.push({
+        date: new Date().toLocaleDateString(),
+        type: u.breakType,
+        in: u.breakIn,
+        out: u.breakOut,
+        duration: `${min} min ${sec} sec`
+    });
+}
+
+        setInterval(() => {
+            users = JSON.parse(localStorage.getItem("users")) || [];
+            renderUsers();
+        }, 2000);
+
+        renderUsers();
+    </script>
 
 </body>
+
 </html>

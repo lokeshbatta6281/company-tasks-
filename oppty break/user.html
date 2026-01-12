@@ -1,194 +1,459 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>User Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <title>User Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-<style>
-body{    font-family: Poppins;
-    background: linear-gradient(135deg, #ceb4a1, #92924b);
-    padding: 30px;}
+    <style>
+        * {
+            box-sizing: border-box
+        }
 
-.backBtn{
-    padding:10px 18px;
-    margin-bottom:15px;
-    border:none;
-    border-radius:10px;
-    background:linear-gradient(135deg,#444,#111);
-    color:white;
-    cursor:pointer;
-    transition:0.3s ease;
-}
-.backBtn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 8px 20px rgba(0,0,0,0.35);
-}
+        body {
+            font-family: Poppins;
+            margin: 0;
+            background: linear-gradient(307deg, #484945, #ef6f41);
+        }
 
-.card{
-    background:#fff;
-    padding:25px;
-    border-radius:14px;
-    margin-bottom:20px;
-    box-shadow:0 8px 25px rgba(0,0,0,0.08);
-}
+        /* ===== LAYOUT ===== */
+        .wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
 
-.green{color:#00C9A7;font-weight:600;}
-.red{color:#FF5C5C;font-weight:600;}
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 230px;
+            background: #3b3b82;
+            color: #fff;
+            padding: 25px 20px;
+        }
 
-button{
-    padding:10px 18px;
-    border:none;
-    border-radius:8px;
-    color:#fff;
-    cursor:pointer;
-    font-size: 15px;
-}
-h2{
-    color: rgb(97, 97, 176);
-}
-h2:hover, h3:hover{
-    color: rgb(84, 159, 209);
-    text-decoration: overline;
-}
-.b1{
-background: rgb(60, 181, 60);
-}
-.b1:hover{
-background: green;
-}
-.b2{
-    background: #c04444;
-}
-.b2:hover{
-    background: red;
-}
-select{
-    padding:15px 20px;
-    border-radius:6px;
-    font-size: 20px;
-    color: white;
-    background: rgb(98, 98, 119);
-}
+        .sidebar img {
+            width: 140px;
+            margin-bottom: 40px;
+        }
 
-.popup{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.5);
-    display:none;
-    justify-content:center;
-    align-items:center;
-}
+        .sidebar a {
+            display: block;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+        }
 
-.popup-box{
-    background:#fff;
-    padding:30px;
-    border-radius:14px;
-    width:300px;
-    text-align:center;
-    animation:pop 0.4s ease;
-}
+        .sidebar a.active,
+        .sidebar a:hover {
+            background: #6c63ff;
+        }
 
-@keyframes pop{
-    from{transform:scale(0.7);opacity:0}
-    to{transform:scale(1);opacity:1}
-}
-</style>
+        /* ===== MAIN ===== */
+        .main {
+            flex: 1;
+        }
+
+        /* ---------- NAVBAR ---------- */
+        .navbar {
+            background: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .1);
+        }
+
+        .navbar button {
+            background: #ff5c5c;
+            border: none;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        /* ---------- CONTENT ---------- */
+        .container {
+            padding: 30px;
+            max-width: 900px;
+        }
+
+        /* ---------- CARD ---------- */
+        .card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+        }
+
+        h2,
+        h3 {
+            margin-top: 0;
+            color: #5a5ab7
+        }
+
+        /* ---------- STATUS ---------- */
+        .badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .green {
+            background: #d4f8e8;
+            color: #0a7d5d
+        }
+
+        .red {
+            background: #ffe1e1;
+            color: #c0392b
+        }
+
+        /* ---------- BUTTONS ---------- */
+        button {
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .start {
+            background: #2ecc71;
+            color: #fff
+        }
+
+        .end {
+            background: #e74c3c;
+            color: #fff
+        }
+
+        .download {
+            background: #6c63ff;
+            color: #fff;
+            margin-top: 10px
+        }
+
+        /* ---------- SELECT ---------- */
+        select {
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            width: 200px;
+        }
+
+        /* ---------- POPUP ---------- */
+        .popup {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .section {
+            animation: fadeSlide .35s ease;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<button class="backBtn" onclick="goBack()">← Back</button>
+    <div class="wrapper">
 
-<h2>User Dashboard</h2>
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <img src="oppty.png">
 
-<div class="card">
-<h3>Employees Overview</h3>
-<p id="stats"></p>
-</div>
+            <a class="active" onclick="showSection('dashboard', this)">Dashboard</a>
+            <a onclick="showSection('mybreaks', this)">My Breaks</a>
+            <a onclick="showSection('reports', this)">Reports</a>
+            <a onclick="logout()">Logout</a>
+        </div>
 
-<div class="card">
-<h3>Break Management</h3>
+        <!-- MAIN -->
+        <div class="main">
 
-<select id="breakType">
-<option value="Regular">Regular</option>
-<option value="Lunch">Lunch</option>
-</select>
-<br><br>
+            <div class="navbar">
+                <h3>User Dashboard</h3>
+                <button onclick="logout()">Logout</button>
+            </div>
 
-<button class="b1" onclick="startBreak()  ">Start Break</button>
-<button class="b2" onclick="endBreak()">End Break</button>
+            <div class="container">
 
-<p id="breakStatus"></p>
-</div>
+                <div class="container">
 
-<div id="lunchPopup" class="popup">
-  <div class="popup-box">
-    <h3>🍽 Lunch Break Started</h3>
-    <p>Your lunch break has begun. Please return within 1 hour.</p>
-    <button onclick="closePopup()">OK</button>
-  </div>
-</div>
+                    <!-- DASHBOARD -->
+                    <div id="dashboardSection" class="section">
+                        <div class="card">
+                            <h3>Employees Overview</h3>
+                            <p id="stats"></p>
+                            <p id="workStatus"></p>
+                            <p><b>Users On Break:</b></p>
+                            <ul id="breakUsers"></ul>
+                        </div>
+                    </div>
 
-<script>
-if(localStorage.getItem("role")!=="user") location="login.html";
+                    <!-- MY BREAKS -->
+                    <div id="myBreaksSection" class="section" style="display:none">
+                        <div class="card">
+                            <h3>Break Management</h3>
 
-let users=JSON.parse(localStorage.getItem("users"))||[];
-let currentUser=localStorage.getItem("currentUser");
+                            <select id="breakType">
+                                <option value="Regular">Regular Break</option>
+                                <option value="Lunch">Lunch Break</option>
+                            </select>
+                            <br><br>
 
-function updateUI(){
-    users=JSON.parse(localStorage.getItem("users"))||[];
+                            <button class="start" onclick="startBreak()">Start Break</button>
+                            <button class="end" onclick="endBreak()">End Break</button>
 
-    let online=0,away=0;
-    users.forEach(u=>u.status==="ONLINE"?online++:away++);
+                            <p id="breakStatus"></p>
+                            <p id="timeInfo"></p>
+                            <small><b>Timezone:</b> IST (Asia/Kolkata)</small>
+                        </div>
+                    </div>
 
-    stats.innerHTML=`Online: <b>${online}</b> | On Break: <b>${away}</b>`;
+                    <!-- REPORTS -->
+                    <div id="reportsSection" class="section" style="display:none">
+                        <div class="card">
+                            <h3>My Break Report</h3>
+                            <button class="download" onclick="downloadJSON()">Download JSON</button>
+                            <button class="download" onclick="downloadCSV()">Download CSV</button>
+                        </div>
+                    </div>
 
-    let me=users.find(u=>u.username===currentUser);
+                </div>
 
-    breakStatus.innerHTML=me.breakType?
-    `<span class="red">You are on ${me.breakType} Break</span>`:
-    `<span class="green">You are Working</span>`;
-}
 
-function startBreak(){
-    users.forEach(u=>{
-        if(u.username===currentUser){
-            u.status="AWAY";
-            u.breakType=breakType.value;
-        }
-    });
 
-    if(breakType.value==="Lunch"){
-        document.getElementById("lunchPopup").style.display="flex";
-    }
 
-    save();
-}
+                <!-- LUNCH POPUP -->
+                <div id="lunchPopup" class="popup">
+                    <div class="popup-box">
+                        <h3>🍽 Lunch Break Started</h3>
+                        <p>Please return within 1 hour.</p>
+                        <button onclick="closePopup()">OK</button>
+                    </div>
+                </div>
 
-function closePopup(){
-    document.getElementById("lunchPopup").style.display="none";
-}
+                <script>
+                    function showSection(section, el) {
+                        // hide all
+                        dashboardSection.style.display = "none";
+                        myBreaksSection.style.display = "none";
+                        reportsSection.style.display = "none";
 
-function endBreak(){
-    users.forEach(u=>{
-        if(u.username===currentUser){
-            u.status="ONLINE";
-            u.breakType=null;
-        }
-    });
-    save();
-}
+                        // show selected
+                        if (section === "dashboard") dashboardSection.style.display = "block";
+                        if (section === "mybreaks") myBreaksSection.style.display = "block";
+                        if (section === "reports") reportsSection.style.display = "block";
 
-function save(){
-    localStorage.setItem("users",JSON.stringify(users));
-    updateUI();
-}
+                        // active menu highlight
+                        document.querySelectorAll(".sidebar a").forEach(a => a.classList.remove("active"));
+                        el.classList.add("active");
+                    }
+                    if (localStorage.getItem("role") !== "user") location = "login.html";
 
-function goBack(){location="login.html";}
+                    let users = JSON.parse(localStorage.getItem("users")) || [];
+                    let currentUser = localStorage.getItem("currentUser");
+                    let breakTimer = null;
 
-setInterval(updateUI,2000);
-updateUI();
-</script>
+                    function now() {
+                        return new Date(
+                            new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+                        );
+                    }
+
+                    function formatTime(d) {
+                        return d.toLocaleTimeString("en-IN", {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                            second: "2-digit"
+                        });
+                    }
+                    function checkBreakExceeded() {
+                        let me = users.find(u => u.username === currentUser);
+                        if (!me || !me.breakStartTS) return;
+
+                        let nowTS = now().getTime();
+                        let diffMin = Math.floor((nowTS - me.breakStartTS) / 60000);
+
+                        if (me.breakType === "Lunch" && diffMin > 60) {
+                            alert("⚠ Lunch break exceeded 1 hour!");
+                        }
+
+                        if (me.breakType === "Regular" && diffMin > 15) {
+                            alert("⚠ Regular break exceeded 15 minutes!");
+                        }
+                    }
+                    function updateUI() {
+                        users = JSON.parse(localStorage.getItem("users")) || [];
+
+                        let online = 0, away = 0;
+                        let breakList = "";
+
+                        users.forEach(u => {
+                            if (u.status === "ONLINE") online++;
+                            if (u.status === "AWAY") {
+                                away++;
+                                breakList += `<li>${u.username} (${u.breakType})</li>`;
+                            }
+                        });
+
+                        stats.innerHTML = `Online: <b>${online}</b> | On Break: <b>${away}</b>`;
+                        breakUsers.innerHTML = breakList || "<li>No one on break</li>";
+
+                        let me = users.find(u => u.username === currentUser);
+                        if (!me) return;
+
+                        if (me.breakType) {
+                            workStatus.innerHTML = `<span class="badge red">On ${me.breakType} Break</span>`;
+                            breakStatus.innerHTML = `Break Type: <b>${me.breakType}</b>`;
+                            timeInfo.innerHTML = `Break IN (IST): <b>${me.breakIn}</b>`;
+                        } else {
+                            workStatus.innerHTML = `<span class="badge green">Working</span>`;
+                            breakStatus.innerHTML = "You are currently working";
+                            timeInfo.innerHTML = "";
+                        }
+                    }
+
+                    function startBreak() {
+                        users.forEach(u => {
+                            if (u.username === currentUser) {
+                                u.status = "AWAY";
+                                u.breakType = breakType.value;
+                                u.breakIn = formatTime(now());
+                                u.breakStartTS = now().getTime();
+                            }
+                        });
+
+                        if (breakType.value === "Lunch") {
+                            showPopup("🍽 Lunch Break Started", "You have 1 hour only");
+                            startTimer(60);
+                        } else {
+                            showPopup("☕ Regular Break Started", "You have 15 minutes");
+                            startTimer(15);
+                        }
+
+                        save();
+                    }
+
+                    function endBreak() {
+                        clearTimeout(breakTimer);
+                        users.forEach(u => {
+                            if (u.username === currentUser) {
+                                u.status = "ONLINE";
+                                u.breakType = null;
+                                u.breakOut = formatTime(now());
+                                u.breakStartTS = null;
+                            }
+                        });
+                        save();
+                    }
+
+                    /* ===== TIMER ===== */
+                    function startTimer(minutes) {
+                        clearTimeout(breakTimer);
+                        breakTimer = setTimeout(() => {
+                            timeCompleted();
+                        }, minutes * 60 * 1000);
+                    }
+
+                    function timeCompleted() {
+                        let me = users.find(u => u.username === currentUser);
+                        if (!me || !me.breakType) return;
+
+                        if (me.breakType === "Lunch") {
+                            showPopup("⏰ Lunch Time Over", "1 hour completed. You will be logged out.");
+                        } else {
+                            showPopup("⏰ Break Time Over", "15 minutes completed. You will be logged out.");
+                        }
+
+                        setTimeout(autoLogout, 3000);
+                    }
+
+                    /* ===== POPUP ===== */
+                    function showPopup(title, msg) {
+                        lunchPopup.style.display = "flex";
+                        lunchPopup.querySelector("h3").innerText = title;
+                        lunchPopup.querySelector("p").innerText = msg;
+                    }
+
+                    function closePopup() {
+                        lunchPopup.style.display = "none";
+                    }
+
+                    /* ===== AUTO LOGOUT ===== */
+                    function autoLogout() {
+                        alert("Session expired. Logging out...");
+                        logout();
+                    }
+
+                    function save() {
+                        localStorage.setItem("users", JSON.stringify(users));
+                        updateUI();
+                    }
+
+                    /* ===== DOWNLOAD ===== */
+                    function downloadJSON() {
+                        let me = users.filter(u => u.username === currentUser);
+                        let blob = new Blob([JSON.stringify(me, null, 2)], { type: "application/json" });
+                        download(blob, "my_break_data.json");
+                    }
+
+                    function downloadCSV() {
+                        let me = users.find(u => u.username === currentUser);
+                        let today = new Date().toLocaleDateString(); // Date
+                        let csv = "Username,Date,Status,Break Type,Break In,Break Out\n";
+                        csv += `${me.username},${today},${me.status},${me.breakType || ""},${me.breakIn || ""},${me.breakOut || ""}`;
+                        let blob = new Blob([csv], { type: "text/csv" });
+                        download(blob, "my_break_data.csv");
+                    }
+
+
+                    function download(blob, filename) {
+                        let a = document.createElement("a");
+                        a.href = URL.createObjectURL(blob);
+                        a.download = filename;
+                        a.click();
+                    }
+
+                    function logout() {
+                        localStorage.removeItem("role");
+                        localStorage.removeItem("currentUser");
+                        location = "login.html";
+                    }
+
+                    setInterval(updateUI, 2000);
+                    updateUI();
+                </script>
 
 </body>
+
 </html>
