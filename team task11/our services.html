@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .navbar-brand img {
+            width: 200px;
+
+        }
+
+        .nav-link {
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #f97216 !important;
+        }
+
+        .nav-item .btn {
+            background: #f97216;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .btn {
+            background: #f97216;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .nav-item .btn:hover {
+            background-color: #e55f14;
+            transform: scale(1.05);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            cursor: pointer;
+        }
+        
+        /* Dropdown box */
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            min-width: 180px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            display: none;
+            z-index: 999;
+        }
+        
+        /* Dropdown links */
+        .dropdown-content a {
+            display: block;
+            padding: 12px 18px;
+            color: #111;
+            font-weight: 500;
+            transition: 0.3s;
+            text-decoration: none;
+            text-align:center ;
+
+        }
+
+        /* Hover effects */
+        .dropdown-content a:hover {
+            background: white;
+            color: #f08a2f;
+        }
+
+        /* SHOW ON HOVER */
+        .dropdown:hover .dropdown-content {
+            display: block;
+            color: #f08a2f;
+        }
+
+        .about-hero {
+            position: relative;
+            height: 368px;
+            background: url(imgs/breadcrumb-bg.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 78px;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        .about-content {
+            position: relative;
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+        }
+
+        .about-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            margin-left: 60px;
+        }
+
+        .breadcrumb a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-align: center;
+
+        }
+
+        .breadcrumb a:hover {
+            color: #ff7a00;
+        }
+
+        .breadcrumb span {
+            margin: 0 8px;
+            color: #ff7a00;
+        }
+
+        .breadcrumb .active {
+            color: #ff7a00;
+        }
+
+        .text {
+            background: white;
+            color: #fff;
+            padding: 100px 0 0;
+        }
+
+        .text h5:hover {
+            color: #db822f;
+
+        }
+
+        .text h6 {
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #fbfaf8;
+            font-size: 20px;
+        }
+
+        .text h2 span {
+            color: #ffc107;
+        }
+
+        .text p {
+            color: #fbfbfc;
+            font-size: 17px;
+            line-height: 1.7;
+        
+        }
+
+        .text .divider {
+            width: 3px;
+            height: 70px;
+            background: #ffc107;
+            margin: 20px 0;
+        }
+
+        .text .number {
+            font-size: 50px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .text .number:hover {
+            color: #db822f;
+        }
+
+        @media (max-width: 768px) {
+            .text {
+                text-align: center;
+            }
+        }
+
+        .text4 {
+            background: white;
+        }
+
+        .text4 h6 {
+            color: #f87b05;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .text4 h2 {
+            font-size: 60px;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .text4 .stars {
+            color: #e77729;
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .text4 p {
+            font-size: 30px;
+            color: #201e1e;
+            max-width: 770px;
+            font-weight: 600;
+        }
+
+        .text4 hr {
+            border-top: 2px solid #c96f2b;
+            width: 100%;
+            margin: 30px 0;
+        }
+
+        .text4 .client-name {
+            font-weight: 700;
+        }
+
+        .text4 .client-role {
+            font-size: 18px;
+            color: #e0a80d;
+        }
+
+        .text4 .quote-icon {
+            font-size: 130px;
+            color: #121010;
+            opacity: 1.3;
+        }
+
+        .text4 .quote-icon:hover {
+            color: #c96f2b;
+        }
+
+        .content1 {
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+            max-width: 1418px;
+            margin-left: 50px;
+        }
+
+        .content2 {
+            display: flex;
+            white-space: nowrap;
+            animation: content2 15s linear infinite;
+            align-items: center;
+        }
+
+        .service {
+            display: flex;
+            align-items: center;
+            margin-right: 5px;
+        }
+
+        .service span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #000000;
+            padding: 0 3px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, color 0.3s ease;
+            line-height: 1;
+        }
+
+        .service .separator {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000000;
+            margin: 0 3px;
+            line-height: 1;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        /* Marquee Section Styling */
+        .content1 {
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+            max-width: 1418px;
+            margin-left: 50px;
+        }
+
+        .content2 {
+            display: flex;
+            white-space: nowrap;
+            animation: content2 15s linear infinite;
+            align-items: center;
+            /* Vertically align items */
+        }
+
+        .content2 .service {
+            display: flex;
+            align-items: center;
+            margin-right: 5px;
+            /* Tight space between service phrases */
+        }
+
+        .content2 span {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #000000;
+            padding: 0 3px;
+            /* Tight text spacing */
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, color 0.3s ease;
+            line-height: 1;
+            /* Ensure consistent baseline */
+        }
+
+        .content2 span:hover {
+            transform: scale(1.1) rotate(2deg);
+            color: #333333;
+        }
+
+        /* Separator (Between Service Phrases) */
+        .content2 .separator {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            /* Slightly smaller than text for balance */
+            font-weight: 700;
+            color: #000000;
+            margin: 0 3px;
+            /* Tight separator spacing */
+            line-height: 1;
+            /* Match text baseline */
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        /* Animation Keyframes */
+        @keyframes content2 {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+
+            /* Full width to ensure seamless loop */
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .content2 span {
+                font-size: 1.4rem;
+                padding: 0 2px;
+            }
+
+            .content2 .separator {
+                font-size: 1.2rem;
+                margin: 0 2px;
+            }
+
+            .content2 .service {
+                margin-right: 4px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content2 span {
+                font-size: 1.1rem;
+                padding: 0 2px;
+            }
+
+            .content2 .separator {
+                font-size: 0.9rem;
+                margin: 0 2px;
+            }
+
+            .content2 .service {
+                margin-right: 3px;
+            }
+
+            .content1 {
+                padding: 10px 0;
+            }
+        }
+        .text2 {
+  padding: 0  0 100px 0;
+  background: #f8f9fa;
+}
+
+.text2 .img-box {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Black & White Image */
+.text2 img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  transition: all 0.4s ease;
+}
+.text2 img:hover{
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: all 0.4s ease;
+}
+/* Hover Effect */
+.text2 .img-box:hover img {
+  transform: scale(1.1);
+  filter: grayscale(100%);
+}
+
+/* Overlay */
+.text2 .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.text2 .img-box:hover .overlay {
+  opacity: 1;
+}
+
+/* Icon */
+.text2 .overlay i {
+  font-size: 40px;
+  color: #fff;
+  background: #ffc107;
+  padding: 18px;
+  border-radius: 50%;
+}
+               /* ======================
+   NEW FOOTER TEMPLATE
+======================*/
+
+.footer-new {
+  background: linear-gradient(135deg,#071e17,#0b3d2e);
+  padding: 70px 0 30px;
+  color: #e5e7eb;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-logo-new {
+  width: 150px;
+  margin-bottom: 15px;
+}
+
+.footer-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  opacity: 0.85;
+}
+
+.footer-new h5 {
+  color: #c9a14a;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.footer-new p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Social icons */
+.social-icons a {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.08);
+  color: #c9a14a;
+  margin-right: 8px;
+  transition: 0.4s ease;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  background: #c9a14a;
+  color: #071e17;
+  transform: translateY(-6px) rotate(8deg);
+}
+
+/* Government strip */
+.gov-strip-new {
+  margin-top: 40px;
+  padding: 25px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.gov-strip-new img {
+  height: 70px;
+  transition: 0.4s;
+}
+
+.gov-strip-new img:hover {
+  transform: scale(1.15);
+}
+
+/* Bottom */
+.footer-bottom-new {
+  margin-top: 35px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  text-align: center;
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+/* Floating glow effect */
+.footer-new::before {
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  background: radial-gradient(circle,#c9a14a44,transparent 70%);
+  top:-100px;
+  right:-100px;
+  filter: blur(40px);
+}
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+        :root{
+ --theme:#1e3a34;
+ --gold:#caa169;
+ --dark:#0f1f1b;
+}
+
+body{font-family:Segoe UI;background:#fff}
+
+/* HERO */
+.about-hero{
+height:380px;
+background:url(imgs/breadcrumb-bg.jpg) center/cover no-repeat;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+padding-top:78px;
+animation:zoomBg 12s infinite alternate ease-in-out;
+}
+.overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);}
+.about-content{color:#fff;z-index:2;text-align:center}
+.about-content h1{font-size:52px;letter-spacing:2px}
+.section-animate{opacity:0;transform:translateY(60px);transition:1s ease}
+.section-animate.show{opacity:1;transform:no}
+/* SERVICES */
+.text{background:var(--dark);color:#fff;padding:100px 0}
+.service-box{max-width:1200px}
+
+.text h2 span{color:var(--gold)}
+
+.left-border{border-left:3px solid var(--gold);padding-left:20px}
+
+.service-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+border-bottom:1px solid #444;
+padding:25px 0;
+}
+
+.service-row .title{font-size:22px;color:var(--gold);width:25%}
+.service-row .desc{width:50%;color:#ccc}
+.service-row .number{font-size:50px;color:#777}
+
+/* TESTIMONIAL */
+.text4{
+background:linear-gradient(180deg,#e9f8ff,#e8aa8c50);
+padding:100px 0
+}
+.text4 h6{color:var(--theme)}
+.text4 .stars{color:gold;font-size:28px}
+
+/* MARQUEE */
+.marquee{
+overflow:hidden;
+background:#f6f6f6;
+padding:20px 0;
+white-space:nowrap
+}
+.content2{
+display:inline-block;
+animation:marq 18s linear infinite;
+font-weight:700;
+font-size:28px
+}
+.content2 span{color:var(--theme);margin:0 15px}
+
+@keyframes marq{
+0%{transform:translateX(0)}
+100%{transform:translateX(-100%)}
+}
+
+/* GALLERY */
+.text2 img{
+width:100%;
+height:260px;
+object-fit:cover;
+transition:.4s
+}
+.img-box{position:relative;overflow:hidden}
+.img-box:hover img{transform:scale(1.1);filter:grayscale(100%)}
+.text2 .overlay{
+position:absolute;inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(0,0,0,.6);
+opacity:0;
+transition:.4s
+}
+.img-box:hover .overlay{opacity:1}
+.text2 i{background:var(--gold);padding:15px;border-radius:50%;color:#fff}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(40px);transition:1s}
+.fade-left{opacity:0;transform:translateX(-60px);transition:1s}
+.fade-right{opacity:0;transform:translateX(60px);transition:1s}
+
+.show{opacity:1;transform:none}
+/* ANIMATIONS */
+@keyframes zoomBg{
+from{background-size:100%}
+to{background-size:115%}
+}
+.whatsapp-btn {
+  animation: pulseBtn 2s infinite;
+}
+
+@keyframes pulseBtn {
+  0% {box-shadow: 0 0 0 0 rgba(37,211,102,0.7);}
+  70% {box-shadow: 0 0 0 15px rgba(37,211,102,0);}
+  100% {box-shadow: 0 0 0 0 rgba(37,211,102,0);}
+}
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container" style="max-width: 1485px;">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="imgs/oppty.png" alt="...">
+            </a>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="About us.html">About Us</a></li>
+                    <div class="dropdown">
+                            <a href="our services.html" class="dropbtn" style="color: #716e6e;text-transform: lowercase;text-decoration: none;font-size: 18px;padding: 0px 9px; font-weight: 500;">Our Services</a>
+
+                            <div class="dropdown-content">
+                                <a href="solution.html">Solutions</a>
+                            </div>
+                        </div>
+                    <li class="nav-item"><a class="nav-link" href="contact us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="academy.html">Academy</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="index.html">Training Partner</a>
+                    </li>
+                    
+
+                    <li class="nav-item" style="display: flex;"><a class="nav-link" href="tel:+919491209900"><img src="imgs/1f4de.svg"
+                                alt="..." width="10px"> +91 9491209900</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- HERO -->
+<section class="about-hero">
+        <div class="overlay"></div>
+
+        <div class="about-content">
+            <h1>OUR SERVICES</h1>
+
+            <nav class="breadcrumb">
+                <a href="index.html">HOME</a>
+                <span>/</span>
+                <a href="#">OUR SERVICES</a>
+            </nav>
+        </div>
+    </section>
+
+<!-- SERVICES LIST -->
+<section class="text">
+<div class="container service-box">
+
+<div class="row mb-5 fade-up">
+  <div class="col-5">
+    <h6>Services</h6>
+    <h2>SOLUTION WE <span>PROVIDE</span></h2>
+  </div>
+  <div class="col-lg-6 left-border">
+    <p>Unlock your business potential with our innovative, SEO-optimized solutions designed for success.</p>
+  </div>
+</div>
+<div class="service-row fade-left">
+  <div class="title">IT SERVICES</div>
+  <div class="desc">
+    <p>Boost your business with robust IT infrastructure and cybersecurity.</p>
+    <p>24/7 support minimizing downtime.</p>
+  </div>
+  <div class="number">01</div>
+</div>
+
+<div class="service-row fade-right">
+  <div class="title">BOP</div>
+  <div class="desc">
+    <p>Scalable business outsourcing services.</p>
+    <p>Optimized workflow and productivity.</p>
+  </div>
+  <div class="number">02</div>
+</div>
+
+<div class="service-row fade-left">
+  <div class="title">E-COMMERCE</div>
+  <div class="desc">
+    <p>High-conversion online stores.</p>
+    <p>Secure payment and automation.</p>
+  </div>
+  <div class="number">03</div>
+</div>
+
+<div class="service-row fade-right">
+  <div class="title">WEB DEVELOPMENT</div>
+  <div class="desc">
+    <p>Modern responsive websites.</p>
+    <p>Fast & SEO optimized.</p>
+  </div>
+  <div class="number">04</div>
+</div>
+
+<div class="service-row fade-left">
+  <div class="title">AI SOLUTIONS</div>
+  <div class="desc">
+    <p>Automation & intelligent systems.</p>
+    <p>Business intelligence tools.</p>
+  </div>
+  <div class="number">05</div>
+</div>
+<div class="service-row fade-left">
+  <div class="title">IT SERVICES</div>
+  <div class="desc">
+    <p>Boost your business with robust IT infrastructure and cybersecurity.</p>
+    <p>24/7 support minimizing downtime.</p>
+  </div>
+  <div class="number">01</div>
+</div>
+
+<div class="service-row fade-right">
+  <div class="title">BOP</div>
+  <div class="desc">
+    <p>Scalable business outsourcing services.</p>
+    <p>Optimized workflow and productivity.</p>
+  </div>
+  <div class="number">02</div>
+</div>
+
+<div class="service-row fade-left">
+  <div class="title">E-COMMERCE</div>
+  <div class="desc">
+    <p>High-conversion online stores.</p>
+    <p>Secure payment and automation.</p>
+  </div>
+  <div class="number">03</div>
+</div>
+
+<div class="service-row fade-right">
+  <div class="title">WEB DEVELOPMENT</div>
+  <div class="desc">
+    <p>Modern responsive websites.</p>
+    <p>Fast & SEO optimized.</p>
+  </div>
+  <div class="number">04</div>
+</div>
+
+<div class="service-row fade-left">
+  <div class="title">AI SOLUTIONS</div>
+  <div class="desc">
+    <p>Automation & intelligent systems.</p>
+    <p>Business intelligence tools.</p>
+  </div>
+  <div class="number">05</div>
+</div>
+
+</div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="text4">
+<div class="container text-center fade-up">
+  <h6>Client Says</h6>
+  <h2>Review & Ratings</h2>
+  <div class="stars">★★★★★</div>
+  <p>Oppty’s innovative solutions transformed our business</p>
+  <hr>
+  <div class="client-name">Arjun Mehta</div>
+  <div class="client-role">E-Commerce Entrepreneur</div>
+</div>
+</section>
+
+<!-- MARQUEE -->
+<section class="marquee">
+  <div class="content2">
+    <span>IT SERVICES</span> • <span>BOP</span> • <span>E-COMMERCE</span> • <span>WEB DEVELOPMENT</span> • <span>AI SOLUTIONS</span>
+    • <span>IT SERVICES</span> • <span>BOP</span> • <span>E-COMMERCE</span>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="text2">
+<div class="container">
+<div class="row g-3">
+
+<div class="col img-box fade-up"><img src="imgs/Hai-insta-img-01.jpg"><div class="overlay"><i class="bi bi-instagram"></i></div></div>
+<div class="col img-box fade-up"><img src="imgs/Hai-insta-img-02.jpg"><div class="overlay"><i class="bi bi-instagram"></i></div></div>
+<div class="col img-box fade-up"><img src="imgs/Hai-insta-img-03.jpg"><div class="overlay"><i class="bi bi-instagram"></i></div></div>
+<div class="col img-box fade-up"><img src="imgs/Hai-insta-img-04.jpg"><div class="overlay"><i class="bi bi-instagram"></i></div></div>
+<div class="col img-box fade-up"><img src="imgs/Hai-insta-img-06.jpg"><div class="overlay"><i class="bi bi-instagram"></i></div></div>
+
+</div>
+</div>
+</section>
+    <footer class="footer-new">
+  <div class="container">
+
+    <div class="row gy-4">
+
+      <!-- Brand -->
+      <div class="col-lg-4">
+        <img src="imgs/322343.png" class="footer-logo-new">
+        <p class="footer-desc">
+          Power up your success with innovative IT, BPO, E-commerce,
+          Web Development, and AI solutions tailored to your vision.
+        </p>
+
+        <div class="social-icons">
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-linkedin"></i></a>
+          <a href="#"><i class="bi bi-twitter-x"></i></a>
+        </div>
+      </div>
+
+      <!-- Hyderabad -->
+      <div class="col-lg-3">
+        <h5>Hyderabad Office</h5>
+        <p>
+          Flat No 601, Mahitha’s Green Galaxy,<br>
+          CBID Colony, NRSA Colony,<br>
+          Kukatpally, Hyderabad,<br>
+          Telangana – 500085
+        </p>
+      </div>
+
+      <!-- Udaipur -->
+      <div class="col-lg-3">
+        <h5>Udaipur Office</h5>
+        <p>
+          Plot No: 26, 100 Feet Rd,<br>
+          Shobhagpura, Udaipur,<br>
+          Rajasthan – 313011
+        </p>
+      </div>
+
+      <!-- Contact -->
+      <div class="col-lg-2">
+        <h5>Contact</h5>
+        <p>
+          info@oppty.in<br>
+          +91-9491209900
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Government strip -->
+    <div class="gov-strip-new">
+      <img src="imgs/png-clipart-government-of-india-ministry-of-micro-small-and-medium-enterprises-small-business-india-text-logo__1_-removebg-preview.png">
+      <img src="imgs/Ministry-for-Corporate-AffairS-1-removebg-preview.png">
+      <img src="imgs/36662669-1685562943668-bf31f5769c66e.jpg">
+    </div>
+
+    <!-- Bottom -->
+    <div class="footer-bottom-new">
+      © <span id="year"></span> Oppty. All Rights Reserved.
+    </div>
+
+  </div>
+</footer>
+    <a href="#" class="whatsapp-btn">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Scroll animations
+const observer = new IntersectionObserver(entries=>{
+ entries.forEach(entry=>{
+  if(entry.isIntersecting){
+    entry.target.classList.add("show");
+  }
+ });
+},{threshold:0.2});
+
+document.querySelectorAll(".fade-up,.fade-left,.fade-right").forEach(el=>{
+ observer.observe(el);
+});
+
+// Auto year footer
+const year = document.getElementById("year");
+if(year){ year.textContent = new Date().getFullYear(); }
+    </script>
+</body>
+
+</html>

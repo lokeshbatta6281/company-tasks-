@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .navbar-brand img {
+            width: 200px;
+
+        }
+
+        .nav-link {
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #f97216 !important;
+        }
+
+        .nav-item .btn {
+            background: #f97216;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .btn {
+            background: #f97216;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .nav-item .btn:hover {
+            background-color: #e55f14;
+            transform: scale(1.05);
+        }
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            cursor: pointer;
+        }
+        
+        /* Dropdown box */
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            min-width: 180px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            display: none;
+            z-index: 999;
+        }
+        
+        /* Dropdown links */
+        .dropdown-content a {
+            display: block;
+            padding: 12px 18px;
+            color: #111;
+            font-weight: 500;
+            transition: 0.3s;
+            text-decoration: none;
+            text-align: center;
+
+        }
+
+        /* Hover effects */
+        .dropdown-content a:hover {
+            background: white;
+            color: #f08a2f;
+        }
+
+        /* SHOW ON HOVER */
+        .dropdown:hover .dropdown-content {
+            display: block;
+            color: #f08a2f;
+        }
+
+        .about-hero {
+            position: relative;
+            height: 368px;
+            background: url(imgs/breadcrumb-bg.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 78px;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        .about-content {
+            position: relative;
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+        }
+
+        .about-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            margin-left: 60px;
+        }
+
+        .breadcrumb a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-align: center;
+
+        }
+
+        .breadcrumb a:hover {
+            color: #ff7a00;
+        }
+
+        .breadcrumb span {
+            margin: 0 8px;
+            color: #ff7a00;
+        }
+
+        .breadcrumb .active {
+            color: #ff7a00;
+        }
+
+        .text {
+            background: #f8f9fa;
+            padding: 60px 0;
+        }
+
+        .text .icon {
+            font-size: 50px;
+            color: #000;
+        }
+
+        .text h2 {
+            font-weight: 700;
+            font-size: 46px;
+        }
+
+        .text .highlight {
+            color: #f6890c;
+        }
+
+        .text .divider {
+            width: 3px;
+            height: 100%;
+            background: #f48a12;
+            margin: auto;
+            padding: 110px 2px;
+        }
+
+        .text p {
+            font-size: 15px;
+            color: #1c1b1b;
+            line-height: 1.6;
+        }
+
+        @media(max-width:768px) {
+            .text .divider {
+                display: none;
+            }
+        }
+
+        .textform {
+            background: #f8f9fa;
+        }
+
+        .textform .card {
+            border-radius: 10px;
+        }
+
+        .textform-right {
+            background: #d89b32;
+            color: #000;
+        }
+
+        .textform-right h2 {
+            color: #000;
+        }
+
+        .textform-right p {
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .textform-right img {
+            max-height: 260px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .btns {
+            width: 100%;
+            padding: 10px;
+            font-size: 20px;
+            background: #4848eee3;
+            border-radius: 10px;
+            color: white;
+            border: none;
+        }
+
+        .btns:hover {
+            color: #ffffff;
+            background: rgb(75, 75, 167);
+        }
+
+        .text2 {
+            padding: 80px 0;
+            background: #fcfcfc;
+        }
+
+        .text2 h2 {
+            font-weight: 700;
+            margin-bottom: 40px;
+            font-size: 40px;
+        }
+
+        .text2 h2 span {
+            color: #f4a21e;
+        }
+
+        /* Card Design */
+        .location-card {
+            background: linear-gradient(145deg, #1e1e1e, #111);
+            padding: 30px;
+            color: #fff;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .location-card:hover {
+
+            border: 5px solid #f4a21e;
+        }
+
+        .location-card h4 {
+            color: #f4a21e;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .location-card p {
+            font-size: 17px;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .location-card i {
+            color: #fbfbfb;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            font-size: 15px;
+        }
+
+        .contact-info p:hover {
+            color: rgb(217, 217, 56);
+        }
+
+        .text3 {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .text3 .pricing-card {
+            background: linear-gradient(109deg, #fee500, #e8aa8c 66%);
+            padding: 90px 30px;
+            text-align: center;
+            height: 100%;
+            transition: 0.3s;
+        }
+
+        .text3 .pricing-card.light {
+            background: #f3f3f3;
+            border: 1px solid #eee;
+        }
+
+        .text3 .pricing-card:hover {
+            border-radius: 0px 0px 0px 150px;
+            background: linear-gradient(109deg, #fee500, #e8aa8c 66%);
+        }
+
+        .text3 h5 {
+            font-weight: 700;
+
+            border-bottom: 2px solid black;
+            margin: 0px 100px;
+            padding-bottom: 50px;
+        }
+
+        .text3 .price {
+            font-size: 42px;
+            font-weight: 800;
+            margin: 20px 0;
+        }
+
+        .text3 ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        .text3 ul li {
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .text3 ul li::before {
+            content: "✔";
+            color: #e67e22;
+            margin-right: 10px;
+        }
+
+        .text3 .btnes {
+            border-radius: 30px;
+            padding: 10px 30px;
+            color: white;
+            background: black;
+            margin-bottom: 20px;
+        }
+
+        .text3 .btnes:hover {
+            color: #000;
+            background: white;
+        }
+
+        /* toggle switch */
+        .price-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .switch {
+            position: relative;
+            width: 100px;
+            height: 30px;
+        }
+
+        .switch input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            background: #000;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+
+        .slider:before {
+            content: "";
+            position: absolute;
+            height: 20px;
+            width: 25px;
+            left: 4px;
+            bottom: 4px;
+            background: #e39342;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(60px);
+        }
+
+               /* ======================
+   NEW FOOTER TEMPLATE
+======================*/
+
+.footer-new {
+  background: linear-gradient(135deg,#071e17,#0b3d2e);
+  padding: 70px 0 30px;
+  color: #e5e7eb;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-logo-new {
+  width: 150px;
+  margin-bottom: 15px;
+}
+
+.footer-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  opacity: 0.85;
+}
+
+.footer-new h5 {
+  color: #c9a14a;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.footer-new p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Social icons */
+.social-icons a {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.08);
+  color: #c9a14a;
+  margin-right: 8px;
+  transition: 0.4s ease;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  background: #c9a14a;
+  color: #071e17;
+  transform: translateY(-6px) rotate(8deg);
+}
+
+/* Government strip */
+.gov-strip-new {
+  margin-top: 40px;
+  padding: 25px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.gov-strip-new img {
+  height: 70px;
+  transition: 0.4s;
+}
+
+.gov-strip-new img:hover {
+  transform: scale(1.15);
+}
+
+/* Bottom */
+.footer-bottom-new {
+  margin-top: 35px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  text-align: center;
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+/* Floating glow effect */
+.footer-new::before {
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  background: radial-gradient(circle,#c9a14a44,transparent 70%);
+  top:-100px;
+  right:-100px;
+  filter: blur(40px);
+}
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+        :root{
+  --tiya-green:#1e3a34;
+  --tiya-gold:#caa169;
+  --tiya-dark:#0f1f1b;
+  --tiya-soft:#f4f7f6;
+}
+
+/* HERO */
+.about-hero{
+height:380px;
+background:url(imgs/breadcrumb-bg.jpg) center/cover no-repeat;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+padding-top:78px;
+animation:zoomBg 12s infinite alternate ease-in-out;
+}
+.overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);}
+.about-content{color:#fff;z-index:2;text-align:center}
+.about-content h1{font-size:52px;letter-spacing:2px}
+.section-animate{opacity:0;transform:translateY(60px);transition:1s ease}
+.section-animate.show{opacity:1;transform:no}
+
+/* TEXT SECTION */
+.text{
+  background:var(--tiya-soft);
+}
+
+.text .highlight{
+  color:var(--tiya-gold);
+}
+
+.text .divider{
+  background:var(--tiya-gold);
+}
+
+/* FORM SECTION */
+.textform-right{
+  background:linear-gradient(135deg,var(--tiya-green),var(--tiya-gold)) !important;
+  color:#fff;
+}
+
+.textform-right h2,
+.textform-right p{
+  color:#fff;
+}
+
+.btns{
+  background:var(--tiya-green);
+}
+
+.btns:hover{
+  background:#16302b;
+}
+
+/* LOCATION CARDS */
+.location-card{
+  background:linear-gradient(145deg,#0f1f1b,#1e3a34);
+  border-radius:16px;
+  transition:.4s;
+  border:2px solid transparent;
+}
+
+.location-card:hover{
+  transform:translateY(-10px);
+  border-color:var(--tiya-gold);
+}
+
+.location-card h4{
+  color:var(--tiya-gold);
+}
+
+/* PRICING */
+.text3{
+  background:#fff;
+}
+
+.pricing-card{
+  border-radius:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,.15);
+}
+
+.pricing-card:hover{
+  transform:translateY(-12px);
+}
+
+.text3 h5{
+  border-color:var(--tiya-green);
+}
+
+.text3 ul li::before{
+  color:var(--tiya-gold);
+}
+
+.text3 .btnes{
+  background:var(--tiya-green);
+}
+
+.text3 .btnes:hover{
+  background:#fff;
+  color:var(--tiya-green);
+}
+
+/* FOOTER */
+.footer{
+  background:#0b1613 !important;
+}
+
+.footer h6{
+  color:var(--tiya-gold);
+}
+
+/* WHATSAPP */
+.whatsapp-btn{
+  transition:.3s;
+}
+.whatsapp-btn:hover{
+  transform:scale(1.15);
+}
+
+/* SCROLL ANIMATIONS */
+.fade-up{
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s;
+}
+
+.fade-left{
+  opacity:0;
+  transform:translateX(-50px);
+  transition:1s;
+}
+
+.fade-right{
+  opacity:0;
+  transform:translateX(50px);
+  transition:1s;
+}
+
+.show{
+  opacity:1;
+  transform:none;
+}
+
+/* KEYFRAMES */
+@keyframes fadeDown{
+  from{opacity:0;transform:translateY(-30px)}
+  to{opacity:1;transform:none}
+}
+/* ANIMATIONS */
+@keyframes zoomBg{
+from{background-size:100%}
+to{background-size:115%}
+}
+.whatsapp-btn {
+  animation: pulseBtn 2s infinite;
+}
+
+@keyframes pulseBtn {
+  0% {box-shadow: 0 0 0 0 rgba(37,211,102,0.7);}
+  70% {box-shadow: 0 0 0 15px rgba(37,211,102,0);}
+  100% {box-shadow: 0 0 0 0 rgba(37,211,102,0);}
+}
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container" style="max-width: 1485px;">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="imgs/oppty.png" alt="...">
+            </a>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="About us.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="our services.html">Our Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="academy.html">Academy</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="index.html">Training Partner</a>
+                    </li>
+                    
+
+                    <li class="nav-item" style="display: flex;"><a class="nav-link" href="tel:+919491209900"><img src="imgs/1f4de.svg"
+                                alt="..." width="10px"> +91 9491209900</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="about-hero">
+        <div class="overlay"></div>
+
+        <div class="about-content">
+            <h1>CONTACT US</h1>
+
+            <nav class="breadcrumb">
+                <a href="index.html">HOME</a>
+                <span>/</span>
+                <a href="#">CONTACT-US</a>
+            </nav>
+        </div>
+    </section>
+    <section class="text">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Left Content -->
+                <div class="col-md-6 mb-4 mb-md-0 fade-left">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="icon">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <div>
+                            <h2 class="mb-0">We Provide</h2>
+                            <h2 class="highlight">Hassle-Free 24X7 Support</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="col-md-1 d-none d-md-block">
+                    <div class="divider"></div>
+                </div>
+
+                <!-- Right Content -->
+                <div class="col-md-5 fade-right">
+                    <p>Ready to transform your business? Contact Oppty TechHub to explore innovative IT, BPO,
+                        e-commerce, web development, and AI solutions tailored to your needs. Our team is dedicated to
+                        driving your success through collaboration and cutting-edge technology. Reach out today to start
+                        building something extraordinary together. Call us at +91 9491209900, email info@oppty.in, or
+                        visit us at Flat number 601, Mahitha’s green galaxy, CBCID Colony, NRSA Colony, Bagath Singh
+                        Nagar Phase 2, Kukatpally, Hyderabad, Telangana 500085 or Plot No. 26, 100 Feet Rd, Shobhagpura,
+                        Udaipur, Rajasthan 313011.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="textform " style="background: white;">
+        <div class="container" style="max-width: 1418px;">
+            <div class="row  align-items-stretch">
+
+                <!-- Left Form -->
+                <div class="col-lg-8 fade-left" style="background: rgb(245 247 250);padding: 17px;">
+                    <div class="card shadow-sm p-4 h-100" style="margin: 0px 221px;">
+                        <form id="contactForm" style="    font-size: 20px;font-weight: 600;">
+                            <div class="mb-3">
+                                <label class="form-label">Email *</label>
+                                <input type="email" class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Company Name *</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Company Address *</label>
+                                <textarea class="form-control" rows="3" required></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Official Email *</label>
+                                <input type="email" class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Contact Number *</label>
+                                <input type="tel" class="form-control" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Type of Service Looking for *</label>
+                                <select class="form-select">
+                                    <option selected>IT Service</option>
+                                    <option>Web Development</option>
+                                    <option>AI Solutions</option>
+                                    <option>BPO Services</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label">Any Suggestions or Requests</label>
+                                <textarea class="form-control" rows="4"></textarea>
+                            </div>
+
+                            <button type="submit" class="btns">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Content -->
+                <div class="col-lg-4 fade-right">
+                    <div class="textform-right h-100 p-4"
+                        style="background-color: transparent;background-image: linear-gradient(207deg, #F97216 1.94%, #FEE500 116%);">
+                        <h2 class="fw-bold mb-3">Let’s Build Your Future</h2>
+                        <p>
+                            Oppty TechHub is here to empower your business with innovative IT, AI, BPO, e-commerce, and
+                            web development solutions. Our dedicated team is ready to collaborate, turning your vision
+                            into reality with tailored, SEO-friendly strategies. Connect with us to discuss your goals
+                            and start a journey toward sustainable growth. Reach out at +91 9491209900, email
+                            info@oppty.in, or visit our offices in Hyderabad (Flat number 601, Mahitha's green galaxy,
+                            CBCID Colony, NRSA Colony, Bagath Singh Nagar Phase 2, Kukatpally, Hyderabad, Telangana
+                            500085) or Udaipur (Plot No. 26, 100 Feet Rd, Shobhagpura, Rajasthan 313011).
+                        </p>
+
+
+
+                        <img src="imgs/contact-image.jpg" class="img-fluid rounded mt-3" alt="Support">
+
+                        <h2 style="padding-top: 20px;">Enquries</h2>
+                        <p>info@oppty.in</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="text2">
+        <div class="container" style="max-width: 1418px;">
+
+            <h2 class="text-cente">
+                CORPORATE OFFICE <span>LOCATIONS</span>
+            </h2>
+
+            <div class="row g-4">
+
+                <!-- Hyderabad -->
+                <div class="col-md-6">
+                    <div class="location-card fade-up">
+                        <h4>HYDERABAD</h4>
+                        <p>
+                            <i class="bi bi-geo-alt-fill"></i>
+                            Flat number 601, Mahitha's green galaxy,<br>
+                            CBCID Colony, NRSA Colony, Bagath Singh<br>
+                            Nagar Phase 2, Kukatpally, Hyderabad,<br>
+                            Telangana 500085
+                        </p>
+
+                        <div class="contact-info">
+                            <p><i class="bi bi-telephone-fill"></i> +91-9491209900</p>
+                            <p><i class="bi bi-envelope-fill"></i> info@oppty.in</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Udaipur -->
+                <div class="col-md-6">
+                    <div class="location-card fade-up" >
+                        <h4>UDAIPUR</h4>
+                        <p>
+                            <i class="bi bi-geo-alt-fill"></i>
+                            Plot No: 26, 100 Feet<br>
+                            Rd, Shobhagpura, Udaipur,<br>
+                            Rajasthan 313011
+                        </p>
+
+                        <div class="contact-info">
+                            <p><i class="bi bi-telephone-fill"></i> +91-9491209900</p>
+                            <p><i class="bi bi-envelope-fill"></i> info@oppty.in</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="text3" style="background: white;">
+        <div class="container" style="max-width: 1418px;">
+
+            <div class="text-center mb-4">
+                <small class="text-mute" style="font-size: 20px;">Pricing</small>
+                <h2 class="fw-bold" style="font-size: 45px;">
+                    CHOOSE THE <span class="text-" style="color: #f09226;">BEST PACKAGE</span><br>
+                    FOR YOUR BUSINESS
+                </h2>
+            </div>
+
+            <!-- Toggle -->
+            <div class="price-toggle">
+                <span>Monthly</span>
+                <label class="switch">
+                    <input type="checkbox" id="priceSwitch">
+                    <span class="slider"></span>
+                </label>
+                <span>Yearly</span>
+            </div>
+
+            <!-- Cards -->
+            <div class="row g-4 align-items-center">
+
+                <!-- Basic -->
+                <div class="col-md-4">
+                    <div class="pricing-card light fade-up">
+                        <h5>Basic Package</h5>
+
+                        <ul>
+                            <li>Free Consultation</li>
+                            <li>Document Template</li>
+                            <li>Professional Team</li>
+                            <li>24/7 Full Support</li>
+                        </ul>
+                        <button class="btnes ">Get Started →</button>
+                        <p>*Terms and Conditions apply</p>
+                    </div>
+                </div>
+
+                <!-- Regular -->
+                <div class="col-md-4">
+                    <div class="pricing-card fade-up" style="border-radius: 0px 0px 0px 150px;">
+                        <h5>Regular Package</h5>
+
+                        <ul>
+                            <li>Free Consultation</li>
+                            <li>Document Template</li>
+                            <li>Professional Team</li>
+                            <li>24/7 Full Support</li>
+                        </ul>
+                        <button class="btnes ">Get Started →</button>
+                        <p>*Terms and Conditions apply</p>
+                    </div>
+                </div>
+
+                <!-- Deluxe -->
+                <div class="col-md-4">
+                    <div class="pricing-card light fade-up">
+                        <h5>Deluxe Package</h5>
+
+                        <ul>
+                            <li>Free Consultation</li>
+                            <li>Document Template</li>
+                            <li>Professional Team</li>
+                            <li>24/7 Full Support</li>
+                        </ul>
+                        <button class="btnes">Get Started →</button>
+                        <p>*Terms and Conditions apply</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-5">
+                <p>Need a custom pricing plan? <a href="#" class="text-warning fw-bold">Click Here →</a></p>
+            </div>
+
+        </div>
+    </section>
+    <footer class="footer-new">
+  <div class="container">
+
+    <div class="row gy-4">
+
+      <!-- Brand -->
+      <div class="col-lg-4">
+        <img src="imgs/322343.png" class="footer-logo-new">
+        <p class="footer-desc">
+          Power up your success with innovative IT, BPO, E-commerce,
+          Web Development, and AI solutions tailored to your vision.
+        </p>
+
+        <div class="social-icons">
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-linkedin"></i></a>
+          <a href="#"><i class="bi bi-twitter-x"></i></a>
+        </div>
+      </div>
+
+      <!-- Hyderabad -->
+      <div class="col-lg-3">
+        <h5>Hyderabad Office</h5>
+        <p>
+          Flat No 601, Mahitha’s Green Galaxy,<br>
+          CBID Colony, NRSA Colony,<br>
+          Kukatpally, Hyderabad,<br>
+          Telangana – 500085
+        </p>
+      </div>
+
+      <!-- Udaipur -->
+      <div class="col-lg-3">
+        <h5>Udaipur Office</h5>
+        <p>
+          Plot No: 26, 100 Feet Rd,<br>
+          Shobhagpura, Udaipur,<br>
+          Rajasthan – 313011
+        </p>
+      </div>
+
+      <!-- Contact -->
+      <div class="col-lg-2">
+        <h5>Contact</h5>
+        <p>
+          info@oppty.in<br>
+          +91-9491209900
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Government strip -->
+    <div class="gov-strip-new">
+      <img src="imgs/png-clipart-government-of-india-ministry-of-micro-small-and-medium-enterprises-small-business-india-text-logo__1_-removebg-preview.png">
+      <img src="imgs/Ministry-for-Corporate-AffairS-1-removebg-preview.png">
+      <img src="imgs/36662669-1685562943668-bf31f5769c66e.jpg">
+    </div>
+
+    <!-- Bottom -->
+    <div class="footer-bottom-new">
+      © <span id="year"></span> Oppty. All Rights Reserved.
+    </div>
+
+  </div>
+</footer>
+    <a href="#" class="whatsapp-btn">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    <script>
+/* Contact form */
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  alert("Form submitted successfully!");
+  this.reset();
+});
+
+/* Pricing toggle */
+const toggle = document.getElementById("priceSwitch");
+const prices = document.querySelectorAll(".price");
+
+toggle.addEventListener("change", () => {
+  prices.forEach(price => {
+    price.textContent = toggle.checked
+      ? price.dataset.year
+      : price.dataset.month;
+  });
+});
+
+/* Scroll animations */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("show");
+    }
+  });
+},{threshold:0.2});
+
+document.querySelectorAll(".fade-up,.fade-left,.fade-right").forEach(el=>{
+  observer.observe(el);
+});
+
+/* Footer year */
+const year=document.getElementById("year");
+if(year){year.textContent=new Date().getFullYear();}
+</script>
+</body>
+
+</html>

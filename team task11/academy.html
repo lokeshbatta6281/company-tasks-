@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .navbar-brand img {
+            width: 200px;
+
+        }
+
+        .nav-link {
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #f97216 !important;
+        }
+
+        .nav-item .btn {
+            background: #f97216;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .btn {
+            background: #f97216;
+            color: white;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .nav-item .btn:hover {
+            background-color: #e55f14;
+            transform: scale(1.05);
+        }
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            cursor: pointer;
+        }
+        
+        /* Dropdown box */
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            min-width: 180px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            display: none;
+            z-index: 999;
+        }
+        
+        /* Dropdown links */
+        .dropdown-content a {
+            display: block;
+            padding: 12px 18px;
+            color: #111;
+            font-weight: 500;
+            transition: 0.3s;
+            text-decoration: none;
+            text-align: center;
+
+        }
+
+        /* Hover effects */
+        .dropdown-content a:hover {
+            background: white;
+            color: #f08a2f;
+        }
+
+        /* SHOW ON HOVER */
+        .dropdown:hover .dropdown-content {
+            display: block;
+            color: #f08a2f;
+        }
+
+
+        .about-hero {
+            position: relative;
+            height: 368px;
+            background: url(imgs/breadcrumb-bg.jpg);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 78px;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+        }
+
+        .about-content {
+            position: relative;
+            text-align: center;
+            color: #fff;
+            z-index: 1;
+        }
+
+        .about-content h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            margin-left: 60px;
+        }
+
+        .breadcrumb a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            text-align: center;
+
+        }
+
+        .breadcrumb a:hover {
+            color: #ff7a00;
+        }
+
+        .breadcrumb span {
+            margin: 0 8px;
+            color: #ff7a00;
+        }
+
+        .breadcrumb .active {
+            color: #ff7a00;
+        }
+
+        .text {
+            min-height: 90vh;
+            background: url(imgs/career-detail-image-1.jpg) center/cover no-repeat;
+            position: relative;
+        }
+
+        .text .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+        }
+
+        .text h1 {
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        .text .highlight {
+            color: #f38212;
+        }
+
+        .text .content-box {
+            max-width: 894px;
+            margin-top: 30px;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .text .content-box p {
+            position: relative;
+            padding-left: 20px;
+            font-size: 16px;
+        }
+
+        .text .content-box p::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 4px;
+            height: 80%;
+            background: #f39c12;
+        }
+
+        @media (max-width: 768px) {
+            .text h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .courses {
+  padding: 80px 10%;
+  text-align: center;
+}
+
+.courses h2 {
+  font-size: 36px;
+  letter-spacing: 1px;
+}
+
+.courses .sub {
+  margin: 10px 0 50px;
+  color: #666;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.course-card {
+  background: #1f2125;
+  color: #fff;
+  padding: 40px 35px;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: .4s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.course-card .num {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.course-card h3 {
+  margin-top: 80px;
+  font-size: 20px;
+  transition: .4s;
+}
+
+.course-card p {
+  margin-top: 10px;
+  color: #777;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: .4s;
+}
+
+.course-card .icon {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 55px;
+  transition: .6s;
+  animation: spin 8s linear infinite;   /* rotates always */
+  transition: .4s ease;
+}
+.course-card:hover .icon {
+  animation-duration: 1.5s;   /* spins faster on hover */
+}
+
+/* ===== HOVER EFFECT ===== */
+
+.course-card:hover {
+  background: #fff;
+  border: 2px solid #ff9f1a;
+}
+
+.course-card:hover h3 {
+  color: #111;
+  transform: translateY(-10px);
+}
+
+.course-card:hover p {
+  transform: translateY(0);
+  opacity: 1;
+  color: #555;
+}
+
+.course-card:hover .num {
+  color: #111;
+}
+
+.course-card:hover .icon {
+  transform: rotate(180deg);
+
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+        .text3 {
+            padding: 70px 0;
+            background: #f9f9f9;
+        }
+
+        .text3 h2 {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .text3 p.subtitle {
+            color: #666;
+            margin-bottom: 50px;
+        }
+
+        .plan-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            height: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .plan-title {
+            color: #f57c00;
+            font-weight: 700;
+        }
+
+        .plan-subtitle {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .plan-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .plan-list li {
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .plan-list li span {
+            color: #f57c00;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .text3 ul li::before {
+            content: "✔";
+            color: #e67e22;
+            margin-right: 10px;
+        }
+
+        .btn-enroll {
+            background: linear-gradient(45deg, #f57c00, #ff4800eb);
+            color: #131212;
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        .btn-enroll:hover {
+            background: linear-gradient(45deg, #ff9800, #e5cb3a);
+        }
+
+       /* ======================
+   NEW FOOTER TEMPLATE
+======================*/
+
+.footer-new {
+  background: linear-gradient(135deg,#071e17,#0b3d2e);
+  padding: 70px 0 30px;
+  color: #e5e7eb;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-logo-new {
+  width: 150px;
+  margin-bottom: 15px;
+}
+
+.footer-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  opacity: 0.85;
+}
+
+.footer-new h5 {
+  color: #c9a14a;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.footer-new p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* Social icons */
+.social-icons a {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.08);
+  color: #c9a14a;
+  margin-right: 8px;
+  transition: 0.4s ease;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  background: #c9a14a;
+  color: #071e17;
+  transform: translateY(-6px) rotate(8deg);
+}
+
+/* Government strip */
+.gov-strip-new {
+  margin-top: 40px;
+  padding: 25px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.gov-strip-new img {
+  height: 70px;
+  transition: 0.4s;
+}
+
+.gov-strip-new img:hover {
+  transform: scale(1.15);
+}
+
+/* Bottom */
+.footer-bottom-new {
+  margin-top: 35px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  text-align: center;
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+/* Floating glow effect */
+.footer-new::before {
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  background: radial-gradient(circle,#c9a14a44,transparent 70%);
+  top:-100px;
+  right:-100px;
+  filter: blur(40px);
+}
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+        :root{
+--gold:#c8a24a;
+--dark:#0e0f12;
+--soft:#414348;
+}
+
+body{background:#fff;font-family:"Segoe UI",sans-serif}
+
+/* HERO */
+/* HERO */
+.about-hero{
+height:380px;
+background:url(imgs/breadcrumb-bg.jpg) center/cover no-repeat;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+padding-top:78px;
+animation:zoomBg 12s infinite alternate ease-in-out;
+}
+.overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);}
+.about-content{color:#fff;z-index:2;text-align:center}
+.about-content h1{font-size:52px;letter-spacing:2px}
+.section-animate{opacity:0;transform:translateY(60px);transition:1s ease}
+.section-animate.show{opacity:1;transform:no}
+
+.breadcrumb a,.breadcrumb span{color:#fff}
+.breadcrumb span{color:var(--gold)}
+
+/* MAIN TEXT */
+.text{
+min-height:90vh;
+background:url(imgs/career-detail-image-1.jpg) center/cover no-repeat;
+position:relative;
+}
+
+.text .overlay{background:rgba(0,0,0,.75)}
+
+.highlight{color:var(--gold)}
+
+.content-box p{
+border-left:4px solid var(--gold);
+padding-left:18px;
+margin-bottom:20px;
+}
+
+/* COURSES */
+.courses{
+padding:80px 10%;
+text-align:center;
+background:#111;
+color:#fff;
+}
+
+.course-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+}
+
+.course-card{
+background:var(--soft);
+padding:35px;
+border-radius:10px;
+position:relative;
+overflow:hidden;
+transition:.5s;
+border:1px solid #222;
+}
+
+.course-card:hover{
+background:#fff;
+color:#111;
+border-color:var(--gold);
+transform:translateY(-10px);
+}
+
+.course-card .icon{
+position:absolute;
+top:25px;
+right:25px;
+width:50px;
+animation:spin 8s linear infinite;
+}
+
+.course-card:hover .icon{animation-duration:1.5s}
+
+/* TRAINING */
+.text3{padding:80px 0;background:#f7f7f7}
+
+.plan-card{
+background:#fff;
+border-radius:15px;
+padding:30px;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+transition:.4s;
+}
+
+.plan-card:hover{
+transform:translateY(-8px);
+box-shadow:0 20px 50px rgba(0,0,0,.15);
+}
+
+.plan-title{color:var(--gold)}
+
+.btn-enroll{
+background:linear-gradient(45deg,#c8a24a,#ffcc66);
+border:none;
+padding:12px;
+width:100%;
+font-weight:600;
+border-radius:8px;
+}
+
+.btn-enroll:hover{background:linear-gradient(45deg,#ffcc66,#c8a24a)}
+
+/* Animations */
+.animate-up{opacity:0;transform:translateY(40px)}
+.animate-fade{opacity:0}
+.animate-card{opacity:0;transform:translateY(50px)}
+
+.show{opacity:1;transform:none;transition:1s}
+
+@keyframes fadeDown{
+from{opacity:0;transform:translateY(-40px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes spin{
+from{transform:rotate(0)}
+to{transform:rotate(360deg)}
+}
+/* ANIMATIONS */
+@keyframes zoomBg{
+from{background-size:100%}
+to{background-size:115%}
+}
+.whatsapp-btn {
+  animation: pulseBtn 2s infinite;
+}
+
+@keyframes pulseBtn {
+  0% {box-shadow: 0 0 0 0 rgba(37,211,102,0.7);}
+  70% {box-shadow: 0 0 0 15px rgba(37,211,102,0);}
+  100% {box-shadow: 0 0 0 0 rgba(37,211,102,0);}
+}
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container" style="max-width: 1485px;">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <img src="imgs/oppty.png" alt="...">
+            </a>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="About us.html">About Us</a></li>
+                    <div class="dropdown">
+                            <a href="our services.html" class="dropbtn" style="color: #716e6e;text-transform: lowercase;text-decoration: none;font-size: 18px;padding: 0px 9px; font-weight: 500;">Our Services</a>
+
+                            <div class="dropdown-content">
+                                <a href="solution.html">Solutions</a>
+                            </div>
+                        </div>
+                    <li class="nav-item"><a class="nav-link" href="contact us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="academy.html">Academy</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning rounded-pill px-4" href="index.html">Training Partner</a>
+                    </li>
+                    
+
+                    <li class="nav-item" style="display: flex;"><a class="nav-link" href="tel:+919491209900"><img src="imgs/1f4de.svg"
+                                alt="..." width="10px"> +91 9491209900</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<section class="about-hero">
+        <div class="overlay"></div>
+
+        <div class="about-content">
+            <h1>ACADEMY</h1>
+
+            <nav class="breadcrumb">
+                <a href="index.html">HOME</a>
+                <span>/</span>
+                <a href="#">ACADEMY</a>
+            </nav>
+        </div>
+    </section>    <!-- MAIN TEXT SECTION -->
+<section style="padding:100px 50px;">
+<div class="text d-flex align-items-center">
+<div class="overlay"></div>
+
+<div class="container position-relative" style="padding:100px 50px;">
+<div class="row justify-content-center">
+<div class="col-lg-9 text-center text-white">
+
+<h1 class="fw-bold mb-5 animate-up">
+EMPOWER YOUR FUTURE <span class="highlight">WITH</span><br> OPPTY ACADEMY
+</h1>
+
+<div class="content-box text-start mx-auto animate-fade">
+<p>Unlock your potential with industry-ready AI, Data Science, and tech courses designed to propel your career forward...</p>
+<p>Our cutting-edge training programs are crafted to align with market demands...</p>
+<p>We focus on hands-on, industry-relevant learning...</p>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- COURSES -->
+<section class="courses">
+<h2 class="animate-up">OUR COURSES</h2>
+<p class="sub animate-fade">Explore our dynamic courses tailored to make you job-ready in AI and Data Science.</p>
+
+<div class="course-grid">
+
+<div class="course-card animate-card">
+<span class="num">01</span>
+<img src="./imgs/ba5fd549-ad8c-4613-95ef-6dfb492ef60e.svg" class="icon">
+<h3>DATA SCIENCE</h3>
+<p>Master data analytics and machine learning...</p>
+</div>
+
+<div class="course-card animate-card">
+<span class="num">02</span>
+<img src="./imgs/604441ce-f643-47bc-918d-8a51302a0ef9.svg" class="icon">
+<h3>MACHINE LEARNING</h3>
+<p>Dive into ML and AI concepts...</p>
+</div>
+
+<div class="course-card animate-card">
+<span class="num">03</span>
+<img src="./imgs/81b86790-c1b5-441c-9b2d-da84944070e6.svg" class="icon">
+<h3>ARTIFICIAL INTELLIGENCE</h3>
+<p>Solve complex challenges...</p>
+</div>
+
+<div class="course-card animate-card">
+<span class="num">04</span>
+<img src="./imgs/afd7ebc6-e556-4db7-b35b-81d814c274b6.svg" class="icon">
+<h3>APPLIED DEEP LEARNING</h3>
+<p>Leverage cutting-edge algorithms...</p>
+</div>
+
+</div>
+</section>
+
+<!-- TRAINING PLANS -->
+<section class="text3">
+<div class="container">
+<div class="text-center">
+<h2>Training Plans</h2>
+<p class="subtitle">Choose the plan that fits your goals.</p>
+</div>
+
+<div class="row g-4">
+
+<div class="col-lg-6">
+<div class="plan-card animate-card">
+<h4 class="plan-title">Data Science</h4>
+<ul class="plan-list">
+<li>Pre & Post Assessments</li>
+<li>100-Hour Engagement</li>
+<li>Projects & Certification</li>
+</ul>
+<button class="btn btn-enroll enroll-btn">Enroll Now</button>
+</div>
+</div>
+
+<div class="col-lg-6">
+<div class="plan-card animate-card">
+<h4 class="plan-title">Machine Learning</h4>
+<ul class="plan-list">
+<li>80-Hour Engagement</li>
+<li>Projects & Certification</li>
+</ul>
+<button class="btn btn-enroll enroll-btn">Enroll Now</button>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+    <footer class="footer-new">
+  <div class="container">
+
+    <div class="row gy-4">
+
+      <!-- Brand -->
+      <div class="col-lg-4">
+        <img src="imgs/322343.png" class="footer-logo-new">
+        <p class="footer-desc">
+          Power up your success with innovative IT, BPO, E-commerce,
+          Web Development, and AI solutions tailored to your vision.
+        </p>
+
+        <div class="social-icons">
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-linkedin"></i></a>
+          <a href="#"><i class="bi bi-twitter-x"></i></a>
+        </div>
+      </div>
+
+      <!-- Hyderabad -->
+      <div class="col-lg-3">
+        <h5>Hyderabad Office</h5>
+        <p>
+          Flat No 601, Mahitha’s Green Galaxy,<br>
+          CBID Colony, NRSA Colony,<br>
+          Kukatpally, Hyderabad,<br>
+          Telangana – 500085
+        </p>
+      </div>
+
+      <!-- Udaipur -->
+      <div class="col-lg-3">
+        <h5>Udaipur Office</h5>
+        <p>
+          Plot No: 26, 100 Feet Rd,<br>
+          Shobhagpura, Udaipur,<br>
+          Rajasthan – 313011
+        </p>
+      </div>
+
+      <!-- Contact -->
+      <div class="col-lg-2">
+        <h5>Contact</h5>
+        <p>
+          info@oppty.in<br>
+          +91-9491209900
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Government strip -->
+    <div class="gov-strip-new">
+      <img src="imgs/png-clipart-government-of-india-ministry-of-micro-small-and-medium-enterprises-small-business-india-text-logo__1_-removebg-preview.png">
+      <img src="imgs/Ministry-for-Corporate-AffairS-1-removebg-preview.png">
+      <img src="imgs/36662669-1685562943668-bf31f5769c66e.jpg">
+    </div>
+
+    <!-- Bottom -->
+    <div class="footer-bottom-new">
+      © <span id="year"></span> Oppty. All Rights Reserved.
+    </div>
+
+  </div>
+</footer>
+    <a href="#" class="whatsapp-btn">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.enroll-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                alert('Enrollment process coming soon!');
+            });
+        });
+        // Scroll animations
+const observer = new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.classList.add("show");
+}
+});
+},{threshold:0.2});
+
+document.querySelectorAll(".animate-up,.animate-fade,.animate-card").forEach(el=>{
+observer.observe(el);
+});
+
+// Enroll buttons
+document.querySelectorAll('.enroll-btn').forEach(btn=>{
+btn.addEventListener('click',()=>{
+alert("Enrollment process coming soon!");
+});
+});
+    </script>
+</body>
+
+</html>
