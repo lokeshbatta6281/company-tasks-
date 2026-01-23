@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Oppty TechHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <style>
+    :root {
+      --oppty-orange: #f97216;
+      --oppty-dark: #0f172a;
+      --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--oppty-dark);
+      background: #ffffff;
+      overflow-x: hidden;
+    }
+
+    /* --- Base Navbar Styles --- */
+.advanced-navbar {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 20px 0;
+    background: white;
+}
+
+/* Glass effect triggered via JS on scroll */
+.advanced-navbar.navbar-scrolled {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 12px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* --- Nav Links & Hover Animation --- */
+.nav-link {
+    font-weight: 600;
+    color: #333 !important;
+    position: relative;
+    padding: 10px 15px !important;
+    transition: 0.3s;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 5px;
+    left: 15px;
+    background-color: #e55f14; /* Oppty Orange */
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: calc(100% - 30px);
+}
+
+.nav-link:hover {
+    color: #e55f14 !important;
+}
+
+/* --- Custom CTA Buttons --- */
+.btn-custom {
+    background: #1a1a1a; /* Dark Tech Grey */
+    color: white !important;
+    font-weight: 700;
+    border: 2px solid #1a1a1a;
+    transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+    background: #e55f14;
+    border-color: #e55f14;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(229, 95, 20, 0.3);
+}
+
+/* --- Dropdown Improvements --- */
+.dropdown-custom {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 200px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 1000;
+    top: 100%;
+    border: 1px solid #f1f1f1;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.dropdown-content a:hover {
+    background-color: #fcf4f0;
+    color: #e55f14;
+    padding-left: 25px;
+}
+
+.dropdown-custom:hover .dropdown-content {
+    display: block;
+    animation: fadeInUp 0.3s ease;
+}
+
+/* --- Phone Link Styling --- */
+.phone-link {
+    background: #f8f9fa;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+        .footer-title {
+      color: #e55f14;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-nav li {
+      margin-bottom: 10px;
+    }
+
+    .footer-nav a {
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.3s ease;
+    }
+
+    .footer-nav a:hover {
+      color: #e55f14;
+      padding-left: 5px;
+    }
+
+    .map-container-sm {
+      transition: 0.4s ease;
+      filter: grayscale(1) contrast(1.2);
+    }
+
+    .map-container-sm:hover {
+      filter: grayscale(0);
+      border-color: #e55f14;
+    }
+
+    .form-control-oppty {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      width: 100%;
+    }
+
+    .btn-oppty-neon {
+      background: #e55f14;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .btn-oppty-neon:hover {
+      box-shadow: 0 0 15px rgba(229, 95, 20, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .oppty-social {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 1.2rem;
+      transition: 0.3s;
+    }
+
+    .oppty-social:hover {
+      color: #e55f14;
+    }
+
+    .map-image-wrapper {
+      height: 140px;
+      width: 100%;
+      position: relative;
+      background: #0a0c10;
+    }
+
+    .map-static-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1) brightness(0.6) contrast(1.2);
+      transition: 0.5s ease;
+    }
+
+    .map-image-wrapper:hover .map-static-img {
+      filter: grayscale(0.5) brightness(0.8);
+      transform: scale(1.05);
+    }
+
+    /* UPDATED FOOTER GRADIENT */
+.footer-gradient {
+    background: linear-gradient(135deg, #0a0f1d 0%, #02040a 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* COMPACT FORM STYLING */
+.glass-premium {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+}
+
+.form-control-footer {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 0.8rem;
+    padding: 10px 15px;
+    border-radius: 8px;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.form-control-footer:focus {
+    outline: none;
+    border-color: #e55f14;
+    background: rgba(229, 95, 20, 0.05);
+}
+
+.btn-oppty-submit {
+    background: #e55f14;
+    border: none;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.btn-oppty-submit:hover {
+    background: white;
+    color: #e55f14;
+    box-shadow: 0 0 20px rgba(229, 95, 20, 0.4);
+    transform: translateY(-2px);
+}
+.hero-banner-sec {
+    min-height: 100vh;
+    background: #02040a;
+    display: flex;
+    align-items: center;
+}
+
+/* BACKGROUND IMAGE ANIMATION */
+.hero-visual-layer {
+    position: absolute;
+    inset: 0;
+    /* Using a high-resolution technical schematic */
+    background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2000');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+    z-index: 1;
+    animation: backgroundShift 40s linear infinite alternate;
+}
+
+@keyframes backgroundShift {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.15) translate(-2%, -2%); }
+}
+
+.hero-overlay-depth {
+    position: absolute;
+    inset: 0;
+    /* Radial gradient to focus eye on text and blend image edges */
+    background: radial-gradient(circle at 20% 50%, transparent 0%, #02040a 80%);
+    z-index: 2;
+}
+
+/* UI ELEMENTS */
+.hero-pre-title {
+    color: #e55f14;
+    font-weight: 800;
+    letter-spacing: 4px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pulse-orange {
+    width: 8px; height: 8px;
+    background: #e55f14;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #e55f14;
+    animation: glowPulse 2s infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+}
+
+.text-glow {
+    color: #e55f14;
+    text-shadow: 0 0 25px rgba(229, 95, 20, 0.4);
+}
+
+/* CTAs */
+.btn-hero-primary {
+    background: #e55f14;
+    color: white;
+    padding: 18px 40px;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.4s;
+}
+
+.btn-hero-primary:hover {
+    background: white;
+    color: #e55f14;
+    box-shadow: 0 0 30px rgba(229, 95, 20, 0.5);
+    transform: translateY(-5px);
+}
+
+.btn-hero-secondary {
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    padding: 18px 40px;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    transition: 0.4s;
+}
+
+.btn-hero-secondary:hover {
+    border-color: #e55f14;
+    background: rgba(229, 95, 20, 0.05);
+}
+.about-overview-sec {
+    background: #02040a;
+    padding: 100px 0;
+}
+
+/* VISUAL STACK ANIMATIONS */
+.about-visual-container {
+    position: relative;
+    padding-right: 50px;
+    padding-bottom: 50px;
+}
+
+.main-img-wrapper {
+    overflow: hidden;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.parallax-img {
+    transition: transform 0.8s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.about-visual-container:hover .parallax-img {
+    transform: scale(1.1);
+}
+
+.accent-img-wrapper {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 240px;
+    z-index: 5;
+    border: 8px solid #02040a;
+    border-radius: 28px;
+}
+
+.experience-badge-float {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    background: #e55f14;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 20px 40px rgba(229, 95, 20, 0.3);
+}
+
+.experience-badge-float .number { font-size: 2rem; font-weight: 900; line-height: 1; }
+.experience-badge-float .label { font-size: 0.65rem; text-transform: uppercase; text-align: center; font-weight: 700; margin-top: 5px; }
+
+/* MISSION BOX */
+.mission-statement-box {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 4px solid #e55f14;
+    backdrop-filter: blur(10px);
+}
+
+/* INTERACTIVE LINK */
+.btn-about-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.btn-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: #e55f14;
+    transition: 0.4s;
+}
+
+.btn-about-link:hover .btn-line {
+    width: 100%;
+}
+
+.btn-about-link:hover {
+    color: #e55f14;
+}
+.about-overview-sec-light {
+    background: #f8f9fa; /* Soft Alabaster/Off-White */
+    padding: 100px 0;
+}
+
+/* BACKGROUND TEXTURE */
+.light-mesh-texture {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(#dee2e6 0.5px, transparent 0.5px);
+    background-size: 20px 20px; /* Subtle grid pattern */
+    opacity: 0.3;
+    z-index: 1;
+}
+
+/* VISUAL STACK */
+.main-img-wrapper-light {
+    overflow: hidden;
+    border-radius: 20px;
+    border: 5px solid white; /* Frame effect */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.accent-img-wrapper-light {
+    position: absolute;
+    bottom: -30px;
+    right: -20px;
+    width: 240px;
+    z-index: 5;
+    border: 8px solid white;
+    border-radius: 28px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.experience-badge-float-light {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    background: #e55f14;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    z-index: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(229, 95, 20, 0.4);
+}
+
+/* MISSION BOX LIGHT */
+.mission-statement-box-light {
+    background: white;
+    border-left: 4px solid #e55f14;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+/* INTERACTIVE LINK LIGHT */
+.btn-about-link-light {
+    color: #333;
+    text-decoration: none;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+    transition: 0.3s;
+}
+
+.btn-line-orange {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 40px; height: 2px;
+    background: #e55f14;
+    transition: 0.4s;
+}
+
+.btn-about-link-light:hover .btn-line-orange { width: 100%; }
+.btn-about-link-light:hover { color: #e55f14; padding-left: 5px; }
+.bg-light-soft { background: #fdfdfd; }
+
+/* 3D CARD CORE */
+.service-flip-card {
+    background-color: transparent;
+    height: 380px;
+    perspective: 1000px; /* Essential for 3D effect */
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    border-radius: 20px;
+}
+
+.service-flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.flip-card-front {
+    background-color: #fff;
+    color: #333;
+}
+
+.flip-card-back {
+    background-color: #02040a;
+    color: white;
+    transform: rotateY(180deg);
+}
+
+/* UI ELEMENTS */
+.icon-box-main {
+    width: 80px; height: 80px;
+    background: rgba(229, 95, 20, 0.1);
+    color: #e55f14;
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 25px;
+    transition: 0.3s;
+}
+
+.service-flip-card:hover .icon-box-main { transform: scale(1.1); }
+
+.tech-list li {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.tech-list i { color: #e55f14; margin-right: 10px; }
+
+.flip-hint {
+    margin-top: 30px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #bbb;
+}
+
+.btn-services-all {
+    color: #333;
+    font-weight: 800;
+    text-decoration: none;
+    border-bottom: 2px solid #e55f14;
+    padding-bottom: 5px;
+}
+/* ADDING SPACE */
+.py-10 {
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+}
+
+/* BACKGROUND IMAGE ENGINE */
+.services-parallax-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.parallax-bg-img {
+    width: 110%;
+    height: 110%;
+    /* Technical Blueprint Image */
+    background-image: url('https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&q=80&w=2000');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.05; /* Keeps it subtle for light mode */
+    filter: grayscale(1);
+    transform: translateY(0);
+    animation: slowDrift 20s ease-in-out infinite alternate;
+}
+
+@keyframes slowDrift {
+    from { transform: scale(1) translateY(0); }
+    to { transform: scale(1.05) translateY(-20px); }
+}
+
+.light-overlay-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(253, 253, 253, 0) 0%, #fdfdfd 90%);
+    z-index: 2;
+}
+
+/* FLIP CARD ENHANCEMENTS */
+.shadow-soft {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.05) !important;
+}
+
+.btn-card-link-white {
+    color: white;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.btn-card-link-white:hover {
+    background: #e55f14;
+    border-color: #e55f14;
+}
+.bg-slate-medium {
+    background: #232d3f;
+    padding: 120px 0;
+}
+
+/* BACKGROUND IMAGE ANIMATION */
+.linear-bg-visual {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=2000');
+    background-size: cover;
+    opacity: 0.1;
+    z-index: 1;
+    animation: panBackground 60s linear infinite alternate;
+}
+
+@keyframes panBackground {
+    from { background-position: left; }
+    to { background-position: right; }
+}
+
+/* TIMELINE CORE STRUCTURE */
+.linear-timeline-wrapper {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* The Central Line */
+.linear-timeline-wrapper::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, #e55f14, transparent);
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.timeline-row {
+    display: flex;
+    margin-bottom: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.timeline-content, .timeline-empty {
+    flex: 1;
+}
+
+.timeline-node {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.node-circle {
+    width: 60px;
+    height: 60px;
+    background: #232d3f;
+    border: 2px solid #e55f14;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e55f14;
+    font-size: 1.5rem;
+    box-shadow: 0 0 20px rgba(229, 95, 20, 0.4);
+    transition: 0.5s;
+}
+
+.timeline-row:hover .node-circle {
+    background: #e55f14;
+    color: white;
+    transform: scale(1.2);
+    box-shadow: 0 0 30px #e55f14;
+}
+
+/* RESPONSIVE TIMELINE */
+@media (max-width: 991px) {
+    .linear-timeline-wrapper::before { left: 30px; }
+    .timeline-row { flex-direction: row-reverse; }
+    .timeline-empty { display: none; }
+    .timeline-node { width: 60px; justify-content: flex-start; }
+    .timeline-content { text-align: left !important; padding-left: 20px; }
+}
+.solutions-hub-sec-light {
+    background: #ded0c4;
+    padding: 120px 0;
+}
+
+/* SUBTLE GRID */
+.light-grid-layer {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(#f1f1f1 1px, transparent 1px), linear-gradient(90deg, #f1f1f1 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.4;
+    z-index: 1;
+}
+
+/* ACCORDION BUTTONS */
+.custom-acc-btn-light {
+    background: white !important;
+    border: 1px solid #eee !important;
+    border-radius: 16px !important;
+    padding: 24px !important;
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02) !important;
+}
+
+.custom-acc-btn-light:not(.collapsed) {
+    background: white !important;
+    border-color: #e55f14 !important;
+    box-shadow: 0 10px 30px rgba(229, 95, 20, 0.1) !important;
+    transform: translateX(10px);
+}
+
+.acc-icon-box-light {
+    width: 50px; height: 50px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-size: 1.4rem;
+    transition: 0.3s;
+}
+
+.custom-acc-btn-light:not(.collapsed) .acc-icon-box-light {
+    background: #e55f14;
+    color: white;
+}
+
+/* VISUAL FRAME */
+.solution-visual-wrapper-light {
+    position: relative;
+    padding: 20px;
+}
+
+.visual-inner-light {
+    position: relative;
+    border-radius: 40px;
+    overflow: hidden;
+    background: white;
+    padding: 10px;
+    border: 1px solid #eee;
+    transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.visual-inner-light img {
+    border-radius: 30px;
+}
+
+.badge-oppty-outline-orange {
+    border: 1px solid #e55f14;
+    color: #e55f14;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+.industry-sec-vibrant {
+    position: relative;
+    padding: 120px 0;
+    background-color: #fdfdfd;
+}
+
+/* THE GRADIENT ENGINE */
+.industry-gradient-wrap {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    /* This creates a soft, modern mesh look */
+    background: 
+        radial-gradient(at 0% 0%, rgba(229, 95, 20, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(26, 36, 54, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(229, 95, 20, 0.05) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(26, 36, 54, 0.05) 0px, transparent 50%);
+    animation: gradientShift 15s ease infinite alternate;
+}
+
+@keyframes gradientShift {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+/* CARD REFINEMENT */
+.industry-card-premium {
+    background: rgba(255, 255, 255, 0.8); /* Slight transparency to show gradient */
+    backdrop-filter: blur(10px);
+    padding: 40px 30px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    z-index: 2;
+}
+
+.shadow-hover:hover {
+    transform: translateY(-10px);
+    background: #ffffff;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+    border-color: #e55f14;
+}
+
+.ind-icon-wrapper {
+    width: 70px; height: 70px;
+    background: #ffffff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+    color: #e55f14;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    border-radius: 20px;
+    margin: 0 auto 25px;
+    transition: 0.4s;
+}
+
+.industry-card-premium:hover .ind-icon-wrapper {
+    background: #e55f14;
+    color: white;
+}
+.neural-engine-sec { min-height: 100vh; }
+
+/* 🎥 VIDEO BACKGROUND SYSTEM */
+.neural-bg-container {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.neural-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.5) brightness(0.3); /* Dims video for readability */
+}
+
+.neural-vignette {
+    position: absolute;
+    inset: 0;
+   
+}
+
+.neural-scanline-overlay {
+    position: absolute;
+    inset: 0;
+    
+    pointer-events: none;
+}
+
+/* 🚀 DATA HUB STYLING */
+.data-node {
+    display: flex;
+    gap: 25px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.data-node:hover {
+    background: rgba(229, 95, 20, 0.08);
+    border-color: #e55f14;
+    transform: translateX(15px);
+}
+
+.node-id {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: #e55f14;
+}
+
+.node-body h5 { color: #fff; font-weight: 700; }
+.node-body p { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 0; }
+
+/* OS Tag & Status */
+.os-tag {
+    font-family: 'Space Mono', monospace;
+    color: #e55f14;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    background: #28a745;
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 0 0 10px #28a745;
+    animation: pulseStatus 2s infinite;
+}
+
+@keyframes pulseStatus {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+/* --- Entrance Animation --- */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal-up.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Progress Bar Initial State --- */
+.progress-bar {
+    width: 0%; /* Initial state for JS to trigger */
+}
+
+/* --- Comparison Table Hover Effects --- */
+.comparison-container tr {
+    transition: background 0.3s ease;
+}
+
+.comparison-container tbody tr:hover {
+    background: rgba(229, 95, 20, 0.02); /* Very faint orange highlight */
+}
+
+.bg-orange {
+    background-color: #e55f14 !important;
+}
+
+/* --- Smooth Table Entrance --- */
+.comparison-container {
+    opacity: 0;
+    transform: scale(0.98);
+    transition: all 1s ease 0.4s; /* Delayed entrance */
+}
+
+.reveal-up.active .comparison-container {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* --- Metric Icon Pulse --- */
+.metric-icon {
+    transition: transform 0.3s ease;
+}
+
+.metric-block:hover .metric-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+/* MESH OVERLAY COLOR TUNING */
+.footer-mesh-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        radial-gradient(at 0% 100%, rgba(0, 102, 255, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(229, 95, 20, 0.05) 0px, transparent 50%);
+    pointer-events: none;
+}
+    /* Pulsing Location Marker */
+    .map-marker-pulse {
+      position: absolute;
+      top: 40%;
+      left: 30%;
+      width: 10px;
+      height: 10px;
+      background: #e55f14;
+      border-radius: 50%;
+      box-shadow: 0 0 0 rgba(229, 95, 20, 0.4);
+      animation: pulse 2s infinite;
+      z-index: 5;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(229, 95, 20, 0.7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 15px rgba(229, 95, 20, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(229, 95, 20, 0);
+      }
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #00ff88;
+      /* Green online status */
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 8px #00ff88;
+    }
+
+    .map-overlay-tint {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent, rgba(2, 4, 10, 0.6));
+      pointer-events: none;
+    }
+
+        .newsletter-card {
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(12px);
+            padding: 35px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 35px;
+            right: 35px;
+            background: #25d366;
+            width: 65px; height: 65px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 35px; color: white;
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
+            z-index: 9999;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-btn:hover { transform: scale(1.1); color: white; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top advanced-navbar">
+        <div class="container" style="max-width: 1485px;">
+            <a class="navbar-brand fw-bold" href="#">
+                <img src="imgs/oppty.png" alt="Logo" height="40">
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="About us.html">About Us</a></li>
+                    
+                    <li class="nav-item">
+                        <div class="dropdown-custom">
+                            <a href="our services.html" class="dropbtn">Our Services</a>
+                            <div class="dropdown-content">
+                                <a href="solution.html">Solutions</a>
+                                <a href="#">Another Service</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="contact us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-custom rounded-pill px-4" href="academy.html">Academy</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-custom rounded-pill px-4" href="index.html">Training Partner</a>
+                    </li>
+                    
+                    <li class="nav-item ms-lg-3">
+                        <a class="nav-link phone-link" href="tel:+919491209900">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3616/3616215.png" alt="phone" width="18"> 
+                            +91 9491209900
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="hero-banner-sec position-relative overflow-hidden">
+    <div class="hero-visual-layer"></div>
+    <div class="hero-overlay-depth"></div>
+    
+    <div class="data-particles-container"></div>
+
+    <div class="container position-relative z-3 h-100 d-flex align-items-center">
+        <div class="row w-100">
+            <div class="col-lg-8">
+                <div class="hero-content-box reveal-left">
+                    <span class="hero-pre-title">
+                        <span class="pulse-orange"></span> OPPTY GLOBAL ECOSYSTEM
+                    </span>
+                    
+                    <h1 class="display-1 fw-black text-white mb-4">
+                        Architecting the <br>
+                        <span class="text-orange text-glow">Digital Backbone.</span>
+                    </h1>
+                    
+                    <p class="lead text-white-50 mb-5 pe-lg-5">
+                        High-stakes L3 engineering and AI-driven infrastructure designed to empower 
+                        global enterprises with resilient, scalable, and automated operations.
+                    </p>
+
+                    <div class="hero-cta-group d-flex flex-wrap gap-4">
+                        <a href="#solutions" class="btn-hero-primary magnetic-element">
+                            Explore Solutions <i class="bi bi-chevron-right ms-2"></i>
+                        </a>
+                        <a href="#contact" class="btn-hero-secondary magnetic-element">
+                            Request Audit <i class="bi bi-shield-check ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about-overview-sec-light py-10 position-relative overflow-hidden">
+    <div class="light-mesh-texture"></div>
+
+    <div class="container position-relative z-3">
+        <div class="row align-items-center g-5">
+            
+            <div class="col-lg-6">
+                <div class="about-visual-container reveal-left">
+                    <div class="experience-badge-float-light">
+                        <span class="number">12+</span>
+                        <span class="label">Years of Engineering <br>Excellence</span>
+                    </div>
+                    <div class="main-img-wrapper-light">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" 
+                             alt="Oppty Engineering" class="img-fluid rounded-4 shadow-lg parallax-img">
+                    </div>
+                    <div class="accent-img-wrapper-light d-none d-md-block">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=400" 
+                             alt="Mission Focus" class="img-fluid rounded-4 shadow-lg floating-anim">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="about-text-content reveal-right">
+                    <span class="text-orange fw-black tracking-widest uppercase mb-3 d-block">02 / WHO WE ARE</span>
+                    <h2 class="display-4 fw-bold text-dark mb-4">Beyond Managed Services: <br>
+                        <span class="text-muted">A Vision for Resilience.</span>
+                    </h2>
+                    
+                    <p class="text-secondary fs-5 mb-4">
+                        Oppty Global is the tactical partner for enterprises navigating the complexities of the digital age. We don't just manage systems; we architect the future of professional excellence.
+                    </p>
+
+                    <div class="mission-statement-box-light p-4 rounded-4 mb-5">
+                        <h5 class="text-dark mb-3"><i class="bi bi-bullseye text-orange me-2"></i> Our Mission</h5>
+                        <p class="small text-muted mb-0">
+                            To empower global organizations through architecture-level L3 engineering, sustainable AI integration, and a commitment to operational transparency that scales without friction.
+                        </p>
+                    </div>
+
+                    <a href="about.html" class="btn-about-link-light">
+                        Discover Our Full Story <i class="bi bi-arrow-right ms-2"></i>
+                        <span class="btn-line-orange"></span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="services-grid-sec-vibrant position-relative overflow-hidden py-10">
+    <div class="services-parallax-wrap">
+        <div class="parallax-bg-img"></div>
+    </div>
+    <div class="light-overlay-vignette"></div>
+
+    <div class="container py-5 position-relative z-3">
+        <div class="row align-items-center mb-5 reveal">
+            <div class="col-lg-7">
+                <span class="badge-tech mb-3">03 / ECOSYSTEM CAPABILITIES</span>
+                <h2 class="display-5 fw-bold text-dark">Technical <span class="text-orange">Excellence</span> at Scale.</h2>
+            </div>
+            <div class="col-lg-5 text-lg-end">
+                <a href="services.html" class="btn-services-all">View All Architecture <i class="bi bi-arrow-right ms-2"></i></a>
+            </div>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-lg-4 col-md-6 reveal-up">
+                <div class="service-flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front shadow-soft">
+                            <div class="icon-box-main"><i class="bi bi-layers-half"></i></div>
+                            <h4 class="fw-bold">Managed L3 <br>Engineering</h4>
+                            <p class="text-muted small">Architecture-level support for complex infrastructures.</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h5 class="text-orange mb-3">Core Specs</h5>
+                            <p class="small">24/7 SRE Support & Disaster Recovery protocols.</p>
+                            <a href="#" class="btn-card-link-white">Explore Tech <i class="bi bi-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 reveal-up" style="transition-delay: 0.1s;">
+                <div class="service-flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front shadow-soft">
+                            <div class="icon-box-main"><i class="bi bi-robot"></i></div>
+                            <h4 class="fw-bold">AI Stacks & <br>Automation</h4>
+                            <p class="text-muted small">Intelligent LLM pipelines and automated excellence.</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h5 class="text-orange mb-3">AI Stack</h5>
+                            <p class="small">LLM Fine-tuning & Data Fusion pipelines.</p>
+                            <a href="#" class="btn-card-link-white">Explore Tech <i class="bi bi-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 reveal-up" style="transition-delay: 0.2s;">
+                <div class="service-flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front shadow-soft">
+                            <div class="icon-box-main"><i class="bi bi-cloud-check"></i></div>
+                            <h4 class="fw-bold">Cloud-Native <br>Architecture</h4>
+                            <p class="text-muted small">Scalable cloud solutions built for the modern enterprise.</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <h5 class="text-orange mb-3">Environments</h5>
+                            <p class="small">AWS/Azure/GCP Hybrid Clusters & Edge Computing.</p>
+                            <a href="#" class="btn-card-link-white">Explore Tech <i class="bi bi-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="why-linear-sec py-10 position-relative overflow-hidden bg-slate-medium">
+    <div class="linear-bg-visual"></div>
+    
+    <div class="container position-relative z-3">
+        <div class="row mb-5 justify-content-center text-center">
+            <div class="col-lg-8 reveal-up">
+                <span class="text-orange fw-bold tracking-widest d-block mb-2">STRATEGIC ADVANTAGE</span>
+                <h2 class="display-4 fw-bold text-white">The Oppty <span class="text-orange">Core Differentiator</span></h2>
+                <p class="text-white-50 mt-3">We replace traditional support with a high-velocity engineering ecosystem.</p>
+            </div>
+        </div>
+
+        <div class="linear-timeline-wrapper">
+            <div class="timeline-row reveal-left">
+                <div class="timeline-content text-lg-end">
+                    <h4 class="text-white">L3 Architecture Grade</h4>
+                    <p class="text-white-50">Every solution is designed by senior architects, ensuring infrastructure that isn't just maintained, but evolved.</p>
+                </div>
+                <div class="timeline-node">
+                    <div class="node-circle"><i class="bi bi-gear-wide-connected"></i></div>
+                </div>
+                <div class="timeline-empty"></div>
+            </div>
+
+            <div class="timeline-row reveal-right">
+                <div class="timeline-empty"></div>
+                <div class="timeline-node">
+                    <div class="node-circle"><i class="bi bi-shield-lock"></i></div>
+                </div>
+                <div class="timeline-content">
+                    <h4 class="text-white">Hardened Security Stacks</h4>
+                    <p class="text-white-50">Zero-trust architecture and ISO-compliant workflows are baked into the core of your digital operations.</p>
+                </div>
+            </div>
+
+            <div class="timeline-row reveal-left">
+                <div class="timeline-content text-lg-end">
+                    <h4 class="text-white">AI-Driven Efficiency</h4>
+                    <p class="text-white-50">Custom LLM integration reduces operational friction by automating high-stakes decision-making processes.</p>
+                </div>
+                <div class="timeline-node">
+                    <div class="node-circle"><i class="bi bi-robot"></i></div>
+                </div>
+                <div class="timeline-empty"></div>
+            </div>
+
+            <div class="timeline-row reveal-right">
+                <div class="timeline-empty"></div>
+                <div class="timeline-node">
+                    <div class="node-circle"><i class="bi bi-arrow-up-right-square"></i></div>
+                </div>
+                <div class="timeline-content">
+                    <h4 class="text-white">Scalability on Demand</h4>
+                    <p class="text-white-50">Global nodes allow your business to expand into new territories without technical bottlenecks.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="solutions-hub-sec-light py-10 position-relative overflow-hidden">
+    <div class="light-grid-layer"></div>
+
+    <div class="container position-relative z-3">
+        <div class="row mb-5 reveal">
+            <div class="col-lg-6">
+                <span class="badge-oppty-outline-orange mb-3">04 / CORE SOLUTIONS</span>
+                <h2 class="display-5 fw-bold text-dark">Industry-Specific <br><span class="text-orange">Architecture</span></h2>
+            </div>
+        </div>
+
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 reveal-left">
+                <div class="accordion accordion-oppty-light" id="solutionsAccordion">
+                    
+                    <div class="accordion-item bg-transparent border-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed custom-acc-btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#sol1">
+                                <span class="acc-icon-box-light"><i class="bi bi-bank"></i></span>
+                                <div class="ms-3">
+                                    <span class="d-block text-orange x-small fw-bold">FINTECH & BANKING</span>
+                                    <span class="h5 mb-0 text-dark fw-bold">Resilient Finance Stacks</span>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="sol1" class="accordion-collapse collapse" data-bs-parent="#solutionsAccordion">
+                            <div class="accordion-body text-secondary">
+                                Architecture-level L3 support for high-frequency trading environments and zero-trust banking security protocols. 
+                                <br><a href="solutions.html" class="text-orange small fw-bold text-decoration-none mt-3 d-inline-block">View Case Study →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item bg-transparent border-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button custom-acc-btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#sol2">
+                                <span class="acc-icon-box-light"><i class="bi bi-cart4"></i></span>
+                                <div class="ms-3">
+                                    <span class="d-block text-orange x-small fw-bold">RETAIL & E-COMMERCE</span>
+                                    <span class="h5 mb-0 text-dark fw-bold">Omnichannel Automation</span>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="sol2" class="accordion-collapse collapse show" data-bs-parent="#solutionsAccordion">
+                            <div class="accordion-body text-secondary">
+                                Scalable cloud nodes that handle 10x traffic spikes during seasonal demands with integrated AI inventory forecasting.
+                                <br><a href="solutions.html" class="text-orange small fw-bold text-decoration-none mt-3 d-inline-block">View Case Study →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item bg-transparent border-0 mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed custom-acc-btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#sol3">
+                                <span class="acc-icon-box-light"><i class="bi bi-hospital"></i></span>
+                                <div class="ms-3">
+                                    <span class="d-block text-orange x-small fw-bold">HEALTHCARE TECH</span>
+                                    <span class="h5 mb-0 text-dark fw-bold">Secure Patient Ecosystems</span>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="sol3" class="accordion-collapse collapse" data-bs-parent="#solutionsAccordion">
+                            <div class="accordion-body text-secondary">
+                                HIPAA-compliant data lakes and private cloud infrastructure designed for low-latency telemedicine and diagnostics.
+                                <br><a href="solutions.html" class="text-orange small fw-bold text-decoration-none mt-3 d-inline-block">View Case Study →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-6 reveal-right">
+                <div class="solution-visual-wrapper-light">
+                    <div class="visual-inner-light shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" 
+                             alt="Solution View" class="img-fluid solution-main-img" id="solutionDisplay">
+                        <div class="visual-glow-border-light"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="industry-sec-vibrant py-10 position-relative overflow-hidden">
+    
+    <div class="industry-gradient-wrap"></div>
+    
+    <div class="container py-5 position-relative z-3">
+        <div class="row mb-5 text-center reveal">
+            <div class="col-lg-8 mx-auto">
+                <span class="badge-tech-outline mb-3">GLOBAL IMPACT</span>
+                <h2 class="display-5 fw-bold text-dark">Strategic <span class="text-orange">Verticals</span></h2>
+                <p class="text-muted">Specialized L3 engineering tailored to the unique regulatory and operational demands of global industries.</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6 reveal-up">
+                <div class="industry-card-premium shadow-hover">
+                    <div class="ind-icon-wrapper">
+                        <i class="bi bi-cpu"></i>
+                    </div>
+                    <h4>IT & Technology</h4>
+                    <p class="small text-muted">Scaling SaaS infrastructure and cloud-native ecosystems with zero-downtime deployments.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 reveal-up" style="transition-delay: 0.1s;">
+                <div class="industry-card-premium shadow-hover">
+                    <div class="ind-icon-wrapper">
+                        <i class="bi bi-heart-pulse"></i>
+                    </div>
+                    <h4>Healthcare</h4>
+                    <p class="small text-muted">HIPAA-compliant data management and resilient telemedicine networking solutions.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 reveal-up" style="transition-delay: 0.2s;">
+                <div class="industry-card-premium shadow-hover">
+                    <div class="ind-icon-wrapper">
+                        <i class="bi bi-bank"></i>
+                    </div>
+                    <h4>Finance</h4>
+                    <p class="small text-muted">High-security banking stacks and low-latency trading infrastructure engineering.</p>
+                </div>
+            </div>
+
+            </div>
+    </div>
+</section>
+<section id="solutions-focus" class="neural-engine-sec py-10 position-relative overflow-hidden bg-dark">
+    <div class="neural-bg-container">
+        <video autoplay muted loop playsinline class="neural-video">
+            <source src="imgs/istockphoto-2162666822-640x640.avif" type="video/mp4">
+        </video>
+        <div class="neural-scanline-overlay"></div>
+        <div class="neural-vignette"></div>
+    </div>
+
+    <div class="container position-relative z-3">
+        <div class="row align-items-center min-vh-100">
+            
+            <div class="col-lg-5 mb-5 mb-lg-0">
+                <div class="os-tag mb-3 anim-fade-left">OPPTY_OS // CORE.INTELLIGENCE</div>
+                <h2 class="display-3 fw-bold text-white mb-4 anim-fade-left">The Intelligence <br><span class="text-orange">Engine.</span></h2>
+                <p class="text-white-50 lead anim-fade-left">A cognitive architecture for autonomous systems and high-scale infrastructure management, designed by Oppty TechHub.</p>
+                
+                <div class="status-indicator mt-4 anim-fade-left">
+                    <span class="status-dot"></span> OPPTY_SYSTEM_STATUS: <span class="text-success">OPTIMIZED</span>
+                </div>
+            </div>
+
+            <div class="col-lg-6 offset-lg-1">
+                <div class="data-hub">
+                    <div class="data-node reveal-node">
+                        <div class="node-id">01.</div>
+                        <div class="node-body">
+                            <h5>Neural Mapping</h5>
+                            <p>Full-stack cognitive audit of network nodes and logic flows within the Oppty ecosystem.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="data-node reveal-node">
+                        <div class="node-id">02.</div>
+                        <div class="node-body">
+                            <h5>Pattern Recognition</h5>
+                            <p>Identifying infrastructure bottlenecks using predictive AI modeling developed by our engineers.</p>
+                        </div>
+                    </div>
+
+                    <div class="data-node reveal-node">
+                        <div class="node-id">03.</div>
+                        <div class="node-body">
+                            <h5>Autonomous Scaling</h5>
+                            <p>Self-healing deployment pipelines with zero-latency logic for global enterprises.</p>
+                        </div>
+                    </div>
+
+                    <div class="data-node reveal-node">
+                        <div class="node-id">04.</div>
+                        <div class="node-body">
+                            <h5>Cognitive Delivery</h5>
+                            <p>Continuous optimization loops driven by real-time neural feedback systems.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="data-dashboard-sec py-10 bg-white position-relative">
+    <div class="container">
+        <div class="row mb-5 align-items-end">
+            <div class="col-lg-7">
+                <span class="badge-oppty-orange mb-3">SYSTEM PERFORMANCE</span>
+                <h2 class="display-5 fw-bold text-dark">L3 Operational <span class="text-orange">Benchmarks</span></h2>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-lg-4">
+                <div class="metric-block p-4 reveal-up">
+                    <div class="d-flex justify-content-between align-items-start mb-4">
+                        <div>
+                            <h6 class="fw-bold text-muted">UPTIME RELIABILITY</h6>
+                            <h2 class="counter fw-900" data-target="99">0</h2><span class="h2">.99%</span>
+                        </div>
+                        <div class="metric-icon bg-orange-light"><i class="bi bi-cpu"></i></div>
+                    </div>
+                    <div class="progress-bar-wrap">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="x-small fw-bold">Current Load Stability</span>
+                            <span class="x-small fw-bold">94%</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-orange" role="progressbar" style="width: 94%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="metric-block p-4 reveal-up" style="transition-delay: 0.1s;">
+                    <div class="d-flex justify-content-between align-items-start mb-4">
+                        <div>
+                            <h6 class="fw-bold text-muted">INCIDENT RESPONSE</h6>
+                            <h2 class="counter fw-900" data-target="15">0</h2><span class="h2">min</span>
+                        </div>
+                        <div class="metric-icon bg-blue-light"><i class="bi bi-lightning-charge"></i></div>
+                    </div>
+                    <div class="progress-bar-wrap">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="x-small fw-bold">SLA Compliance</span>
+                            <span class="x-small fw-bold">100%</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-dark" role="progressbar" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="metric-block p-4 reveal-up" style="transition-delay: 0.2s;">
+                    <div class="d-flex justify-content-between align-items-start mb-4">
+                        <div>
+                            <h6 class="fw-bold text-muted">AI EFFICIENCY</h6>
+                            <h2 class="counter fw-900" data-target="40">0</h2><span class="h2">%</span>
+                        </div>
+                        <div class="metric-icon bg-green-light"><i class="bi bi-robot"></i></div>
+                    </div>
+                    <div class="progress-bar-wrap">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="x-small fw-bold">Cost Reduction</span>
+                            <span class="x-small fw-bold">22%</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 22%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12 reveal-up">
+                <div class="comparison-container shadow-sm rounded-4 overflow-hidden">
+                    <table class="table table-borderless mb-0">
+                        <thead class="bg-dark text-white">
+                            <tr>
+                                <th class="p-4">Service Layer</th>
+                                <th class="p-4">Standard Support</th>
+                                <th class="p-4 bg-orange text-center">Oppty L3 Engineering</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-bottom">
+                                <td class="p-4 fw-bold">Architecture Design</td>
+                                <td class="p-4 text-muted">Template-based</td>
+                                <td class="p-4 text-center fw-bold">Bespoke Blueprinting</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="p-4 fw-bold">Security Integration</td>
+                                <td class="p-4 text-muted">Reactive Patches</td>
+                                <td class="p-4 text-center fw-bold">Zero-Trust Hardening</td>
+                            </tr>
+                            <tr class="border-bottom">
+                                <td class="p-4 fw-bold">Infrastructure Scalability</td>
+                                <td class="p-4 text-muted">Manual Intervention</td>
+                                <td class="p-4 text-center fw-bold">Autonomous Scaling</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 fw-bold">AI Pipeline Management</td>
+                                <td class="p-4 text-muted">Not Included</td>
+                                <td class="p-4 text-center fw-bold">Full Lifecycle Support</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <footer class="footer-wrapper py-5 position-relative overflow-hidden bg-obsidian" style="background: #0f172a;">
+    <div class="footer-mesh-overlay"  style="position: absolute;top: 0;left: 0;width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 15% 25%, rgba(249, 114, 22, 0.12) 0%, transparent 45%), radial-gradient(circle at 85% 75%, rgba(37, 99, 235, 0.08) 0%, transparent 45%);
+    animation: meshMove 20s ease-in-out infinite alternate;"></div>
+
+    <div class="container position-relative z-3">
+      <div class="row g-5">
+        <div class="col-lg-4 reveal-left">
+          <img src="imgs/oppty.png" alt="Oppty Global" height="42" class="mb-4 brand-logo-glow">
+          <p class="text-white-50 small mb-4">Empowering professional excellence through architecture-level L3
+            engineering and global innovation.</p>
+
+          <div class="map-image-wrapper rounded-4 overflow-hidden border border-white-10 position-relative">
+            <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=800"
+              alt="Global HQ Map" onclick="openMap()" class="img-fluid map-static-img">
+            <div class="map-marker-pulse"></div>
+            <div class="map-overlay-tint"></div>
+          </div>
+
+          <p class="x-small text-white-50 mt-3 d-flex align-items-center">
+            <span class="status-dot me-2"></span>
+            Global HQ: Tech District, Silicon Valley
+          </p>
+        </div>
+
+        <div class="col-6 col-lg-2 reveal-up">
+          <h6 class="footer-title">Ecosystem</h6>
+          <ul class="list-unstyled footer-nav">
+            <li><a href="#">Solutions Hub</a></li>
+            <li><a href="#">L3 Engineering</a></li>
+            <li><a href="#">AI Stacks</a></li>
+            <li><a href="#">Academy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-lg-2 reveal-up">
+          <h6 class="footer-title">Company</h6>
+          <ul class="list-unstyled footer-nav">
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Partnerships</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Insights</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 reveal-right">
+    <div class="contact-node-footer p-4 rounded-4 border border-white-10 glass-premium">
+        <h6 class="text-white fw-bold mb-2">Initialize Project</h6>
+        <p class="x-small text-white-50 mb-4">Send a brief to our L3 engineering team.</p>
+        
+        <form action="#" class="footer-contact-form">
+            <div class="mb-2">
+                <input type="text" class="form-control-footer" placeholder="Full Name" required>
+            </div>
+            <div class="mb-2">
+                <input type="email" class="form-control-footer" placeholder="Email Address" required>
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control-footer" rows="2" placeholder="Briefly describe your requirements..."></textarea>
+            </div>
+            <button type="submit" class="btn-oppty-submit w-100">
+                Transmit Inquiry <i class="bi bi-send-fill ms-2"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+      <div class="footer-bottom mt-5 pt-4 border-top border-white-10 text-center">
+        <p class="x-small text-white-50 opacity-50">© 2026 OPPTY GLOBAL. ALL RIGHTS RESERVED. | ISO 27001 CERTIFIED</p>
+      </div>
+    </div>
+  </footer>
+
+    <a href="https://wa.me/919491209900" class="whatsapp-btn"><i class="bi bi-whatsapp"></i></a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        
+
+        // Advanced Scroll Reveal Animation
+        const revealElements = () => {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 120;
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealElements);
+        window.addEventListener('load', revealElements); // Trigger on page load
+        function openMap() {
+                // Address in JS format
+                const address = "108/43 Vijaya Lakshmi Enclave 1st Floor H No 2 PJR Enclave Rd Gangaram ICRISAT Colony Hyderabad Telangana 500050";
+
+                // Convert address to Google Maps URL
+                const mapURL =
+                    "https://maps.app.goo.gl/v16JWQce8ibuZS6r8?g_st=aw" +
+                    encodeURIComponent(address);
+
+                // Redirect to Google Maps
+                window.open(mapURL, "_blank"); // opens in new tab
+            }
+            document.addEventListener("DOMContentLoaded", function () {
+    // 1. Setup Intersection Observer for reveals and counters
+    const observerOptions = {
+        threshold: 0.25 // Trigger when 25% of the element is visible
+    };
+
+    const dashboardObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                // Trigger the "reveal-up" CSS animation
+                entry.target.classList.add("active");
+
+                // If this block contains a counter, start it
+                const counter = entry.target.querySelector(".counter");
+                if (counter && !counter.classList.contains("done")) {
+                    animateCounter(counter);
+                }
+
+                // If this block contains a progress bar, animate it
+                const progressBar = entry.target.querySelector(".progress-bar");
+                if (progressBar) {
+                    const width = progressBar.style.width;
+                    progressBar.style.width = "0%"; // Reset first
+                    setTimeout(() => {
+                        progressBar.style.width = width;
+                        progressBar.style.transition = "width 1.5s cubic-bezier(0.1, 0.5, 0.5, 1)";
+                    }, 100);
+                }
+            }
+        });
+    }, observerOptions);
+
+    // 2. Attach observer to all metric blocks
+    document.querySelectorAll(".reveal-up").forEach((block) => {
+        dashboardObserver.observe(block);
+    });
+
+    // 3. Counter Animation Function
+    function animateCounter(el) {
+        const target = +el.getAttribute("data-target");
+        const duration = 2000; // 2 seconds
+        const step = target / (duration / 16); // 60fps
+        let current = 0;
+
+        const update = () => {
+            current += step;
+            if (current < target) {
+                el.innerText = Math.floor(current);
+                requestAnimationFrame(update);
+            } else {
+                el.innerText = target;
+                el.classList.add("done");
+            }
+        };
+        update();
+    }
+});
+document.addEventListener("DOMContentLoaded", function() {
+    const nodes = document.querySelectorAll('.reveal-node');
+    
+    const nodeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Apply a 'booting' animation class
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateX(0)";
+            }
+        });
+    }, { threshold: 0.3 });
+
+    nodes.forEach(node => {
+        node.style.opacity = "0";
+        node.style.transform = "translateX(50px)";
+        node.style.transition = "all 0.8s cubic-bezier(0.19, 1, 0.22, 1)";
+        nodeObserver.observe(node);
+    });
+});
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

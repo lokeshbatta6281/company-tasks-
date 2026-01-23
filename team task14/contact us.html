@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Oppty TechHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <style>
+    :root {
+      --oppty-orange: #f97216;
+      --oppty-dark: #0f172a;
+      --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--oppty-dark);
+      background: #ffffff;
+      overflow-x: hidden;
+    }
+
+    /* --- Base Navbar Styles --- */
+.advanced-navbar {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 20px 0;
+    background: white;
+}
+
+/* Glass effect triggered via JS on scroll */
+.advanced-navbar.navbar-scrolled {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 12px 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* --- Nav Links & Hover Animation --- */
+.nav-link {
+    font-weight: 600;
+    color: #333 !important;
+    position: relative;
+    padding: 10px 15px !important;
+    transition: 0.3s;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 5px;
+    left: 15px;
+    background-color: #e55f14; /* Oppty Orange */
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: calc(100% - 30px);
+}
+
+.nav-link:hover {
+    color: #e55f14 !important;
+}
+
+/* --- Custom CTA Buttons --- */
+.btn-custom {
+    background: #1a1a1a; /* Dark Tech Grey */
+    color: white !important;
+    font-weight: 700;
+    border: 2px solid #1a1a1a;
+    transition: all 0.3s ease;
+}
+
+.btn-custom:hover {
+    background: #e55f14;
+    border-color: #e55f14;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(229, 95, 20, 0.3);
+}
+
+/* --- Dropdown Improvements --- */
+.dropdown-custom {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 200px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 1000;
+    top: 100%;
+    border: 1px solid #f1f1f1;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.dropdown-content a:hover {
+    background-color: #fcf4f0;
+    color: #e55f14;
+    padding-left: 25px;
+}
+
+.dropdown-custom:hover .dropdown-content {
+    display: block;
+    animation: fadeInUp 0.3s ease;
+}
+
+/* --- Phone Link Styling --- */
+.phone-link {
+    background: #f8f9fa;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* --- ADVANCED PAGE BANNER --- */
+        .advanced-banner {
+            position: relative;
+            padding: 200px 0 120px;
+            background: var(--oppty-dark);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Animated Mesh Gradient Background */
+        .advanced-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle at 30% 30%, rgba(249, 114, 22, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 70% 70%, rgba(30, 64, 175, 0.1) 0%, transparent 40%);
+            animation: meshRotate 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes meshRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .banner-title {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .text-outline-gradient {
+            color: #e55f14;
+        }
+
+        .glass-breadcrumb {
+            background: var(--glass-white);
+            backdrop-filter: blur(15px);
+            padding: 12px 40px;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: inline-flex;
+            margin-top: 30px;
+            transition: var(--transition);
+        }
+
+        .glass-breadcrumb:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--oppty-orange);
+        }
+
+        /* --- MAGNETIC INFO CARDS --- */
+        .magnetic-info-card {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid #f1f5f9;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease;
+            cursor: pointer;
+        }
+
+        .magnetic-info-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.1);
+            border-color: var(--oppty-orange);
+        }
+
+        .info-icon {
+            font-size: 35px;
+            color: var(--oppty-orange);
+            margin-bottom: 20px;
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .magnetic-info-card:hover .info-icon {
+            transform: rotateY(360deg);
+        }
+
+        .info-link {
+            font-weight: 700;
+            color: var(--oppty-dark);
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        /* --- GLASS FORM --- */
+        .glass-form-wrapper {
+            background: white;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f1f5f9;
+        }
+
+        .form-visual-sidebar {
+            background: linear-gradient(135deg, var(--oppty-dark) 0%, #1e293b 100%);
+            height: 100%;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-control-custom {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 12px;
+            border: 2px solid #f1f5f9;
+            background: #f8fafc;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .form-control-custom:focus {
+            border-color: var(--oppty-orange);
+            background: white;
+            box-shadow: 0 10px 20px rgba(249, 114, 22, 0.05);
+        }
+
+        .btn-form-submit {
+            background: var(--oppty-orange);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: 0.4s;
+            width: 100%;
+        }
+
+        .btn-form-submit:hover {
+            background: var(--oppty-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(249, 114, 22, 0.3);
+        }
+
+        /* --- PREMIUM LOCATION CARDS --- */
+.location-card-premium {
+    position: relative;
+    height: 450px;
+    border-radius: 40px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* The Background Image Logic */
+.loc-bg-img {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 1;
+}
+
+/* Deep Gradient Overlay to make text pop */
+.loc-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 10%, rgba(15, 23, 42, 0.2) 100%);
+    z-index: 2;
+    transition: opacity 0.5s ease;
+}
+
+/* Floating Content */
+.loc-content {
+    position: relative;
+    z-index: 3;
+    transform: translateY(20px);
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    width: 100%;
+}
+
+.loc-icon-circle {
+    width: 50px; height: 50px;
+    background: var(--oppty-orange);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 20px;
+    margin-right: 20px;
+    box-shadow: 0 10px 20px rgba(249, 114, 22, 0.3);
+}
+
+.loc-header { display: flex; align-items: center; }
+
+/* Interactive Hover States */
+.location-card-premium:hover {
+    transform: translateY(-10px);
+}
+
+.location-card-premium:hover .loc-bg-img {
+    transform: scale(1.1); /* Zoom Effect */
+}
+
+.location-card-premium:hover .loc-content {
+    transform: translateY(0px); /* Smooth Translate Up */
+}
+
+.btn-loc-explore {
+    display: inline-block;
+    color: var(--oppty-orange);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 10px 0;
+    transition: 0.3s;
+    border-bottom: 2px solid transparent;
+}
+
+.btn-loc-explore:hover {
+    border-color: var(--oppty-orange);
+    letter-spacing: 1px;
+}
+
+        /* MAP STYLES */
+        .map-focus-wrapper {
+            position: relative;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f1f5f9;
+        }
+
+        .map-info-overlay {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 30px;
+            z-index: 10;
+            max-width: 350px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-map-link {
+            color: var(--oppty-orange);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* QUICK CTA STYLES */
+        .magnetic-cta-box {
+            background: linear-gradient(135deg, var(--oppty-dark) 0%, #1e293b 100%);
+            padding: 60px;
+            border-radius: 40px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .support-avatar-group {
+            position: relative;
+            width: 100px;
+            margin: 0 auto;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            border: 4px solid var(--oppty-orange);
+            transition: 0.3s;
+        }
+
+        .status-indicator {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            background: #10b981;
+            border: 3px solid var(--oppty-dark);
+            border-radius: 50%;
+            animation: statusPulse 2s infinite;
+        }
+
+        @keyframes statusPulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+
+            70% {
+                transform: scale(1.1);
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* BUTTONS */
+        .btn-support-white {
+            background: white;
+            color: var(--oppty-dark);
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-support-orange {
+            background: var(--oppty-orange);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-support-white:hover {
+            transform: translateY(-5px);
+            background: #f8fafc;
+        }
+
+        .btn-support-orange:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(249, 114, 22, 0.3);
+        }
+
+        .footer-title {
+      color: #e55f14;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-nav li {
+      margin-bottom: 10px;
+    }
+
+    .footer-nav a {
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.3s ease;
+    }
+
+    .footer-nav a:hover {
+      color: #e55f14;
+      padding-left: 5px;
+    }
+
+    .map-container-sm {
+      transition: 0.4s ease;
+      filter: grayscale(1) contrast(1.2);
+    }
+
+    .map-container-sm:hover {
+      filter: grayscale(0);
+      border-color: #e55f14;
+    }
+
+    .form-control-oppty {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      width: 100%;
+    }
+
+    .btn-oppty-neon {
+      background: #e55f14;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .btn-oppty-neon:hover {
+      box-shadow: 0 0 15px rgba(229, 95, 20, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .oppty-social {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 1.2rem;
+      transition: 0.3s;
+    }
+
+    .oppty-social:hover {
+      color: #e55f14;
+    }
+
+    .map-image-wrapper {
+      height: 140px;
+      width: 100%;
+      position: relative;
+      background: #0a0c10;
+    }
+
+    .map-static-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(1) brightness(0.6) contrast(1.2);
+      transition: 0.5s ease;
+    }
+
+    .map-image-wrapper:hover .map-static-img {
+      filter: grayscale(0.5) brightness(0.8);
+      transform: scale(1.05);
+    }
+
+    /* UPDATED FOOTER GRADIENT */
+.footer-gradient {
+    background: linear-gradient(135deg, #0a0f1d 0%, #02040a 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* COMPACT FORM STYLING */
+.glass-premium {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+}
+
+.form-control-footer {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 0.8rem;
+    padding: 10px 15px;
+    border-radius: 8px;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.form-control-footer:focus {
+    outline: none;
+    border-color: #e55f14;
+    background: rgba(229, 95, 20, 0.05);
+}
+
+.btn-oppty-submit {
+    background: #e55f14;
+    border: none;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.btn-oppty-submit:hover {
+    background: white;
+    color: #e55f14;
+    box-shadow: 0 0 20px rgba(229, 95, 20, 0.4);
+    transform: translateY(-2px);
+}
+
+
+/* MESH OVERLAY COLOR TUNING */
+.footer-mesh-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        radial-gradient(at 0% 100%, rgba(0, 102, 255, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(229, 95, 20, 0.05) 0px, transparent 50%);
+    pointer-events: none;
+}
+    /* Pulsing Location Marker */
+    .map-marker-pulse {
+      position: absolute;
+      top: 40%;
+      left: 30%;
+      width: 10px;
+      height: 10px;
+      background: #e55f14;
+      border-radius: 50%;
+      box-shadow: 0 0 0 rgba(229, 95, 20, 0.4);
+      animation: pulse 2s infinite;
+      z-index: 5;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(229, 95, 20, 0.7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 15px rgba(229, 95, 20, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(229, 95, 20, 0);
+      }
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #00ff88;
+      /* Green online status */
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 8px #00ff88;
+    }
+
+    .map-overlay-tint {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent, rgba(2, 4, 10, 0.6));
+      pointer-events: none;
+    }
+
+        .newsletter-card {
+            background: rgba(255,255,255,0.04);
+            backdrop-filter: blur(12px);
+            padding: 35px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 35px;
+            right: 35px;
+            background: #25d366;
+            width: 65px; height: 65px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 35px; color: white;
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
+            z-index: 9999;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-btn:hover { transform: scale(1.1); color: white; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top advanced-navbar">
+        <div class="container" style="max-width: 1485px;">
+            <a class="navbar-brand fw-bold" href="#">
+                <img src="imgs/oppty.png" alt="Logo" height="40">
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="About us.html">About Us</a></li>
+                    
+                    <li class="nav-item">
+                        <div class="dropdown-custom">
+                            <a href="our services.html" class="dropbtn">Our Services</a>
+                            <div class="dropdown-content">
+                                <a href="solution.html">Solutions</a>
+                                <a href="#">Another Service</a>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="contact us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
+
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-custom rounded-pill px-4" href="academy.html">Academy</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-custom rounded-pill px-4" href="index.html">Training Partner</a>
+                    </li>
+                    
+                    <li class="nav-item ms-lg-3">
+                        <a class="nav-link phone-link" href="tel:+919491209900">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3616/3616215.png" alt="phone" width="18"> 
+                            +91 9491209900
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+     <section class="advanced-banner">
+        <div class="container text-center">
+            <div class="reveal">
+                <h1 class="banner-title">
+                    REDEFINING <br>
+                    <span class="text-outline-gradient">POSSIBILITIES</span>
+                </h1>
+                <div class="glass-breadcrumb">
+                    <span class="text-white-50">Home</span>
+                    <i class="bi bi-dot mx-2 text-orange"></i>
+                    <span class="text-white">CONTACT US</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="contact-info-grid py-5">
+        <div class="container py-5">
+            <div class="row g-4">
+                <div class="col-md-4 reveal" style="transition-delay: 0.1s;">
+                    <div class="magnetic-info-card">
+                        <div class="info-icon"><i class="bi bi-telephone-outbound"></i></div>
+                        <h5>Call Our Experts</h5>
+                        <p class="text-muted">Direct line to our technical architects.</p>
+                        <a href="tel:+919491209900" class="info-link">+91 9491209900</a>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal" style="transition-delay: 0.2s;">
+                    <div class="magnetic-info-card active">
+                        <div class="info-icon"><i class="bi bi-envelope-at"></i></div>
+                        <h5>General Inquiries</h5>
+                        <p class="text-muted">We typically respond within 2 business hours.</p>
+                        <a href="mailto:info@oppty.com" class="info-link">info@oppty.com</a>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal" style="transition-delay: 0.3s;">
+                    <div class="magnetic-info-card">
+                        <div class="info-icon"><i class="bi bi-clock-history"></i></div>
+                        <h5>Global Support</h5>
+                        <p class="text-muted">Our SOC is active 24/7/365.</p>
+                        <span class="info-link">Available Round the Clock</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="contact-form-section py-5 position-relative">
+        <div class="form-blur-bg"></div>
+        <div class="container py-5">
+            <div class="glass-form-wrapper reveal">
+                <div class="row g-0">
+                    <div class="col-lg-5 d-none d-lg-block">
+                        <div class="form-visual-sidebar">
+                            <h2 class="text-white fw-bold mb-4">Let's Build Something <span
+                                    class="text-orange">Legendary.</span></h2>
+                            <p class="text-white-50">Tell us about your project requirements and our solutions team will
+                                prepare a custom roadmap for you.</p>
+                            <div class="v-line mt-5"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 p-4 p-lg-5">
+                        <form id="opptyContactForm" class="contact-form">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label class="form-label">Full Name</label>
+                                    <input type="text" class="form-control-custom" placeholder="John Doe" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Work Email</label>
+                                    <input type="email" class="form-control-custom" placeholder="john@company.com"
+                                        required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Select Service</label>
+                                    <select class="form-control-custom">
+                                        <option>AI & Data Solutions</option>
+                                        <option>BPO & Managed Operations</option>
+                                        <option>Software Engineering</option>
+                                        <option>Consulting</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Message</label>
+                                    <textarea class="form-control-custom" rows="4"
+                                        placeholder="Briefly describe your project..."></textarea>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn-form-submit">
+                                        Send Message <i class="bi bi-send-fill ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="office-locations-sec py-5">
+    <div class="container py-5">
+        <div class="text-center mb-5 reveal">
+            <span class="intro-badge">Our Footprint</span>
+            <h2 class="display-5 fw-bold" style="color: var(--oppty-dark);">Global <span class="text-orange">Presence</span></h2>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-6 reveal-left">
+                <div class="location-card-premium">
+                    <div class="loc-bg-img" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1000');"></div>
+                    <div class="loc-overlay"></div>
+                    
+                    <div class="loc-content">
+                        <div class="loc-header">
+                            <div class="loc-icon-circle"><i class="bi bi-geo-alt-fill"></i></div>
+                            <h3 class="text-white fw-bold mb-0">India HQ</h3>
+                        </div>
+                        <p class="text-white-50 mt-3">Plot No. 12, IT Park, Anantapur,<br>Andhra Pradesh, 515001, India</p>
+                        
+                        <div class="loc-footer mt-4">
+                            <a href="#" class="btn-loc-explore">View on Map <i class="bi bi-arrow-up-right-circle ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 reveal-right">
+                <div class="location-card-premium">
+                    <div class="loc-bg-img" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000');"></div>
+                    <div class="loc-overlay"></div>
+                    
+                    <div class="loc-content">
+                        <div class="loc-header">
+                            <div class="loc-icon-circle"><i class="bi bi-globe-americas"></i></div>
+                            <h3 class="text-white fw-bold mb-0">Global Operations</h3>
+                        </div>
+                        <p class="text-white-50 mt-3">Supporting EMEA, North America,<br>and APAC regions through remote excellence.</p>
+                        
+                        <div class="loc-footer mt-4">
+                            <a href="#" class="btn-loc-explore">Connect Globally <i class="bi bi-chat-dots ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <section class="map-section py-5 position-relative">
+        <div class="container py-5">
+            <div class="map-focus-wrapper reveal">
+                <div class="map-info-overlay reveal-left">
+                    <div class="overlay-badge">Main Campus</div>
+                    <h3 class="text-white fw-bold mb-3">Oppty TechHub</h3>
+                    <p class="text-white-50 small mb-4">Plot No. 12, IT Park, Anantapur,<br>Andhra Pradesh, 515001,
+                        India</p>
+                    <a href="https://goo.gl/maps/example" target="_blank" class="btn-map-link">
+                        Get Directions <i class="bi bi-cursor-fill ms-2"></i>
+                    </a>
+                </div>
+
+                <div class="map-iframe-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3859.638423456789!2d77.6!3d14.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDM2JzAwLjAiTiA3N8KwMzYnMDAuMCJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                        width="100%" height="500" style="border:0; filter: grayscale(100%) invert(90%) contrast(90%);"
+                        allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="quick-support-cta py-5">
+        <div class="container">
+            <div class="magnetic-cta-box reveal">
+                <div class="row align-items-center">
+                    <div class="col-lg-2 text-center reveal-left">
+                        <div class="support-avatar-group">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Support"
+                                class="avatar-img magnetic-element">
+                            <div class="status-indicator"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-center text-lg-start">
+                        <h2 class="text-white fw-bold mb-2">Need Immediate <span class="text-orange">Assistance?</span>
+                        </h2>
+                        <p class="text-white-50 mb-0">Our L3 Engineers are online and ready to troubleshoot your
+                            infrastructure.</p>
+                    </div>
+                    <div class="col-lg-4 text-center text-lg-end mt-4 mt-lg-0">
+                        <div class="d-flex gap-3 justify-content-center justify-content-lg-end">
+                            <a href="tel:+919491209900" class="btn-support-white">
+                                <i class="bi bi-telephone-fill me-2"></i> Call Now
+                            </a>
+                            <a href="https://wa.me/919491209900" class="btn-support-orange">
+                                <i class="bi bi-whatsapp me-2"></i> WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer-wrapper py-5 position-relative overflow-hidden bg-obsidian" style="background: #0f172a;">
+    <div class="footer-mesh-overlay"  style="position: absolute;top: 0;left: 0;width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 15% 25%, rgba(249, 114, 22, 0.12) 0%, transparent 45%), radial-gradient(circle at 85% 75%, rgba(37, 99, 235, 0.08) 0%, transparent 45%);
+    animation: meshMove 20s ease-in-out infinite alternate;"></div>
+
+    <div class="container position-relative z-3">
+      <div class="row g-5">
+        <div class="col-lg-4 reveal-left">
+          <img src="imgs/oppty.png" alt="Oppty Global" height="42" class="mb-4 brand-logo-glow">
+          <p class="text-white-50 small mb-4">Empowering professional excellence through architecture-level L3
+            engineering and global innovation.</p>
+
+          <div class="map-image-wrapper rounded-4 overflow-hidden border border-white-10 position-relative">
+            <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&q=80&w=800"
+              alt="Global HQ Map" onclick="openMap()" class="img-fluid map-static-img">
+            <div class="map-marker-pulse"></div>
+            <div class="map-overlay-tint"></div>
+          </div>
+
+          <p class="x-small text-white-50 mt-3 d-flex align-items-center">
+            <span class="status-dot me-2"></span>
+            Global HQ: Tech District, Silicon Valley
+          </p>
+        </div>
+
+        <div class="col-6 col-lg-2 reveal-up">
+          <h6 class="footer-title">Ecosystem</h6>
+          <ul class="list-unstyled footer-nav">
+            <li><a href="#">Solutions Hub</a></li>
+            <li><a href="#">L3 Engineering</a></li>
+            <li><a href="#">AI Stacks</a></li>
+            <li><a href="#">Academy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-lg-2 reveal-up">
+          <h6 class="footer-title">Company</h6>
+          <ul class="list-unstyled footer-nav">
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">Partnerships</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Insights</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 reveal-right">
+    <div class="contact-node-footer p-4 rounded-4 border border-white-10 glass-premium">
+        <h6 class="text-white fw-bold mb-2">Initialize Project</h6>
+        <p class="x-small text-white-50 mb-4">Send a brief to our L3 engineering team.</p>
+        
+        <form action="#" class="footer-contact-form">
+            <div class="mb-2">
+                <input type="text" class="form-control-footer" placeholder="Full Name" required>
+            </div>
+            <div class="mb-2">
+                <input type="email" class="form-control-footer" placeholder="Email Address" required>
+            </div>
+            <div class="mb-3">
+                <textarea class="form-control-footer" rows="2" placeholder="Briefly describe your requirements..."></textarea>
+            </div>
+            <button type="submit" class="btn-oppty-submit w-100">
+                Transmit Inquiry <i class="bi bi-send-fill ms-2"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+      <div class="footer-bottom mt-5 pt-4 border-top border-white-10 text-center">
+        <p class="x-small text-white-50 opacity-50">© 2026 OPPTY GLOBAL. ALL RIGHTS RESERVED. | ISO 27001 CERTIFIED</p>
+      </div>
+    </div>
+  </footer>
+
+    <a href="https://wa.me/919491209900" class="whatsapp-btn"><i class="bi bi-whatsapp"></i></a>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        
+
+        // Advanced Scroll Reveal Animation
+        const revealElements = () => {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 120;
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealElements);
+        window.addEventListener('load', revealElements); // Trigger on page load
+        function openMap() {
+                // Address in JS format
+                const address = "108/43 Vijaya Lakshmi Enclave 1st Floor H No 2 PJR Enclave Rd Gangaram ICRISAT Colony Hyderabad Telangana 500050";
+
+                // Convert address to Google Maps URL
+                const mapURL =
+                    "https://maps.app.goo.gl/v16JWQce8ibuZS6r8?g_st=aw" +
+                    encodeURIComponent(address);
+
+                // Redirect to Google Maps
+                window.open(mapURL, "_blank"); // opens in new tab
+            }
+            document.addEventListener("DOMContentLoaded", function () {
+    // 1. Setup Intersection Observer for reveals and counters
+    const observerOptions = {
+        threshold: 0.25 // Trigger when 25% of the element is visible
+    };
+
+    const dashboardObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                // Trigger the "reveal-up" CSS animation
+                entry.target.classList.add("active");
+
+                // If this block contains a counter, start it
+                const counter = entry.target.querySelector(".counter");
+                if (counter && !counter.classList.contains("done")) {
+                    animateCounter(counter);
+                }
+
+                // If this block contains a progress bar, animate it
+                const progressBar = entry.target.querySelector(".progress-bar");
+                if (progressBar) {
+                    const width = progressBar.style.width;
+                    progressBar.style.width = "0%"; // Reset first
+                    setTimeout(() => {
+                        progressBar.style.width = width;
+                        progressBar.style.transition = "width 1.5s cubic-bezier(0.1, 0.5, 0.5, 1)";
+                    }, 100);
+                }
+            }
+        });
+    }, observerOptions);
+
+    // 2. Attach observer to all metric blocks
+    document.querySelectorAll(".reveal-up").forEach((block) => {
+        dashboardObserver.observe(block);
+    });
+
+    // 3. Counter Animation Function
+    function animateCounter(el) {
+        const target = +el.getAttribute("data-target");
+        const duration = 2000; // 2 seconds
+        const step = target / (duration / 16); // 60fps
+        let current = 0;
+
+        const update = () => {
+            current += step;
+            if (current < target) {
+                el.innerText = Math.floor(current);
+                requestAnimationFrame(update);
+            } else {
+                el.innerText = target;
+                el.classList.add("done");
+            }
+        };
+        update();
+    }
+});
+document.addEventListener("DOMContentLoaded", function() {
+    const nodes = document.querySelectorAll('.reveal-node');
+    
+    const nodeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Apply a 'booting' animation class
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateX(0)";
+            }
+        });
+    }, { threshold: 0.3 });
+
+    nodes.forEach(node => {
+        node.style.opacity = "0";
+        node.style.transform = "translateX(50px)";
+        node.style.transition = "all 0.8s cubic-bezier(0.19, 1, 0.22, 1)";
+        nodeObserver.observe(node);
+    });
+});
+const observerOptions = { threshold: 0.2 };
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal, .reveal-card').forEach(el => observer.observe(el));
+        /**
+ * OPPTY TECHHUB - Core Animation & Interaction Engine
+ * Version 2.0 (2026)
+ */
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. SCROLL REVEAL ENGINE
+            // Triggers "reveal", "reveal-left", and "reveal-right" classes when scrolled into view
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Once animated, we can stop observing to save performance
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+                revealObserver.observe(el);
+            });
+
+
+            // 2. MAGNETIC CARD PHYSICS
+            // Mimics a magnetic pull on "magnetic-card" and "magnetic-info-card" elements
+            const magneticCards = document.querySelectorAll('.magnetic-card, .magnetic-info-card, .cta-magnetic-box');
+
+            magneticCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left; // x position within the element
+                    const y = e.clientY - rect.top;  // y position within the element
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    // Calculate distance from center to create a "tilt" effect
+                    const moveX = (x - centerX) / 10;
+                    const moveY = (y - centerY) / 10;
+
+                    card.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.02)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `translate(0px, 0px) scale(1)`;
+                });
+            });
+
+
+            // 3. SMART NAVBAR TRANSLATION
+            // Changes navbar background/shadow when user scrolls down
+            const navbar = document.querySelector('.advanced-navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.style.background = "rgba(255, 255, 255, 0.98)";
+                    navbar.style.boxShadow = "0 10px 30px rgba(15, 23, 42, 0.08)";
+                    navbar.style.padding = "10px 0";
+                } else {
+                    navbar.style.background = "rgba(255, 255, 255, 0.95)";
+                    navbar.style.boxShadow = "none";
+                    navbar.style.padding = "20px 0";
+                }
+            });
+
+
+            // 4. CONTACT FORM INTERACTIVE FEEDBACK
+            const contactForm = document.getElementById('opptyContactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const submitBtn = contactForm.querySelector('.btn-form-submit');
+
+                    // Visual feedback for submission
+                    submitBtn.innerHTML = 'Sending... <i class="bi bi-arrow-repeat spin"></i>';
+                    submitBtn.style.opacity = '0.7';
+                    submitBtn.disabled = true;
+
+                    // Simulate API Call
+                    setTimeout(() => {
+                        submitBtn.innerHTML = 'Message Sent! <i class="bi bi-check-circle-fill"></i>';
+                        submitBtn.style.background = '#10b981'; // Success Green
+                        contactForm.reset();
+
+                        // Reset button after 3 seconds
+                        setTimeout(() => {
+                            submitBtn.innerHTML = 'Send Message <i class="bi bi-send-fill ms-2"></i>';
+                            submitBtn.style.background = '#f97216';
+                            submitBtn.style.opacity = '1';
+                            submitBtn.disabled = false;
+                        }, 3000);
+                    }, 1500);
+                });
+            }
+
+            // Add this to your JS file to handle the icon-magnet effect inside location cards
+document.querySelectorAll('.location-card-premium').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const icon = card.querySelector('.loc-icon-circle');
+        const rect = card.getBoundingClientRect();
+        
+        const x = (e.clientX - rect.left - rect.width / 2) * 0.1;
+        const y = (e.clientY - rect.top - rect.height / 2) * 0.1;
+        
+        icon.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+        const icon = card.querySelector('.loc-icon-circle');
+        icon.style.transform = `translate(0px, 0px)`;
+    });
+});
+            // 5. SMOOTH ANCHOR SCROLLING
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+        });
+        // Add this to your existing JS DOMContentLoaded
+        const magneticElements = document.querySelectorAll('.magnetic-element');
+
+        magneticElements.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const { clientX, clientY } = e;
+                const { left, top, width, height } = el.getBoundingClientRect();
+
+                const x = (clientX - (left + width / 2)) * 0.4; // Sensitivity 0.4
+                const y = (clientY - (top + height / 2)) * 0.4;
+
+                el.style.transform = `translate(${x}px, ${y}px)`;
+            });
+
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = 'translate(0px, 0px)';
+            });
+        });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
