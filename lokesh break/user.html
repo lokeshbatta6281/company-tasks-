@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard | Oppty Portal</title>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+
+        // 🔐 YOUR FIREBASE CONFIG (UNCHANGED)
+        const firebaseConfig = {
+            apiKey: "AIzaSyB5uyEKwSXsy9lPyG8fXP6jUTDEMWjqe7Y",
+            authDomain: "lokeshbatta-e5027.firebaseapp.com",
+            projectId: "lokeshbatta-e5027",
+            storageBucket: "lokeshbatta-e5027.firebasestorage.app",
+            messagingSenderId: "760264623454",
+            appId: "1:760264623454:web:dba33f6524ac698298bbcf",
+            measurementId: "G-N0F70EX5N6"
+        };
+
+        // 🔥 Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        getAnalytics(app);
+
+        // Expose for future syncing (NOT USED YET)
+        window.firebaseDB = db;
+        window.firebaseApp = app;
+    </script>
+
+    <style>
+        :root {
+            --brand: #ff9f43;
+            --brand-soft: rgba(255, 159, 67, 0.1);
+            --bg-main: #f8fafc;
+            --sidebar-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #22c55e;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            display: flex;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            padding: 30px 15px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .sidebar img {
+            height: 35px;
+            margin: 0 auto 30px;
+            display: block;
+        }
+
+        .menu { display: flex; flex-direction: column; gap: 6px; }
+
+        .menu button {
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            padding: 12px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .menu button.active {
+            background: var(--brand-soft);
+            color: var(--brand);
+            font-weight: 700;
+        }
+
+        /* TEAM BOX IN SIDEBAR */
+        .team-box {
+            margin-top: auto;
+            background: var(--bg-main);
+            border-radius: 12px;
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+        }
+
+        .team-box h4 { font-size: 12px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+        
+        .team-box select {
+            width: 100%;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid var(--border);
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        /* MAIN CONTENT */
+        .main { flex: 1; margin-left: 260px; padding: 40px; }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header h2 { font-weight: 800; }
+
+        .header-right button {
+            background: #fff;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        /* CARDS */
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h3 { font-size: 14px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+
+        /* AVATAR & PROFILE */
+        .profile { display: flex; align-items: center; gap: 20px; }
+        .avatar {
+            width: 64px; height: 64px; border-radius: 50%;
+            background: var(--brand); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; font-weight: 800;
+        }
+
+        /* ACTIONS */
+        button.action {
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            background: var(--brand);
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 10px;
+        }
+
+        button.action:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        select, input[type="date"] {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: #fff;
+            outline: none;
+        }
+
+        .timer { font-size: 28px; font-weight: 800; color: var(--brand); margin: 15px 0; }
+        
+        /* CALENDAR */
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            background: var(--bg-main);
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .day {
+            background: #fff;
+            padding: 15px 5px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        .day.present {
+            background: var(--success) !important;
+            color: #fff !important;
+            border-color: var(--success);
+        }
+
+        .green { color: var(--success); font-weight: 700; }
+        .red { color: var(--danger); font-weight: 700; }
+
+        .section { display: none; }
+        .section.active { display: block; }
+
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <img src="imgs/322343.png">
+        <div class="menu">
+            <button class="active" onclick="showSection('dashboard',this)">🏠 Dashboard</button>
+            <button onclick="showSection('profile',this)">👤 Profile</button>
+            <button onclick="showSection('breaks',this)">⏱ Breaks</button>
+            <button onclick="showSection('leave',this)">🌴 Leave</button>
+            <button onclick="showSection('attendance',this)">📅 Attendance</button>
+        </div>
+
+        <div class="team-box">
+            <h4>👥 Team Status</h4>
+            <select onchange="renderTeamStatus(this.value)">
+                <option value="work">Working First</option>
+                <option value="break">On Break First</option>
+            </select>
+            <div id="teamStatus"></div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <h2>Employee Dashboard</h2>
+            <div class="header-right">
+                <button onclick="location.href='index.html'">← Back</button>
+                <button onclick="logout()">🚪 Logout</button>
+            </div>
+        </div>
+
+        <div class="section active" id="dashboard">
+            <div class="card profile">
+                <div class="avatar" id="avatar"></div>
+                <div>
+                    <h2 id="profileName" style="margin-bottom: 4px;"></h2>
+                    <p id="dashboardStatus"></p>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                <div class="card">
+                    <h3>Activity Summary</h3>
+                    <p id="stats" style="margin-bottom: 10px;"></p>
+                    <p id="totalBreak"></p>
+                    <p id="dashboardTimer" class="timer"></p>
+                    
+                </div>
+
+                <div class="card">
+                    <h3>Break Management</h3>
+                    <select id="breakType" style="width: 100%; margin-bottom: 15px;">
+                        <option value="Regular">Regular Break (15 mins)</option>
+                        <option value="Lunch">Lunch Break (12 PM–2 PM)</option>
+                    </select>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="action" onclick="startBreak()" style="flex:1">Break In</button>
+                        <button class="action" onclick="endBreak()" style="flex:1; background: var(--text-dark);">Break Out</button>
+                    </div>
+                    <p id="breakStatus" style="margin-top: 15px;"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="profile">
+    <div class="card profile">
+        <div class="avatar" id="avatar2"></div>
+        <div>
+            <h3 id="profileName2"></h3>
+            <p id="profileStatus2"></p>
+            <p><b>Role:</b> Employee Member</p>
+            <p><b>ID Number:</b> <span id="profileIdDisplay" style="color: var(--brand); font-weight: 700;"></span></p>
+        </div>
+    </div>
+</div>
+        <div class="section" id="breaks">
+            <div class="card" style="max-width: 500px;">
+                <h3>Break Control</h3>
+                <p id="breakStatus2"></p>
+                <p id="breakTimer2" class="timer"></p>
+                <button class="action" onclick="startBreak()">Break In</button>
+                <button class="action" onclick="endBreak()" style="background: var(--text-dark);">Break Out</button>
+            </div>
+        </div>
+
+        <div class="section" id="leave">
+            <div class="card">
+                <h3>Apply Leave</h3>
+                <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                    <input type="date" id="leaveDate" style="flex: 2;">
+                    <select id="leaveType" style="flex: 1;">
+                        <option value="Sick">Sick Leave</option>
+                        <option value="Casual">Casual Leave</option>
+                    </select>
+                </div>
+                <button class="action" onclick="applyLeave()">Submit Request</button>
+                <p id="leaveMsg" style="margin-top:15px;"></p>
+                <p id="leaveBalance" style="color: var(--text-muted); font-size:13px;"></p>
+
+                <h4 style="margin-top:40px; margin-bottom: 20px; font-size: 14px; color: var(--text-muted);">REQUEST HISTORY</h4>
+                <div id="leaveHistory"></div>
+            </div>
+        </div>
+
+        <div class="section" id="attendance">
+            <div class="card">
+                <h3>Attendance Tracking</h3>
+                <div id="monthYear" style="font-size: 20px; font-weight: 800; color: var(--brand); margin-bottom: 20px;"></div>
+                
+                <div style="display: flex; gap: 10px; margin-bottom: 25px;">
+                    <button class="action" onclick="checkIn()">Check In</button>
+                    <button class="action" onclick="checkOut()" style="background: var(--text-dark);">Check Out</button>
+                </div>
+
+                <p id="attStatus"></p>
+                <p id="workTimer" class="timer"></p>
+
+                <div id="attendanceSummary" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 30px 0;"></div>
+                <div id="calendar" class="calendar"></div>
+            </div>
+        </div>
+
+    </div>
+
+    
+<script src="firebase.js" type="module"></script>
+
+<script type="module">
+import { collection, getDocs }
+from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+const usersRef = collection(window.db, "users");
+
+async function loadUsers(){
+  const snap = await getDocs(usersRef);
+  users.innerHTML = "";
+  snap.forEach(d=>{
+    const u = d.data();
+    users.innerHTML += `<li>${u.username}</li>`;
+  });
+}
+
+loadUsers();
+</script>
+
+    <script>
+        if (localStorage.getItem("role") !== "user") {
+            location.href = "index.html";
+        }
+
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+        let breakLogs = JSON.parse(localStorage.getItem("breakLogs")) || [];
+        let adminAlerts = JSON.parse(localStorage.getItem("adminAlerts")) || [];
+        let currentUser = localStorage.getItem("currentUser");
+        let timerInterval;
+
+        /* ADDED LOGOUT FUNCTION */
+        function logout() {
+            localStorage.removeItem("currentUser");
+            localStorage.removeItem("role");
+            location.href = "index.html";
+        }
+
+        function renderTeamStatus(sortBy = "work") {
+            let list = [...users];
+
+            // Sorting logic: prioritize showing Working users, then Break, then Leave
+            list.sort((a, b) => {
+                if (sortBy === "break") {
+                    return (b.breakType ? 1 : 0) - (a.breakType ? 1 : 0);
+                } else {
+                    return (a.status === "ONLINE" ? -1 : 1);
+                }
+            });
+
+            teamStatus.innerHTML = "";
+            list.forEach(u => {
+                let statusText = "";
+
+                // Check 1: Is the user on Leave? (Status is DISABLED)
+                if (u.status === "DISABLED") {
+                    statusText = `<span style="color:#ff8a8a; opacity:0.8;">🏖 On Leave</span>`;
+                }
+                // Check 2: Is the user on a Break?
+                else if (u.breakType) {
+                    statusText = `<span class="red">☕ ${u.breakType}</span>`;
+                }
+                // Default: User is Working
+                else {
+                    statusText = `<span class="green">🟢 Working</span>`;
+                }
+
+                teamStatus.innerHTML += `
+            <div class="team-user" style="padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                <small style="opacity:0.6">#${u.idNum || '---'}</small>
+                <b>${u.username}</b>: ${statusText}
+            </div>
+        `;
+            });
+        }
+
+        /* ===== EXISTING CODE (UNCHANGED) ===== */
+
+        function showSection(id, btn) {
+            document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+            document.getElementById(id).classList.add("active");
+
+            document.querySelectorAll(".menu button").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+        }
+
+        function updateUI() {
+    users = JSON.parse(localStorage.getItem("users")) || [];
+    let me = users.find(u => u.username === currentUser);
+    if (!me) return;
+
+    let online = 0, onBreak = 0;
+    users.forEach(u => {
+        if (u.status === "ONLINE") online++;
+        if (u.breakType) onBreak++;
+    });
+
+    avatar.innerText = avatar2.innerText = currentUser[0].toUpperCase();
+    profileName.innerText = profileName2.innerText = currentUser;
+
+    // --- ADD THIS LINE TO DISPLAY THE ID ---
+    if (document.getElementById("profileIdDisplay")) {
+        document.getElementById("profileIdDisplay").innerText = me.idNum || "Not Set";
+    }
+
+    dashboardStatus.innerHTML = profileStatus2.innerHTML =
+        me.breakType
+            ? `<span class="red">On ${me.breakType} Break</span>`
+            : `<span class="green">Working</span>`;
+
+    stats.innerHTML = `Online: <b>${online}</b> | On Break: <b>${onBreak}</b>`;
+    totalBreak.innerHTML =
+        `Total Break Today: <b>${Math.floor(me.totalBreak || 0)} mins</b>`;
+
+    breakStatus.innerHTML = breakStatus2.innerHTML =
+        me.breakType
+            ? `<span class="red">You are on ${me.breakType} Break</span>`
+            : `<span class="green">You are Working</span>`;
+
+    renderTeamStatus();
+    
+}
+
+        function startBreak() {
+            if (breakLogs.some(b => b.user === currentUser && b.status === "ACTIVE")) {
+                alert("You already have an active break");
+                return;
+            }
+
+            const hour = new Date().getHours();
+            if (breakType.value === "Lunch" && (hour < 12 || hour >= 14)) {
+                alert("Lunch allowed only between 12 PM and 2 PM");
+                return;
+            }
+
+            users.forEach(u => {
+                if (u.username === currentUser) {
+                    u.status = "NOT ACTIVE";
+                    u.breakType = breakType.value;
+                    u.breakStart = Date.now();
+                }
+            });
+
+            breakLogs.push({
+                user: currentUser,
+                type: breakType.value,
+                start: new Date().toLocaleString(),
+                end: "",
+                status: "ACTIVE"
+            });
+
+            startTimer();
+            saveAll();
+        }
+
+        function endBreak() {
+            users.forEach(u => {
+                if (u.username === currentUser) {
+                    u.status = "ONLINE";
+                    u.breakType = null;
+                    u.breakStart = null;
+                }
+            });
+
+            for (let i = breakLogs.length - 1; i >= 0; i--) {
+                if (breakLogs[i].user === currentUser && breakLogs[i].status === "ACTIVE") {
+                    breakLogs[i].end = new Date().toLocaleString();
+                    breakLogs[i].status = "ENDED";
+                    break;
+                }
+            }
+
+            clearInterval(timerInterval);
+            dashboardTimer.innerText = breakTimer2.innerText = "";
+            saveAll();
+        }
+
+        function startTimer(){
+    clearInterval(timerInterval);
+
+    timerInterval = setInterval(() => {
+        // Always get the freshest data from the array
+        let me = users.find(u => u.username === currentUser);
+        
+        if(!me || !me.breakStart) {
+            clearInterval(timerInterval);
+            return;
+        }
+
+        let diff = Math.floor((Date.now() - me.breakStart) / 1000);
+        let m = Math.floor(diff / 60);
+        let s = diff % 60;
+
+        let limit = me.breakType === "Lunch" ? 60 : 15;
+        let timerText = `${me.breakType}: ${m}:${s.toString().padStart(2, "0")}`;
+
+        // Update all possible timer displays
+        if(document.getElementById("dashboardTimer")) dashboardTimer.innerText = timerText;
+        if(document.getElementById("breakTimer2")) breakTimer2.innerText = timerText;
+
+
+        // Alert logic for break limits
+if (m >= limit) {
+
+    // Lunch Break Alert (existing logic kept)
+    if (me.breakType === "Lunch" && !me.lunchExceeded) {
+        me.lunchExceeded = true;
+        adminAlerts.push(`🚨 ${currentUser} exceeded LUNCH break (60 mins)`);
+        localStorage.setItem("adminAlerts", JSON.stringify(adminAlerts));
+        saveAll();
+    }
+
+    // ⭐ NEW → Regular Break Alert (15 mins)
+    if (me.breakType === "Regular" && !me.regularExceeded) {
+        me.regularExceeded = true;
+        adminAlerts.push(`🚨 ${currentUser} exceeded REGULAR break (15 mins)`);
+        localStorage.setItem("adminAlerts", JSON.stringify(adminAlerts));
+        saveAll();
+    }
+
+}
+
+    }, 1000);
+}
+
+        function saveAll() {
+            localStorage.setItem("users", JSON.stringify(users));
+            localStorage.setItem("breakLogs", JSON.stringify(breakLogs));
+            updateUI();
+        }
+
+        setInterval(updateUI, 2000);
+        updateUI();
+        let leaves = JSON.parse(localStorage.getItem("leaves")) || {};
+        let leaveRequests = JSON.parse(localStorage.getItem("leaveRequests")) || [];
+
+        let attendance = JSON.parse(localStorage.getItem("attendance")) || {};
+        let workInterval;
+
+function checkIn() {
+    let today = new Date().toDateString();
+    
+    // Check if attendance already exists for today
+    if (attendance[currentUser] && attendance[currentUser][today]) {
+        alert("You have already checked in for today!");
+        return;
+    }
+
+    let now = new Date();
+    let hour = now.getHours();
+
+    if (hour < 10) {
+        alert("Shift starts at 10 AM");
+        return;
+    }
+
+    if (!attendance[currentUser]) attendance[currentUser] = {};
+
+    attendance[currentUser][today] = { 
+        checkIn: Date.now() 
+    };
+    
+    localStorage.setItem("attendance", JSON.stringify(attendance));
+    attStatus.innerText = "Checked in at " + now.toLocaleTimeString();
+    
+    startWorkTimer(); 
+    renderCalendar(); 
+}
+        function checkOut() {
+            let today = new Date().toDateString();
+            let data = attendance[currentUser]?.[today];
+
+            if (!data?.checkIn) {
+                alert("You must check in first");
+                return;
+            }
+
+            let worked = (Date.now() - data.checkIn) / 3600000;
+
+            if (worked < 9) {
+                alert("You must complete 9 working hours!");
+                return;
+            }
+
+            data.checkOut = Date.now();
+            localStorage.setItem("attendance", JSON.stringify(attendance));
+
+            clearInterval(workInterval);
+            attStatus.innerText = "Checked out successfully";
+        }
+        function startWorkTimer() {
+    clearInterval(workInterval);
+
+    let today = new Date().toDateString();
+    let data = attendance[currentUser]?.[today];
+
+    // If no check-in today, or they already checked out, don't start the timer
+    if (!data?.checkIn || data?.checkOut) {
+        if (data?.checkOut) {
+             attStatus.innerText = "Status: Shift Completed";
+        }
+        return;
+    }
+
+    // Set status message since they are already checked in
+    attStatus.innerText = "Currently Checked In (Started at " + new Date(data.checkIn).toLocaleTimeString() + ")";
+
+    workInterval = setInterval(() => {
+        let diff = Math.floor((Date.now() - data.checkIn) / 1000);
+        let h = Math.floor(diff / 3600);
+        let m = Math.floor((diff % 3600) / 60);
+        let s = diff % 60;
+
+        workTimer.innerText = `Worked: ${h}h ${m}m ${s}s`;
+    }, 1000);
+}
+        function renderCalendar() {
+    calendar.innerHTML = "";
+    
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const todayStr = now.toDateString();
+
+    let daysInMonth = new Date(year, month + 1, 0).getDate();
+    
+    let presentCount = 0;
+    let totalWorkedMs = 0;
+
+    for (let i = 1; i <= daysInMonth; i++) {
+        let loopDateObj = new Date(year, month, i);
+        let loopDateStr = loopDateObj.toDateString();
+
+        let div = document.createElement("div");
+        div.className = "day";
+        div.innerText = i;
+
+        // Check attendance data
+        const dayData = attendance[currentUser]?.[loopDateStr];
+
+        if (dayData && dayData.checkIn) {
+            div.classList.add("present");
+            presentCount++;
+            
+            // Calculate work duration if they checked out
+            if(dayData.checkOut) {
+                totalWorkedMs += (dayData.checkOut - dayData.checkIn);
+            }
+        } 
+        // Style for "Today" so the user knows which day it is
+        if (loopDateStr === todayStr) {
+            div.style.border = "2px solid #ff9f43";
+        }
+
+        calendar.appendChild(div);
+    }
+
+    // Update the Summary Display
+    renderSummary(presentCount, daysInMonth, totalWorkedMs);
+}
+
+function renderSummary(present, totalDays, totalMs) {
+    const avgHours = totalMs > 0 ? (totalMs / (present * 3600000)).toFixed(1) : 0;
+    const absent = new Date().getDate() - present; // Days passed so far minus present days
+
+    attendanceSummary.innerHTML = `
+        <div style="background:#222; padding:15px; border-radius:12px; text-align:center; border-bottom:3px solid #7CFC98">
+            <small style="color:#aaa">Present</small><br>
+            <b style="font-size:20px;color:#ffffff">${present}</b>
+        </div>
+        <div style="background:#222; padding:15px; border-radius:12px; text-align:center; border-bottom:3px solid #ff8a8a">
+            <small style="color:#aaa">Absent</small><br>
+            <b style="font-size:20px;color:#ffffff">${absent < 0 ? 0 : absent}</b>
+        </div>
+        <div style="background:#222; padding:15px; border-radius:12px; text-align:center; border-bottom:3px solid #ff9f43">
+            <small style="color:#aaa">Avg. Hours</small><br>
+            <b style="font-size:20px;color:#ffffff">${avgHours}h</b>
+        </div>
+    `;
+}
+        /* ===== SHOW MONTH YEAR IN ATTENDANCE ===== */
+        function showMonthYear() {
+            let now = new Date();
+            let options = { month: 'long', year: 'numeric' };
+            monthYear.innerText = now.toLocaleDateString(undefined, options);
+        }
+        showMonthYear();
+
+
+
+        /* APPLY LEAVE - UPDATED */
+        function applyLeave() {
+            let leaveRequests = JSON.parse(localStorage.getItem("leaveRequests")) || [];
+            let leaves = JSON.parse(localStorage.getItem("leaves")) || {};
+            let month = new Date().getMonth();
+
+            // Check Leave Balance
+            if (!leaves[currentUser] || leaves[currentUser].month !== month) {
+                leaves[currentUser] = { month: month, count: 0 };
+            }
+
+            if (leaves[currentUser].count >= 2) {
+                alert("Limit reached: Only 2 leaves allowed per month.");
+                return;
+            }
+
+            let selectedDate = document.getElementById("leaveDate").value;
+            if (!selectedDate) {
+                alert("Please select a date.");
+                return;
+            }
+
+            // Add to Global Requests (Status defaults to Pending)
+            leaveRequests.push({
+                user: currentUser,
+                date: selectedDate,
+                type: document.getElementById("leaveType").value,
+                status: "Pending",
+                requestDate: new Date().toLocaleString()
+            });
+
+            // Update Balance
+            leaves[currentUser].count++;
+
+            // Save
+            localStorage.setItem("leaveRequests", JSON.stringify(leaveRequests));
+            localStorage.setItem("leaves", JSON.stringify(leaves));
+
+            // UI Feedback
+            document.getElementById("leaveMsg").innerHTML = "<span class='green'>Request sent to Admin!</span>";
+            renderLeaveHistory();
+
+            // REMOVED location.href="admin.html" -> User stays on their own dashboard
+        }
+
+        /* RENDER LEAVE HISTORY - UPDATED */
+        function renderLeaveHistory() {
+            let leaveRequests = JSON.parse(localStorage.getItem("leaveRequests")) || [];
+            let myRequests = leaveRequests.filter(req => req.user === currentUser);
+            let historyDiv = document.getElementById("leaveHistory");
+
+            if (myRequests.length === 0) {
+                historyDiv.innerHTML = "<p style='opacity:0.5'>No history found.</p>";
+                return;
+            }
+
+            // Show most recent requests first
+            historyDiv.innerHTML = myRequests.reverse().map(req => {
+                let statusColor = "#ff9f43"; // Orange for Pending
+                if (req.status === "Approved") statusColor = "#7CFC98"; // Green
+                if (req.status === "Rejected") statusColor = "#ff8a8a"; // Red
+
+                return `
+            <div style="background:#111; padding:15px; border-radius:12px; margin-top:10px; border-left: 5px solid ${statusColor};">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <b style="font-size:16px;color:#ffffff">${req.date}</b><br>
+                        <small style="opacity:0.6;color:#ffffff">Type: ${req.type}</small>
+                    </div>
+                    <div style="text-align:right;">
+                        <span style="color:${statusColor}; font-weight:bold; text-transform:uppercase; font-size:12px;">
+                            ${req.status}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        `;
+            }).join("");
+        }
+
+        // Add this to your existing setInterval in User Dashboard
+        setInterval(() => {
+            updateUI();
+            renderLeaveHistory(); // Keep status updated in real-time
+        }, 2000);
+        // --- AUTO-RESUME TIMER ON LOGIN/REFRESH ---
+function checkActiveBreak() {
+    users = JSON.parse(localStorage.getItem("users")) || [];
+    let me = users.find(u => u.username === currentUser);
+    
+    if (me && me.breakStart) {
+        console.log("Resuming active break timer...");
+        startTimer();
+    }
+}
+
+// Call this once when the script loads
+checkActiveBreak();
+
+
+// Add this line at the bottom of your script
+startWorkTimer();
+setInterval(() => {
+    updateUI();
+}, 2000);
+function showSection(id, btn) {
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+
+    document.querySelectorAll(".menu button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    // 🟢 Refresh calendar if the user switches to the attendance tab
+    if (id === 'attendance') {
+        renderCalendar();
+    }
+}
+    </script>
+
+</body>
+
+</html>

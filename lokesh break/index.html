@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Oppty | Management Portal</title>
+
+<style>
+    :root {
+        --accent: #ff9f43;
+        --text-main: #2d3436;
+        --text-sub: #636e72;
+        --bg-light: #f5f6fa;
+        --border: #dfe6e9;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+    body {
+        height: 100vh;
+        background: var(--bg-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .wrapper {
+        display: flex;
+        width: 1000px;
+        height: 600px;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    /* LEFT SIDE: BRANDING & INFO */
+    .branding {
+        flex: 1.2;
+        background: #2d3436;
+        padding: 60px;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    .branding::after {
+        content: '';
+        position: absolute;
+        bottom: 0; right: 0;
+        width: 150px; height: 150px;
+        background: var(--accent);
+        border-radius: 100% 0 0 0;
+        opacity: 0.1;
+    }
+
+    .branding img { height: 40px; margin-bottom: 20px; }
+    .branding h1 { font-size: 36px; line-height: 1.2; margin-bottom: 20px; }
+    .branding p { font-size: 16px; color: #b2bec3; line-height: 1.6; }
+
+    .feature-list { list-style: none; margin-top: 40px; }
+    .feature-list li { margin-bottom: 15px; font-size: 14px; display: flex; align-items: center; gap: 10px;}
+    .feature-list li::before { content: '✔'; color: var(--accent); font-weight: bold; }
+
+    /* RIGHT SIDE: LOGIN FORM */
+    .login-box {
+        flex: 1;
+        padding: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .login-box h2 { font-size: 24px; color: var(--text-main); margin-bottom: 5px; }
+    .login-box span { color: var(--text-sub); font-size: 14px; margin-bottom: 30px; }
+
+    .tabs {
+        display: flex;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-bottom: 25px;
+        overflow: hidden;
+    }
+
+    .tab {
+        flex: 1;
+        padding: 12px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-sub);
+        transition: 0.3s;
+    }
+
+    .tab.active { background: var(--bg-light); color: var(--accent); }
+
+    label { display: block; font-size: 12px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; text-transform: uppercase; }
+
+    input {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255, 159, 67, 0.1); }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover { background: #e67e22; transform: translateY(-1px); box-shadow: 0 5px 15px rgba(230, 126, 34, 0.3); }
+
+    #error { color: #d63031; font-size: 13px; margin-top: 15px; text-align: center; font-weight: 600; }
+
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="branding">
+        <div>
+            <img src="imgs/322343.png" alt="Logo">
+            <h1>Measure.<br>Manage.<br>Move.</h1>
+            <p>The all-in-one terminal for tracking workforce attendance and breaks with pinpoint accuracy.</p>
+            
+            <ul class="feature-list">
+                <li>Real-time Break Monitoring</li>
+                <li>Automated Attendance Logs</li>
+                <li>Admin Approval Workflow</li>
+            </ul>
+        </div>
+        <div style="font-size: 12px; color: #636e72;">Powered by Oppty Engine v4.0</div>
+    </div>
+
+    <div class="login-box">
+        <h2>Sign In</h2>
+        <span>Welcome back! Please enter your details.</span>
+
+        <div class="tabs">
+            <div class="tab active" id="adminTab" onclick="setRole('admin')">Admin</div>
+            <div class="tab" id="userTab" onclick="setRole('user')">Employee</div>
+        </div>
+
+        <label>Account Identity</label>
+        <input id="username" type="text" placeholder="e.g. alex@oppty.in">
+
+        <label>Access Key</label>
+        <input id="password" type="password" placeholder="••••••••">
+
+        <button onclick="login()">Enter Dashboard</button>
+        <div id="error"></div>
+    </div>
+</div>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script type="module">
+  // 🔥 Firebase SDKs (MODERN v12)
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
+
+  // ✅ YOUR FIREBASE CONFIG (UNCHANGED)
+  const firebaseConfig = {
+    apiKey: "AIzaSyB5uyEKwSXsy9lPyG8fXP6jUTDEMWjqe7Y",
+    authDomain: "lokeshbatta-e5027.firebaseapp.com",
+    projectId: "lokeshbatta-e5027",
+    storageBucket: "lokeshbatta-e5027.firebasestorage.app",
+    messagingSenderId: "760264623454",
+    appId: "1:760264623454:web:dba33f6524ac698298bbcf",
+    measurementId: "G-N0F70EX5N6"
+  };
+
+  // 🔥 Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
+
+  // -------------------------------
+  // EXISTING LOGIN LOGIC (CONNECTED TO FIREBASE)
+  // -------------------------------
+  let selectedRole = "admin";
+
+  window.setRole = function(role){
+    selectedRole = role;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    if(role === 'admin') document.getElementById('adminTab').classList.add('active');
+    else document.getElementById('userTab').classList.add('active');
+  }
+
+  window.login = async function(){
+    const uname = document.getElementById('username').value.trim();
+    const pass  = document.getElementById('password').value.trim();
+    const errorDiv = document.getElementById('error');
+    errorDiv.innerText = "";
+
+    // 🔐 ADMIN LOGIN (STATIC – SAME AS BEFORE)
+    if(selectedRole === "admin"){
+      if(uname === "admin@oppty.in" && pass === "oppty@1234"){
+        localStorage.setItem("role","admin");
+        location.href = "admin.html";
+      } else {
+        errorDiv.innerText = "Access Denied: Invalid Credentials";
+      }
+      return;
+    }
+
+    // 👤 EMPLOYEE LOGIN (FIRESTORE – ALL DEVICES)
+    try {
+      const q = query(
+        collection(db, "users"),
+        where("username", "==", uname),
+        where("password", "==", pass)
+      );
+
+      const snap = await getDocs(q);
+
+      if(!snap.empty){
+        localStorage.setItem("role","user");
+        localStorage.setItem("currentUser", uname);
+        location.href = "user.html";
+      } else {
+        errorDiv.innerText = "Identification Failed: User not found";
+      }
+
+    } catch (err) {
+      console.error(err);
+      errorDiv.innerText = "Server Error. Please try again.";
+    }
+  }
+</script>
+
+</body>
+</html>
