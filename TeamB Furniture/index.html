@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+
+<header class="ws-header">
+
+  <!-- TOP STRIP -->
+  <div class="top-strip">
+    <div class="container top-flex">
+      <div class="top-links">
+        <a href="#">Furniture</a>
+        <a href="#">Home Interiors</a>
+        <a href="#">Bulk Order</a>
+      </div>
+
+      <div class="top-right">
+        <span style="margin-right: 20px;">📞 +91-9876543210</span>
+        <a href="#">Become a Franchise</a>
+        <a href="#">Track Order</a>
+        <a href="#">Help Center</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER -->
+  <div class="main-header container">
+    <div class="logo"><img src="imgs/Q-HOME-LOGO-_HOR-1400x449.webp" alt="..." width="300px" height="100px"></div>
+
+    <!-- SEARCH -->
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search Products, Color & More..." />
+      <button id="searchBtn">🔍</button>
+
+      <div class="search-results" id="searchResults"></div>
+    </div>
+
+    <!-- ICONS -->
+    <div class="header-icons">
+
+      <!-- PROFILE -->
+      <div class="icon profile">
+        👤
+        <div class="profile-dropdown">
+          <button onclick="signIn()">Sign In</button>
+          <button onclick="signUp()">Sign Up</button>
+        </div>
+      </div>
+
+      <!-- WISHLIST -->
+      <div class="icon" onclick="openWishlist()">
+        ♥️ <span id="wishlistCount">0</span>
+      </div>
+
+      <!-- CART -->
+      <div class="icon" onclick="openCart()">
+        🛒 <span id="cartCount">0</span>
+      </div>
+
+    </div>
+  </div>
+
+ <!-- NAVBAR WITH MEGA MENU -->
+<nav class="nav">
+  <ul>
+
+    <!-- SOFAS -->
+    <li class="nav-item has-mega">Sofas
+      
+       
+            <div class="mega-menu simple">
+        
+        <a href="fabric sofas.html">Fabric Sofas</a>
+        <a href="wooden sofa.html">Wooden Sofas</a>
+        <a href="L shape sofas.html">L Shape Sofas</a>
+            <a href="Sofa Cum Beds.html">Sofa Cum Beds</a>
+      </div>
+
+
+          
+    </li>
+
+    <!-- LIVING -->
+    <li class="nav-item has-mega">Living
+      <div class="mega-menu simple">
+        <a href="TV Units.html">TV Units</a>
+        <a href="Coffee Tables.html">Coffee Tables</a>
+        <a href="Bookshelves.html">Bookshelves</a>
+      </div>
+    </li>
+
+    <!-- BEDROOM -->
+    <li class="nav-item has-mega">Bedroom
+      <div class="mega-menu simple">
+        <a href="Beds.html">Beds</a>
+        <a href="Wardrobes.html">Wardrobes</a>
+        <a href="Bedside Tables.html">Bedside Tables</a>
+      </div>
+    </li>
+
+    <li class="nav-item has-mega">Mattress
+      <div class="mega-menu simple">
+        <a href="Foam.html">Foam</a>
+        <a href="Spring.html">Spring</a>
+        <a href="Latex.html">Latex</a>
+      </div>
+    </li>
+
+    <li class="nav-item has-mega">Dining
+      <div class="mega-menu simple">
+        <a href="Dining Tables.html">Dining Tables</a>
+        <a href="Dining Chairs.html">Dining Chairs</a>
+      </div>
+    </li>
+
+    
+
+  </ul>
+</nav>
+
+
+</header>
+
+<!-- DEMO PRODUCT SECTION -->
+<section class="products container">
+  <h2>Products Price Range</h2>
+
+  <div class="filters" style="margin-top: 10px;">
+    Price Filter :
+    <input type="range" id="priceRange" min="5000" max="50000" value="50000">
+    <span id="priceValue">₹50000</span>
+  </div>
+
+  <div class="product-grid" id="productGrid"></div>
+</section>
+<section class="hero">
+
+  <!-- TOP AUTO SCROLL STRIP -->
+  <div class="hero-strip">
+    <div class="strip-track">
+      <img src="https://www.urbanwood.in/catalog/view/javascript/assets/image/big-strip.webp">
+      <img src="https://www.urbanwood.in/catalog/view/javascript/assets/image/big-strip.webp">
+     
+    </div>
+  </div>
+
+  <!-- MAIN HERO GRID -->
+  <div class="hero-grid">
+
+    <!-- BIG SLIDER -->
+    <div class="hero-slider">
+
+      <div class="slides">
+
+        <div class="slide active">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
+        </div>
+
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf">
+        </div>
+
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200">
+        </div>
+
+      </div>
+
+      <button class="prev">❮</button>
+      <button class="next">❯</button>
+
+    </div>
+
+    <!-- SIDE PROMO -->
+    <div class="hero-side">
+      <img src="imgs/WhatsApp Image 2026-02-11 at 5.40.34 PM.jpeg">
+      <div class="side-content">
+        <h2>Clearance Sale</h2>
+        <p>Upto 60% OFF</p>
+        <button>Shop Now</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="categories container">
+
+  <h2 class="section-title">Shop By Categories</h2>
+
+  <div class="cat-tabs">
+    <button class="tab active" data-filter="all">All</button>
+    <button class="tab" data-filter="living">Living</button>
+    <button class="tab" data-filter="bedroom">Bedroom</button>
+    <button class="tab" data-filter="dining">Dining</button>
+    <button class="tab" data-filter="mattress">Mattress</button>
+    <button class="tab" data-filter="decor">Decor</button>
+  </div>
+
+  <!-- DYNAMIC GRID -->
+  <div class="cat-grid" id="catGrid"></div>
+
+</section>
+<section class="trending container">
+
+  <div class="section-head">
+    <h2>Trending Furniture</h2>
+    <div class="slider-arrows">
+      <button id="prevTrend">❮</button>
+      <button id="nextTrend">❯</button>
+    </div>
+  </div>
+
+  <div class="product-slider" id="productSlider"></div>
+
+</section>
+<section style="background:#fff;padding:40px 0;overflow-x:hidden">
+    
+<div class="container">
+    <h2 class="heading-primary">Shop by collection</h2>
+
+    <div class="hero-slider" id="sliderMain">
+        <div class="hero-slider__viewport">
+            <div class="hero-slider__track" id="sliderTrack"></div>
+        </div>
+
+        <div class="product-panel" id="revealPanel">
+            <div class="product-panel__close" onclick="closePanel()">✕</div>
+            <img class="product-panel__thumb" id="p-img">
+            <h3 class="product-panel__name" id="p-title"></h3>
+            <div>
+                <span class="product-panel__price-current" id="p-curr"></span>
+                <span class="product-panel__price-old" id="p-old"></span>
+            </div>
+            <div class="product-panel__discount" id="p-disc"></div>
+        </div>
+    </div>
+
+    <div class="progress-bar" id="lineNav"></div>
+</div>
+
+</section>
+
+<section class="trust">
+  <div class="container trust-grid">
+
+    <div class="trust-item">
+      <div class="icon">🚚</div>
+      <h4>Free Delivery</h4>
+      <p>Across India</p>
+    </div>
+
+    <div class="trust-item">
+      <div class="icon">🔧</div>
+      <h4>Free Installation</h4>
+      <p>By Experts</p>
+    </div>
+
+    <div class="trust-item">
+      <div class="icon">💰</div>
+      <h4>No Cost EMI</h4>
+      <p>Easy Payments</p>
+    </div>
+
+    <div class="trust-item">
+      <div class="icon">🔄</div>
+      <h4>Easy Returns</h4>
+      <p>7 Day Policy</p>
+    </div>
+
+    <div class="trust-item">
+      <div class="icon">🛡</div>
+      <h4>5 Year Warranty</h4>
+      <p>On Solid Wood</p>
+    </div>
+
+    <div class="trust-item">
+      <div class="icon">🏆</div>
+      <h4>1M+ Customers</h4>
+      <p>Trusted Brand</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="rooms container" style="padding: 80px 0px;">
+
+  <div class="section-head-center">
+    <h2>Shop By Room</h2>
+    <p>Design your dream home with curated furniture collections</p>
+  </div>
+
+  <div class="room-grid">
+
+    <!-- BIG LEFT BANNER -->
+    <div class="room-card big">
+      <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
+      <div class="room-content">
+        <h3>Bedroom Collection</h3>
+        <button>Explore Now</button>
+      </div>
+    </div>
+
+    <!-- RIGHT TOP -->
+    <div class="room-card">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.EOsbC-qv84lTe8IcF6BkdQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3">
+      <div class="room-content">
+        <h3>Living Room</h3>
+        <button>Explore Now</button>
+      </div>
+    </div>
+
+    <!-- RIGHT BOTTOM -->
+    <div class="room-card">
+      <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200">
+      <div class="room-content">
+        <h3>Dining Room</h3>
+        <button>Explore Now</button>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+<section class="deals">
+
+  <div class="container deals-head">
+    <h2>🔥 Limited Time Deals</h2>
+
+    <!-- CREATIVE TIMER -->
+    <div class="deal-timer">
+      <div class="timer-title">Sale Ends In</div>
+
+      <div class="timer-boxes">
+        <div class="time-box"><span id="hours">00</span><p>Hours</p></div>
+        <div class="time-box"><span id="minutes">00</span><p>Minutes</p></div>
+        <div class="time-box"><span id="seconds">00</span><p>Seconds</p></div>
+      </div>
+
+      <div class="timer-progress">
+        <div id="progressBar"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container slider-wrap">
+    <button class="deal-arrow" id="dealPrev">❮</button>
+    <button class="deal-arrow right" id="dealNext">❯</button>
+
+    <div class="deals-slider" id="dealsSlider"></div>
+  </div>
+
+</section>
+<section class="reviews container">
+
+  <div class="review-head">
+    <h2>Loved by Happy Homes ❤️</h2>
+    <p>Real stories from real customers</p>
+  </div>
+
+  <div class="review-grid">
+
+    <!-- BIG CARD -->
+    <div class="review-card big">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">
+        “The sofa quality is outstanding! Delivery and installation were super smooth.
+        My living room looks premium now.”
+      </p>
+      <div class="user">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg">
+        <div>
+          <h4>Priya Sharma</h4>
+          <span>Verified Buyer • Hyderabad</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SMALL CARDS -->
+    <div class="review-card">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>Bed looks exactly like pictures. Worth every rupee!</p>
+      <h4>Rahul Mehta</h4>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>Installation team was very professional and fast.</p>
+      <h4>Anjali Verma</h4>
+    </div>
+
+    <div class="review-card tall">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>
+        Dining table finish is beautiful and packaging was perfect.
+        Highly recommended brand.
+      </p>
+      <h4>Karthik Reddy</h4>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>Best online furniture shopping experience ever.</p>
+      <h4>Sneha Kapoor</h4>
+    </div>
+
+    <div class="review-card">
+      <div class="stars">⭐⭐⭐⭐⭐</div>
+      <p>Great EMI options and amazing support team.</p>
+      <h4>Arjun Singh</h4>
+    </div>
+
+  </div>
+
+</section>
+<section class="newsletter">
+
+  <div class="container newsletter-grid">
+
+    <!-- LEFT : NEWSLETTER -->
+    <div class="newsletter-left">
+      <h2>Get ₹1000 OFF on Your First Order 🎉</h2>
+      <p>Subscribe to receive exclusive deals, offers & design tips.</p>
+
+      <div class="newsletter-form">
+        <input type="email" id="emailInput" placeholder="Enter your email">
+        <button onclick="subscribe()">Subscribe</button>
+      </div>
+
+      <span id="subscribeMsg"></span>
+    </div>
+
+    <!-- RIGHT : APP DOWNLOAD -->
+    <div class="newsletter-right">
+      <img class="phone" src="https://clipart.info/images/ccovers/1503496383Apple-IPhone-Png-mobile.png">
+
+      <div class="app-text">
+        <h3>Download Our App 📱</h3>
+        <p>Shop faster & track orders easily</p>
+
+        <div class="app-buttons">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+<footer class="footer">
+
+    <div class="footer-top">
+
+        <div>
+            <h4>OUR COMPANY</h4>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Our Stores</a></li>
+                <li><a href="#">Disclaimer</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>PRODUCT CATEGORIES</h4>
+            <ul>
+                <li><a href="#">Living</a></li>
+                <li><a href="#">Bedroom</a></li>
+                <li><a href="#">Dining Sets</a></li>
+                <li><a href="#">Study and Office Furniture</a></li>
+                <li><a href="#">Collections</a></li>
+                <li><a href="#">Modular Furniture</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h4>HELP</h4>
+            <ul>
+                <li><a href="#">Bulk Enquiry</a></li>
+                <li><a href="#">Terms and Condition</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Cancellation Policy</a></li>
+                <li><a href="#">Return & Refund Policy</a></li>
+                <li><a href="#">Grievance Redressal Policy</a></li>
+                <li><a href="#">Code of Ethics</a></li>
+                <li><a href="#">Payment & Security</a></li>
+                <li><a href="#">Shipping & Delivery</a></li>
+            </ul>
+        </div>
+
+        <div class="newsletter1">
+            <h4>SIGN UP FOR REGULAR UPDATES</h4>
+            <p>Sign-Up to receive regular updates from Quantum Home Furniture – New Arrivals, Latest Offers and more!</p>
+
+            <div class="newsletter-box">
+                <input type="email" placeholder="Email">
+                <button>SUBSCRIBE</button>
+            </div>
+
+            <div class="payments">
+                <h4>WE ACCEPT</h4>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-bottom">
+
+        <div>
+            <div class="company-logo">
+                <img src="imgs/Q-HOME-LOGO-_HOR-1400x449.webp" alt="Quantum Home Furniture Logo">
+            </div>
+
+            <p>
+                Quantum Home Furniture offers a diverse range of modern and traditional furniture crafted with precision and elegance.
+            </p>
+
+            <p>
+                Please use the store locator to find your nearest Quantum showroom.
+            </p>
+        </div>
+
+        <div class="contact-info">
+            <p><i class="fa fa-phone"></i> Customer care number : 1800 425 1122</p>
+            <p><i class="fa fa-phone"></i> Alternate number : +91 9876543210</p>
+            <p><i class="fa fa-envelope"></i> Sales : sales@quantumhome.com</p>
+            <p><i class="fa fa-envelope"></i> Service : service@quantumhome.com</p>
+
+            <div class="social">
+                <h4>Follow Us</h4>
+                <a href="#" class="facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="twitter"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="youtube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+    </div>
+
+</footer>
+<div class="cart-overlay" id="cartOverlay">
+    <div class="cart-modal">
+        <div class="cart-header" style="display:flex; justify-content:space-between; align-items:center; padding: 20px; border-bottom: 1px solid #eee;">
+            <h3 style="margin:0;">Your Cart</h3>
+            <span class="close-cart" onclick="toggleCart()" style="font-size:30px; cursor:pointer;">&times;</span>
+        </div>
+        
+        <div class="cart-items-list" id="cartItemsList"></div>
+
+        <div class="cart-footer" id="cartFooter">
+            <div id="summarySection">
+                <div style="display:flex; justify-content:space-between; margin-bottom:5px; font-size:14px; color:#666;">
+                    <span>Subtotal:</span>
+                    <span id="subTotal">₹0</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-weight:bold; font-size:18px;">
+                    <span>Total Payable:</span>
+                    <span id="cartTotal">₹0</span>
+                </div>
+                <button class="add-btn" onclick="openAddressModal()">PROCEED TO CHECKOUT</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addressModal" class="pay-modal-overlay">
+    <div class="pay-window">
+        <div class="pay-header">
+            <h3>Shipping Details</h3>
+            <span class="close-pay" onclick="closeAddress()">&times;</span>
+        </div>
+        <div class="pay-body">
+            <form id="addressForm" onsubmit="proceedToPayment(event)">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <input type="text" placeholder="Full Name" required style="grid-column: span 2; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+                    <input type="tel" placeholder="Phone Number" required style="grid-column: span 2; padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+                    <input type="text" placeholder="Pincode" required style="padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+                    <input type="text" placeholder="City" required style="padding: 12px; border: 1px solid #ddd; border-radius: 4px;">
+                    <textarea placeholder="Full House Address" required style="grid-column: span 2; padding: 12px; border: 1px solid #ddd; border-radius: 4px; height: 80px;"></textarea>
+                </div>
+                <button type="submit" class="add-btn" style="margin-top: 20px;">PROCEED TO PAYMENT</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="paymentModal" class="pay-modal-overlay">
+    <div class="pay-window">
+        <div class="pay-header">
+            <img src="imgs/Q-HOME-LOGO-_HOR-1400x449.webp" alt="Logo" height="30">
+            <span class="close-pay" onclick="closePayment()">&times;</span>
+        </div>
+        <div class="pay-amount-bar">
+            <span>Amount to Pay:</span>
+            <strong id="finalPayAmount">₹0</strong>
+        </div>
+        <div class="pay-body" id="paymentBody">
+            <p style="margin-bottom: 15px; font-weight: 500;">Select Payment Method</p>
+            <div class="pay-grid">
+                <div class="pay-card" onclick="finalizeOrder('UPI')">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    <span>UPI / QR</span>
+                </div>
+                <div class="pay-card" onclick="finalizeOrder('Card')">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <span>Card</span>
+                </div>
+                <div class="pay-card" onclick="finalizeOrder('Net Banking')">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <span>Banking</span>
+                </div>
+                <div class="pay-card" onclick="finalizeOrder('Wallet')">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Wallets</span>
+                </div>
+            </div>
+        </div>
+        <div class="pay-footer">
+            <i class="fa-solid fa-shield-halved"></i> 100% Secure SSL Encrypted Payment
+        </div>
+    </div>
+</div>
+<div id="authOverlay" class="auth-overlay">
+
+  <div class="auth-box">
+
+    <!-- LEFT IMAGE -->
+    <div class="auth-left">
+      <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200">
+      <div class="sale-text">
+        End of Winter Season Sale<br>
+        <span>UPTO 40% OFF</span>
+      </div>
+    </div>
+
+    <!-- RIGHT FORM -->
+    <div class="auth-right">
+      <span class="close-auth" onclick="closeAuth()">✖</span>
+
+      <h2 id="authTitle">Create an Account</h2>
+
+      <div id="signupForm">
+        <input id="fname" placeholder="First Name">
+        <input id="lname" placeholder="Last Name">
+        <input id="email" placeholder="Email Address">
+        <input id="phone" placeholder="Contact Number">
+        <input id="password" type="password" placeholder="Password">
+        <input id="confirmPassword" type="password" placeholder="Confirm Password">
+
+        <button onclick="registerUser()">SIGN UP</button>
+        <p>Already have an account? <span onclick="showLogin()">Sign in</span></p>
+      </div>
+
+      <div id="loginForm" style="display:none">
+        <input id="loginEmail" placeholder="Email">
+        <input id="loginPass" type="password" placeholder="Password">
+
+        <button onclick="loginUser()">SIGN IN</button>
+        <p>Don't have account? <span onclick="showSignup()">Sign up</span></p>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
