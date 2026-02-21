@@ -1,3 +1,4 @@
+
 // DEMO PRODUCT DATA
 const products=[
  {name:"Modern Sofa",price:15000},
@@ -203,34 +204,103 @@ document.querySelectorAll(".tab").forEach(tab=>{
     },200);
   });
 });
-const productsTrend=[
- {name:"Modern Sofa",price:25999,old:35999,disc:"28%",img1:"https://www.estre.in/cdn/shop/files/2-min_d2bc49bf-1893-4118-bab5-8d0848d4d3fb.jpg?v=1743762905",img2:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c"},
- {name:"Queen Bed",price:30999,old:40999,disc:"25%",img1:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",img2:"https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf"},
- {name:"Dining Set",price:19999,old:27999,disc:"30%",img1:"https://images.unsplash.com/photo-1617806118233-18e1de247200",img2:"https://cdn2.bigcommerce.com/server5600/42eba/products/3776/images/17419/California_Rustic_Oak_Expandable_Round_Dining_Table__04717.1448060644.1280.1280.png?c=2"},
- {name:"TV Unit",price:14999,old:19999,disc:"20%",img1:"https://images.livspace-cdn.com/plain/https://d3gq2merok8n5r.cloudfront.net/abhinav/ond-1634120396-Obfdc/jas-1657179080-NnXAg/tv-unit-1657603921-6y6tm/sc-10-1-1-1663178015-D0u0q.jpg",img2:"https://images.unsplash.com/photo-1615874959474-d609969a20ed"},
- {name:"Coffee Table",price:8999,old:11999,disc:"25%",img1:"https://images.unsplash.com/photo-1618220179428-22790b461013",img2:"https://images.thdstatic.com/productImages/de8462ea-b8de-400d-9df2-5577c43a7d30/svn/white-gold-tribesigns-way-to-origin-coffee-tables-hd-ny148-hyf-64_600.jpg"},
- {name:"Wardrobe",price:28999,old:37999,disc:"24%",img1:"https://images.unsplash.com/photo-1615874959474-d609969a20ed",img2:"https://images.unsplash.com/photo-1600210492493-0946911123ea"},
+const productsTrend = [
+  { 
+    name: "Modern Sofa", 
+    price: 25999, 
+    old: 35999, 
+    disc: "28%", 
+    img1: "https://www.estre.in/cdn/shop/files/2-min_d2bc49bf-1893-4118-bab5-8d0848d4d3fb.jpg?v=1743762905", 
+    img2: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
+    link: "wooden sofa.html" 
+  },
+  { 
+    name: "Queen Bed", 
+    price: 30999, 
+    old: 40999, 
+    disc: "25%", 
+    img1: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85", 
+    img2: "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf",
+    link: "Beds.html"
+  },
+  { 
+    name: "Dining Set", 
+    price: 19999, 
+    old: 27999, 
+    disc: "30%", 
+    img1: "https://images.unsplash.com/photo-1617806118233-18e1de247200", 
+    img2: "https://cdn2.bigcommerce.com/server5600/42eba/products/3776/images/17419/California_Rustic_Oak_Expandable_Round_Dining_Table__04717.1448060644.1280.1280.png?c=2",
+    link: "Dining Chairs.html"
+  },
+  { 
+    name: "TV Unit", 
+    price: 14999, 
+    old: 19999, 
+    disc: "20%", 
+    img1: "https://images.woodenstreet.de/image/data/tv-units-mdf/hailey-wall-mounted-tv-unit/exotic/updated+new/updated/upda/new-logo/9.jpg", 
+    img2: "https://images.unsplash.com/photo-1615874959474-d609969a20ed",
+    link: "TV Units.html"
+  },
+  { 
+    name: "Coffee Table", 
+    price: 8999, 
+    old: 11999, 
+    disc: "25%", 
+    img1: "https://images.unsplash.com/photo-1618220179428-22790b461013", 
+    img2: "https://images.thdstatic.com/productImages/de8462ea-b8de-400d-9df2-5577c43a7d30/svn/white-gold-tribesigns-way-to-origin-coffee-tables-hd-ny148-hyf-64_600.jpg",
+    link: "Coffee Tables.html"
+  },
+  { 
+    name: "Wardrobe", 
+    price: 28999, 
+    old: 37999, 
+    disc: "24%", 
+    img1: "https://images.unsplash.com/photo-1615874959474-d609969a20ed", 
+    img2: "https://images.unsplash.com/photo-1600210492493-0946911123ea",
+    link: "Wardrobes.html"
+  },
 ];
 
-const slider=document.getElementById("productSlider");
+const slider = document.getElementById("productSlider");
 
-productsTrend.forEach((p,i)=>{
- slider.innerHTML+=`
+// Build HTML string
+let productHTML = "";
+
+productsTrend.forEach((p) => {
+  productHTML += `
   <div class="product-card">
-   <span class="badge">${p.disc} OFF</span>
-   <div class="wishlist" onclick="toggleWish(this)">♡</div>
+    <span class="badge">${p.disc} OFF</span>
+    <div class="wishlist" onclick="toggleWish(this)">♡</div>
 
-   <div class="img-wrap">
-     <img src="${p.img1}" class="img1">
-     <img src="${p.img2}" class="img2">
-   </div>
+    <div class="img-wrap">
+      <img src="${p.img1}" class="img1">
+      <img src="${p.img2}" class="img2">
+    </div>
 
-   <h4>${p.name}</h4>
-   <div class="rating">⭐⭐⭐⭐☆</div>
-   <div class="price">₹${p.price} <span class="old-price">₹${p.old}</span></div>
-   <button class="add-cart" onclick="addCart()">Add to Cart</button>
+    <h4>${p.name}</h4>
+    <div class="rating">⭐⭐⭐⭐☆</div>
+    <div class="price">₹${p.price} <span class="old-price">₹${p.old}</span></div>
+    
+    <button class="add-cart" data-url="${p.link}">Shop Now</button>
   </div>`;
 });
+
+// Update DOM once
+slider.innerHTML = productHTML;
+
+// Handle Click Redirection
+slider.addEventListener('click', (e) => {
+  // Check if the clicked element is the button
+  if (e.target.classList.contains('add-cart')) {
+    const targetPage = e.target.getAttribute('data-url');
+    window.location.href = targetPage;
+  }
+});
+
+// Keep your existing toggleWish function
+function toggleWish(element) {
+    element.innerHTML = element.innerHTML === "♡" ? "♥" : "♡";
+}
 
 // SCROLL BUTTONS
 document.getElementById("nextTrend").onclick=()=>slider.scrollLeft+=300;
@@ -275,25 +345,67 @@ window.addEventListener("scroll",revealRooms);
 revealRooms();
 
 
-// PRODUCTS
-const dealsData=[
- {img:"https://www.comfortfurniture.com.sg/image/catalog/banners/sharer-sale-page.jpg",price:19999,old:29999,disc:"35%"},
- {img:"https://images.unsplash.com/photo-1505693416388-ac5ce068fe85",price:24999,old:34999,disc:"30%"},
- {img:"https://images.unsplash.com/photo-1617806118233-18e1de247200",price:14999,old:21999,disc:"32%"},
- {img:"https://static.povison.com/media/wysiwyg/new_menu/LimitedOffer-100.jpg",price:9999,old:14999,disc:"33%"},
- {img:"https://images.unsplash.com/photo-1618220179428-22790b461013",price:7999,old:11999,disc:"30%"},
+const dealsData = [
+  { 
+    img: "https://www.comfortfurniture.com.sg/image/catalog/banners/sharer-sale-page.jpg", 
+    price: 19999, 
+    old: 29999, 
+    disc: "35%", 
+    link: "L shape sofas.html" 
+  },
+  { 
+    img: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85", 
+    price: 24999, 
+    old: 34999, 
+    disc: "30%", 
+    link: "Beds.html" 
+  },
+  { 
+    img: "https://images.unsplash.com/photo-1617806118233-18e1de247200", 
+    price: 14999, 
+    old: 21999, 
+    disc: "32%", 
+    link: "Dining Chairs.html" 
+  },
+  { 
+    img: "https://static.povison.com/media/wysiwyg/new_menu/LimitedOffer-100.jpg", 
+    price: 9999, 
+    old: 14999, 
+    disc: "33%", 
+    link: "Dining Tables.html" 
+  },
+  { 
+    img: "https://images.unsplash.com/photo-1618220179428-22790b461013", 
+    price: 7999, 
+    old: 11999, 
+    disc: "30%", 
+    link: "Sofa.html" 
+  },
 ];
 
-const dealsSlider=document.getElementById("dealsSlider");
+const dealsSlider = document.getElementById("dealsSlider");
 
-dealsData.forEach(d=>{
- dealsSlider.innerHTML+=`
+// 1. Generate the HTML for all cards
+const dealsHTML = dealsData.map(d => `
   <div class="deal-card">
     <span class="deal-badge">${d.disc} OFF</span>
-    <img src="${d.img}">
-    <div class="deal-price">₹${d.price} <span class="deal-old">₹${d.old}</span></div>
-    <button>Add to Cart</button>
-  </div>`;
+    <img src="${d.img}" alt="Deal Image">
+    <div class="deal-price">
+      ₹${d.price} <span class="deal-old">₹${d.old}</span>
+    </div>
+    <button class="explore-btn" data-url="${d.link}">Explore Now</button>
+  </div>
+`).join('');
+
+// 2. Set the innerHTML once
+dealsSlider.innerHTML = dealsHTML;
+
+// 3. Add a single event listener to the container (Event Delegation)
+dealsSlider.addEventListener('click', (e) => {
+  if (e.target.classList.contains('explore-btn')) {
+    const targetUrl = e.target.getAttribute('data-url');
+    window.location.href = targetUrl;
+  }
 });
 
 // SCROLL
@@ -518,4 +630,39 @@ window.addEventListener("load", () => {
     showLogin(); // open signup view by default
   }, 3000);
 
+});
+const observerOptions = { threshold: 0.2 };
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal, .reveal-card').forEach(el => observer.observe(el));
+        const backToTopBtn = document.getElementById("backToTop");
+window.onscroll = function() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        backToTopBtn.style.display = "flex";
+        backToTopBtn.style.animation = "fadeIn 0.3s forwards";
+    } else {
+        backToTopBtn.style.display = "none";
+    }
+};
+
+backToTopBtn.addEventListener("click", function() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 });

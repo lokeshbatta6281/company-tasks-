@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Urban Wood | Premium Furniture Collection</title>
+    <title>Quantum | Premium Furniture Collection</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -24,20 +24,18 @@
   display:flex;
   align-items:center;
   justify-content:space-between;
-  
 }
 .ws-header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: #fff; /* Ensures content doesn't show through the header */
-     /* Optional: adds depth when scrolling */
+    background: #fff; 
 }
 
-/* Ensure the main head (breadcrumb/icons) stays below the sticky header if needed */
+
 .main-head {
     position: sticky;
-    top: 185px; /* Adjust this value based on the total height of ws-header */
+    top: 185px; 
     background: #fff;
     z-index: 999;
 }
@@ -239,16 +237,16 @@
   padding:20px;
 }
 .simple a{
-  display:block;
-  padding:5px;
-  text-decoration:none;
-  color:#333;
-  font-size: 15px;
+ display: block;
+    padding: 5px;
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
 }
 .simple a:hover{
   background:#f5f5f5;
 }
-       
+        
         .container { width: 95%; margin: auto; max-width: 1400px; }
 
         /* HEADER & NOTIFICATION */
@@ -258,7 +256,6 @@
         .nav-icons { display: flex; gap: 20px; font-size: 18px; cursor: pointer; }
         .icon-badge { background: #f58220; color: #fff; font-size: 11px; padding: 2px 6px; border-radius: 10px; vertical-align: top; margin-left: -8px; }
 
-        /* LAYOUT */
         .plp-wrapper { 
     display: flex; 
     margin-top: 30px; 
@@ -494,9 +491,6 @@
         grid-template-columns:1fr;
     }
 }
-
-
-
 /* SIDE DRAWER CSS */
 .cart-overlay {
     position: fixed;
@@ -609,6 +603,7 @@
     align-items: center;
     z-index: 9999;
 }
+
 .auth-overlay{
  position:fixed;
  inset:0;
@@ -680,6 +675,70 @@
  right:20px;
  top:20px;
  cursor:pointer;
+}
+/* QUANTUM POLICY FOOTER CSS */
+.q-policy-footer {
+    background-color: #fcfcfc; /* Light grey off-white background */
+    padding: 50px 0;          /* Large top/bottom padding for elite feel */
+    border-top: 1px solid #ddd;
+    font-family: 'Playfair Display', serif; /* Elegant Serif for Paragraphs */
+}
+
+.q-policy-footer__wrapper {
+    max-width: 1300px;
+    margin: 0 auto;           /* Centers the content */
+    padding: 0 40px;          /* Side padding for breathing room */
+}
+
+.q-policy-footer__row {
+    
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 60px;                /* Large gap between columns */
+}
+
+.q-policy-footer__block {
+    margin-bottom: 30px;      /* Margin bottom for each column */
+}
+
+.q-policy-footer__title {
+    color: #1a1a1a;           /* Deep Charcoal Heading */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 40px;      /* Spacing between title and paragraphs */
+    padding-bottom: 10px;
+    border-bottom: 3px solid #f58220; /* Brand Orange underline */
+    display: inline-block;
+}
+
+.q-policy-footer__text-group p {
+    color: #4a4a4a;           /* Soft Grey-Black for easy reading */
+    font-size: 15px;
+    line-height: 1.9;         /* Increased line height for paragraph feel */
+    margin-bottom: 25px;      /* Margin between individual paragraphs */
+    text-align: left;
+}
+
+.q-policy-footer__label {
+    color: #f58220;           /* Orange sub-headings */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    display: block;           /* Puts label on its own line */
+    margin-bottom: 5px;       /* Padding below label */
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .q-policy-footer {
+        padding: 60px 20px;
+    }
+    .q-policy-footer__row {
+        gap: 40px;
+    }
 }
 .whatsapp-btn {
             position: fixed;
@@ -789,7 +848,7 @@
     </div>
   </div>
 
- <!-- NAVBAR WITH MEGA MENU -->
+<!-- NAVBAR WITH MEGA MENU -->
 <nav class="nav">
   <ul>
 
@@ -846,53 +905,65 @@
 
   </ul>
 </nav>
-
 <header class="main-head">
-    <div class="container" style="display:flex; justify-content:space-between; align-items:center; width:100%; margin: 0px 60.4px;" >
-        <a href="index.html" class="logo"><div class="breadcrumb">Home / Dining  /Dining Chairs </div></a>
-        
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; width:100%">
+        <a href="index.html" class="logo"><div class="breadcrumb">Home </div></a>
         <div class="nav-icons">
             <div title="Wishlist">❤️<span class="icon-badge" id="wishCount">0</span></div>
             <div title="Cart">🛒<span class="icon-badge" id="cartCount">0</span></div>
         </div>
-           
-        
     </div>
 </header>
+
 </header>
-
-
-
-
-<main class="container plp-wrapper">
-
-    <aside class="sidebar">
-        <div class="filter-section">
-            <div class="filter-group-title">Sort by</div>
-            <label><input type="radio" name="sort" value="recommended" checked> Recommended</label>
-            <label><input type="radio" name="sort" value="low"> Price (Low to High)</label>
-            <label><input type="radio" name="sort" value="high"> Price (High to Low)</label>
-        </div>
-
-        <div class="filter-section">
-            <div class="filter-group-title">Price Range</div>
-            <div class="price-inputs">
-                <input type="number" id="minPrice" value="1000" onchange="applyFilters()">
-                <input type="number" id="maxPrice" value="95000" onchange="applyFilters()">
+<footer class="q-policy-footer">
+    <div class="q-policy-footer__wrapper">
+        <div class="q-policy-footer__row">
+            
+            <div class="q-policy-footer__block">
+                <h3 class="q-policy-footer__title">01. Our Company</h3>
+                <div class="q-policy-footer__text-group">
+                    <p><span class="q-policy-footer__label">About Us:</span> Quantum Furniture was founded on the principle of "Essential Luxury." We bridge the gap between high-end Italian aesthetics and Indian craftsmanship. Our mission is to create pieces that aren't just furniture, but heirlooms that define your living space.</p>
+                    <p><span class="q-policy-footer__label">Contact Us:</span> Communication is key to our service. Whether you have a query about a product finish or need help with an existing order, our dedicated support team is available via email, phone, and live chat to provide personalized assistance.</p>
+                    <p><span class="q-policy-footer__label">Our Stores:</span> Experience the texture of our premium fabrics and the solid weight of our teak wood in person. Our experience centers are designed as "living galleries" where you can visualize how our pieces fit into your dream home.</p>
+                    <p><span class="q-policy-footer__label">Disclaimer:</span> While we strive for perfection, handcrafted furniture may have slight variations in grain and color. This section outlines our commitment to information accuracy and the natural characteristics of the materials we use.</p>
+                </div>
             </div>
-            <input type="range" class="range-slider" min="15000" max="95000" id="priceRange" value="95000" oninput="updateRange(this.value)">
+
+            <div class="q-policy-footer__block">
+                <h3 class="q-policy-footer__title">02. Policies</h3>
+                <div class="q-policy-footer__text-group">
+                    <p><span class="q-policy-footer__label">Terms and Condition:</span> This section governs the use of our digital platform. It covers user accounts, intellectual property rights for our unique designs, and the legal framework of your purchase at Quantum Furniture.</p>
+                    <p><span class="q-policy-footer__label">Privacy Policy:</span> We value your data as much as your style. We use industry-standard SSL encryption to ensure that your personal details and browsing habits are used only to improve your shopping experience and are never sold to third parties.</p>
+                    <p><span class="q-policy-footer__label">Cancellation Policy:</span> We understand that plans change. Our policy allows for easy cancellations within 24 hours of order placement, ensuring you have the flexibility to make the right choice for your interior.</p>
+                    <p><span class="q-policy-footer__label">Return & Refund Policy:</span> To ensure your complete satisfaction, we offer a "No-Questions-Asked" return window for damaged or mismatched goods. We provide full refunds or replacements to maintain the highest standards of customer happiness.</p>
+                    <p><span class="q-policy-footer__label">Shipping & Delivery:</span> We partner with specialized furniture logistics providers to ensure white-glove delivery. From secure packaging in wooden crates to room-of-choice placement, we handle the heavy lifting for you.</p>
+                </div>
+            </div>
+
+            <div class="q-policy-footer__block">
+                <h3 class="q-policy-footer__title">03. Business & Ethics</h3>
+                <div class="q-policy-footer__text-group">
+                    <p><span class="q-policy-footer__label">Bulk Enquiry:</span> Catering to architects, interior designers, and hospitality moguls, our B2B division offers customized pricing and scalable manufacturing for hotels, resorts, and corporate offices.</p>
+                    <p><span class="q-policy-footer__label">Grievance Redressal:</span> In the rare event of a dispute, we have a formal hierarchy to resolve issues. Our Grievance Officer ensures that every complaint is addressed within 48 hours with a fair and logical solution.</p>
+                    <p><span class="q-policy-footer__label">Code of Ethics:</span> At Quantum, we believe in fair wages and sustainable sourcing. We strictly follow environmental regulations and ensure that the wood used in our furniture is sourced from government-approved sustainable plantations.</p>
+                    <p><span class="q-policy-footer__label">Payment & Security:</span> Shop with peace of mind. Our payment gateway supports all major credit cards, UPI, and EMI options, all protected by 256-bit encryption to prevent unauthorized access.</p>
+                </div>
+            </div>
+
+            <div class="q-policy-footer__block">
+                <h3 class="q-policy-footer__title">04. Shop Categories</h3>
+                <div class="q-policy-footer__text-group">
+                    <p><span class="q-policy-footer__label">Living Room:</span> The social hub of the home. Our collection ranges from modular L-shaped sofas to minimalist marble coffee tables that serve as conversation starters.</p>
+                    <p><span class="q-policy-footer__label">Bedroom:</span> Your private sanctuary. Discover beds with integrated storage, velvet-upholstered headboards, and bedside tables that blend functionality with quiet elegance.</p>
+                    <p><span class="q-policy-footer__label">Dining Room:</span> Where memories are shared. We offer solid wood dining sets, ergonomic chairs, and sophisticated bar cabinets designed for the modern host.</p>
+                    <p><span class="q-policy-footer__label">Home Decor:</span> The finishing touch. Enhance your space with our curated selection of hand-tufted rugs, designer mirrors, and ambient lighting solutions that set the perfect mood.</p>
+                </div>
+            </div>
+
         </div>
-
-       
-    </aside>
-
-    <section class="content-area">
-        
-        <h1 class="page-title">Premium Dining Chairs Collections</h1>
-        <div id="grid" class="grid"></div>
-    </section>
-
-</main>
+    </div>
+</footer>
 <footer class="footer">
 
     <div class="footer-top">
@@ -991,7 +1062,6 @@
     </div>
 
 </footer>
-
 <div class="cart-overlay" id="cartOverlay">
     <div class="cart-modal">
         <div class="cart-header" style="display:flex; justify-content:space-between; align-items:center; padding: 20px; border-bottom: 1px solid #eee;">
@@ -1003,7 +1073,7 @@
 
         <div class="cart-footer" id="cartFooter">
             <div id="summarySection">
-                
+               
                 <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-weight:bold; font-size:18px;">
                     <span>Total Payable:</span>
                     <span id="cartTotal">₹0</span>
@@ -1071,6 +1141,7 @@
         </div>
     </div>
 </div>
+
 <!-- OVERLAY -->
 <div id="authOverlay" class="auth-overlay">
 
@@ -1177,36 +1248,88 @@ document.addEventListener("click", (e) => {
         searchResults.style.display = "none";
     }
 });
-const products = [
-    // --- Low Price Dining Chairs (Urbanwood) ---
-    {id:1,
-         name:"Woodora Dining Chair Without Cushion",
-          price:7869,
-           old:11803,
-            disc:33,
-             finish:"Walnut",
-              type:"Wooden Dining",
-               img:"https://www.urbanwood.in/image/cache/catalog/dining-chair/woodora/walnut/walnut-look-1920x1340.jpg"},
-    {id:2, name:"Deck Dining Chair", price:8500, old:15833, disc:46, finish:"Teak", type:"Wooden Dining", img:"https://www.thegardenroom.in/cdn/shop/files/DinningChair-05.jpg?v=1745424182&width=620"},
-    {id:3, name:"Tale Dining Chair", price:8733, old:13099, disc:33, finish:"Walnut", type:"Wooden Dining", img:"https://www.nilkamalhomes.com/cdn/shop/files/FLORETDININGCHAIR_1024x@2x.jpg?v=1694063592"},
-    {id:4, name:"Elysian Wooden Dining Chair", price:8739, old:12474, disc:30, finish:"Honey", type:"Wooden Dining", img:"https://hasthshilpa.com/wp-content/uploads/2023/07/DCH-006DCH-0061200-120020-12-2021-15-40-37-028.jpg.webp"},
-    {id:5, name:"Vera Dining Chair", price:9025, old:14373, disc:37, finish:"Lite Honey", type:"Wooden Dining", img:"https://www.nilkamalhomes.com/cdn/shop/products/VerachairLS_1024x@2x.jpg?v=1664774628"},
-    {id:6, name:"Alto Dining Chair", price:9975, old:14373, disc:31, finish:"Teak", type:"Wooden Dining", img:"https://www.urbanwood.in//image/cache/catalog/dining/6-seater/crispin%20/teak/5-746x522.jpg"},
-    {id:7, name:"Dahlia Dining Chair", price:9975, old:14725, disc:32, finish:"Walnut", type:"Wooden Dining", img:"https://www.dtalemodern.com/media/cachei/0x0/catalog/product/d/a/dahlia_dining_chair_lg_6__1742471830.jpg"},
-    {id:8, name:"Oreo Dining Chair", price:9980, old:14970, disc:33, finish:"Stone Grey Velvet", type:"Wood & Fabric Dining", img:"https://www.urbanwood.in//image/cache/catalog/dining-chair/oreo-chairs/steel-grey/look-1-746x522.jpg"},
-
-    // --- Mid Price Dining Chairs ---
-    {id:9, name:"Cilan Dining Chair", price:10925, old:16625, disc:34, finish:"Walnut", type:"Wooden Dining", img:"https://www.urbanwood.in//image/cache/catalog/dining/6-seater/cilan/honey/SINGLE%20CHAIR%20HONEY%20jpg-746x522.jpg"},
-    {id:10, name:"Jasper Dining Chair", price:11009, old:15759, disc:30, finish:"Walnut", type:"Wooden Dining", img:"https://assets.pbimgs.com/pbimgs/ab/images/dp/wcm/202548/0005/open-box-jasper-dining-chair-l.jpg"},
-    {id:11, name:"Knit Dining Chair", price:11707, old:17561, disc:33, finish:"Honey", type:"Wooden Dining", img:"https://www.urbanwood.in//image/cache/catalog/dining/4-seater/knit-sets/honey/honey-look-746x522.jpg"},
-    {id:12, name:"Rio Dining Chair", price:12919, old:18619, disc:31, finish:"Honey", type:"Wooden Dining", img:"https://www.urbanwood.in//image/cache/catalog/dining/4-seater/rio/honey/1-746x522.jpg"},
-    {id:13, name:"Quipo Dining Chair With Arm", price:13434, old:20151, disc:33, finish:"Honey", type:"Wood & Arm Dining", img:"https://www.undomus.com/35582-large_default/rio-dining-chair-gianfranco-ferre.jpg"},
-    {id:14, name:"Moderna Wooden Dining Chair - Set Of 2", price:14630, old:21850, disc:33, finish:"Walnut", type:"Set Of 2 Dining", img:"https://www.urbanwood.in//image/cache/catalog/dining-chair/moderna/walnut/walnut-746x522.jpg"},
-
-    // --- Higher Range / Premium Dining Chairs ---
-    {id:15, name:"Amelia Dining Chair - Set Of 2", price:15485, old:23275, disc:33, finish:"Honey", type:"Set Of 2 Dining", img:"https://www.urbanwood.in//image/cache/catalog/dining/6-seater/amelia/honey/honey-chair-746x522.jpg"},
-    {id:16, name:"Urban Dining Chair - Set Of 2", price:31999, old:47111, disc:32, finish:"Stone Grey Velvet", type:"Luxury Dining Set", img:"https://www.urbanwood.in//image/cache/catalog/dining-chair/urban/stone-grey/stone-grey-746x522.jpg"}
-    
+    // Hybrid Data matching your uploaded images
+ const products = [
+    {
+        id: 1, 
+        name: "Eco-Pure Organic Natural Latex", 
+        price: 34500, 
+        old: 52000, 
+        disc: 34, 
+        finish: "Organic Cotton Cover", 
+        type: "100% Natural", 
+        img: "https://sleeponlatex.com/img/mattress-construction-p-1280_640x.jpg"
+    },
+    {
+        id: 2, 
+        name: "Pincore Ortho Latex Mattress", 
+        price: 28900, 
+        old: 41000, 
+        disc: 29, 
+        finish: "Bamboo Fabric", 
+        type: "Orthopedic", 
+        img: "https://5.imimg.com/data5/SELLER/Default/2023/12/371446254/LL/SK/ID/12033720/latex-pincore-mattress-500x500.jpg"
+    },
+    {
+        id: 3, 
+        name: "Zenith Hybrid Latex-Coil", 
+        price: 45000, 
+        old: 69000, 
+        disc: 35, 
+        finish: "Tencel Quilt", 
+        type: "Hybrid", 
+        img: "https://cdn.shopify.com/s/files/1/0255/9777/1885/files/Latex_hybrid_mattress_cb45a7cc-37e7-4df5-a9c6-f49762689948.jpg?v=1731733530"
+    },
+    {
+        id: 4, 
+        name: "Belgian Talalay Luxury Mattress", 
+        price: 62000, 
+        old: 82000, 
+        disc: 24, 
+        finish: "Silk Infused Cover", 
+        type: "Talalay Latex", 
+        img: "https://tse2.mm.bing.net/th/id/OIP.mj-SirPc1TIChtleOcVXjAHaFF?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+        id: 5, 
+        name: "Eco-Soft Soy-Latex Blend", 
+        price: 22500, 
+        old: 31250, 
+        disc: 28, 
+        finish: "Aloe Vera Finish", 
+        type: "Eco-Blend", 
+        img: "https://tse3.mm.bing.net/th/id/OIP.jNovhBtfT5b_LvDeJS1_TwHaHa?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3"
+    },
+    {
+        id: 6, 
+        name: "Deep-Rest Dunlop Support Bed", 
+        price: 19800, 
+        old: 28700, 
+        disc: 31, 
+        finish: "Knitted Jacquard", 
+        type: "Dunlop Latex", 
+        img: "https://cdn.shopify.com/s/files/1/0255/9777/1885/files/turmerry-full-size-mattress-dunlop-latex-foam-support.jpg"
+    },
+    {
+        id: 7, 
+        name: "Ergo-Latex Breathable Pad", 
+        price: 11500, 
+        old: 17000, 
+        disc: 32, 
+        finish: "Cooling Mesh", 
+        type: "Topper", 
+        img: "https://colchoneriafarmadescanso.com/wp-content/uploads/2022/10/ergo-latex-5.jpg"
+    },
+    {
+        id: 8, 
+        name: "Platinum Dual-Layer Latex", 
+        price: 58000, 
+        old: 83000, 
+        disc: 30, 
+        finish: "Cashmere Cover", 
+        type: "Dual-Density", 
+        img: "https://thezone8.com/wp-content/uploads/2023/10/Latex-Dual-Mattress_white_cutout-5-700x700.webp"
+    }
 ];
 // ==========================================
 // 1. DATA AND SHARED STATE (LocalStorage)
@@ -1278,6 +1401,7 @@ function updateCounters() {
     if(cCount) cCount.innerText = cart.length;
     if(wCount) wCount.innerText = wishlist.length;
 }
+
 // ==========================================
 // 4. DRAWER LOGIC
 // ==========================================
@@ -1454,9 +1578,9 @@ window.onload = () => {
     document.getElementById("minPrice")?.addEventListener('input', applyFilters);
     document.getElementById("maxPrice")?.addEventListener('input', applyFilters);
 };
-
 // --- Add Auth & Filter functions here as they were in your original code ---
 // (signIn, signUp, closeAuth, showLogin, showSignup, registerUser, loginUser, applyFilters)
+
 function signIn(){
  document.getElementById("authOverlay").style.display="flex";
  showLogin();

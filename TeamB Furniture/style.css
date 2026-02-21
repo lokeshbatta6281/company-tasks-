@@ -57,16 +57,76 @@
 .icon{cursor:pointer;position:relative}
 
 /* PROFILE DROPDOWN */
-.profile-dropdown{
-  position:absolute;
-  top:35px;
-  right:0;
-  background:#fff;
-  border:1px solid #ddd;
-  padding:15px;
-  display:none;
+/* PROFILE DROPDOWN */
+.profile{
+    position: relative;
+    cursor: pointer;
 }
-.profile:hover .profile-dropdown{display:block}
+
+/* Dropdown */
+.profile-dropdown{
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 230px;
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+/* Show on Hover */
+.profile:hover .profile-dropdown{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Button Styling */
+.profile-dropdown button{
+    width: 100%;
+    padding: 15px 18px;
+    border: none;
+    background: #fff;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+/* First Button (Sign In - Orange text) */
+.profile-dropdown button:first-child{
+    color: #f58220;
+}
+
+/* Second Button (Dark Background) */
+.profile-dropdown button:last-child{
+    background: #4b4b4b;
+    color: #fff;
+}
+
+/* Hover Effects */
+.profile-dropdown button:hover{
+    background: #f5f5f5;
+}
+
+.profile-dropdown button:last-child:hover{
+    background: #333;
+}
+
+/* Icon Styling */
+.profile-dropdown button i{
+    font-size: 16px;
+}
 
 /* NAVBAR */
 .nav{border-top:1px solid #eee;border-bottom:1px solid #eee}
@@ -245,7 +305,11 @@
   color:#121212;
 }
 .side-content button{
-  background:#ff6b00;border:none;color:#fff;padding:10px 15px;margin-top:10px;
+  background:#ff6b00;border:none;padding:10px 15px;margin-top:10px;
+}
+.side-content button a {
+  text-decoration: none;
+  color:#fff;
 }
 .categories{padding:70px 0;text-align:center}
 .section-title{font-size:32px;margin-bottom:30px}
@@ -478,10 +542,12 @@
   padding:10px 18px;
   border:none;
   background:#ff6b00;
-  color:#fff;
   cursor:pointer;
 }
-
+.room-content button a{
+  text-decoration: none;
+  color: #fff;
+}
 /* HOVER EFFECT */
 .room-card:hover img{
   transform:scale(1.15);
@@ -1059,4 +1125,55 @@ body{font-family:Poppins}
     justify-content: center;
     align-items: center;
     z-index: 9999;
+}
+.whatsapp-btn {
+            position: fixed;
+    bottom: 31px;
+    left: 22px;
+    background: #25d366;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 29px;
+    color: white;
+    box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
+    z-index: 9999;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+        }
+        .whatsapp-btn:hover { transform: scale(1.1); color: white; }
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #e55f14; /* Your Brand Orange */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none; /* Hidden by default */
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(229, 95, 20, 0.4);
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top:hover {
+    background-color: #0a0a0a; /* Darker on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Optional: Animation for appearing */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

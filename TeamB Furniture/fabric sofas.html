@@ -6,7 +6,7 @@
     <title>Urban Wood | Premium Furniture Collection</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
@@ -68,16 +68,76 @@
 .icon{cursor:pointer;position:relative}
 
 /* PROFILE DROPDOWN */
-.profile-dropdown{
-  position:absolute;
-  top:35px;
-  right:0;
-  background:#fff;
-  border:1px solid #ddd;
-  padding:15px;
-  display:none;
+/* PROFILE DROPDOWN */
+.profile{
+    position: relative;
+    cursor: pointer;
 }
-.profile:hover .profile-dropdown{display:block}
+
+/* Dropdown */
+.profile-dropdown{
+    position: absolute;
+    top: 45px;
+    right: 0;
+    width: 230px;
+    background: #fff;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+/* Show on Hover */
+.profile:hover .profile-dropdown{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Button Styling */
+.profile-dropdown button{
+    width: 100%;
+    padding: 15px 18px;
+    border: none;
+    background: #fff;
+    text-align: left;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+/* First Button (Sign In - Orange text) */
+.profile-dropdown button:first-child{
+    color: #f58220;
+}
+
+/* Second Button (Dark Background) */
+.profile-dropdown button:last-child{
+    background: #4b4b4b;
+    color: #fff;
+}
+
+/* Hover Effects */
+.profile-dropdown button:hover{
+    background: #f5f5f5;
+}
+
+.profile-dropdown button:last-child:hover{
+    background: #333;
+}
+
+/* Icon Styling */
+.profile-dropdown button i{
+    font-size: 16px;
+}
 
 /* NAVBAR */
 .nav{border-top:1px solid #eee;}
@@ -505,7 +565,7 @@
 
 .pay-window {
     background: #fff;
-    width: 400px;
+    width: 440px;
     border-radius: 12px;
     overflow: hidden;
     animation: slideUp 0.3s ease-out;
@@ -619,6 +679,57 @@
  top:20px;
  cursor:pointer;
 }
+.whatsapp-btn {
+            position: fixed;
+    bottom: 31px;
+    left: 22px;
+    background: #25d366;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 29px;
+    color: white;
+    box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
+    z-index: 9999;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+        }
+        .whatsapp-btn:hover { transform: scale(1.1); color: white; }
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #e55f14; /* Your Brand Orange */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none; /* Hidden by default */
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(229, 95, 20, 0.4);
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-top:hover {
+    background-color: #0a0a0a; /* Darker on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Optional: Animation for appearing */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
     </style>
 </head>
 <body>
@@ -660,12 +771,16 @@
 
       <!-- PROFILE -->
       <div class="icon profile">
-        👤
-        <div class="profile-dropdown">
-          <button onclick="signIn()">Sign In</button>
-          <button onclick="signUp()">Sign Up</button>
-        </div>
-      </div>
+<i class="fa-regular fa-user"></i>
+    <div class="profile-dropdown">
+        <button onclick="signIn()">
+            <i class="fa-regular fa-user"></i> Sign In
+        </button>
+        <button onclick="signUp()">
+            <i class="fa-solid fa-user-plus"></i> Sign Up
+        </button>
+    </div>
+</div>
 
       
 
@@ -732,7 +847,7 @@
 </nav>
 <header class="main-head">
     <div class="container" style="display:flex; justify-content:space-between; align-items:center; width:100%">
-        <a href="#" class="logo"><div class="breadcrumb">Home / Sofas / Fabric Sofa Sets</div></a>
+        <a href="index.html" class="logo"><div class="breadcrumb">Home / Sofas / Fabric Sofa Sets</div></a>
         <div class="nav-icons">
             <div title="Wishlist">❤️<span class="icon-badge" id="wishCount">0</span></div>
             <div title="Cart">🛒<span class="icon-badge" id="cartCount">0</span></div>
@@ -758,8 +873,8 @@
         <div class="filter-section">
             <div class="filter-group-title">Price Range</div>
             <div class="price-inputs">
-                <input type="number" id="minPrice" value="15000" onchange="applyFilters()">
-                <input type="number" id="maxPrice" value="95000" onchange="applyFilters()">
+                <input type="number" id="minPrice" value="1000" onchange="applyFilters()">
+                <input type="number" id="maxPrice" value="150000" onchange="applyFilters()">
             </div>
             <input type="range" class="range-slider" min="15000" max="95000" id="priceRange" value="95000" oninput="updateRange(this.value)">
         </div>
@@ -788,39 +903,38 @@
         <div>
             <h4>OUR COMPANY</h4>
             <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Our Stores</a></li>
-                <li><a href="#">Disclaimer</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="Our Company.html">About Us</a></li>
+                <li><a href="Our Company.html">Contact Us</a></li>
+                <li><a href="Our Company.html">Our Stores</a></li>
+                <li><a href="Our Company.html">Disclaimer</a></li>
+                
             </ul>
         </div>
 
         <div>
             <h4>PRODUCT CATEGORIES</h4>
             <ul>
-                <li><a href="#">Living</a></li>
-                <li><a href="#">Bedroom</a></li>
-                <li><a href="#">Dining Sets</a></li>
-                <li><a href="#">Study and Office Furniture</a></li>
-                <li><a href="#">Collections</a></li>
-                <li><a href="#">Modular Furniture</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="fabric sofas.html">Sofas</a></li>
+                <li><a href="TV Units.html">Living room</a></li>
+                <li><a href="Beds.html">Bedroom</a></li>
+                <li><a href="Foam.html">Mattress</a></li>
+                <li><a href="Dining Chairs.html">Dining</a></li>
             </ul>
         </div>
 
         <div>
             <h4>HELP</h4>
             <ul>
-                <li><a href="#">Bulk Enquiry</a></li>
-                <li><a href="#">Terms and Condition</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Cancellation Policy</a></li>
-                <li><a href="#">Return & Refund Policy</a></li>
-                <li><a href="#">Grievance Redressal Policy</a></li>
-                <li><a href="#">Code of Ethics</a></li>
-                <li><a href="#">Payment & Security</a></li>
-                <li><a href="#">Shipping & Delivery</a></li>
+                <li><a href="Our Company.html">Bulk Enquiry</a></li>
+                <li><a href="Our Company.html">Terms and Condition</a></li>
+                <li><a href="Our Company.html">Privacy Policy</a></li>
+                <li><a href="Our Company.html">Cancellation Policy</a></li>
+                <li><a href="Our Company.html">Return & Refund Policy</a></li>
+                <li><a href="Our Company.html">Grievance Redressal Policy</a></li>
+                <li><a href="Our Company.html">Code of Ethics</a></li>
+                <li><a href="Our Company.html">Payment & Security</a></li>
+                <li><a href="Our Company.html">Shipping & Delivery</a></li>
             </ul>
         </div>
 
@@ -869,11 +983,11 @@
 
             <div class="social">
                 <h4>Follow Us</h4>
-                <a href="#" class="facebook"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="twitter"><i class="fab fa-x-twitter"></i></a>
-                <a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="youtube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.facebook.com/quantumfurniture" class="facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://x.com/quantumfurniture"  class="twitter" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.linkedin.com/company/quantumfurniture" class="linkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/quantumfurniture" class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@quantumfurniture" class="youtube" target="_blank"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
 
@@ -891,10 +1005,7 @@
 
         <div class="cart-footer" id="cartFooter">
             <div id="summarySection">
-                <div style="display:flex; justify-content:space-between; margin-bottom:5px; font-size:14px; color:#666;">
-                    <span>Subtotal:</span>
-                    <span id="subTotal">₹0</span>
-                </div>
+                
                 <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-weight:bold; font-size:18px;">
                     <span>Total Payable:</span>
                     <span id="cartTotal">₹0</span>
@@ -1005,7 +1116,69 @@
     </div>
   </div>
 </div>
+<a href="https://chat.whatsapp.com/B8PiQs8sQdF13EA9BZLUOc" class="whatsapp-btn" target="_blank"><i class="bi bi-whatsapp"></i></a>
+    <button id="backToTop" class="back-to-top" title="Go to top">
+    <i class="bi bi-arrow-up-short"></i>
+</button>
 <script>
+    const searchInput = document.getElementById("searchInput");
+const searchResults = document.getElementById("searchResults");
+
+// Apply styles to ensure the dropdown hides the background content
+searchResults.style.backgroundColor = "white"; // Solid background
+searchResults.style.position = "absolute";     // Floats over content
+searchResults.style.zIndex = "1000";           // Sits on top of everything
+searchResults.style.boxShadow = "0 4px 8px rgba(0,0,0,0.1)"; // Optional: adds depth
+
+searchInput.addEventListener("input", function() {
+    const query = this.value.toLowerCase().trim();
+    searchResults.innerHTML = "";
+
+    if(query === ""){
+        searchResults.style.display = "none";
+        return;
+    }
+
+    const filtered = products.filter(p =>
+        p.name.toLowerCase().includes(query)
+    );
+
+    if(filtered.length === 0){
+        searchResults.innerHTML = "<div style='padding:10px; background: white;'>No products found</div>";
+    } else {
+        filtered.forEach(p => {
+            const div = document.createElement("div");
+            div.style.padding = "10px";
+            div.style.cursor = "pointer";
+            div.style.borderBottom = "1px solid #eee";
+            div.style.backgroundColor = "white"; // Ensures individual items are opaque
+            div.innerText = p.name;
+
+            div.onclick = () => {
+                searchInput.value = p.name;
+                searchResults.style.display = "none";
+                
+                const cards = document.querySelectorAll(".card-name");
+                cards.forEach(card => {
+                    if(card.innerText === p.name){
+                        card.scrollIntoView({behavior:"smooth", block:"center"});
+                    }
+                });
+            };
+
+            searchResults.appendChild(div);
+        });
+    }
+
+    searchResults.style.display = "block";
+});
+
+// Close the search results if you click anywhere else on the page
+document.addEventListener("click", (e) => {
+    if (e.target !== searchInput) {
+        searchResults.style.display = "none";
+    }
+});
     // Hybrid Data matching your uploaded images
    const products = [
     {
@@ -1159,156 +1332,190 @@
         img: "https://m.media-amazon.com/images/I/81zNdfxY2YL._AC_UF894,1000_QL80_.jpg"
     }
 ];
+// ==========================================
+// 1. DATA AND SHARED STATE (LocalStorage)
+// ==========================================
+let cart = JSON.parse(localStorage.getItem('userCart')) || [];
+let wishlist = JSON.parse(localStorage.getItem('userWishlist')) || [];
 
-
-
-    // 1. DATA AND STATE
-    let cart = [];
-    let wishlist = [];
-
-    // 2. RENDER PRODUCTS
-    function render(dataList) {
-        const grid = document.getElementById("grid");
-        if(!grid) return;
-        grid.innerHTML = "";
-        
-        dataList.forEach(p => {
-            const inWish = wishlist.some(item => item.id === p.id);
-            grid.innerHTML += `
-                <div class="card">
-                    <div class="img-container">
-                        <div class="wishlist-trigger ${inWish ? 'active' : ''}" onclick="toggleWish(${p.id})">❤</div>
-                        <img src="${p.img}" alt="${p.name}">
+// ==========================================
+// 2. RENDER PRODUCTS
+// ==========================================
+function render(dataList) {
+    const grid = document.getElementById("grid");
+    if(!grid) return;
+    grid.innerHTML = "";
+    
+    dataList.forEach(p => {
+        const inWish = wishlist.some(item => item.id === p.id);
+        grid.innerHTML += `
+            <div class="card">
+                <div class="img-container">
+                    <div class="wishlist-trigger ${inWish ? 'active' : ''}" onclick="toggleWish(${p.id})">❤</div>
+                    <img src="${p.img}" alt="${p.name}">
+                </div>
+                <div class="card-info">
+                    <h4 class="card-name">${p.name}</h4>
+                    <p class="finish-label">(${p.finish})</p>
+                    <div class="price-row">
+                        <span class="current-price">₹${p.price.toLocaleString()}</span>
+                        <span class="old-price">₹${p.old.toLocaleString()}</span>
+                        <span class="discount-pct">${p.disc}% OFF</span>
                     </div>
-                    <div class="card-info">
-                        <h4 class="card-name">${p.name}</h4>
-                        <p class="finish-label">(${p.finish})</p>
-                        <div class="price-row">
-                            <span class="current-price">₹${p.price.toLocaleString()}</span>
-                            <span class="old-price">₹${p.old.toLocaleString()}</span>
-                            <span class="discount-pct">${p.disc}% OFF</span>
-                        </div>
-                        <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
-                    </div>
-                </div>`;
-        });
-    }
+                    <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+                </div>
+            </div>`;
+    });
+}
 
-    // 3. CORE LOGIC
-    function addToCart(id) {
-        const product = products.find(p => p.id === id);
-        if(product) {
-            cart.push(product);
-            updateCounters();
-            // Silent add - No popup, No auto-open
-        }
-    }
-
-    function toggleWish(id) {
-        const index = wishlist.findIndex(p => p.id === id);
-        const product = products.find(p => p.id === id);
-        
-        if (index === -1) {
-            wishlist.push(product);
-        } else {
-            wishlist.splice(index, 1);
-        }
+// ==========================================
+// 3. CORE LOGIC
+// ==========================================
+function addToCart(id) {
+    const product = products.find(p => p.id === id);
+    if(product) {
+        cart.push(product);
         updateCounters();
-        render(products); // Refresh to show red heart
     }
+}
 
-    function updateCounters() {
-        document.getElementById("cartCount").innerText = cart.length;
-        document.getElementById("wishCount").innerText = wishlist.length;
+function toggleWish(id) {
+    const index = wishlist.findIndex(p => p.id === id);
+    const product = products.find(p => p.id === id);
+    
+    if (index === -1) {
+        wishlist.push(product);
+    } else {
+        wishlist.splice(index, 1);
     }
+    updateCounters();
+    applyFilters(); // Use filters to re-render so heart stays red
+}
 
-    // 4. DRAWER LOGIC (Scrolling & Dynamic Content)
-    function showDrawer(type) {
-        const overlay = document.getElementById("cartOverlay");
-        const list = document.getElementById("cartItemsList");
-        const title = overlay.querySelector('h3');
-        const footer = document.getElementById("cartFooter");
+function updateCounters() {
+    // Save to browser memory for 15-page sync
+    localStorage.setItem('userCart', JSON.stringify(cart));
+    localStorage.setItem('userWishlist', JSON.stringify(wishlist));
+
+    const cCount = document.getElementById("cartCount");
+    const wCount = document.getElementById("wishCount");
+    if(cCount) cCount.innerText = cart.length;
+    if(wCount) wCount.innerText = wishlist.length;
+}
+// ==========================================
+// 4. DRAWER LOGIC
+// ==========================================
+function showDrawer(type) {
+    const overlay = document.getElementById("cartOverlay");
+    const list = document.getElementById("cartItemsList");
+    const title = overlay.querySelector('h3');
+    const footer = document.getElementById("cartFooter");
+    
+    const items = (type === 'cart') ? cart : wishlist;
+    
+    title.innerText = (type === 'cart') ? "Your Cart" : "Your Wishlist";
+    footer.style.display = (type === 'cart') ? "block" : "none";
+
+    list.innerHTML = items.length === 0 ? `<p style="text-align:center; padding:50px; color:#999;">Empty</p>` : "";
+    
+    let total = 0;
+    items.forEach((item, index) => {
+        total += item.price;
         
-        const items = (type === 'cart') ? cart : wishlist;
+        // Action button for Wishlist view
+        let actionUI = (type === 'wishlist') 
+            ? `<button onclick="moveFromWishToCart(${item.id})" style="background:#f58220; color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer; font-size:11px; margin-top:5px;">Add to Cart</button>` 
+            : "";
+
+        list.innerHTML += `
+            <div class="cart-item" style="display:flex; gap:15px; margin-bottom:20px; align-items:center; border-bottom:1px solid #eee; padding-bottom:10px;">
+                <img src="${item.img}" style="width:60px; height:60px; object-fit:cover; border-radius:5px;">
+                <div style="flex:1">
+                    <h5 style="font-size:13px; margin:0;">${item.name}</h5>
+                    <p style="font-size:14px; margin:2px 0; font-weight:bold;">₹${item.price.toLocaleString()}</p>
+                    ${actionUI}
+                </div>
+                <span onclick="removeItem('${type}', ${index})" style="color:red; cursor:pointer; font-weight:bold; font-size:20px;">&times;</span>
+            </div>`;
+    });
+
+    const totalEl = document.getElementById("cartTotal");
+    if(totalEl) totalEl.innerText = `₹${total.toLocaleString()}`;
+    overlay.classList.add("active");
+}
+
+// --- NEW FUNCTION: Moves item from Wishlist to Cart and redirects ---
+function moveFromWishToCart(id) {
+    const product = products.find(p => p.id === id);
+    const wishIndex = wishlist.findIndex(p => p.id === id);
+    
+    if (product) {
+        // 1. Add to Cart
+        cart.push(product);
         
-        // Dynamic Title & Footer visibility
-        title.innerText = (type === 'cart') ? "Your Cart" : "Your Wishlist";
-        footer.style.display = (type === 'cart') ? "block" : "none";
-
-        list.innerHTML = items.length === 0 ? `<p style="text-align:center; padding:50px; color:#999;">Empty</p>` : "";
+        // 2. Remove from Wishlist
+        if (wishIndex !== -1) {
+            wishlist.splice(wishIndex, 1);
+        }
         
-        let total = 0;
-        items.forEach((item, index) => {
-            total += item.price;
-            list.innerHTML += `
-                <div class="cart-item" style="display:flex; gap:15px; margin-bottom:20px; align-items:center;">
-                    <img src="${item.img}">
-                    <div style="flex:1">
-                        <h5 style="font-size:13px; margin:0;">${item.name}</h5>
-                        <p style="font-size:14px; margin:5px 0 0; font-weight:bold;">₹${item.price.toLocaleString()}</p>
-                    </div>
-                    <span onclick="removeItem('${type}', ${index})" style="color:red; cursor:pointer; font-weight:bold; font-size:20px;">&times;</span>
-                </div>`;
-        });
-
-        document.getElementById("cartTotal").innerText = `₹${total.toLocaleString()}`;
-        overlay.classList.add("active");
-    }
-
-    function removeItem(type, index) {
-        if (type === 'cart') cart.splice(index, 1);
-        else wishlist.splice(index, 1);
-        updateCounters();
-        showDrawer(type); // Refresh the list
-    }
-
-    function toggleCart() {
-        document.getElementById("cartOverlay").classList.remove("active");
-    }
-
-    // 5. FILTER SYSTEM
-    function updateRange(val) {
-        document.getElementById("maxPrice").value = val;
-        applyFilters();
-    }
-
-    function applyFilters() {
-        let min = parseInt(document.getElementById("minPrice").value) || 0;
-        let max = parseInt(document.getElementById("maxPrice").value) || 999999;
-        let sort = document.querySelector('input[name="sort"]:checked').value;
-        let selectedTypes = [...document.querySelectorAll('.seater:checked')].map(cb => cb.value);
-
-        let filtered = products.filter(p => {
-            let priceMatch = p.price >= min && p.price <= max;
-            let typeMatch = selectedTypes.length === 0 || selectedTypes.includes(p.type);
-            return priceMatch && typeMatch;
-        });
-
-        if(sort === "low") filtered.sort((a,b) => a.price - b.price);
-        if(sort === "high") filtered.sort((a,b) => b.price - a.price);
-
-        render(filtered);
-    }
-
-    // 6. INITIALIZATION
-    window.onload = () => {
-        render(products);
+        // 3. Sync Data & UI
+        updateCounters(); // Saves to LocalStorage
+        render(products); // Updates the Heart icons on the main grid
         
-        // Link header icons to the side drawer
-        const cartBtn = document.querySelector('[title="Cart"]');
-        const wishBtn = document.querySelector('[title="Wishlist"]');
-        if(cartBtn) cartBtn.onclick = () => showDrawer('cart');
-        if(wishBtn) wishBtn.onclick = () => showDrawer('wishlist');
+        // 4. Redirect view to Cart
+        showDrawer('cart');
+    }
+}
 
-        // Link sort/filters
-        document.querySelectorAll('.seater, input[name="sort"]').forEach(el => {
-            el.addEventListener('change', applyFilters);
-        });
-    };
-    // Open Shipping Address
+function removeItem(type, index) {
+    if (type === 'cart') cart.splice(index, 1);
+    else wishlist.splice(index, 1);
+    updateCounters();
+    showDrawer(type); 
+}
+
+function toggleCart() {
+    document.getElementById("cartOverlay").classList.remove("active");
+}
+
+// ==========================================
+// 5. FILTER SYSTEM
+// ==========================================
+function updateRange(val) {
+    const maxPriceInput = document.getElementById("maxPrice");
+    if(maxPriceInput) maxPriceInput.value = val;
+    applyFilters();
+}
+
+function applyFilters() {
+    let min = parseInt(document.getElementById("minPrice")?.value) || 0;
+    let max = parseInt(document.getElementById("maxPrice")?.value) || 999999;
+    
+    // Sort logic
+    let sortEl = document.querySelector('input[name="sort"]:checked');
+    let sort = sortEl ? sortEl.value : "default";
+
+    // Seater logic
+    let selectedTypes = [...document.querySelectorAll('.seater:checked')].map(cb => cb.value);
+
+    let filtered = products.filter(p => {
+        let priceMatch = p.price >= min && p.price <= max;
+        let typeMatch = selectedTypes.length === 0 || selectedTypes.includes(p.type);
+        return priceMatch && typeMatch;
+    });
+
+    if(sort === "low") filtered.sort((a,b) => a.price - b.price);
+    if(sort === "high") filtered.sort((a,b) => b.price - a.price);
+
+    render(filtered);
+}
+
+// ==========================================
+// 6. CHECKOUT FLOW
+// ==========================================
 function openAddressModal() {
     if (cart.length === 0) return alert("Your cart is empty!");
-    toggleCart(); // Close drawer
+    toggleCart(); 
     document.getElementById("addressModal").style.display = "flex";
 }
 
@@ -1316,26 +1523,22 @@ function closeAddress() {
     document.getElementById("addressModal").style.display = "none";
 }
 
-// Transition: Shipping -> Payment
 function proceedToPayment(event) {
-    event.preventDefault(); // Stop form from reloading page
-    
-    // Copy the amount to the payment modal
+    event.preventDefault(); 
     const totalAmount = document.getElementById("cartTotal").innerText;
     document.getElementById("finalPayAmount").innerText = totalAmount;
-
     closeAddress();
     document.getElementById("paymentModal").style.display = "flex";
 }
-
+// Function to hide the payment modal overlay
 function closePayment() {
-    document.getElementById("paymentModal").style.display = "none";
+    const modal = document.getElementById("paymentModal");
+    if (modal) {
+        modal.style.display = "none";
+    }
 }
-
-// Final Step: Payment Success
 function finalizeOrder(method) {
     const body = document.getElementById('paymentBody');
-    
     body.innerHTML = `
         <div style="text-align:center; padding:30px;">
             <i class="fa-solid fa-circle-notch fa-spin" style="font-size:40px; color:#f58220;"></i>
@@ -1350,10 +1553,34 @@ function finalizeOrder(method) {
                 <p>Order ID: #UW${Math.floor(Math.random()*99999)}</p>
                 <button onclick="location.reload()" class="add-btn" style="margin-top:20px;">Continue Shopping</button>
             </div>`;
-        cart = []; // Empty the cart data
+        cart = []; 
         updateCounters();
     }, 2500);
 }
+
+// ==========================================
+// 7. INITIALIZATION
+// ==========================================
+window.onload = () => {
+    render(products);
+    updateCounters();
+    
+    const cartBtn = document.querySelector('[title="Cart"]');
+    const wishBtn = document.querySelector('[title="Wishlist"]');
+    if(cartBtn) cartBtn.onclick = () => showDrawer('cart');
+    if(wishBtn) wishBtn.onclick = () => showDrawer('wishlist');
+
+    document.querySelectorAll('.seater, input[name="sort"]').forEach(el => {
+        el.addEventListener('change', applyFilters);
+    });
+
+    // Handle min/max price inputs directly
+    document.getElementById("minPrice")?.addEventListener('input', applyFilters);
+    document.getElementById("maxPrice")?.addEventListener('input', applyFilters);
+};
+
+// --- Add Auth & Filter functions here as they were in your original code ---
+// (signIn, signUp, closeAuth, showLogin, showSignup, registerUser, loginUser, applyFilters)
 function signIn(){
  document.getElementById("authOverlay").style.display="flex";
  showLogin();
@@ -1413,18 +1640,41 @@ function loginUser(){
 }
 
 
-/* AUTO OPEN SIGNUP AFTER PAGE LOAD */
-window.addEventListener("load", () => {
 
-  // Do not show again if user already logged in
-  const user = localStorage.getItem("user");
-  if(user) return;
+const observerOptions = { threshold: 0.2 };
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
 
-  setTimeout(() => {
-    document.getElementById("authOverlay").style.display = "flex";
-    showLogin(); // open signup view by default
-  }, 3000);
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => revealObserver.observe(el));
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
 
+        document.querySelectorAll('.reveal, .reveal-card').forEach(el => observer.observe(el));
+        const backToTopBtn = document.getElementById("backToTop");
+window.onscroll = function() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        backToTopBtn.style.display = "flex";
+        backToTopBtn.style.animation = "fadeIn 0.3s forwards";
+    } else {
+        backToTopBtn.style.display = "none";
+    }
+};
+
+backToTopBtn.addEventListener("click", function() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 });
 </script>
 

@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -48,22 +49,18 @@
 
       <!-- PROFILE -->
       <div class="icon profile">
-        👤
-        <div class="profile-dropdown">
-          <button onclick="signIn()">Sign In</button>
-          <button onclick="signUp()">Sign Up</button>
-        </div>
-      </div>
+<i class="fa-regular fa-user"></i>
+    <div class="profile-dropdown">
+        <button onclick="signIn()">
+            <i class="fa-regular fa-user"></i> Sign In
+        </button>
+        <button onclick="signUp()">
+            <i class="fa-solid fa-user-plus"></i> Sign Up
+        </button>
+    </div>
+</div>
 
-      <!-- WISHLIST -->
-      <div class="icon" onclick="openWishlist()">
-        ♥️ <span id="wishlistCount">0</span>
-      </div>
-
-      <!-- CART -->
-      <div class="icon" onclick="openCart()">
-        🛒 <span id="cartCount">0</span>
-      </div>
+      
 
     </div>
   </div>
@@ -129,18 +126,7 @@
 
 </header>
 
-<!-- DEMO PRODUCT SECTION -->
-<section class="products container">
-  <h2>Products Price Range</h2>
 
-  <div class="filters" style="margin-top: 10px;">
-    Price Filter :
-    <input type="range" id="priceRange" min="5000" max="50000" value="50000">
-    <span id="priceValue">₹50000</span>
-  </div>
-
-  <div class="product-grid" id="productGrid"></div>
-</section>
 <section class="hero">
 
   <!-- TOP AUTO SCROLL STRIP -->
@@ -185,7 +171,7 @@
       <div class="side-content">
         <h2>Clearance Sale</h2>
         <p>Upto 60% OFF</p>
-        <button>Shop Now</button>
+        <button><a href="Beds.html">Shop Now</a></button>
       </div>
     </div>
 
@@ -289,7 +275,18 @@
 
   </div>
 </section>
+<!-- DEMO PRODUCT SECTION -->
+<section class="products container">
+  <h2>Products Price Range</h2>
 
+  <div class="filters" style="margin-top: 10px;">
+    Price Filter :
+    <input type="range" id="priceRange" min="5000" max="50000" value="50000">
+    <span id="priceValue">₹50000</span>
+  </div>
+
+  <div class="product-grid" id="productGrid"></div>
+</section>
 <section class="rooms container" style="padding: 80px 0px;">
 
   <div class="section-head-center">
@@ -304,7 +301,7 @@
       <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85">
       <div class="room-content">
         <h3>Bedroom Collection</h3>
-        <button>Explore Now</button>
+        <button> <a href="Beds.html">Explore Now</a></button>
       </div>
     </div>
 
@@ -313,7 +310,7 @@
       <img src="https://tse2.mm.bing.net/th/id/OIP.EOsbC-qv84lTe8IcF6BkdQHaE8?rs=1&pid=ImgDetMain&o=7&rm=3">
       <div class="room-content">
         <h3>Living Room</h3>
-        <button>Explore Now</button>
+        <button><a href="wooden sofa.html">Explore Now</a></button>
       </div>
     </div>
 
@@ -322,7 +319,7 @@
       <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200">
       <div class="room-content">
         <h3>Dining Room</h3>
-        <button>Explore Now</button>
+        <button><a href="Dining Chairs.html">Explore Now</a></button>
       </div>
     </div>
 
@@ -462,39 +459,38 @@
         <div>
             <h4>OUR COMPANY</h4>
             <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Our Stores</a></li>
-                <li><a href="#">Disclaimer</a></li>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="Our Company.html">About Us</a></li>
+                <li><a href="Our Company.html">Contact Us</a></li>
+                <li><a href="Our Company.html">Our Stores</a></li>
+                <li><a href="Our Company.html">Disclaimer</a></li>
+                
             </ul>
         </div>
 
         <div>
             <h4>PRODUCT CATEGORIES</h4>
             <ul>
-                <li><a href="#">Living</a></li>
-                <li><a href="#">Bedroom</a></li>
-                <li><a href="#">Dining Sets</a></li>
-                <li><a href="#">Study and Office Furniture</a></li>
-                <li><a href="#">Collections</a></li>
-                <li><a href="#">Modular Furniture</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="fabric sofas.html">Sofas</a></li>
+                <li><a href="TV Units.html">Living room</a></li>
+                <li><a href="Beds.html">Bedroom</a></li>
+                <li><a href="Foam.html">Mattress</a></li>
+                <li><a href="Dining Chairs.html">Dining</a></li>
             </ul>
         </div>
 
         <div>
             <h4>HELP</h4>
             <ul>
-                <li><a href="#">Bulk Enquiry</a></li>
-                <li><a href="#">Terms and Condition</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Cancellation Policy</a></li>
-                <li><a href="#">Return & Refund Policy</a></li>
-                <li><a href="#">Grievance Redressal Policy</a></li>
-                <li><a href="#">Code of Ethics</a></li>
-                <li><a href="#">Payment & Security</a></li>
-                <li><a href="#">Shipping & Delivery</a></li>
+                <li><a href="Our Company.html">Bulk Enquiry</a></li>
+                <li><a href="Our Company.html">Terms and Condition</a></li>
+                <li><a href="Our Company.html">Privacy Policy</a></li>
+                <li><a href="Our Company.html">Cancellation Policy</a></li>
+                <li><a href="Our Company.html">Return & Refund Policy</a></li>
+                <li><a href="Our Company.html">Grievance Redressal Policy</a></li>
+                <li><a href="Our Company.html">Code of Ethics</a></li>
+                <li><a href="Our Company.html">Payment & Security</a></li>
+                <li><a href="Our Company.html">Shipping & Delivery</a></li>
             </ul>
         </div>
 
@@ -543,11 +539,11 @@
 
             <div class="social">
                 <h4>Follow Us</h4>
-                <a href="#" class="facebook"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="twitter"><i class="fab fa-x-twitter"></i></a>
-                <a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="youtube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.facebook.com/quantumfurniture" class="facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://x.com/quantumfurniture"  class="twitter" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.linkedin.com/company/quantumfurniture" class="linkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/quantumfurniture" class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@quantumfurniture" class="youtube" target="_blank"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
 
@@ -678,6 +674,10 @@
     </div>
   </div>
 </div>
+<a href="https://chat.whatsapp.com/B8PiQs8sQdF13EA9BZLUOc" class="whatsapp-btn" target="_blank"><i class="bi bi-whatsapp"></i></a>
+    <button id="backToTop" class="back-to-top" title="Go to top">
+    <i class="bi bi-arrow-up-short"></i>
+</button>
 <script src="script.js"></script>
 </body>
 </html>
