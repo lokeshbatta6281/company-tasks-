@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --calc-bg: #111111;
+            --panel-bg: #181818;
+            --card: #242424;
+            --accent: #ff9f0a;
+            --text: #ffffff;
+            --text-dim: #888888;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', system-ui, sans-serif; 
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .dashboard {
+            width: 700px;
+            height: 754px;
+            background-color: var(--calc-bg);
+            border-radius: 32px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #222;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            overflow: hidden;
+        }
+
+        .header {
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .header-title {
+            color: var(--text-dim);
+            font-weight: 500;
+        }
+
+        .history-trigger {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: color 0.2s;
+        }
+
+        
+
+        .display {
+            flex: 1;
+            padding: 0 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            text-align: right;
+        }
+
+        #exp-view { 
+            font-size: 1.4rem; 
+            color: var(--text-dim); 
+            min-height: 1.8rem; 
+        }
+
+        #res-view { 
+            font-size: 4.5rem; 
+            font-weight: 600; 
+            margin-top: 5px; 
+        }
+
+        .keypad {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        button {
+            height: 70px;
+            border-radius: 18px;
+            border: none;
+            font-size: 1.4rem;
+            font-weight: 500;
+            cursor: pointer;
+            background-color: #262626;
+            color: white;
+            transition: 0.2s;
+        }
+
+        button:hover { 
+            background-color: #333; 
+        }
+
+        .btn-op { 
+            color: var(--accent); 
+            background: #1e1e1e; 
+        }
+
+        .btn-eq { 
+            background: var(--accent); 
+            color: white; 
+        }
+
+        .btn-util { 
+            background: #3d3d3d; 
+        }
+
+        .btn-zero {
+            grid-column: span 2;
+            width: 100%;
+        }
+
+        .history-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 350px;
+            height: 100%;
+            background-color: var(--panel-bg);
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 10;
+            border-right: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+        }
+
+        .history-panel.active { 
+            transform: translateX(0); 
+        }
+
+        .hist-top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .clear-logs-btn {
+            cursor: pointer;
+            color: var(--accent);
+            font-size: 0.9rem;
+            background: none;
+            border: none;
+        }
+
+        .hist-list { 
+            flex: 1; 
+            overflow-y: auto; 
+            margin-top: 20px; 
+            padding-right: 10px; 
+        }
+
+        .hist-card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .hist-card:hover { 
+            background: #2d2d2d; 
+        }
+
+        .h-exp { 
+            color: var(--text-dim); 
+            font-size: 0.85rem; 
+            margin-bottom: 5px; 
+        }
+
+        .h-res { 
+            font-size: 1.3rem; 
+            font-weight: bold; 
+        }
+
+        .h-date { 
+            color: #444; 
+            font-size: 0.7rem; 
+            margin-top: 10px; 
+        }
+
+        .hist-list::-webkit-scrollbar { width: 4px; }
+        .hist-list::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+<section class="dashboard">
+    <div id="histPanel" class="history-panel">
+        <div class="hist-top-bar">
+            <span class="close-btn" onclick="toggleHistory()">✕ Close</span>
+            <button class="clear-logs-btn" onclick="clearLogs()">Clear</button>
+        </div>
+        <div class="hist-list" id="histList"></div>
+    </div>
+
+    <div class="header">
+        <button class="history-trigger" onclick="toggleHistory()">History</button>
+        <span class="header-title">Desktop Calculator</span>
+    </div>
+
+    <div class="display">
+        <div id="exp-view"></div>
+        <div id="res-view">0</div>
+    </div>
+
+    <div class="keypad">
+        <button class="btn-util" onclick="reset()">AC</button>
+        <button class="btn-util" onclick="del()">DEL</button>
+        <button class="btn-op" onclick="press('%')">%</button>
+        <button class="btn-op" onclick="press('/')">÷</button>
+
+        <button onclick="press('7')">7</button>
+        <button onclick="press('8')">8</button>
+        <button onclick="press('9')">9</button>
+        <button class="btn-op" onclick="press('*')">×</button>
+
+        <button onclick="press('4')">4</button>
+        <button onclick="press('5')">5</button>
+        <button onclick="press('6')">6</button>
+        <button class="btn-op" onclick="press('-')">−</button>
+
+        <button onclick="press('1')">1</button>
+        <button onclick="press('2')">2</button>
+        <button onclick="press('3')">3</button>
+        <button class="btn-op" onclick="press('+')">+</button>
+
+        <button class="btn-zero" onclick="press('0')">0</button>
+        <button onclick="press('.')">.</button>
+        <button class="btn-eq" onclick="solve()">=</button>
+    </div>
+</section>
+
+<script>
+    let input = "";
+    let logs = JSON.parse(localStorage.getItem('calc_history')) || [];
+
+    function press(v) {
+        if(input === "0" && v !== ".") input = "";
+        input += v;
+        update();
+    }
+
+    function reset() {
+        input = "";
+        document.getElementById('exp-view').innerText = "";
+        update();
+    }
+
+    function del() {
+        input = input.toString().slice(0, -1);
+        update();
+    }
+
+    function update() {
+        document.getElementById('res-view').innerText = input || "0";
+    }
+
+    function solve() {
+        try {
+            let formula = input.replace('×', '*').replace('÷', '/').replace('−', '-');
+            let result = eval(formula);
+            
+            save(input, result);
+            
+            document.getElementById('exp-view').innerText = input + " =";
+            input = result.toString();
+            update();
+        } catch(e) {
+            document.getElementById('res-view').innerText = "Error";
+        }
+    }
+
+    function toggleHistory() {
+        document.getElementById('histPanel').classList.toggle('active');
+        render();
+    }
+
+    function save(exp, res) {
+        const date = new Date().toLocaleDateString('en-GB');
+        logs.unshift({ exp, res, date });
+        if(logs.length > 20) logs.pop();
+        localStorage.setItem('calc_history', JSON.stringify(logs));
+    }
+
+    function render() {
+        const list = document.getElementById('histList');
+        list.innerHTML = logs.map(item => `
+            <div class="hist-card" onclick="useResult('${item.res}')">
+                <div class="h-exp">${item.exp}</div>
+                <div class="h-res">${Number(item.res).toLocaleString()}</div>
+                <div class="h-date">${item.date}</div>
+            </div>
+        `).join('');
+    }
+
+    function useResult(val) {
+        input = val;
+        update();
+        toggleHistory();
+    }
+
+    function clearLogs() {
+        logs = [];
+        localStorage.removeItem('calc_history');
+        render();
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key >= '0' && e.key <= '9') press(e.key);
+        if (e.key === '.') press('.');
+        if (e.key === 'Enter') solve();
+        if (e.key === 'Backspace') del();
+        if (e.key === 'Escape') reset();
+        if (e.key === '+') press('+');
+        if (e.key === '-') press('-');
+        if (e.key === '*') press('×');
+        if (e.key === '/') press('÷');
+    });
+
+    render();
+</script>
+</body>
+</html>
