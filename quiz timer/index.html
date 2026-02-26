@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPortal | Professional Certification</title>
+    <style>
+        :root {
+            --edu-orange: #1a284b;
+            --edu-bg: #e6f4fd;
+            --success: #10b981;
+            --danger: #ef4444;
+            --dark: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: var(--edu-bg);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 950px;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- EXAM HUD --- */
+        .exam-header {
+            background: var(--dark);
+            color: white;
+            padding: 18px 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .timer-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .urgent {
+            color: #ff4d4d;
+            border-color: #ff4d4d;
+            animation: pulse 0.8s infinite;
+        }
+
+        /* --- SECTIONS --- */
+        #login-section {
+            display: flex;
+            min-height: 520px;
+        }
+
+        .auth-banner {
+            flex: 1;
+            background: var(--edu-orange);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .auth-form {
+            flex: 1.2;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        input {
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--edu-orange);
+            outline: none;
+        }
+
+        .btn {
+            background: var(--edu-orange);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.05rem;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--edu-orange);
+            color: var(--edu-orange);
+        }
+
+        /* --- INSTRUCTIONS PAGE --- */
+        .instruction-box {
+            padding: 50px;
+            text-align: left;
+        }
+
+        .instruction-list {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .instruction-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.5;
+            color: #475569;
+        }
+
+        .instruction-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--edu-orange);
+            font-weight: bold;
+        }
+
+        /* --- QUIZ BODY --- */
+        .quiz-content {
+            padding: 45px;
+        }
+
+        .q-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .accuracy-pill {
+            color: var(--edu-orange);
+            background: #fff5f0;
+            padding: 6px 15px;
+            border-radius: 50px;
+            border: 1px solid var(--edu-orange);
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #f1f5f9;
+            border-radius: 10px;
+            margin-bottom: 35px;
+            overflow: hidden;
+        }
+
+        #progress-fill {
+            height: 100%;
+            background: var(--edu-orange);
+            width: 0%;
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .opt-btn {
+            padding: 22px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            background: white;
+            cursor: pointer;
+            text-align: left;
+            transition: 0.2s;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .opt-btn:hover:not(:disabled) {
+            border-color: var(--edu-orange);
+            background: #fffaf7;
+            transform: translateY(-2px);
+        }
+
+        .correct {
+            background: var(--success) !important;
+            color: white;
+            border-color: var(--success) !important;
+        }
+
+        .wrong {
+            background: var(--danger) !important;
+            color: white;
+            border-color: var(--danger) !important;
+        }
+
+        /* --- NEW ENHANCED RESULTS UI --- */
+        .result-screen {
+            padding: 60px;
+            text-align: center;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .score-visualizer {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 25px;
+            background: conic-gradient(var(--success) var(--p), #e2e8f0 0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-visualizer::before {
+            content: "";
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .score-text {
+            position: relative;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--dark);
+        }
+
+        .result-card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 35px 0;
+        }
+
+        .stat-card {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .stat-card h4 {
+            font-size: 0.75rem;
+            color: #64748b;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .stat-card p {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #login-section {
+                flex-direction: column;
+            }
+
+            .options-grid,
+            .result-card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-container">
+
+        <header id="exam-hud" class="exam-header hidden">
+            <div>
+                <span style="opacity: 0.6; font-size: 0.75rem; letter-spacing: 1px; display: block;">CANDIDATE</span>
+                <span id="display-student-id" style="font-weight: 700; font-size: 1rem;">---</span>
+            </div>
+            <div style="text-align: right;">
+                <span style="opacity: 0.6; font-size: 0.75rem; letter-spacing: 1px; display: block;">TIME
+                    REMAINING</span>
+                <div id="global-timer" class="timer-badge">05:00</div>
+            </div>
+        </header>
+
+        <section id="login-section">
+            <div class="auth-banner">
+                <h1 style="font-size: 2.8rem;">EduPortal</h1>
+                <p style="font-weight: 300; letter-spacing: 1px;">Web Development Exam v2.0</p>
+            </div>
+            <div class="auth-form">
+                <h2 style="margin-bottom: 10px; color: var(--dark);">Secure Sign-In</h2>
+                <p style="color: #64748b; margin-bottom: 25px;">Enter your credentials to access the examination hall.
+                </p>
+                <input type="text" id="student-name" placeholder="Full Name">
+                <input type="text" id="student-id" placeholder="Student Roll No / ID">
+                <button class="btn" onclick="showInstructions()">Validate & Proceed</button>
+            </div>
+        </section>
+
+        <section id="instruction-section" class="instruction-box hidden">
+            <h2
+                style="color: var(--dark); border-bottom: 3px solid var(--edu-orange); display: inline-block; padding-bottom: 5px;">
+                Exam Instructions</h2>
+            <ul class="instruction-list">
+                <li><strong>Global Timer:</strong> You have exactly <strong>5 minutes</strong> to finish the entire
+                    exam.</li>
+                <li><strong>Question Timer:</strong> Each question has a <strong>20-second</strong> limit. Unanswered
+                    questions result in zero points.</li>
+                <li><strong>Accuracy Tracking:</strong> Your real-time accuracy is logged. Aim for 80% or higher for
+                    certification.</li>
+                <li><strong>Submission:</strong> The exam auto-submits when the timer hits zero or all questions are
+                    answered.</li>
+                <li><strong>No Refreshing:</strong> Refreshing the page will terminate your current session.</li>
+            </ul>
+            <div
+                style="background: #fff5f0; padding: 15px; border-radius: 10px; margin-bottom: 25px; border-left: 5px solid var(--edu-orange);">
+                <p style="font-size: 0.9rem; color: #854d0e;">Ready to begin, <strong><span
+                            id="instruction-name">Student</span></strong>?</p>
+            </div>
+            <button class="btn" style="width: 200px;" onclick="startExam()">Start Examination</button>
+        </section>
+
+        <section id="quiz-section" class="quiz-content hidden">
+            <div class="q-meta">
+                <span>Q: <span id="q-num">1</span> / <span id="q-total"></span></span>
+                <span class="accuracy-pill">🎯 Accuracy: <span id="accuracy-val">100</span>%</span>
+                <span>⏱️ <span id="q-timer">20</span>s</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progress-fill"></div>
+            </div>
+
+            <h2 id="q-text" style="color: var(--dark); line-height: 1.4; margin-bottom: 10px;">Question loading...</h2>
+
+            <div id="options-box" class="options-grid"></div>
+        </section>
+
+        <section id="result-section" class="result-screen hidden">
+            <div class="score-visualizer" id="score-ring" style="--p: 0%">
+                <div class="score-text" id="final-score">0%</div>
+            </div>
+            <h2 id="status-msg" style="color: var(--dark);">Exam Completed</h2>
+            <p id="details-msg" style="margin: 5px 0; color: #64748b;"></p>
+
+            <div class="result-card-grid">
+                <div class="stat-card">
+                    <h4>Total Score</h4>
+                    <p id="stat-correct">0/0</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Accuracy</h4>
+                    <p id="accuracy-summary">0%</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Duration</h4>
+                    <p id="stat-time">0m 0s</p>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-outline" onclick="window.print()">Download Report</button>
+                <button class="btn" style="padding: 16px 40px;" onclick="location.reload()">Return to Portal</button>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const EXAM_TOTAL_SECONDS = 300;
+        const QUESTION_SECONDS = 20;
+
+        const questions = [
+            { q: "Which CSS property is used to create a blurry 'frosted glass' effect?", a: ["blur-element", "backdrop-filter", "glass-blur", "opacity-filter"], c: 1 },
+            { q: "What is the correct way to declare a CSS variable?", a: ["@var name: 10px", "var-name: 10px", "--name: 10px", "$name: 10px"], c: 2 },
+            { q: "In JavaScript, which keyword is used to define a constant variable?", a: ["var", "let", "const", "fixed"], c: 2 },
+            { q: "Which HTML5 attribute is used to provide a hint for the user's input?", a: ["hint", "placeholder", "value", "title"], c: 1 },
+            { q: "Which CSS property determines how an element is positioned in the document?", a: ["float", "z-index", "position", "display"], c: 2 },
+            { q: "Which HTTP status code represents a 'Not Found' error?", a: ["200", "404", "500", "301"], c: 1 },
+            { q: "In CSS Flexbox, which property controls the alignment along the main axis?", a: ["align-items", "justify-content", "content-align", "flex-direction"], c: 1 },
+            { q: "Which JavaScript method is used to combine two or more arrays?", a: ["append()", "combine()", "concat()", "join()"], c: 2 },
+            { q: "What does the 'Semantic' HTML tag <aside> represent?", a: ["Main content", "Navigation menu", "Indirectly related sidebar", "A highlighted paragraph"], c: 2 },
+            { q: "Which 'Display' value makes an element behave like a block element but allows it to sit next to others?", a: ["block", "inline", "inline-block", "flex-item"], c: 2 }
+        ];
+
+        let currentQ = 0;
+        let score = 0;
+        let attempts = 0;
+        let timeRemaining = EXAM_TOTAL_SECONDS;
+        let qTimeRemaining = QUESTION_SECONDS;
+        let globalInterval, qInterval;
+
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function showInstructions() {
+            const name = document.getElementById('student-name').value;
+            const id = document.getElementById('student-id').value;
+            if (!name || !id) return alert("Validation Failed: Name and ID required.");
+
+            document.getElementById('instruction-name').innerText = name;
+            document.getElementById('display-student-id').innerText = id;
+            showSection('instruction-section');
+        }
+
+        function startExam() {
+            showSection('quiz-section');
+            document.getElementById('exam-hud').classList.remove('hidden');
+            document.getElementById('q-total').innerText = questions.length;
+            startGlobalTimer();
+            loadQuestion();
+        }
+
+        function startGlobalTimer() {
+            globalInterval = setInterval(() => {
+                timeRemaining--;
+                const m = Math.floor(timeRemaining / 60);
+                const s = timeRemaining % 60;
+                const display = document.getElementById('global-timer');
+                display.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+                if (timeRemaining < 60) display.classList.add('urgent');
+                if (timeRemaining <= 0) endExam("Time Expired!");
+            }, 1000);
+        }
+
+        function loadQuestion() {
+            if (currentQ >= questions.length) return endExam("Successful Submission");
+
+            const data = questions[currentQ];
+            document.getElementById('q-num').innerText = currentQ + 1;
+            document.getElementById('q-text').innerText = data.q;
+            document.getElementById('progress-fill').style.width = `${(currentQ / questions.length) * 100}%`;
+
+            const box = document.getElementById('options-box');
+            box.innerHTML = '';
+            data.a.forEach((opt, i) => {
+                const b = document.createElement('button');
+                b.className = 'opt-btn';
+                b.innerText = opt;
+                b.onclick = () => handleAnswer(i);
+                box.appendChild(b);
+            });
+
+            startQuestionTimer();
+        }
+
+        function startQuestionTimer() {
+            clearInterval(qInterval);
+            qTimeRemaining = QUESTION_SECONDS;
+            document.getElementById('q-timer').innerText = qTimeRemaining;
+
+            qInterval = setInterval(() => {
+                qTimeRemaining--;
+                document.getElementById('q-timer').innerText = qTimeRemaining;
+                if (qTimeRemaining <= 0) handleAnswer(-1);
+            }, 1000);
+        }
+
+        function handleAnswer(idx) {
+            clearInterval(qInterval);
+            attempts++;
+            const correct = questions[currentQ].c;
+            const btns = document.querySelectorAll('.opt-btn');
+
+            if (idx === correct) score++;
+
+            btns.forEach((b, i) => {
+                if (i === correct) b.classList.add('correct');
+                else if (i === idx) b.classList.add('wrong');
+                b.disabled = true;
+            });
+
+            const acc = Math.round((score / attempts) * 100);
+            document.getElementById('accuracy-val').innerText = acc;
+
+            setTimeout(() => {
+                currentQ++;
+                loadQuestion();
+            }, 1200);
+        }
+
+        function endExam(msg) {
+            clearInterval(globalInterval);
+            clearInterval(qInterval);
+
+            showSection('result-section');
+            document.getElementById('exam-hud').classList.add('hidden');
+
+            const finalPercent = Math.round((score / questions.length) * 100);
+            const finalAccuracy = Math.round((score / attempts) * 100) || 0;
+
+            // Update Score Ring
+            document.getElementById('final-score').innerText = finalPercent + "%";
+            document.getElementById('score-ring').style.setProperty('--p', finalPercent + "%");
+
+            // Update Stats
+            document.getElementById('status-msg').innerText = msg;
+            document.getElementById('details-msg').innerText = `Candidate ID: ${document.getElementById('display-student-id').innerText}`;
+            document.getElementById('stat-correct').innerText = `${score} / ${questions.length}`;
+            document.getElementById('accuracy-summary').innerText = finalAccuracy + "%";
+
+            const timeSpent = EXAM_TOTAL_SECONDS - timeRemaining;
+            document.getElementById('stat-time').innerText = `${Math.floor(timeSpent / 60)}m ${timeSpent % 60}s`;
+        }
+    </script>
+</body>
+
+</html>
