@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India Weather Explorer</title>
+    <style>
+        :root {
+            --glass: rgba(255, 255, 255, 0.12);
+            --border: rgba(255, 255, 255, 0.2);
+            --text: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            overflow: hidden;
+        }
+
+        .search-box {
+            position: relative;
+            width: 350px;
+            margin-bottom: 25px;
+            z-index: 100;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .autocomplete-dropdown {
+            position: absolute;
+            top: 65px;
+            left: 0;
+            right: 0;
+            background: rgba(30, 60, 114, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            max-height: 250px;
+            overflow-y: auto;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .suggestion-item {
+            padding: 14px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .suggestion-item:hover { background: rgba(255,255,255,0.1); }
+
+        .weather-card {
+            background: var(--glass);
+            backdrop-filter: blur(40px);
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            padding: 40px 30px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .temp-val { font-size: 6rem; font-weight: 200; margin: 15px 0; line-height: 1; }
+        .condition-text { text-transform: uppercase; letter-spacing: 3px; font-size: 0.85rem; font-weight: 700; opacity: 0.9; }
+        
+        .hourly-section {
+            margin-top: 30px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+            display: flex;
+            gap: 25px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .hourly-section::-webkit-scrollbar { display: none; }
+
+        .hour-card {
+            min-width: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .hour-card span.time { font-size: 0.75rem; opacity: 0.7; font-weight: 500; }
+        .hour-card strong { font-size: 1.2rem; }
+        .hour-card .extra-info { font-size: 0.65rem; color: #a5c7ff; }
+
+        .footer-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat-box small { display: block; opacity: 0.6; font-size: 0.75rem; margin-bottom: 4px; }
+        .stat-box strong { font-size: 1rem; }
+    </style>
+</head>
+<body>
+
+    <div class="search-box">
+        <input type="text" id="citySearch" placeholder="Search Indian Cities..." autocomplete="off">
+        <div id="dropdown" class="autocomplete-dropdown"></div>
+    </div>
+
+    <div class="weather-card">
+        <h2 id="cityName" style="margin: 0; font-weight: 500;">Anantapur</h2>
+        <p id="stateName" style="opacity: 0.6; font-size: 0.9rem; margin: 5px 0 10px 0;">Andhra Pradesh</p>
+        
+        <h1 class="temp-val" id="temp">--°</h1>
+        <p class="condition-text" id="condition">Loading...</p>
+
+        <div class="hourly-section" id="hourlyWrapper"></div>
+
+        <div class="footer-stats">
+            <div class="stat-box">
+                <small>Wind Speed</small>
+                <strong id="wind">-- km/h</strong>
+            </div>
+            <div class="stat-box">
+                <small>Local Time</small>
+                <strong id="time">--:--</strong>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const searchInput = document.getElementById('citySearch');
+        const dropdown = document.getElementById('dropdown');
+
+        searchInput.addEventListener('input', async (e) => {
+            const query = e.target.value;
+            if (query.length < 2) { dropdown.style.display = 'none'; return; }
+            try {
+
+                const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=5&language=en&format=json&country_code=in`);
+                const data = await res.json();
+                if (data.results) {
+                    dropdown.innerHTML = ''; dropdown.style.display = 'block';
+                    data.results.forEach(city => {
+                        const item = document.createElement('div');
+                        item.className = 'suggestion-item';
+                        item.innerHTML = `<strong>${city.name}</strong> <span>${city.admin1 || ''}, India</span>`;
+                        item.onclick = () => selectCity(city);
+                        dropdown.appendChild(item);
+                    });
+                }
+            } catch (err) { console.error("Search failed", err); }
+        });
+
+        async function selectCity(city) {
+            searchInput.value = ''; dropdown.style.display = 'none';
+            document.getElementById('cityName').innerText = city.name;
+            document.getElementById('stateName').innerText = city.admin1 || "India";
+            fetchWeather(city.latitude, city.longitude);
+        }
+
+        async function fetchWeather(lat, lon) {
+            try {
+                
+                const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,precipitation_probability,weathercode&timezone=auto&forecast_days=3`);
+                const data = await res.json();
+                const cur = data.current_weather;
+
+                document.getElementById('temp').innerText = `${Math.round(cur.temperature)}°`;
+                document.getElementById('wind').innerText = `${cur.windspeed} km/h`;
+                
+                const localTime = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false });
+                document.getElementById('time').innerText = localTime;
+                
+                const codes = { 0: "Clear Sky", 1: "Mainly Clear", 2: "Partly Cloudy", 3: "Overcast", 45: "Foggy", 61: "Rainy" };
+                document.getElementById('condition').innerText = codes[cur.weathercode] || "Clear Skies";
+
+                const hourlyWrapper = document.getElementById('hourlyWrapper');
+                hourlyWrapper.innerHTML = ''; 
+
+                const now = new Date();
+                const currentHour = now.getHours();
+
+                const startIndex = data.hourly.time.findIndex(t => {
+                    const d = new Date(t);
+                    return d.getHours() === currentHour && d.getDate() === now.getDate();
+                });
+
+                for(let i = 0; i < 24; i++) {
+                    const idx = startIndex + i;
+                    if (idx < 0 || idx >= data.hourly.temperature_2m.length) continue;
+
+                    const temp = data.hourly.temperature_2m[idx];
+                    const rain = data.hourly.precipitation_probability[idx];
+                    const wCode = data.hourly.weathercode[idx];
+
+                    let icon = "☀️";
+                    if (rain > 20) icon = "🌧️";
+                    else if (wCode >= 1 && wCode <= 3) icon = "⛅";
+
+                    const hourTime = new Date(data.hourly.time[idx]);
+                    const hourDisplay = hourTime.getHours();
+                    const ampm = hourDisplay >= 12 ? 'PM' : 'AM';
+                    const hourText = (hourDisplay % 12 || 12) + ampm;
+
+                    const hourCard = document.createElement('div');
+                    hourCard.className = 'hour-card';
+                    hourCard.innerHTML = `
+                        <span class="time">${i === 0 ? 'Now' : hourText}</span>
+                        <div style="font-size: 1.4rem; margin: 4px 0;">${icon}</div>
+                        <strong>${Math.round(temp)}°</strong>
+                        <span class="extra-info">☔ ${rain}%</span>
+                    `;
+                    hourlyWrapper.appendChild(hourCard);
+                }
+            } catch (err) {
+                document.getElementById('condition').innerText = "Sync Error";
+            }
+        }
+
+        window.onclick = (e) => { if (e.target !== searchInput) dropdown.style.display = 'none'; };
+
+        fetchWeather(15.17, 77.38);
+    </script>
+</body>
+</html>
