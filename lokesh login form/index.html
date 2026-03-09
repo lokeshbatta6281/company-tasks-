@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureAuth | Advanced Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .strength-bar { height: 4px; transition: width 0.3s, background 0.3s; }
+        .hidden-form { display: none; }
+        .error-shake { animation: shake 0.4s; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 to-indigo-950 min-h-screen flex items-center justify-center p-4">
+
+    <div id="toast" class="fixed top-5 right-5 transform translate-x-full transition-transform duration-300 glass text-white px-6 py-3 rounded-xl z-50"></div>
+
+    <div class="w-full max-w-md glass rounded-[2rem] p-8 shadow-2xl overflow-hidden relative">
+        <div id="loader" class="hidden absolute inset-0 bg-slate-900/60 flex items-center justify-center z-10">
+            <div class="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+
+        <div class="flex mb-8 bg-slate-800/50 rounded-xl p-1">
+            <button onclick="UI.switchTab('login')" id="tab-login" class="flex-1 py-2 rounded-lg font-bold text-white bg-indigo-600 transition-all">Login</button>
+            <button onclick="UI.switchTab('signup')" id="tab-signup" class="flex-1 py-2 rounded-lg font-bold text-slate-400 hover:text-white transition-all">Register</button>
+        </div>
+
+        <form id="loginForm" class="space-y-5">
+            <div class="relative">
+                <input type="email" id="loginEmail" placeholder=" " class="peer w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 pt-6 text-white outline-none focus:ring-2 ring-indigo-500">
+                <label class="absolute left-4 top-2 text-xs text-indigo-400 uppercase font-bold transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-500">Email Address</label>
+            </div>
+            <div class="relative">
+                <input type="password" id="loginPass" placeholder=" " class="peer w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 pt-6 text-white outline-none focus:ring-2 ring-indigo-500">
+                <label class="absolute left-4 top-2 text-xs text-indigo-400 uppercase font-bold transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-500">Password</label>
+                <i onclick="UI.togglePass('loginPass')" class="fas fa-eye absolute right-4 top-5 text-slate-500 cursor-pointer"></i>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+                <label class="text-slate-400 flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" id="rememberMe" class="accent-indigo-500"> Remember Me
+                </label>
+                <a href="#" class="text-indigo-400 hover:underline">Forgot Password?</a>
+            </div>
+            <button type="submit" class="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-900/20">Sign In</button>
+        </form>
+
+        <form id="signupForm" class="hidden-form space-y-5">
+            <div class="relative">
+                <input type="text" id="regName" placeholder=" " class="peer w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 pt-6 text-white outline-none focus:ring-2 ring-indigo-500">
+                <label class="absolute left-4 top-2 text-xs text-indigo-400 uppercase font-bold transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-500">Full Name</label>
+            </div>
+            <div class="relative">
+                <input type="email" id="regEmail" placeholder=" " class="peer w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 pt-6 text-white outline-none focus:ring-2 ring-indigo-500">
+                <label class="absolute left-4 top-2 text-xs text-indigo-400 uppercase font-bold transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-500">Email Address</label>
+            </div>
+            <div class="relative">
+                <input type="password" id="regPass" oninput="Validation.checkStrength(this.value)" placeholder=" " class="peer w-full bg-slate-800/50 border border-slate-700 rounded-xl p-4 pt-6 text-white outline-none focus:ring-2 ring-indigo-500">
+                <label class="absolute left-4 top-2 text-xs text-indigo-400 uppercase font-bold transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-500">Create Password</label>
+                <div class="mt-2 flex gap-1">
+                    <div id="s-1" class="strength-bar flex-1 bg-slate-700 rounded"></div>
+                    <div id="s-2" class="strength-bar flex-1 bg-slate-700 rounded"></div>
+                    <div id="s-3" class="strength-bar flex-1 bg-slate-700 rounded"></div>
+                </div>
+            </div>
+            <button type="submit" id="regBtn" disabled class="w-full bg-slate-700 text-slate-400 py-4 rounded-xl font-bold transition-all cursor-not-allowed">Create Account</button>
+        </form>
+    </div>
+
+    <script src="js/storage.js"></script>
+<script src="js/validation.js"></script>
+<script src="js/ui.js"></script>
+
+<script src="js/auth.js"></script>
+</body>
+</html>
