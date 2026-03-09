@@ -1,0 +1,48 @@
+/* Layout & Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background: #2d3142;
+    border-radius: 10px;
+}
+
+/* Glassmorphism Sidebar */
+aside {
+    backdrop-filter: blur(10px);
+    background: rgba(22, 25, 37, 0.95);
+}
+
+/* Form Elements */
+textarea::placeholder {
+    color: #475569;
+}
+
+/* Tool Hover Effects */
+button {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Range Input Styling */
+input[type=range] {
+    height: 6px;
+    
+    background: #1e293b;
+    border-radius: 5px;
+}
+
+/* Canvas Workspace Shadow */
+#designCanvas {
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.7);
+}

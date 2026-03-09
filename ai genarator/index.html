@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignFrame | AI Creative Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body class="bg-[#0f111a] text-slate-200 overflow-hidden">
+
+    <nav class="h-14 border-b border-slate-800 flex items-center justify-between px-6 bg-[#161925]">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+                <i class="fas fa-wand-magic-sparkles text-white"></i>
+            </div>
+            <h1 class="font-black tracking-tighter text-xl">DesignFrame</h1>
+        </div>
+        <div class="flex gap-4">
+            <button onclick="CanvasCore.clearCanvas()" class="text-xs font-bold text-slate-400 hover:text-white transition-colors">CLEAR CANVAS</button>
+            <button onclick="Exporter.download()" class="bg-indigo-600 px-4 py-2 rounded-lg text-xs font-bold hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-500/20">
+                <i class="fas fa-download mr-2"></i> DOWNLOAD FRAME
+            </button>
+        </div>
+    </nav>
+
+    <div class="flex h-[calc(100vh-3.5rem)]">
+        <aside class="w-80 bg-[#161925] border-r border-slate-800 p-6 overflow-y-auto space-y-8">
+            
+            <section>
+                <h3 class="text-[10px] font-black uppercase text-slate-500 tracking-[0.2em] mb-4">AI Image Generator</h3>
+                <div class="space-y-4">
+                    <textarea id="aiPrompt" placeholder="Describe your vision (e.g. 'Cyberpunk beach at sunset')..." 
+                        class="w-full bg-[#1c2130] border border-slate-700 rounded-xl p-4 text-sm outline-none focus:ring-2 ring-indigo-500 h-24 resize-none transition-all"></textarea>
+                    
+                    <button id="genBtn" onclick="AIEngine.generate()" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-all">
+                        <span id="genText">Generate Image</span>
+                        <div id="genLoader" class="hidden flex items-center justify-center">
+                            <i class="fas fa-circle-notch animate-spin mr-2"></i> Generating...
+                        </div>
+                    </button>
+                </div>
+            </section>
+
+            <section>
+                <h3 class="text-[10px] font-black uppercase text-slate-500 tracking-[0.2em] mb-4">Add Shapes</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="CanvasCore.addShape('square')" class="bg-[#1c2130] p-4 rounded-xl border border-slate-700 hover:border-indigo-500 transition-all group">
+                        <div class="w-full aspect-square bg-slate-600 rounded-sm mb-2 group-hover:bg-indigo-500"></div>
+                        <span class="text-[10px] font-bold">SQUARE</span>
+                    </button>
+                    <button onclick="CanvasCore.addShape('circle')" class="bg-[#1c2130] p-4 rounded-xl border border-slate-700 hover:border-indigo-500 transition-all group">
+                        <div class="w-full aspect-square bg-slate-600 rounded-full mb-2 group-hover:bg-indigo-500"></div>
+                        <span class="text-[10px] font-bold">CIRCLE</span>
+                    </button>
+                    
+                </div>
+            </section>
+
+            <section class="space-y-6">
+                <h3 class="text-[10px] font-black uppercase text-slate-500 tracking-[0.2em] mb-4">Frame Styling</h3>
+                
+                <div>
+                    <label class="text-[10px] font-bold mb-2 block">BACKGROUND COLOR</label>
+                    <input type="color" id="frameBg" oninput="CanvasCore.updateBg(this.value)" class="w-full h-10 bg-transparent cursor-pointer">
+                </div>
+
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <label class="text-[10px] font-bold">FRAME ROUNDNESS</label>
+                        <span id="radiusVal" class="text-[10px] font-mono">0px</span>
+                    </div>
+                    <input type="range" id="frameRadius" min="0" max="200" value="0" 
+                        oninput="CanvasCore.updateRadius(this.value)" class="w-full accent-indigo-500">
+                </div>
+            </section>
+        </aside>
+
+        <main class="flex-1 relative bg-[#0f111a] flex items-center justify-center p-12 overflow-hidden" id="workspace">
+            <div id="designCanvas" class="relative bg-white shadow-2xl transition-all duration-300 overflow-hidden" 
+                style="width: 600px; height: 450px;">
+                <div id="canvasContent" class="absolute inset-0"></div>
+                
+                <div id="emptyState" class="absolute inset-0 flex flex-col items-center justify-center text-slate-300">
+                    <div class="w-16 h-16 bg-slate-100 rounded-2xl flex items-center justify-center mb-4">
+                        <i class="fas fa-image text-slate-300 text-2xl"></i>
+                    </div>
+                    <p class="font-bold text-sm">Empty Canvas</p>
+                    <p class="text-[10px] opacity-50">Generate an image or add shapes to start</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/ai-engine.js"></script>
+    <script src="js/canvas-core.js"></script>
+    <script src="js/exporters.js"></script>
+</body>
+</html>
