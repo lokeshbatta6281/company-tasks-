@@ -1,0 +1,1112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book
+    PUBLIC "-//DTD CUP-BITS Book Interchange DTD v1.2//EN" "https://dtd.cambridge.org/schemas/2021/09/CUP-BITS-book1.dtd">
+
+<book xmlns:xlink="http://www.w3.org/1999/xlink">
+
+
+    <book-part book-part-type="chapter" id="chap4">
+
+        <book-part-meta>
+            <title-group>
+                <label>CHAPTER 1</label>
+            </title-group>
+        </book-part-meta>
+    </book-part>
+
+    <body>
+        <sec>
+            <title>Introduction</title>
+            <p>Historically, cryptography arose as a means to enable parties to maintain privacy of the information
+                they send to each other, even in the presence of an adversary with access to the communication
+                channel. While providing privacy remains a central goal, the field has expandeded to encompass
+                many others, including not just other goals of communication security, such as guaranteeing integrity
+                and authenticity of communications, but many more sophisticated and fascinating goals.</p>
+
+            <p>Once largely the domain of the military, cryptography is now in widespread use, and you are
+                likely to have used it even if you don’t know it. When you shop on the Internet, for example to buy
+                a book at www.amazon.com, cryptography is used to ensure privacy of your credit card number as
+                it travels from you to the shop’s server. Or, in electronic banking, cryptography is used to ensure
+                that your checks cannot be forged.</p>
+
+            <p>Cryptography has been used almost since writing was invented. For the larger part of its
+                history, cryptography remained an art, a game of ad hoc designs and attacks. Although the field
+                retains some of this flavor, the last twenty-five years have brought in something new. The art of
+                cryptography has now been supplemented with a legitimate science. In this course we shall focus
+                on that science, which is modern cryptography.</p>
+
+            <p>Modern cryptography is a remarkable discipline. It is a cornerstone of computer and communications
+                security, with end products that are imminently practical. Yet its study touches on branches
+                of mathematics that may have been considered esoteric, and it brings together fields like number
+                theory, computational-complexity theory, and probabiltity theory. This course is your invitation
+                to this fascinating field.</p>
+
+            <sec_1_1>
+                <title><label>1.1</label> Goals and settings</title>
+                <p>Modern cryptography addresses a wide range of problems. But the most basic problem remains
+                    the classical one of ensuring security of communication across an insecure medium. To describe it,
+                    let’s introduce the first two members of our cast of characters: our sender, S, and our receiver, R.
+                    (Sometimes people call these characters Alice, A, and Bob, B. Alice and Bob figure in many works
+                    on cryptography. But we’re going to want the letter A for someone else, anyway.) The sender and
+                    receiver want to communicate with each other.</p>
+                <fig id="fig_1_1">
+                    <label>Figure 1.1</label>
+                    <caption>Several cryptographic goals aim to imitate some aspect of an ideal channel connecting
+                        a sender S to a receiver R.
+                    </caption>
+                    <graphic xlink:href="figure1_1.jpg" />
+                </fig>
+
+                <p>THE IDEAL CHANNEL. Imagine our two parties are provided with a dedicated, untappable, impenetrable
+                    pipe or tube into which the sender can whisper a message and the receiver will hear it. Nobody else
+                    can look inside the pipe or change what’s there. This pipe provides the perfect medium, available
+                    only to the sender and receiver, as though they were alone in the world. It is an “ideal”
+                    communication channel from the security point of view.</p>
+
+                <p>Unfortunately, in real life, there are no ideal channels connecting the pairs of parties that might
+                    like to communicate with each other. Usually such parties are communicating over some public network
+                    like the Internet.</p>
+
+                <p>The most basic goal of cryptography is to provide such parties with a means to imbue their
+                    communications with security properties akin to those provided by the ideal channel.</p>
+
+                <p>At this point we should introduce the third member of our cast. This is our adversary, denoted A. An
+                    adversary models the source of all possible threats. We imagine the adversary as having access to
+                    the network and wanting to compromise the security of the parties communications in some way.</p>
+
+                <p>Not all aspects of an ideal channel can be emulated. Instead, cryptographers distill a few central
+                    security goals and try to achieve them. The first such goal is privacy. Providing privacy means
+                    hiding the content of a transmission from the adversary. The second goal is authenticity or
+                    integrity. We want the receiver, upon receiving a communication purporting to be from the sender, to
+                    have a way of assuring itself that it really did originate with the sender, and was not sent by the
+                    adversary, or modified en route from the sender to the receiver.</p>
+
+                <p>PROTOCOLS. In order to achieve security goals such as privacy or authenticity, cryptography supplies
+                    the sender and receiver with a protocol. A protocol is just a collection of programs (equivalently,
+                    algorithms, software), one for each party involved. In our case, there would be some program for the
+                    sender to run, and another for the receiver to run. The sender’s program tells her how to package,
+                    or encapsulate, her data for transmission. The receiver’s program tells him how to decapsulate the
+                    received package to recover the data together possibly with associated information telling her
+                    whether or not to regard it as authentic. Both programs are a function of some cryptographic keys as
+                    we discuss next.</p>
+
+                <p>TRUST MODELS. It is not hard to convince yourself that in order to communicate securely, there must
+                    be something that a party knows, or can do, that the adversary does not know, or cannot do. There
+                    has to be some “asymmetry” between the situation in which the parties find themselves and the
+                    situation in which the adversary finds itself.</p>
+
+                <p>The trust model specifies who, initially, has what keys. There are two central trust models: the
+                    symmetric (or shared-key) trust model and the asymmetric (or public-key) trust model. We look at
+                    them, and the cryptographic problems they give rise to, in turn.</p>
+
+                <fig id="fig_1_2">
+                    <label>Figure 1.2</label>
+                    <caption> Elementary notation from formal-language theory</caption>
+                    <graphic xlink:href="figure1_2.jpg" />
+                </fig>
+
+                <sec_1_1_1>
+                    <title><label>1.1.1</label>The symmetric setting</title>
+                    <p>In practice, the simplest and also most common setting is that the sender and receiver share a
+                        key that the adversary does not know. This is called the <i>symmetric setting</i> or symmetric
+                        trust model. The encapsulation and decapsulation procedures above would both depend on this same
+                        shared key. The shared key is usually a uniformly distributed random string having some number
+                        of bits, say k. Recall that a string is just a sequence of bits. (For language-theoretic
+                        background, see Fig. 1.2.) The sender and receiver must somehow use the key K to overcome the
+                        presence of the adversary.</p>
+
+                    <p>One might ask how the symmetric setting is realized. Meaning, how do a sender and receiver
+                        initially come into possession of a key unknown to the adversary? We will discuss this later.
+                        For now, we will assume that the sender and receiver share a key, and that the adversary does
+                        not know this key.</p>
+
+                    <p>In cryptography we assume that the secret key is kept securely by the party using it. If it is
+                        kept on a computer, we assume that the adversary cannot penetrate these machines and recover the
+                        key. Ensuring that this assumption is true is the domain of computer system security.</p>
+
+                    <p>Let us now take a closer look at secure protocols in the symmetric setting. We’ll describe these
+                        problems quite informally, but we’ll be returning to them later in our studies, where they’ll
+                        get a much more thorough treatment.</p>
+
+                    <p><i>SYMMETRIC ENCRYPTION SCHEMES.</i> A protocol used to provide privacy in the symmetric setting
+                        is called a <i>symmetric encryption scheme</i>. When we specify such a scheme Π, we must specify
+                        three algorithms, so that the scheme is a triple of algorithms, Π = (K, E, D). The encapsulation
+                        algorithm we discussed above is, in this context, called an <i>encryption algorithm</i>, and is
+                        the algorithm E. The message M that the sender wishes to transmit is usually referred to as a
+                        <i>plaintext</i>. The sender encrypts her plaintext under the shared key K by applying E to K
+                        and M to obtain a <i>ciphertext</i> C. The ciphertext is transmitted to the receiver. The
+                        above-mentioned decapsulation procedure, in this context, is called a <i>decryption
+                            algorithm</i>, and is the algorithm D. The receiver applies D to K and C. The decryption
+                        process must be successful, indicated by its returning a plaintext, M. But, if successful, it
+                        ought to return the message that was originally encrypted. The first algorithm in Π is the key
+                        generation algorithm which specifies the manner in which the key is to be chosen. In most cases
+                        this algorithm simply returns a random string of length the key length.</p>
+
+                    <p>The encryption scheme does not tell the adversary what to do. It does not say how the key is to
+                        be generated, nor how the sender and receiver behave. And it does not say how messages are
+                        transmitted. It only says how keys are generated and how the data is processed.</p>
+
+                    <p><i>WHAT IS PRIVACY?</i> The goal of a symmetric encryption scheme is that an adversary who
+                        obtains the ciphertext be unable to learn anything about the plaintext. What exactly this means,
+                        however, is not clear, and obtaining a definition of privacy will be an important objective in
+                        later chapters.</p>
+
+                    <p>One thing encryption does not do is hide the length of a plaintext string. This is usually
+                        recoverable from the length of the ciphertext string.</p>
+
+                    <p>A more complete but informal notion of privacy requires that an adversary, whether or not he
+                        knows the key, should not be able to distinguish between ciphertexts corresponding to two chosen
+                        plaintexts. However, this idea needs a precise definition to make sense.</p>
+
+                    <p>For now, we will just say that an adversary attacking the privacy of an encryption scheme is
+                        passive, merely obtaining and examining ciphertexts. In fact, this might not be the case at all.
+                        We will consider adversaries that are much more powerful than that.</p>
+
+                    <p><i>MESSAGE AUTHENTICITY.</i> In the message-authentication problem the receiver gets some message
+                        which is claimed to have originated with a particular sender. The channel on which this message
+                        flows is insecure. Thus the receiver S wants to distinguish the case in which the message really
+                        did originate with the claimed sender S from the case in which the message originated with some
+                        imposter, A. In such a case we consider the design of an encapsulation mechanism with the
+                        property that unauthentic transmissions lead to the decapsulation algorithm outputting the
+                        special symbol ⊥.</p>
+
+                    <p>The most common tool for solving the message-authentication problem in the symmetric setting is a
+                        <i>message authentication scheme</i>, also called a <i>message authentication code</i> (MAC).
+                        Such a scheme is specified by a triple of algorithms, Π = (K, T, V). When the sender wants to
+                        send a
+                        <br />
+
+                    <figure>
+                        <label>Figure 1.3</label>
+                        <caption> Symmetric encryption. The sender and the receiver share a secret key, K. The adversary
+                            lacks this key. The message M is the plaintext; the message C is the ciphertext.</caption>
+                        <graphic xlink:href="fig1_3.jpg" mime-subtype="png" />
+                    </figure>
+
+                    <figure>
+                        <label>Figure 1.4</label>
+                        <caption> A message authentication code. The tag σ accompanies the message M. The receiver
+                            R uses it to decide if the message really did originate with the sender S with whom he
+                            shares the
+                            key K.</caption>
+                        <graphic xlink:href="fig1_4.jpg" mime-subtype="png" />
+                    </figure>
+
+                    message M to the receiver she computes a “tag,” σ, by applying T to the shared key K and
+                    the message M, and then transmits the pair (M,σ). (The encapsulation procedure referred to
+                    above thus consists of taking M and returning this pair. The tag is also called a MAC.) The
+                    computation of the MAC might be probabilistic or use state, just as with encryption. Or it may
+                    well be deterministic. The receiver, on receipt of M and σ, uses the key K to check if the tag
+                    is OK by applying the verification algorithm V to K,M and σ. If this algorithms returns 1, he
+                    accepts M as authentic; otherwise, he regards M as a forgery. An appropriate reaction might range
+                    from ignoring the bogus message to tearing down the connection to alerting a responsible party
+                    about the possible mischief. See Figure 1.4.</p>
+
+                </sec_1_1_1>
+
+                <sec_1_1_2>
+                    <title>The asymmetric setting</title>
+                    <p>A shared key K between the sender and the receiver is not the only way to create the information
+                        asymmetry that we need between the parties and the adversary. In the asymmetric setting, also
+                        called the public-key setting, a party possesses a pair of keys—a public key, pk, and an
+                        associated
+                        secret key, sk. A party’s public key is made publicly known and bound to its identity. For
+                        example,
+                        a party’s public key might be published in a phone book.</p>
+                    <p>The problems that arise are the same as before, but the difference in the setting leads to the
+                        <br />
+
+                    <figure>
+                        <label>Figure 1.5</label>
+                        <caption> Asymmetric encryption. The receiver R has a public key, pkR, which the sender knows
+                            belongs to R. The receiver also has a corresponding secret key, skR.</caption>
+                        <graphic xlink:href="fig1_5.jpg" mime-subtype="png" />
+                    </figure>
+
+                    development of different kinds of tools.</p>
+
+                    <p>Asymmetric encryption. The sender is assumed to be able to obtain an authentic copy pkR of
+                        the receiver’s public key. (The adversary is assumed to know pkR too.) To send a secret message
+                        M to the receiver the sender computes a ciphertext C ←EpkR
+                        (M) and sends C to the receiver.
+                        When the receiver receives a ciphertext C he computes M ←DskR
+                        (C). The asymmetric encryption
+                        scheme Π = (K,E,D) is specified by the algorithms for key generation, encryption and decryption.
+                        For a picture of encryption in the public-key setting, see Fig. 1.5.</p>
+                    <p>The idea of public-key cryptography, and the fact that we can actually realize this goal, is
+                        remarkable. You’ve never met the receiver before. But you can send him a secret message by
+                        looking up some information in a phone book and then using this information to help you garble
+                        up the message you want to send. The intended receiver will be able to understand the content of
+                        your message, but nobody else will. The idea of public-key cryptography is due to Whitfield
+                        Diffie
+                        and Martin Hellman and was published in 1976 [10].</p>
+                    <p>Digital signatures. The tool for solving the message-authentication problem in the asymmetric
+                        setting is a digital signature. Here the sender has a public key pkS and a corresponding secret
+                        key
+                        skS. The receiver is assumed to know the key pkS and that it belongs to party S. (The adversary
+                        is assumed to know pkS too.) When the sender wants to send a message M she attaches to it
+                        some extra bits, σ, which is called a signature for the message and is computed as a function of
+                        M and skS by applying to them a signing algorithm Sign. The receiver, on receipt of M and σ,
+                        checks if it is OK using the public key of the sender, pkS, by applying a verification algorithm
+                        V. If this algorithm accepts, the receiver regards M as authentic; otherwise, he regards M as an
+                        attempted forgery. The digital signature scheme Π = (K,Sign,V) is specified by the algorithms
+                        for
+                        key generation, signing and verifying. A picture is given in Fig. 1.6.</p>
+                    <p>One difference between a MAC and a digital signature concerns what is called non-repudiation.
+                        With aMACanyonewhocanverify a tagged message can also produce one, and so a tagged message
+                        would seem to be of little use in proving authenticity in a court of law. But with a
+                        digitally-signed
+                        message the only party who should be able to produce a message that verifies under public key
+                        pkS is the party S herself. Thus if the signature scheme is good, party S cannot just maintain
+                        that
+                        the receiver, or the one presenting the evidence, concocted it. If signature σ authenticates M
+                        with <br />
+
+                    <figure>
+                        <label>Figure 1.6</label>
+                        <caption> A digital signature scheme. The signature σ accompanies the message M. The receiver
+                            R uses it to decide if the message really did originate with the sender S with has public
+                            key pkS.</caption>
+                        <graphic xlink:href="fig1_6.jpg" mime-subtype="png" />
+                    </figure>
+
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>symmetric trust model</th>
+                                <th>asymmetric trust model</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>message privacy</td>
+                                <td>symmetric (a.k.a. privatekey) encryption</td>
+                                <td>asymmetric (a.k.a. publickey) encryption</td>
+                            </tr>
+
+                            <tr>
+                                <td>message authenticity</td>
+                                <td>message authentication code (MAC)</td>
+                                <td>digital signature scheme</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <figure>
+                        <label>Figure 1.7</label>
+                        <caption> Summary of main goals and trust models.</caption>
+                        <graphic xlink:href="fig1_7.jpg" mime-subtype="png" />
+                    </figure>
+
+                    respect to public key pkS, then it is only S that should have been able to devise σ. The sender
+                    cannot refute that. Probably the sender S can claim that the key skS was stolen from her. Perhaps
+                    this, if true, might still be construed the sender’s fault.</p>
+                </sec_1_1_2>
+
+                <sec_1_1_3>
+                    <title>Summary</title>
+                    <p>To summarize, there are two common aims concerned with mimicking an ideal channel: achieving
+                        message privacy and achieving message authenticity. There are two main trust models in which
+                        we are interested in achieving these goals: the symmetric trust model and the asymmetric trust
+                        model. The tools used to achieve these four goals are named as shown in Fig. 1.7.</p>
+                </sec_1_1_3>
+
+            </sec_1_1>
+
+
+            <sec>
+                <title><b><label>1.2</label> Other goals</b></title>
+                <p>Cryptography has numerous other goals, some related to the ones above, some not. Let us discuss
+                    a few of them.</p>
+                <sec>
+                    <title><b><label>1.2.1</label> Pseudorandom Number Generation</b></title>
+                    <p>Lots of applications require “random” numbers or bits. These applications involve simulation,
+                        effi
+                        cient algorithms, and cryptography itself. In particular, randomness is essential to key
+                        generation,
+                        and, additionally, many cryptographic algorithms, such as encryption algorithms, are randomized.
+                    </p>
+
+                    <p>A pseudorandom number generator is a deterministic algorithm that takes as input a short random
+                        string called a <i>seed</i> and stretches it to output a longer sequence of bits that is
+                        “pseudorandom.”</p>
+
+                    <p>In some applications, people use Linear Congruential Generators (LCGs) for pseudorandom number
+                        generation. But LCGs do not have good properties with regard to the quality of pseudorandomness
+                        of the bits output. With the ideas and techniques of modern cryptography, one can do much
+                        better. We will say what it means for a pseudorandom number generator to be “good” and then how
+                        to design one that is good in this sense. Our notion of “good” is such that our generators
+                        provably suffice for typical applications.</p>
+
+                    <p>It should be clarified that pseudorandom generators do not generate pseudorandom bits from
+                        scratch. They need as input a random seed, and their job is to stretch this. Thus, they reduce
+                        the task of random number generation to the task of generating a short random seed. As to how to
+                        do the latter, we must step outside the domain of cryptography. We might wire to our computer a
+                        Geiger counter that generates a “random” bit every second, and run the computer for, say, 200
+                        seconds, to get a 200 bit random seed, which we can then stretch via the pseudorandom number
+                        generator. Sometimes, more ad hoc methods are used; a computer might obtain a “random” seed by
+                        computing some function of various variable system parameters such as the time and system load.
+                    </p>
+
+                    <p>We won’t worry about the “philosophical” question as to whether the bits that form the seed are
+                        random in any <i>real</i> sense. We’ll simply assume that these bits are completely
+                        unpredictable to anything “beyond” the computer which has gathered this data—mathematically,
+                        we’ll treat these bits as random. We will then study pseudorandom number generation under the
+                        assumption that a random seed is available.</p>
+                </sec>
+                <sec>
+                    <title><b><label>1.2.2</label>Authenticated key exchange</b></title>
+                    <p>It is common for a pair of communicating parties to wish to establish a <i>secure session</i>.
+                        This
+                        is a communication session in which they exchange information with the conviction that each is
+                        indeed speaking to the other, and the content of the information remains hidden to any third
+                        party.
+                        One example is a login session in which Alice wishes to remotely logon to her computer. Another
+                        example is a web-browsing session in which a client wants to communicate securely with a server
+                        for
+                        some period.</p>
+
+                    <p>Parties who already either share a secret key or are in possession of authentic copies of each
+                        other’s public keys could use these keys directly to provide privacy and integrity of
+                        communicated
+                        data, via symmetric or asymmetric cryptography. However, this is not what is commonly done.
+                        Rather,
+                        the parties will use their existing keys—called <i>long-lived keys</i> in this context—to derive
+                        a
+                        session key. This is done via an <i>authenticated key exchange</i> protocol. This is a message
+                        exchange whose goal is to provide the parties a “fresh” and authentic shared key that will then
+                        be
+                        used to encrypt and authenticate traffic in the session using symmetric cryptography. Once the
+                        session is over, the session key is discarded.</p>
+
+                    <p>Authenticated key exchange is one of the more subtle goals in cryptography, and will spend some
+                        time
+                        later applying the paradigms of modern cryptography to see how to define this goal and <br />
+                    <figure>
+                        <label>Figure 1.8</label>
+                        <caption> Envelope solution to the telephone-coin-flipping 5problem.</caption>
+                        <graphic xlink:href="fig1_8.jpg" mime-subtype="png" />
+                    </figure>
+                    provide high-assurance solutions.</p>
+                </sec>
+                <sec>
+                    <title><b><label>1.2.3</label>Coin Flipping</b></title>
+                    <p>Alice and Bob are getting divorced, and want to decide who gets to keep the car. Alice calls Bob
+                        on the telephone and offers a simple solution. “Bob,” she says, “I’ve got a penny in my pocket.
+                        I’m going to toss it in the air right now. You call <i>heads</i> or <i>tails</i>. If you get it
+                        right, you get the car. If you get it wrong, I get the car.”</p>
+
+                    <p>Bob is not as bright as Alice, but something troubles him about this arrangement.</p>
+
+                    <p>The <i>telephone-coin-flip</i> problem is to come up with a protocol so that, to the maximal
+                        extent possible, neither Alice nor Bob can cheat the other and, at the same time, each of them
+                        learn the outcome of a fair coin toss.</p>
+
+                    <p>Here is a solution—sort of. Alice puts a random bit <i>a</i> inside an envelope and sends it to
+                        Bob. Bob announces a random bit <i>b</i>. Now Alice opens the envelope for Bob to see. The
+                        shared bit is defined as $a \oplus b$. See Figure 1.8.</p>
+
+                    <p>To do this over the telephone we need some sort of “electronic envelope” (in cryptography, this
+                        called a <i>commitment scheme</i>). Alice can put a value in the envelope and Bob can’t see what
+                        the envelope contains. Later, Alice can open the envelope so that Bob can see what the envelope
+                        contains. Alice can’t change her mind about an envelope’s contents—it can only be opened up in
+                        one way.</p>
+
+                </sec>
+            </sec>
+
+
+            <sec_1_3>
+                <title>What cryptography is about</title>
+                <p>Let us now move away from the particular examples we have given and ask what, in general, is
+                    cryptography about?</p>
+
+                <sec_1_3_1>
+                    <title> Protocols, parties and adversaries</title>
+                    <p>Briefly, cryptography is about constructing and analyzing protocols which overcome the influence
+                        of adversaries. In the last sections we gave examples of several different protocol problems,
+                        and a
+                        couple of different protocols</p>
+
+                    <p>Suppose that you are trying to solve some cryptographic problem. The problem will usually
+                        involve some number of parties. Us cryptographers often like to anthropomorphize our parties,
+                        giving them names like “Alice” and “Bob” and referring to them as though they are actual people.
+                        We do this because it’s convenient and fun. But you shouldn’t think that it means that the
+                        parties
+                        are really human beings. They might be—but they could be lots of other things, too. Like a cell
+                        phone, a computer, a processes running on a computer, an institution, or maybe a little gadget
+                        sitting on the top of your television set.</p>
+
+                    <p>We usually think of the parties as the “good guys,” and we want to help them accomplish their
+                        goal. We do this by making a protocol for the parties to use</p>
+
+                    <p>A protocol tells each party how to behave. A protocol is essentially a program, but it’s a
+                        distributed program. Here are some features of protocols for you to understand.</p>
+
+                    <p>A protocol instructs the parties what to do. It doesn’t tell the adversary what to do. That is
+                        up to her.</p>
+
+                    <p>A protocol can be probabilistic. This means that it can make random choices. To formalize this
+                        we usually assume that the model of computation that allows a party to specify a number n ≥ 2
+                        and then obtain a random value i ← { $ 0, 1,...,n−1}. This notation means that i is a random
+                        value
+                        from the indicated set, all values being equally likely</p>
+
+                    <p>A protocol can be stateful. This means that when a party finishes what he is doing he can
+                        retain some information for the next time that he is active. When that party runs again he will
+                        remember the state that he was last in. So, for example, you could have a party that knows “this
+                        is the first time I’ve been run,” “this is the second time I’ve been run,” and so on</p>
+
+                    <p>When we formalize protocols, they are usually tuples of algorithms. But the actual formalization
+                        will vary from problem to problem. For example, a protocol for symmetric encryption isn’t the
+                        same “type” of thing as a protocol for a telephone coin flip.</p>
+
+                    <p>Another word for a protocol is a scheme. We’ll use the two words interchangeably. So an
+                        encryption scheme is a protocol for encryption, and a message-authentication scheme is a
+                        protocol
+                        for message authentication. For us, a function, computed by a deterministic, sequential
+                        algorithm,
+                        is also a protocol. It’s a particularly simple kind of protocol.</p>
+
+                    <p>How can we devise and analyze protocols? The first step is to try to understand the threats and
+                        the goals for our particular problem. Once we have a good idea about these, we can try to find a
+                        protocol solution.</p>
+
+                    <p>The adversary is the agent that embodies the “source” of the threat. Adversaries aim to defeat
+                        our protocol’s goals. Protocols, in turn, are designed to to surmount the behavior of
+                        adversaries.
+                        It is a game—a question of who is more clever, protocol designer or adversary.</p>
+
+                    <p>The adversary is usually what we focus on. In rigorous formalizations of cryptographic problems,
+                        the parties may actually vanish, being “absorbed” into the formalization. But the adversary will
+                        never vanish. She will be at center stage.</p>
+
+                    <p>Cryptography is largely about thinking about the adversary. What can she do, and what can’t
+                        she do? What is she trying to accomplish? We have to answer these questions before we can get
+                        very far.</p>
+
+                    <p>Just as we warned that one shouldn’t literally regard our parties as people, so too for the
+                        adversary. The adversary might represent an actual person, but it might just as well be an
+                        automated
+                        attack program, a competitor’s company, a criminal organization, a government institution, one
+                        or more of the protocol’s legitimate parties, a group of friendly hackers, or merely some
+                        unlucky
+                        circumstances conspiring together, not controlled by any intelligence at all.</p>
+
+                    <p>By imagining a powerful adversary we take a pessimistic view about what might go wrong. We
+                        aim to succeed even if someone is out to get us. Maybe nobody is out to get us. In that case,
+                        we should at least be achieving high reliability. After all, if a powerful adversary can’t
+                        succeed in
+                        disrupting our endeavors, then neither will noisy lines, transmission errors due to software
+                        bugs,
+                        unlucky message delivery times, careless programmers sending improperly formatted messages, and
+                        so forth.</p>
+
+                    <p>When we formalize adversaries they will be random access machines (RAMs) with access to an
+                        oracle.</p>
+
+                </sec_1_3_1>
+
+                <sec_1_3_2>
+                    <title>Cryptography and computer security</title>
+                    <p>Good protocols are an essential tool for making secure computing systems. Badly designed
+                        protocols
+                        are easily exploited to break into computer systems, to eavesdrop on phone calls, to steal
+                        services,
+                        and so forth. Good protocol design is also hard. It is easy to under-estimate the task and
+                        quickly
+                        come up with ad hoc protocols that later turn out to be wrong. In industry, the necessary time
+                        and expertise for proper protocol design is typically under-estimated, often at future cost. It
+                        takes
+                        knowledge, effort and ingenuity to do the job right.</p>
+
+                    <p>Security has many facets. For a system to be secure, many factors must combine. For example,
+                        it should not be possible for hackers to exploit bugs, break into your system, and use your
+                        account.
+                        They shouldn’t be able to buy off your system administrator. They shouldn’t be able to steal
+                        your
+                        back-up tapes. These things lie in the realm of system security.</p>
+
+                    <p>The cryptographic protocol is just one piece of the puzzle. If it is poorly designed, the
+                        attacker
+                        will exploit that. For example, suppose the protocol transmits your password in the clear (that
+                        is, in a way that anyone watching can understand what it is). That’s a protocol problem, not a
+                        system problem. And it will certainly be exploited.</p>
+
+                    <p>The security of the system is only as strong as its weakest link. This is a big part of the
+                        difficulty
+                        of building a secure system. To get security we need to address all the problems: how do we
+                        secure
+                        our machines against intruders, how do we administer machines to maintain security, how do we
+                        design good protocols, and so on. All of these problems are important, but we will not address
+                        all
+                        of these problems here. This course is about the design of secure protocols. We usually have to
+                        assume that the rest of the system is competent at doing its job.</p>
+
+                    <p>We make this assumption because it provides a natural abstraction boundary in dealing with the
+                        enormous task of providing security. Computer system security is a domain of a different nature,
+                        requiring different tools and expertise. Security can be best addressed by splitting it into
+                        more
+                        manageable components.</p>
+
+                </sec_1_3_2>
+
+                <section_1_3_3>
+                    <title>The rules of the game</title>
+                    <p>Cryptography has rules. The first rule is that we may only try to overcome the adversary by means
+                        of protocols. We aren’t allowed to overcome the adversary by intimidating her, arresting her, or
+                        putting poison in her coffee. These methods might be effective, but they are not cryptography.
+                    </p>
+
+                    <p>Another rule that most cryptographers insist on is to make the protocols public. That which
+                        must be secret should be embodied in keys. Keys are data, not algorithms. Why do we insist that
+                        our protocols be public? There are several reasons. A resourceful adversary will likely find out
+                        what the protocol is anyway, since it usually has to be embodied in many programs or machines;
+                        trying to hide the protocol description is likely to be costly or infeasible. More than that,
+                        the
+                        attempt to hide the protocol makes one wonder if you’ve achieved security or just obfuscation.
+                        Peer review and academic work cannot progress in the absence of known mechanisms, so keeping
+                        cryptographic methods secret is often seen as anti-intellectual and a sign that ones work will
+                        not
+                        hold up to serious scrutiny</p>
+
+                    <p>Government organizations that deal in cryptography often do not make their mechanisms public.
+                        For them, learning the cryptographic mechanism is one more hoop that that the adversary must
+                        jump through. Why give anything away? Some organizations may have other reasons for not
+                        wanting mechanisms to be public, like a fear of disseminating cryptographic know-how, or a fear
+                        that the organization’s abilities, or inabilities, will become better understood.</p>
+
+
+                </section_1_3_3>
+            </sec_1_3>
+
+            <sec_1_4>
+                <title><label>1.4</label>Approaches to the study of cryptography</title>
+                <p>Here we very briefly discuss the history of cryptography, and then at two development paradigms,
+                    namely cryptanalysis-driven design and proof-driven design.</p>
+
+                <sec_1_4_1>
+                    <title><label>1.4.1</label>Phases in cryptography’s development</title>
+
+                    <p>The history of cryptography can roughly be divided into three stages. In the first, early stage,
+                        algorithms had to be implementable with paper and ink. Julius Caesar used cryptograms. His and
+                        other early symmetric encryption schemes often took the form of substitution ciphers. In such a
+                        scheme, a key is a permutation π: Σ → Σ (meaning, a one-to-one, onto map from the alphabet to
+                        itself). A symbol σ ∈ Σ is encrypted as π(σ), and a piece of text is encrypted by encrypting
+                        each
+                        symbol in it. Decryption is done using the map π−1. As we will see, however, such schemes are
+                        not very secure. The system can be strengthened in various ways, but none too effective.</p>
+
+                    <p>The second age of cryptography was that of cryptographic engines. This is associated to the
+                        period of the World War II, and the most famous crypto engine was the German Enigma machine.
+                        How its codes were broken is a fascinating story</p>
+
+                    <p>The last stage is modern cryptography. Its central feature is the reliance on mathematics
+                        and electronic computers. Computers enabled the use of much more sophisticated encryption
+                        algorithms, and mathematics told us how to design them. It is during this most recent stage that
+                        cryptography becomes much more a science.</p>
+                </sec_1_4_1>
+
+                <sec_1_4_1>
+                    <title><label>1.4.1</label>Cryptanalysis-driven design</title>
+                    <p>Traditionally, cryptographic mechanisms have been designed by focusing on concrete attacks and
+                        how to defeat them. The approach has worked something like this.</p>
+                    <ol type="1">
+                        <li>(1) A cryptographic goal is recognized.</li>
+                        <li>(2) A solution is offered.</li>
+                        <li>(3) One searches for an attack on the proposed solution.</li>
+                        <li>(4) When one is found, if it is deemed damaging or indicative of a potential weakness, you
+                            go back
+                            to Step 2 and try to come up with a better solution. The process then continues.</li>
+                    </ol>
+
+                </sec_1_4_1>
+
+
+
+
+            </sec_1_4>
+
+            <sec_1_5>
+                <title><label>1.5</label>What background do I need?</title>
+                <p>Now that you have had some introduction to the material and themes of the class, you need to
+                    decide whether you should take it. Here are some things to consider in making this decision.</p>
+                <p>A student taking this course is expected to be comfortable with the following kinds of things,
+                    which are covered in various other courses.</p>
+                <p>The first is probability theory. Probability is everywhere in cryptography. You should be
+                    comfortable with ideas like sample spaces, events, experiments, conditional probability, random
+                    variables and their expectations. We won’t use anything deep from probability theory, but we will
+                    draw heavily on the language and basic concepts of this field.</p>
+                <p>Youshould know about alphabets, strings and formal languages, in the style of an undergraduate
+                    course in the theory of computation.</p>
+                <p>You should know about algorithms and how to measure their complexity. In particular, you
+                    should have taken and understood at least an undergraduate algorithms class.</p>
+                <p>Most of all you should have general mathematical maturity, meaning, especially, you need to
+                    be able to understand what is (and what is not) a proper definition.</p>
+            </sec_1_5>
+
+
+            <sec_1_6>
+                <title><b><label>1.6</label>Problems</b></title>
+                <p><label><b>Problem 1.1</b></label> Besides the symmetric and the asymmetric trust models, think of a
+                    couple more
+                    ways to “create asymmetry” between the receiver and the adversary. Show how you would encrypt
+                    a bit in your model.</p>
+                <p><label><b>Problem 1.2</b></label> In the telephone coin-flipping protocol, what should happen if
+                    Alice refuses to send
+                    her second message? Is this potentially damaging?</p>
+                <p><label><b>Problem 1.3</b></label>Argue that what we have said about keeping the algorithm public but
+                    the key secret
+                    is fundamentally meaningless.</p>
+                <p><label><b>Problem 1.4</b></label> A limitation on fixed-time fair-coin-flipping TMs. Consider the
+                    model of computa
+                    tion in which we augment a Turing machine so that it can obtain the output of a random coin flip:
+                    by going into a distinguished state Q$, the next state will be QH with probability 1/2, and the
+                    next state will be QT with probability 1/2. Show that, in this model of computation, there is no
+                    constant-time algorithm to perfectly deal out five cards to each of two players.
+                    (A deck of cards consists of 52 cards, and a perfect deal means that all hands should be equally
+                    likely. Saying that the algorithm is constant-time means that there is some number T such that
+                    the algorithm is guaranteed to stop within T steps.)</p>
+                <p><label><b>Problem 1.5</b></label> Composition of EPT Algorithms. John designs an EPT (expected
+                    polynomial time)
+                    algorithm to solve some computational problem Π—but he assumes that he has in hand a black
+                    box (ie., a unit-time subroutine) which solves some other computational problem, Π. Tedsoon
+                    discovers an EPT algorithm to solve Π. True or false: putting these two pieces together, John and
+                    Ted now have an EPT algorithm for Π. Give a proof or counterexample. <br />
+                    (When we speak of the worst-case running time of machine M we are looking at the function
+                    T(n) which gives, for each n, the maximal time which M might spend on an input of size n: T(n)=
+                    maxx, |x|=n[#StepsM(x)]. When we speak of the expected running time of M we are instead looking
+                    at the function T(n) which gives, for each n, the maximal value among inputs of length n of the
+                    expected value of the running time of M on this input—that is, T(n)=maxx, |x|=nE[#StepsM(x)],
+                    where the expectation is over the random choices made by M.)
+                </p>
+            </sec_1_6>
+        </sec>
+    </body>
+
+
+    <book-part book-part-type="chapter" id="chap4">
+
+        <book-part-meta>
+            <title-group>
+                <label>CHAPTER 2</label>
+            </title-group>
+        </book-part-meta>
+    </book-part>
+
+    <body>
+        <sec>
+            <title><b> Classical Encryption</b></title>
+            <p>In this chapter we take a quick look at some classical encryption techniques, illustrating their
+weakness and using these examples to initiate questions about how to define privacy. We then
+discuss Shannon’s notion of perfect security.</p>
+            <sec_2_1>
+                <title><b><label>2.1</label>Substitution ciphers</b></title>
+                <p><p>One of the earliest approaches to symmetric encryption is what is called a <i>substitution cipher</i>. Say the plaintext is English text. We can view this as a sequence of symbols, each symbol being either a letter, a blank or a punctuation mark. Encryption substitutes each symbol $\sigma$ with another symbol $\pi(\sigma)$. The function $\pi$ is the key, and has to be a <i>permutation</i> (meaning, one-to-one and onto) so that decryption is possible.</p>
+                </p>
+                <p>Encryption of this form is quite natural and well known, and, indeed, to many people it defines how encryption is done. We will later see many other (and better) ways to encrypt, but it is worth beginning by exploring this one.</p>
+                <p>Let's begin by specifying the scheme a little more mathematically. It may be valuable at this time to review the box in the Introduction that recalls the vocabulary of formal languages; we will be talking of things like alphabets, symbols, and strings.</p>
+                <p>Let $\Sigma$ be a finite <i>alphabet</i>, whose members are called <i>symbols</i>. (In our examples, $\Sigma$ would contain the 26 letters of the English alphabet, the blank symbol $\sqcup$, and punctuation symbols. Let us refer to this henceforth as the <i>English alphabet</i>.) If $x$ is a string over $\Sigma$ then we denote by $x[i]$ its $i$-th symbol.</p>
+                <p>Recall that if $x$ is a string then $|x|$ denotes the length of $x$, meaning the number of symbols in it. Let us also adopt the convention that if $X$ is a set then $|X|$ denotes its size. The double use of the "$|\cdot|$" notation should not cause much problem since the type of object to which it is applied, namely a set or a string, will usually be quite clear.</p>
+                <p>A <i>permutation</i> on a set $S$ is a map $\pi: S \to S$ that is one-to-one and onto. Such a map is invertible, and we denote its inverse by $\pi^{-1}$. The inverse is also a permutation, and the map and its inverse are related by the fact that $\pi^{-1}(\pi(x)) = x$ and $\pi(\pi^{-1}(y)) = y$ for all $x, y \in S$. We let $\text{Perm}(S)$ denote the set of all permutations on set $S$. Note that this set has size $|S|!$.</p>
+                <p>In the introduction, we had discussed symmetric encryption schemes, and said that any such scheme is specified as a triple $\mathcal{SE} = (\mathcal{K}, \mathcal{E}, \mathcal{D})$ consisting of a key-generation algorithm, an encryption algorithm, and a decryption algorithm. A <i>substitution cipher over alphabet</i> $\Sigma$ is a special kind of symmetric encryption scheme in which the output of the key-generation algorithm $\mathcal{K}$ is always a permutation over $\Sigma$ and the encryption and decryption algorithms are as follows:</p>
+                <p>Above, the plaintext $M$ is a string over $\Sigma$, as is the ciphertext $C$. The key is denoted $\pi$ and is a permutation over $\Sigma$. We will let $\text{Keys}(\mathcal{SE})$ denote the set of all keys that might be output by $\mathcal{K}$.</p>
+                <p>There are many possible substitution ciphers over $\Sigma$, depending on the set $\text{Keys}(\mathcal{SE})$. In the simplest case, this is the set of all permutations over $\Sigma$, and $\mathcal{K}$ is picking a permutation at random. But one might consider schemes in which permutations are chosen from a much smaller set.</p>
+                <p>In our examples, unless otherwise indicated, the alphabet will be the English one defined above, namely $\Sigma$ contains the 26 English letters, the blank symbol $\sqcup$, and punctuation symbols. We will, for simplicity, restrict attention to substitution ciphers that are <i>punctuation respecting</i>. By this we mean that any key (permutation) $\pi \in \text{Keys}(\mathcal{SE})$ leaves blanks and punctuation marks unchanged. In specifying such a key, we need only say how it transforms each of the 26 English letters.</p>
+                <section >
+                    <title><b><label>Example 2.1 </label></b>This is an example of how encryption is performed with a (punctuation respecting)
+substitution cipher. An example key (permutation) π is depicted below:</title>
+<table>
+            
+      <thead>
+        <tr>
+          <cell>σ</cell>
+          <cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell><cell>F</cell><cell>G</cell><cell>H</cell><cell>I</cell><cell>J</cell><cell>K</cell><cell>L</cell><cell>M</cell><cell>N</cell><cell>O</cell><cell>P</cell><cell>Q</cell><cell>R</cell><cell>S</cell><cell>T</cell><cell>U</cell><cell>V</cell><cell>W</cell><cell>X</cell><cell>Y</cell><cell>Z</cell>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <cell>π(σ)</cell>
+          <cell>D</cell><cell>B</cell><cell>U</cell><cell>P</cell><cell>W</cell><cell>I</cell><cell>Z</cell><cell>L</cell><cell>A</cell><cell>F</cell><cell>N</cell><cell>S</cell><cell>G</cell><cell>K</cell><cell>H</cell><cell>T</cell><cell>J</cell><cell>X</cell><cell>C</cell><cell>M</cell><cell>Y</cell><cell>O</cell><cell>V</cell><cell>E</cell><cell>Q</cell><cell>R</cell>
+        </tr>
+      </tbody>
+    
+        </table>
+      <p>The adversary begins with the disadvantage of not being given the key $\pi$. It is assumed however to come in possession of a ciphertext $C$. The most basic goal that we can consider for it is that it wants to recover the plaintext $M = \mathcal{D}(\pi, C)$ underlying $C$.</p>
+      
+      <p>The adversary is always assumed to know the "rules of the game." Meaning, it knows the algorithms $\mathcal{K}, \mathcal{E}, \mathcal{D}$. It knows that a substitution cipher is being used, and that it is punctuation respecting in our case. The <i>only</i> thing it does not know a priori is the key, for that is assumed to have been shared secretly and privately between the sender and receiver.</p>
+
+      <p>So the adversary sees some gibberish, such as the text <data type="ciphertext">LA MLWXVW</data>. One might imagine that in the absence of the key $\pi$ it would have a tough time figuring out that the message was <data type="plaintext">HI THERE</data>. But in fact, substitution ciphers are not so hard to cryptanalyze. Indeed, breaking a substitution cipher is a popular exercise in a Sunday newspaper or magazine, and many of you may have done it. The adversary can use its knowledge of the structure of English text to its advantage. Often a good way to begin is by making what is called a <i>frequency table</i>.</p>
+    
+       <table>
+        <thead>
+      <tr>
+        <cell>τ</cell>
+        <cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell><cell>F</cell><cell>G</cell><cell>H</cell><cell>I</cell><cell>J</cell><cell>K</cell><cell>L</cell><cell>M</cell><cell>N</cell><cell>O</cell><cell>P</cell><cell>Q</cell><cell>R</cell><cell>S</cell><cell>T</cell><cell>U</cell><cell>V</cell><cell>W</cell><cell>X</cell><cell>Y</cell><cell>Z</cell>
+      </tr>
+    </thead>
+    <tbody>
+      <tr stage="1">
+        <cell>π⁻¹(τ)</cell>
+        <cell></cell><cell>R</cell><cell>T</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>H</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>A</cell><cell></cell><cell></cell><cell></cell><cell>E</cell><cell></cell><cell></cell>
+      </tr>
+      <tr stage="2">
+        <cell>π⁻¹(τ)</cell>
+        <cell></cell><cell>R</cell><cell>T</cell><cell>I</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>N</cell><cell></cell><cell></cell><cell></cell><cell></cell><cell></cell><cell>H</cell><cell>C</cell><cell></cell><cell></cell><cell></cell><cell>A</cell><cell></cell><cell></cell><cell>W</cell><cell>E</cell><cell></cell><cell></cell>
+      </tr>
+      <tr stage="3">
+        <cell>π⁻¹(τ)</cell>
+        <cell>L</cell><cell>R</cell><cell>T</cell><cell>I</cell><cell></cell><cell></cell><cell>M</cell><cell>F</cell><cell>N</cell><cell></cell><cell>O</cell><cell></cell><cell></cell><cell></cell><cell>H</cell><cell>C</cell><cell></cell><cell></cell><cell>S</cell><cell>A</cell><cell></cell><cell></cell><cell>W</cell><cell>E</cell><cell></cell><cell></cell>
+      </tr>
+      <tr stage="4">
+        <cell>π⁻¹(τ)</cell>
+        <cell>L</cell><cell>R</cell><cell>T</cell><cell>I</cell><cell></cell><cell></cell><cell>M</cell><cell>F</cell><cell>N</cell><cell></cell><cell>O</cell><cell></cell><cell></cell><cell>P</cell><cell>H</cell><cell>C</cell><cell>U</cell><cell></cell><cell>S</cell><cell>A</cell><cell>D</cell><cell></cell><cell>W</cell><cell>E</cell><cell></cell><cell></cell>
+      </tr>
+    </tbody>
+
+       </table> 
+       <figure>
+                        <label>Figure 2.1</label>
+                        <caption> Cryptanalysis of Example 2.2.</caption>
+                        <graphic xlink:href="fig2_1.jpg" mime-subtype="png" />
+                    </figure>
+      <p>This table shows, for ever letter
+τ, how often τ occurs in the ciphertext. Now it turns out that the most common letter in English
+text is typically E. The next most common are the group T, A, O, I, N, S, H, R. (These letters have
+roughly the same frequency, somewhat lower than that of E, but higher than other letters.) So if X
+is the most frequent ciphertext symbol, a good guess would be that it represents E. (The guess is
+not necessarily true, but one attempts to validate or refute it in further stages.) Another thing to
+do is look for words that have few letters. Thus, if the letter T occurs by itself in the ciphertext,
+we conclude that it must represent A or I. Two letter words give similar information. And so on,
+it is remarkable how quickly you actually (usually) can figure out the key.</p>
+    </section>
+
+    <section>
+        <title><b><label>Example 2.2 </label></b>Let us try to decrypt the following ciphertext:</title>
+        <table>
+            <tbody>
+        <tr label="τ">
+          <cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>H</cell><cell>I</cell><cell>O</cell><cell>P</cell><cell>R</cell><cell>T</cell><cell>U</cell><cell>V</cell><cell>X</cell>
+        </tr>
+        <tr label="π⁻¹(τ)">
+          <cell>L</cell><cell>R</cell><cell>T</cell><cell>I</cell><cell>P</cell><cell>H</cell><cell>C</cell><cell>U</cell><cell>S</cell><cell>A</cell><cell>D</cell><cell>W</cell><cell>E</cell>
+        </tr>
+      </tbody>
+        </table>
+
+      <p>To illustrate why the idea of a substitution cipher is flawed at a fundamental level, consider the following example usage of the scheme. A polling station has a list of voters, call them $V_1, V_2, \dots, V_n$. Each voter casts a (secret) ballot which is a choice between two values... we represent them as letters: the two choices are <b>Y</b> and <b>N</b>.</p>
+
+      <p>It quickly becomes apparent that it is not [secure]. There are only two letters in $v$, namely <b>Y</b> and <b>N</b>. This means that $c$ also contains only two letters. Let's give them names, say <b>A</b> and <b>B</b>. If the adversary knew which is which, it would, from the ciphertext, know the votes of all voters. But we claim that it is quite easy for the adversary to know which is which. Consider for example that the adversary is one of the voters, say $V_1$. So it knows its own vote $v_1$. Say this is <b>Y</b>. It now looks at the first symbol in the ciphertext. If this is <b>A</b>, then it knows that $A = \pi(Y)$ and thus that $B = \pi(N)$, and can now immediately recover all of $v_2, \dots, v_n$ from the ciphertext.</p>
+
+      <p>This attack works even when the ciphertext is short (that is, when $n$ is small). The weakness is exhibits is in the very nature of the cipher, namely that a particular letter is always encrypted in the same way, and thus repetitions can be detected.</p>
+      <p>Some people argue that this type of cryptanalysis is not possible if the ciphertext is short, and
+thus that substitution ciphers work fine if, say, one changes the key quite frequently. Other people
+argue for other kinds of variants and extensions. And in fact, these types of systems have been the
+basis for encryption under relatively modern times. We could spend a lot of time on this subject,
+and many books do, but we won’t. The reason is that, as we will explain, the idea of a substitution
+cipher is flawed at a quite fundamental level, and the flaw remains in the various variations and
+enhancements proposed. It will take some quite different ideas to get systems that deliver quality
+privacy.</p>
+<p>To illustrate why the idea of a substitution cipher is flawed at a fundamental level, consider the
+following example usage of the scheme. A polling station has a list of voters, call them V1,V2,...,Vn.
+Each voter casts a (secret) ballot which is a choice between two values. You could think of them
+as YES or NO, being votes on some Proposition, or BUSH and KERRY. In any case, we represent
+them as letters: the two choices are Y and N. At the end of the day, the polling station has a list
+v1,...,vn of n votes, where vi is Vi’s vote. Each vote being a letter, either Y or N, we can think of
+the list of votes as a string v = v1...vn over the alphabet of English letters. The polling station
+wants to transmit this string to a tally center, encrypted in order to preserve anonymity of votes.
+The polling station and tally center have agreed on a key π for a substitution cipher. The polling
+station encrypts the message string v to get a ciphertext string c = π(v1)...π(vn) and transmits
+this to the tally center. Our question is, is this secure?
+</p>
+<p>It quickly becomes apparent that it is not. There are only two letters in v, namely Y and N.
+This means that c also contains only two letters. Let’s give them names, say A and B. One of these
+is π(Y) and the other is π(N). If the adversary knew which is which, it would, from the ciphertext,
+know the votes of all voters. But we claim that it is quite easy for the adversary to know which is
+which. Consider for example that the adversary is one of the voters, say V1. So it knows its own
+vote v1. Say this is Y. It now looks at the first symbol in the ciphertext. If this is A, then it knows
+that A = π(Y) and thus that B = N, and can now immediately recover all of v2,...,vn from the
+ciphertext. (If the first symbol is B, it is the other way around, but again it recovers all votes.)</p>
+<p>This attack works even when the ciphertext is short (that is, when n is small). The weakness
+is exhibits is in the very nature of the cipher, namely that a particular letter is always encrypted
+in the same way, and thus repetitions can be detected.</p>
+<p>Pinpointing this weakness illustrates something of the types of mode of thought we need to
+develop in cryptography. We need to be able to think about usage of application scenarios in which
+a scheme that otherwise seems good will be seen to be bad. For example, above, we considered not
+only that the encrypted text is votes, but that the adversary could be one of the voters. We need
+to always ask, “what if?”</p>
+<p>We want symmetric encryption schemes that are not subject to the types of attacks above and,
+in particular, would provide security in an application such as the voting one. Towards this end we
+now consider one-time-pad encryption.</p>
+    </section>
+    <section>
+        <title><b><label>2.2</label>One-Time-Pad and Perfect Security</b></title>
+        <p>The <i>One-Time-Pad</i> (OTP) scheme with key-length $m$ is the symmetric encryption scheme $\mathcal{SE} = (\mathcal{K}, \mathcal{E}, \mathcal{D})$ whose algorithms are as follows. The code for the key-generation algorithm is $K \leftarrow \{0, 1\}^m$; return $K$, meaning a key is a random $m$-bit string. The encryption algorithm is defined by $\mathcal{E}_K(M) = K \oplus M$, where the message $M$ is an $m$-bit binary string and $\oplus$ denotes bitwise XOR. The decryption algorithm is defined by $\mathcal{D}_K(C) = K \oplus C$, where $C \in \{0, 1\}^m$. The correctness condition is met because $\mathcal{D}_K(\mathcal{E}_K(M)) = K \oplus (K \oplus M) = M$ for all $M \in \{0, 1\}^m$.</p>
+        <p>Let us go back to our voting example. Represent Y by 1 and N by 0, and now encrypt the vote
+string v = v1...vn with the OTP scheme with key-length n. Thus the ciphertext is C = K ⊕ v.
+This time, weaknesses such as those we saw above are not present. Say the adversary has the
+ciphertext C = C1...Cn, where Ci is the i-th bit of C. Say the adversary knows that v1 =1. It
+can deduce that K1, the first bit of K, is1⊕ C1. But having K1 tells it nothing about the other
+bits of K, and hence v2,...,vn remain hidden.</p>
+        <p>It turns out that the higher quality of privacy we see here is not confined to this one application setting. The scheme has a property called <i>perfect security</i>, which we will define below, and effectively provides the best possible security. We will also see that substitution ciphers do not have this property, providing a more formal interpretation of the concrete weaknesses we have seen in them.</p><p>Before going on, we remark that the perfect security of the OTP with key-length $m$ relies crucially on our encrypting only a <i>single</i> message of length $m$. Were we to encrypt two or more messages, privacy would be lost. To see this, suppose we encrypt $M_1$, then $M_2$. The adversary obtains $C_1 = K \oplus M_1$ and $C_2 = K \oplus M_2$. XORing them together, it obtains $M_1 \oplus M_2$. This however provides partial information about the data, and, in particular, if the adversary would now happen to learn $M_1$, it could deduce $M_2$, which is not desirable.</p>
+        <p>efore going on, we remark that the perfect security of the OTP with key-length m relies
+crucially on our encrypting only a single message of length m. Were we to encrypt two or more
+messages, privacy would be lost. To see this, suppose we encrypt M1, then M2. The adversary
+obtains C1 = K ⊕M1 and C2 = K ⊕M2. XORing them together, it obtains M1 ⊕ M2. This
+however provides partial information about the data, and, in particular, if the adversary would
+nowhappentolearnM1, it could deduce M2, which is not desirable.</p>
+<p>The idea behind perfect security is to consider that one of two messages M1 or M2 is being
+encrypted. The adversary is aware of this, and all it wants to know is which of the two it is. It has
+in hand the ciphertext C, and now asks itself whether, given C, it can tell whether it was M1 or M2
+that gave rise to it. Perfect security says that the adversary cannot tell. It asks that the probability
+that C arises as the ciphertext is the same whether M1 or M2 was chosen to be encrypted.</p>
+        <section><title><b>Definition 2.3 (Perfect Security of a Symmetric Encryption Scheme)</b></title>
+            <p>let $\mathcal{SE} = (\mathcal{K}, \mathcal{E}, \mathcal{D})$ be a symmetric encryption scheme, and assume we use it to encrypt just one message, drawn from a set Plaintexts. We say that $\mathcal{SE}$ is <i>perfectly secure</i> if for any two messages $M_1, M_2 \in \text{Plaintexts}$ and any $C$:</p>
+            <p>$$\Pr[\mathcal{E}_K(M_1) = C] = \Pr[\mathcal{E}_K(M_2) = C]$$</p>
+            <p>In both cases, the probability is over the random choice $K \leftarrow \mathcal{K}$ and over the coins tossed by $\mathcal{E}$ if any.</p>
+            <p><b>Claim 2.4</b> Let $\mathcal{SE} = (\mathcal{K}, \mathcal{E}, \mathcal{D})$ be a substitution cipher over the alphabet $\Sigma$ consisting of the 26 English letters. Assume that $\mathcal{K}$ picks a random permutation over $\Sigma$ as the key. Let Plaintexts be the set of all three-letter English words. Assume we use $\mathcal{SE}$ to encrypt a single message from Plaintexts. Then $\mathcal{SE}$ is <i>not</i> perfectly secure.</p>
+            <p>Intuitively, this is due to the weakness we saw above, namely that if a letter appears twice in a plaintext, it is encrypted the same way in the ciphertext, and thus repetitions can be detected. If $M_1, M_2$ are messages such that $M_1$ contains repeated letters but $M_2$ does not, then, if the adversary sees a ciphertext with repeated letters it knows that $M_1$ was encrypted.</p>
+            <p><b>Claim 2.5</b> Let $\mathcal{SE} = (\mathcal{K}, \mathcal{E}, \mathcal{D})$ be the OTP scheme with key length $m \ge 1$. Assume we use it to encrypt a single message drawn from $\{0, 1\}^m$. Then $\mathcal{SE}$ is <i>perfectly secure</i>.</p>
+            <p>Perfect security is great in terms of security, but comes at a hefty price. It turns out that in any perfectly secure scheme, the length of the key must be at least the length of the (single) message encrypted. This means that in practice a perfectly secure scheme (like the OTP) is prohibitively expensive, requiring parties to exchange very long keys before they can communicate securely.</p>
+            <p>n practice we want parties to be able to hold a short key, for example 128 bits, and then be
+able to securely encrypt essentially any amount of data. To achieve this, we need to make a switch
+regarding what kinds of security attributes we seek. As we discussed in the Introduction, we will
+ask for security that is not perfect but good enough, the latter interpreted in a computational sense.
+Visualizing an adversary as someone running programs to break our system, we will say something
+like, yes, in principle you can break my scheme, but it would take more than 100 years running on
+the world’s fastest computers to break it with a probability greater than 2−60. In practice, this is
+good enough.</p>
+    </section>
+        </section>
+        <sec_2_3>
+            <p><b>Problem 2.1</b> Suppose that you want to encrypt a single message M ∈{0,1,2} using a random
+shared key K ∈{0,1,2}. Suppose you do this by representing K and M using two bits (00, 01,
+or 10), and then XORing the two representations. Does this seem like a good protocol to you?
+Explain.</p>
+<p><b>Problem 2.2</b> Suppose that you want to encrypt a single message M ∈{0,1,2} using a random
+shared key K ∈{0,1,2}. Explain a good way to do this.</p>
+<p><b>Problem 2.3</b> Symmetric encryption with a deck of cards. Alice shuffles a deck of cards and deals
+it all out to herself and Bob (each of them gets half of the 52 cards). Alice now wishes to send a
+secret message M to Bob by saying something aloud. Eavesdropper Eve is listening in: she hears
+everything Alice says (but Eve can’t see the cards). <br />
+<p>Part A. Suppose Alice’s message M is a string of 48-bits. Describe how Alice can communicate M
+to Bob in such a way that Eve will have no information about what is M.</p><br />
+<p>Part B. Now suppose Alice’s message M is 49 bits. Prove that there exists no protocol which allows
+Alice to communicate M to Bob in such a way that Eve will have no information about M.</p></p>
+        </sec_2_3>
+            </sec_2_1>
+        </sec>
+    </body>
+    <sec_3_3>
+        <title><b><label>3.3</label> Key recovery attacks on blockciphers</b></title>
+        <p>Now that we know what a blockcipher looks like, let us consider attacking one. This is called
+cryptanalysis of the blockcipher.</p>
+<p>We fix a blockcipher E: {0,1}k ×{0,1}n →{0,1}n having key-size k and block size n. It is
+assumed that the attacker knows the description of E and can compute it. For concreteness, you
+can think of E as being DES.</p>
+<p>aistorically, cryptanalysis of blockciphers has focused on key-recovery. The cryptanalyst may
+think of the problem to be solved as something like this. A k-bit key T, called the target key, is
+chosen at random. Let q ≥ 0 be some integer parameter.</p>
+<p>Given: The adversary has a sequence of q input-output examples of ET,say <br />
+(M1,C1),...,(Mq,Cq)
+where Ci = ET(Mi)fori =1,...,qand M1,...,Mq are all distinct n-bit strings.<br />
+Find: The adversary wants to find the target key T.
+Let us say that a key K is consistent with the input-output examples (M1,C1),...,(Mq,Cq) if <br />
+EK(Mi)=Ci for all 1 ≤ i ≤ q.Welet<br />
+ConsE((M1,C1),...,(Mq,Cq)) <br />
+be the set of all keys consistent with the input-output examples (M1,C1),...,(Mq,Cq). Of course
+the target key T is in this set. But the set might be larger, containing other keys. Without
+asking further queries, a key-recovery attack cannot hope to differentiate the target key from other
+members of ConsE((M1,C1),...,(Mq,Cq)). Thus, the goal is sometimes viewed as simply being to
+find some key in this set. For practical blockciphers we expect that, if a few input-output examples
+are used, the size of the above set will be one, so the adversary can indeed find the target key. We
+will exemplify this when we consider specific attacks.</p>
+<p>Some typical kinds of “attack” that are considered within this framework: <br />
+Known-message attack: M1,...,Mq are any distinct points; the adversary has no control over
+them, and must work with whatever it gets.</p>
+<p>Chosen-message attack: M1,...,Mq are chosen by the adversary, perhaps even adaptively.
+That is, imagine it has access to an “oracle” for the function EK. It can feed the oracle M1 and
+get back C1 = EK(M1). It can then decide on a value M2, feed the oracle this, and get back C2,
+and so on.</p>
+<p>Clearly a chosen-message attack gives the adversary more power, but it may be less realistic in
+practice.</p>
+<p>The most obvious attack strategy is exhaustive key search. The adversary goes through all
+possible keys K∈{0,1}k until it finds one that explains the input-output pairs. Here is the attack
+in detail, using q = 1, meaning one input-output example. For i =1,...,2k let Ti denote the i-th
+k-bit string (in lexicographic order).</p>
+<p>This attack always returns a key consistent with the given input-output example (M1,C1). Whether
+or not it is the target key depends on the blockcipher. If one imagines the blockcipher to be random,
+then the blockcipher’s key length and block length are relevant in assessing if the above attack will
+find the “right” key. , The likelihood of the attack returning the target key can be increased by
+testing against more input-output examples:</p>
+<p>Afairly small vaue of q, say somewhat more than k/n, is enough that this attack will usually return
+the target key itself. For DES, q =1orq = 2 seems to be enough.</p>
+<p>Thus, no blockcipher is perfectly secure. It is always possible for an attacker to recover a consis
+tent key. A good blockcipher, however, is designed to make this task computationally prohibitive</p>
+<p>How long does exhaustive key-search take? Since we will choose q to be small we can neglect the
+difference in running time between the two versions of the attack above, and focus for simplicity on
+the first attack. In the worst case, it uses 2k computations of the blockcipher. However it could be
+less since one could get lucky. For example if the target key is in the first half of the search space,
+only 2k−1 computations would be used. So a better measure is how long it takes on the average.
+This is computations of the blockcipher. This is because the target key is chosen at random, so with
+probability 1/2k equals Ti, and in that case the attack uses iE-computations to find it.</p>
+<p>hus to make key-recovery by exhaustive search computationally prohibitive, one must make
+the key-length k of the blockcipher large enough.</p>
+<p>Let’s look at DES. We noted above that there is VLSI chip that can compute it at the rate of
+1.6 Gbits/sec. How long would key-recovery via exhaustive search take using this chip? Since a
+DES plaintext is 64 bits, the chip enables us to perform (1.6·109)/64 = 2.5·107 DES computations
+per second. To perform 255 computations (here k = 56) we thus need 255/(2.5 · 107) ≈ 1.44 · 109
+seconds, which is about 45.7 years. This is clearly prohibitive.</p>
+<p>It turns out that that DES has a property called key-complementation that one can exploit to
+reduce the size of the search space by one-half, so that the time to find a key by exhaustive search
+comes down to 22.8 years. But this is still prohibitive.</p>
+<p>Yet, the conclusion that DES is secure against exhaustive key search is actually too hasty. We
+will return to this later and see why.</p>
+<p>xhaustive key search is a generic attack in the sense that it works against any blockcipher.
+It only involves computing the blockcipher and makes no attempt to analyze the cipher and find
+and exploit weaknesses. Cryptanalysts also need to ask themselves if there is some weakness in the
+structure of the blockcipher they can exploit to obtain an attack performing better than exhaustive
+key search.</p>
+<p>For DES, the discovery of such attacks waited until 1990. Differential cryptanalysis is capable
+of finding a DES key using about 247 input-output examples (that is, q =247) in a chosen-message
+attack [1, 2]. Linear cryptanalysis [4] improved differential in two ways. The number of input
+output examples required is reduced to 244, and only a known-message attack is required. (An
+alternative version uses 242 chosen plaintexts [24].)</p>
+<p>These were major breakthroughs in cryptanalysis that required careful analysis of the DES
+construction to find and exploit weaknesses. Yet, the practical impact of these attacks is small.
+Why? Ordinarily it would be impossible to obtain 244 input-output examples. Furthermore, the
+storage requirement for these examples is prohibitive. A single input-output pair, consisting of a
+64-bit plaintext and 64-bit ciphertext, takes 16 bytes of storage. When there are 244 such pairs, we
+need 16 · 244 =2.81·1014 bits, or about 281 terabytes of storage, which is enormous.</p>
+<p>Linear and differential cryptanalysis were however more devastating when applied to other
+ciphers, some of which succumbed completely to the attack.</p>
+<p>So what’s the best possible attack against DES? The answer is exhaustive key search. What
+we ignored above is that the DES computations in this attack can be performed in parallel. In
+1993, Weiner argued that one can design a $1 million machine that does the exhaustive key search
+for DES in about 3.5 hours on the average [7]. His machine would have about 57,000 chips, each
+performing numerous DES computations. More recently, a DES key search machine was actually
+built by the Electronic Frontier Foundation, at a cost of $250,000 [5]. It finds the key in 56 hours,
+or about 2.5 days on the average. The builders say it will be cheaper to build more machines now
+that this one is built.</p>
+<p>Thus DES is feeling its age. Yet, it would be a mistake to take away from this discussion the
+impression that DES is a weak algorithm. Rather, what the above says is that it is an impressively
+strong algorithm. After all these years, the best practical attack known is still exhaustive key
+search. That says a lot for its design and its designers.</p>
+<p>Later we will see that we would like security properties from a blockcipher that go beyond
+resistance to key-recovery attacks. It turns out that from that point of view, a limitation of DES
+is its block size. Birthday attacks “break” DES with about q =232 input output examples. (The
+meaning of “break” here is very different from above.) Here 232 is the square root of 264, meaning
+to resist these attacks we must have bigger block size. The next generation of ciphers—things like
+AES—took this into account.</p>
+    </sec_3_3>
+    <sec_3_4>
+        <title><b><label>3.4</label>Iterated-DES and DESX</b></title>
+        <p>The emergence of the above-discussed key-search engines lead to the view that in practice DES
+should be considered broken. Its shortcoming was its key-length of 56, not long enough to resist
+exhaustive key search.</p>
+<p>People looked for cheap ways to strengthen DES, turning it, in some simple way, into a cipher
+with a larger key length. One paradigm towards this end is iteration.</p>
+<section>
+    <title><b><label>3.4.1</label>Double-DES</b></title>
+    <p>Let K1,K2 be 56-bit DES keys and let M be a 64-bit plaintext. Let</p>
+    <p>This defines a blockcipher 2DES: {0,1}112 ×{0,1}64 →{0,1}64 that we call Double-DES. It has a
+112-bit key, viewed as consisting of two 56-bit DES keys. Note that it is reversible, as required to
+be a blockcipher:</p>
+<p>he key length of 112 is large enough that there seems little danger of 2DES succumbing
+to an exhaustive key search attack, even while exploiting the potential for parallelism and special
+purpose hardware. On the other hand, 2DES also seems secure against the best known cryptanalytic
+techniques, namely differential and linear cryptanalysis, since the iteration effectively increases the
+number of Feistel rounds. This would indicate that 2DES is a good way to obtain a DES-based
+cipher more secure than DES itself.</p>
+<p>However, although 2DES has a key-length of 112, it turns out that it can be broken using
+about 257 DES and DES−1 computations by what is called a meet-in-the-middle attack, as we now
+illustrate. Let K1 K2 denote the target key and let C1 = 2DES(K1 K2,M1). The attacker, given
+M1,C1, is attempting to find K1 K2. We observe that</p>
+<p>This leads to the following attack. Below, for i =1,...,256 we let Ti denote the i-th 56-bit string
+(in lexicographic order):</p>
+<p>The set S above is likely to be quite large, of size about 256+56/264 =248, meaning the attack
+as written is not likely to return the target key itself. However, by using a few more input-output
+examples, it is easy to whittle down the choices in the set S until it is likely that only the target
+key remains.</p>
+<p>The attack makes 256 +256 =257 DES or DES−1 computations. The step of forming the set S
+can be implemented in linear time in the size of the arrays involved, say using hashing. (A naive
+strategy takes time quadratic in the size of the arrays.) Thus the running time is dominated by
+the DES,DES−1 computations.</p>
+<p>The meet-in-the-middle attack shows that 2DES is quite far from the ideal of a cipher where
+the best attack is exhaustive key search. However, this attack is not particularly practical, even if
+special purpose machines are designed to implement it. The machines could do the DES,DES−1
+computations quickly in parallel, but to form the set S the attack needs to store the arrays L,R,
+each of which has 256 entries, each entry being 64 bits. The amount of storage required is 8·257 ≈
+1.15 · 1018 bytes, or about 1.15 · 106 terabytes, which is so large that implementing the attack is
+impractical.</p>
+<p>here are some strategies that modify the attack to reduce the storage overhead at the cost of
+some added time, but still the attack does not appear to be practical.</p>
+<p>Since a 112-bit 2DES key can be found using 257 DES or DES−1 computations, we sometimes
+say that 2DES has an effective key length of 57.</p>
+</section>
+<section>
+    <title><b><label>3.4.2</label>Triple-DES</b></title>
+    <p>he triple-DES ciphers use three iterations of DES or DES−1. The three-key variant is defined by
+3DES3(K1 K2 K3,M) = DES(K3,DES−1(K2,DES(K1,M)) ,</p>
+<p> that 3DES3: {0,1}168 ×{0,1}64 →{0,1}64. The two-key variant is defined by
+3DES2(K1 K2,M) = DES(K2,DES−1(K1,DES(K2,M)) ,</p>
+<p>so that 3DES2: {0,1}112×{0,1}64 →{0,1}64. You should check that these functions are reversible
+so that they do qualify as blockciphers. The term “triple” refers to there being three applications
+of DES or DES−1. The rationale for the middle application being DES−1 rather than DES is that
+DES is easily recovered via</p>
+<p>As with 2DES, the key length of these ciphers appears long enough to make exhaustive key
+search prohibitive, even with the best possible engines, and, additionally, differential and linear
+cryptanalysis are not particularly effective because iteration effectively increases the number of
+Feistel rounds.</p>
+<p>3DES3 is subject to a meet-in-the-middle attack that finds the 168-bit key using about 2112
+computations of DES or DES−1, so that it has an effective key length of 112. There does not
+appear to be a meet-in-the-middle attack on 3DES2 however, so that its key length of 112 is also
+its effective key length.</p>
+<p>The 3DES2 cipher is popular in practice and functions as a canonical and standard replacement
+for DES. 2DES, although having the same effective key length as 3DES2 and offering what appears
+to be the same or at least adequate security, is not popular in practice. It is not entirely apparent
+why 3DES2 is preferred over 2DES, but the reason might be Equation (3.2).</p>
+
+</section>
+<section>
+    <tittle><b><label>3.4.3</label>DESX</b></title>
+        <P>Although 2DES,3DES3 and 3DES2 appear to provide adequate security, they are slow. The first
+is twice as slow as DES and the other two are three times as slow. It would be nice to have a
+DES based blockcipher that had a longer key than DES but was not significantly more costly.
+Interestingly, there is a simple design that does just this. Let K be a 56-bit DES key, let K1,K2
+be 64-bit strings, and let M be a 64-bit plaintext. Let</P>
+<p>This defines a blockcipher DESX: {0,1}184 ×{0,1}64 →{0,1}64. It has a 184-bit key, viewed as
+consisting of a 56-bit DES key plus two auxiliary keys, each 64 bits long. Note that it is reversible,
+as required to be a blockcipher:</p>
+<p>The key length of 184 is certainly enough to preclude exhaustive key search attacks. DESX is no
+more secure than DES against linear of differential cryptanalysis, but we already saw that these
+are not really practical attacks.</p>
+<p>There is a meet-in-the-middle attack on DESX. It finds a 184-bit DESX key using 2120 DES and
+DES−1 computations. So the effective key length of DESX seems to be 120, which is large enough
+for security.</p>
+<p>DESX is less secure than Double or Triple DES because the latter are more more resistant than
+DES to linear and differential cryptanalysis while DESX is only as good as DES itself in this regard.
+However, this is good enough; we saw that in practice the weakness of DES was not these attacks
+but rather the short key length leading to successful exhaustive search attacks. DESX fixes this,
+and very cheaply. In summary, DESX is popular because it is much cheaper than Double of Triple
+DES while providing adequate security.</p>
+</section>
+<section>
+    <tittle><b><label>3.4.4</label>Why a new cipher?</b></title>
+        <p>DESX is arguably a fine cipher. Nonetheless, there were important reasons to find and standardize
+a new cipher.</p>
+<p>We will see later that the security provided by a blockcipher depends not only on its key length
+and resistance to key-search attacks but on its block length. A blockcipher with block length n
+can be “broken” in time around 2n/2.Whenn = 64, this is 232, which is quite small. Although
+2DES,3DES3,3DES2,DESX have a higher (effective) key length than DES, they preserve its block
+size and thus are no more secure than DES from this point of view. It was seen as important to
+have a blockcipher with a block length n large enough that a 2n/2 time attack was not practical.
+This was one motivation for a new cipher.</p>
+<p>Perhaps the larger motivation was speed. Desired was a blockcipher that ran faster than DES
+in software.</p>
+</section>
+    </sec_3_4>
+</book>

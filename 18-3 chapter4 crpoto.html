@@ -1,0 +1,1588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//DTD CUP-BITS Book Interchange DTD v1.2//EN"
+"https://dtd.cambridge.org/schemas/2021/09/CUP-BITS-book1.dtd">
+
+<book xmlns:xlink="http://www.w3.org/1999/xlink">
+
+
+<book-part book-part-type="chapter" id="chap2">
+
+    <book-part-meta>
+        <title-group>
+            <label>CHAPTER 2</label>
+            <title>Pseudorandom Functions</title>
+        </title-group>
+    </book-part-meta>
+</book-part>
+
+<body>
+
+    <sec>
+        <p>Pseudorandom functions (PRFs) and their cousins, pseudorandom permutations (PRPs), figure as
+central tools in the design of protocols, especially those for shared-key cryptography. At one level,
+PRFs and PRPs can be used to model blockciphers, and they thereby enable the security analysis
+of protocols based on blockciphers. But PRFs and PRPs are also a useful conceptual starting point
+in contexts where blockciphers don’t quite fit the bill because of their fixed block-length. So in this
+chapter we will introduce PRFs and PRPs and investigate their basic properties.</p>
+
+<sec id="sec4_1">
+
+    <label>4.1</label>
+    <title>Function families</title>
+
+    <p>A function family is a map F: K × D → R. Here K is the set of keys of F and D is the domain
+of F and R is the range of F. The set of keys and the range are finite, and all of the sets are
+nonempty. The two-input function F takes a key K and an input X to return a point Y we denote
+by F(K, X). For any key K ∈ K we define the map FK: D → R by FK(X) = F(K, Y ). We call
+the function FK an instance of function family F. Thus F specifies a collection of maps, one for
+each key. That’s why we call F a function family or family of functions.</p>
+
+<p>Sometimes we write Keys(F) for K, Dom(F) for D, and Range(F) for R</p>
+
+<p>Usually K = {0, 1}k for some integer k, the key length. Often D = {0, 1} for some integer 
+called the input length, and R = {0, 1}L for some integers L called the output length. But sometimes
+the domain or range could be sets containing strings of varying lengths.</p>
+
+<p>There is some probability distribution on the (finite) set of keys K. Unless otherwise indicated,
+this distribution will be the uniform one. We denote by K ← K$ the operation of selecting a random
+string from K and naming it K. We denote by f ←$ F the operation: K ← K$
+; f ← FK. In other
+words, let f be the function FK where K is a randomly chosen key. We are interested in the
+input-output behavior of this randomly chosen instance of the family</p>
+
+<p>A permutation is a bijection (i.e. a one-to-one onto map) whose domain and range are the same
+set. That is, a map π: D → D is a permutation if for every y ∈ D there is exactly one x ∈ D such
+that π(x) = y. We say that F is a family of permutations if Dom(F) = Range(F) and each FK is
+a permutation on this common set.</p>
+
+<p><label>Example 4.1</label> A blockcipher is a family of permutations. In particular DES is a family of permutations DES: K × D → R with</p>
+
+<p>Here the key length is k = 56 and the input length and output length are = L = 64. Similarly
+AES (when “AES” refers to “AES128”) is a family of permutations AES: K × D → R with
+Here the key length is k = 128 and the input length and output length are = L = 128.</p>
+</sec>
+
+<sec id="sec4_2">
+    <label>4.2</label>
+    <title>Random functions and permutations</title>
+
+    <p>Let D, R ⊆ {0, 1}∗ be finite nonempty sets and let , L ≥ 1 be integers. There are two particular
+function families that we will often consider. One is Func(D,R), the family of all functions of D to
+R. The other is Perm(D), the family of all permutations on D. For compactness of notation we let
+Func(,L), Func(), and Perm() denote Func(D,R), Func(D,D), and Perm(D), respectively, where
+D = {0, 1} and R = {0, 1}L. A randomly chosen instance of Func(D,R) will be a random function
+from D to R, and a randomly chosen instance of Perm(D) will be a random permutation on D.
+Let us now look more closely at these families in turn.</p>
+
+<sec id="sec4_2_1">
+    <label>4.2.1</label>
+    <title>Random functions</title>
+
+    <p>The family Func(D,R) has domain D and range R. The set of instances of Func(D,R) is the set
+of all functions mapping D to R. The key describing any particular instance function is simply
+a description of this instance function in some canonical notation. For example, order the domain D lexicographically as X1, X2,..., and then let the key for a function f be the list of values
+(f(X1), f(X2),...). The key-space of Func(D,R) is simply the set of all these keys, under the
+uniform distribution</p>
+
+<p>Let us illustrate in more detail for the case of Func(,L). The key for a function in this family
+is simply a list of of all the output values of the function as its input ranges over {0, 1}
+. Thusis the set of all sequences of length 2 in which each entry of a sequence is an L-bit string. For any
+x ∈ {0, 1} we interpret X as an integer in the range {1,..., 2
+} and set
+</p>
+
+<p>Notice that the key space is very large; it has size 2L2
+. There is a key for every function of -bits
+to L-bits, and this is the number of such functions. The key space is equipped with the uniform
+distribution, so that f ←$ Func(,L) is the operation of picking a random function of -bits to L-bits.</p>
+
+<p><label>Example 4.2</label>We exemplify Func(3,2), meaning  = 3 and L = 2. The domain is {0, 1}3 and the
+range is {0, 1}2. An example instance f of the family is illustrated below via its input-output table:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>x</th>
+      <th>f(x)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>000</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>001</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>010</td>
+      <td>01</td>
+    </tr>
+    <tr>
+      <td>011</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <td>100</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>101</td>
+      <td>00</td>
+    </tr>
+    <tr>
+      <td>110</td>
+      <td>00</td>
+    </tr>
+    <tr>
+      <td>111</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<p>The key corresponding to this particular function is</p>
+
+<p>The key-space of Func(3,2) is the set of all such sequences, meaning the set of all 8-tuples each component of which is a two bit string. There are such tuples, so this is the size of the key-space.</p>
+
+<p>We will hardly ever actually think about these families in terms of this formalism. It is worth pausing here to see how to think about them more intuitively, because they are important objects.</p>
+
+<p>We will consider settings in which you have black-box access to a function g. This means that there is a box to which you can give any value X of your choice (provided X is in the domain of g), and the box gives you back g(X). But you can't "look inside" the box; your only interface to it is the one we have specified.</p>
+
+<p>A random function g: D -> R (where R is a finite set) being placed in this box corresponds to the following. Each time you give the box an input, you get back a random element of R, with the sole constraint that if you twice give the box the same input X, it will be consistent, returning both times the same output g(X).</p>
+
+<p>The dynamic view of a random function can be thought of as implemented by the following computer program. The program maintains the function in the form of a table T where T[X] holds the value of the function at X. Initially, the table is empty. The program processes an input X in D as follows:</p>
+
+<p>The answer on any point is random and independent of the answers on other points. It is this "dynamic" view that we suggest the reader have in mind when thinking about random functions or random permutations.</p>
+
+<p>One must remember that the term "random function" is misleading. It might lead one to think that certain functions are "random" and others are not. (For example, maybe the constant function that always returns on any input is not random, but a function with many different range values is random.) This is not right. The randomness of the function refers to the way it was chosen, not to an attribute of the selected function itself. When you choose a function at random, the constant function is just as likely to appear as any other function. It makes no sense to talk of the randomness of an individual function; the term "random function" just means a function chosen at random.</p>
+
+
+<p><label>Example 4.3</label> Let’s do some simple probabilistic computations to understand random functions.
+In all of the following, the probability is taken over a random choice of f from Func(,L), meaning
+that we have executed the operation</p>
+
+
+</sec>
+
+<sec id="sec4_2_2">
+
+    <label>4.2.2</label> 
+    <title>Random permutations</title>
+
+<p>The family Perm(D) has domain and range D. The set of instances of Perm(D) is the set of all permutations on D. The key describing a particular instance is some description of the function. Again, let us illustrate with Perm(l). In this case</p>
+
+<p>For any X in {0,1} we interpret X as an integer in the range {1, ..., 2} and set</p>
+
+<p>The key space is again equipped with the uniform distribution, so that is the operation of picking a random permutation on {0,1}. In other words, all the possible permutations on {0,1} are equally likely.</p>
+
+<p>Example 4.4 We exemplify Perm(3), meaning l = 3. The domain and range are both {0,1}. An example instance of the family is illustrated below via its input-output table:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>x</th>
+      <th>000</th>
+      <th>001</th>
+      <th>010</th>
+      <th>011</th>
+      <th>100</th>
+      <th>101</th>
+      <th>110</th>
+      <th>111</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>pi(x)</td>
+      <td>010</td>
+      <td>111</td>
+      <td>101</td>
+      <td>011</td>
+      <td>110</td>
+      <td>100</td>
+      <td>000</td>
+      <td>001</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The function is a permutation because each 3-bit string occurs exactly once in the second row of the table. The key corresponding to this particular permutation is</p>
+
+<p>The key-space of Perm(3) is the set of all such sequences, meaning the set of all 8-tuples whose components consist of all 3-bit strings in some order. There are</p>
+
+<p>such tuples, so this is the size of the key-space.</p>
+
+<p>In the dynamic view, we again want to consider having black-box access to a permutation. A random permutation being placed in this box corresponds to the following. If you give the box an input X, it returns the same answer as before if X has already been queried, but, if not, it returns a point chosen at random from D - S where S is the set of all values previously returned by the box in response to queries different from X.</p>
+
+<p>The dynamic view of a random permutation can be thought of as implemented by the following computer program. The program maintains the function in the form of a table T where T[X] holds the value of the function at X. Initially, the table is empty, and the set S below is also empty. The program processes an input X as follows:</p>
+
+<p>If T[X] is not defined, then choose Y randomly from D - S, set T[X] to Y, and add T[X] to the set S. Return T[X].</p>
+
+<p>The answer on any point is random, but not independent of the answers on other points, since it is distinct from those.</p>
+
+<p>Example 4.5 Random permutations are somewhat harder to work with than random functions, due to the lack of independence between values on different points. Let's look at some probabilistic computations involving them. In all of the following, the probability is taken over a random choice of pi from Perm(l).</p>
+
+<p>1. Fix X, Y. Then:</p>
+
+<p>This is the same as if pi had been selected at random from Func(l, l) rather than from Perm(l). However, the similarity vanishes when more than one point is to be considered.</p>
+
+<p>2. Fix X1, X2 and Y1, Y2, and assume X1 is not equal to X2. Then:</p>
+
+<p>The above is a conditional probability, and says that if we know the value of pi on X1, its value on a different point X2 is equally likely to be any L-bit string other than pi(X1). So there are 2^l - 1 choices for pi(X2), all equally likely, if Y1 is not equal to Y2.</p>
+
+<p>3. Fix X1, X2 and Y. Then:</p>
+
+<p>This is true because a permutation can never map distinct X1 and X2 to the same point.</p>
+
+<p>4. Fix X1, X2 and Y. Then:</p>
+
+<p>In the case X1 is not equal to X2 and Y is not equal to 0, this is computed as follows:</p>
+
+<p>Above, the sum is over all Y1. In evaluating the conditional probability, we used item 2 above and the assumption that Y is not equal to 0.</p>
+
+<p>5. Suppose l is less than or equal to L and let tau denote the function that on input Y returns the first l bits of Y. (Note that although pi is a permutation, the composition of tau and pi is not a permutation when l is less than L.) Fix distinct X1, X2, Y1 and Z2. Then:</p>
+
+<p>This is computed as follows. Let</p>
+
+<p>We note that the size of S is 2^(L-l) if the first l bits of Y1 are not equal to Z2, and 2^(L-l) - 1 if they are equal. Then</p>
+
+<p>and the claim follows from what we said about the size of S.</p>
+
+</sec>
+
+</sec>
+
+
+<sec id="sec4_3">
+    <label>4.3</label>
+    <title>Pseudorandom Functions</title>
+    <p>Apseudorandomfunctionisafamilyoffunctionswiththepropertythattheinput-outputbehavior
+ofarandominstanceof thefamilyis“computationallyindistinguishable”fromthatofarandom
+function. Someone who has only black-box access to a function, meaning can only feed it inputs
+and get outputs, has a hard time telling whether the function in question is a random instance of
+the family in question or a random function. The purpose of this section is to arrive at a suitable
+definition of this notion. Later we will look at motivation and applications.</p>
+<p>We fix a family of functions F: K×D → R. (You may want to think K = {0,1}k, D = {0,1}
+and R = {0,1}L for some integers k, ,L ≥ 1.) Imagine that you are in a room which contains a
+terminal connected to a computer outside your room. You can type something into your terminal
+and send it out, and an answer will come back. The allowed questions you can type must be
+elements of the domain D, and the answers you get back will be elements of the range R. The
+computer outside your room implements a function g: D → R, so that whenever you type a value X
+you get back g(X). However, your only access to g is via this interface, so the only thing you can
+see is the input-output behavior of g. We consider two different ways in which g will be chosen,
+giving rise to two different “worlds.”</p>
+<p><b>World 0:</b> The function g is drawn at random from Func(D,R), namely, the function g is selected
+via g $←Func(D,R).</p>
+<p><b>World 1:</b> The function g is drawn at random from F, namely, the function g is selected via g $← F.
+(Recall this means that a key is chosen via K $←Kand then g is set to FK.)</p>
+<p>Wou are not told which of the two worlds was chosen. The choice of world, and of the corresponding
+function g, is made before you enter the room, meaning before you start typing questions. Once
+made, however, these choices are fixed until your “session” is over. Your job is to discover which
+world you are in. To do this, the only resource available to you is your link enabling you to provide
+values X and get back g(X). After trying some number of values of your choice, you must make a
+decision regarding which world you are in. The quality of pseudorandom family F can be thought
+of as measured by the difficulty of telling, in the above game, whether you are in World 0 or in
+World 1.</p>
+<p>In the formalization, the entity referred to as “you” above is an algorithm called the adversary.
+The adversary algorithm A may be randomized. We formalize the ability to query g as giving A
+an oracle which takes input any string X ∈ D and returns g(X). We write Ag to mean that
+adversary A is being given oracle access to function g. (It can only interact with the function by
+giving it inputs and examining the outputs for those inputs; it cannot examine the function directly
+in any way.) Algorithm A can decide which queries to make, perhaps based on answers received
+to previous queries. Eventually, it outputs a bit b which is its decision as to which world it is in.
+Outputting the bit “1” means that A “thinks” it is in world 1; outputting the bit “0” means that A
+thinks it is in world 0. The following definition associates to any such adversary a number between
+0 and 1 that is called its prf-advantage, and is a measure of how well the adversary is doing at
+determining which world it is in. Further explanations follow the definition.</p>
+<p><b>Definition 4.6</b> Let F: K×D →R be a family of functions, and let A be an algorithm that takes
+an oracle for a function g: D → R, and returns a bit. We consider two experiments</p>
+<p>It should be noted that the family F is public. The adversary A, and anyone else, knows the
+description of the family and is capable, given values K,X, of computing F(K,X).</p>
+<p>The worlds are captured by what we call experiments. The first experiment picks a random
+instance FK of family F and then runs adversary A with oracle g = FK. Adversary A interacts
+with its oracle, querying it and getting back answers, and eventually outputs a “guess” bit. The
+experiment returns the same bit. The second experiment picks a random function g: D → R and
+runs A with this as oracle, again returning A’s guess bit. Each experiment has a certain probability
+of returning 1. The probability is taken over the random choices made in the experiment. Thus, for
+the first experiment, the probability is over the choice of K and any random choices that A might
+make, for A is allowed to be a randomized algorithm. In the second experiment, the probability is
+over the random choice of g and any random choices that A makes. These two probabilities should
+be evaluated separately; the two experiments are completely different.</p>
+<p>To see how well A does at determining which world it is in, we look at the difference in the
+probabilities that the two experiments return 1. If A is doing a good job at telling which world it
+is in, it would return 1 more often in the first experiment than in the second. So the difference is
+a measure of how well A is doing. We call this measure the prf-advantage of A. Think of it as the
+probability that A “breaks” the scheme F, with “break” interpreted in a specific, technical way
+based on the definition.</p>
+<p>ifferent adversaries will have different advantages. There are two reasons why one adversary
+may achieve a greater advantage than another. One is that it is more “clever” in the questions it
+asks and the way it processes the replies to determine its output. The other is simply that it asks
+more questions, or spends more time processing the replies. Indeed, we expect that as an adversary
+sees more and more input-output examples of g, or spends more computing time, its ability to tell
+which world it is in should go up.</p>
+<p>The “security” of family F as a pseudorandom function must thus be thought of as depending
+on the resources allowed to the attacker. We may want to want to know, for any given resource
+limitations, what is the prf-advantage achieved by the most “clever” adversary amongst all those
+who are restricted to the given resource limits.</p>
+<p>The choice of resources to consider can vary. One resource of interest is the time-complexity t
+of A. Another resource of interest is the number of queries q that A asks of its oracle. Another
+resource of interest is the total length µ of all of A’s queries. When we state results, we will pay
+attention to such resources, showing how they influence maximal adversarial advantage.</p>
+<p>Let us explain more about the resources we have mentioned, giving some important conventions
+underlying their measurement. The first resource is the time-complexity of A. To make sense of this
+we first need to fix a model of computation. We fix some RAM model, as discussed in Chapter 1.
+Think of the model used in your algorithms courses, often implicitly, so that you could measure
+the running time. However, we adopt the convention that the time-complexity of A refers not just
+to the running time of A, but to the maximum of the running times of the two experiments in the
+definition, plus the size of the code of A. In measuring the running time of the first experiment,
+we must count the time to choose the key K at random, and the time to compute the value FK(x)
+for any query x made by A to its oracle. In measuring the running time of the second experiment,
+we count the time to choose the random function g in a dynamic way, meaning we count the cost
+of maintaining a table of values of the form (X,g(X)). Entries are added to the table as g makes
+queries. A new entry is made by picking the output value at random.</p>
+<p>The number of queries made by A captures the number of input-output examples it sees. In
+general, not all strings in the domain must have the same length, and hence we also measure the
+sum of the lengths of all queries made.</p>
+<p>The strength of this definition lies in the fact that it does not specify anything about the kinds
+of strategies that can be used by a adversary; it only limits its resources. A adversary can use
+whatever means desired to distinguish the function as long as it stays within the specified resource
+bounds.</p>
+<p>What do we mean by a “secure” PRF? Definition 4.6 does not have any explicit condition or
+statement regarding when F should be considered “secure.” It only associates to any adversary
+A attacking F a prf-advantage function. Intuitively, F is “secure” if the value of the advantage
+function is “low” for all adversaries whose resources are “practical.”</p>
+<p>This is, of course, not formal. However, we wish to keep it this way because it better reflects
+reality. In real life, security is not some absolute or boolean attribute; security is a function of the
+resources invested by an attacker. All modern cryptographic systems are breakable in principle; it
+is just a question of how long it takes.</p>
+<p>This is our first example of a cryptographic definition, and it is worth spending time to study
+and understand it. We will encounter many more as we go along. Towards this end let us summarize
+the main features of the definitional framework as we will see them arise later. First, there are
+experiments, involving an adversary. Then, there is some advantage function associated to an
+adversary which returns the probability that the adversary in question “breaks” the scheme. These
+two components will be present in all definitions. What varies is the experiments; this is where we
+pin down how we measure security.</p>
+</sec>
+
+<sec id="4.4">
+    <title><label>4.4</label> Pseudorandom permutations</title>
+
+    <p>
+        A family of functions <italic>F</italic>: <italic>K</italic> × <italic>D</italic> → <italic>D</italic>
+        is a pseudorandom permutation if the input-output behavior of a random instance of the family is
+        “computationally indistinguishable” from that of a random permutation on <italic>D</italic>.
+    </p>
+
+    <p>
+        In this setting, there are two kinds of attacks that one can consider. One, as before, is that
+        the adversary gets an oracle for the function <italic>g</italic> being tested. However when
+        <italic>F</italic> is a family of permutations, one can also consider the case where the adversary
+        gets, in addition, an oracle for <italic>g</italic><superscript>−1</superscript>. We consider these
+        settings in turn. The first is the setting of chosen-plaintext attacks while the second is the
+        setting of chosen-ciphertext attacks.
+    </p>
+
+    <sec id="4.4.1">
+        <title><label>4.4.1</label> PRP under CPA</title>
+
+        <p>
+            We fix a family of functions <italic>F</italic>: <italic>K</italic> × <italic>D</italic> →
+            <italic>D</italic>. (You may want to think <italic>K</italic> = {0,1}<superscript>k</superscript>
+            and <italic>D</italic> = {0,1}<superscript>ℓ</superscript>, since this is the most common case.
+            We do not mandate that <italic>F</italic> be a family of permutations although again this is the
+            most common case.) As before, we consider an adversary <italic>A</italic> that is placed in a
+            room where it has oracle access to a function <italic>g</italic> chosen in one of two ways.
+        </p>
+
+        <p>
+            <bold>World 0:</bold> The function <italic>g</italic> is drawn at random from
+            <italic>Perm</italic>(<italic>D</italic>), namely, we choose <italic>g</italic> according to
+            <italic>g</italic> ←$ <italic>Perm</italic>(<italic>D</italic>).
+        </p>
+    </sec>
+	<sec>
+    <p>
+        <bold>World 1:</bold> The function <italic>g</italic> is drawn at random from <italic>F</italic>.
+        (Recall this means that a key is chosen via <italic>K</italic> ←$ <italic>K</italic> and then
+        <italic>g</italic> is set to <italic>F</italic><subscript>K</subscript>.)
+    </p>
+
+    <p>
+        Notice that World 1 is the same in the PRF setting, but World 0 has changed. As before the task
+        facing the adversary <italic>A</italic> is to determine in which world it was placed based on the
+        input-output behavior of <italic>g</italic>.
+    </p>
+
+    <p>
+        <bold>Definition 4.7</bold> Let <italic>F</italic>: <italic>K</italic> × <italic>D</italic> →
+        <italic>D</italic> be a family of functions, and let <italic>A</italic> be an algorithm that takes
+        an oracle for a function <italic>g</italic>: <italic>D</italic> → <italic>D</italic>, and returns a bit.
+        We consider two experiments:
+    </p>
+
+    <p>
+        The <italic>prp-cpa-advantage</italic> of <italic>A</italic> is defined as follows.
+    </p>
+
+    <p>
+        The intuition is similar to that for Definition 4.6. The difference is that here the “ideal” object
+        that <italic>F</italic> is being compared with is no longer the family of random functions, but rather
+        the family of random permutations.
+    </p>
+
+    <p>
+        Experiment <italic>Exp</italic><superscript>prp-cpa-1</superscript>(<italic>A</italic>) is actually
+        identical to <italic>Exp</italic><superscript>prf-1</superscript><subscript>F</subscript>(<italic>A</italic>).
+        The probability is over the random choice of key <italic>K</italic> and also over the coin tosses of
+        <italic>A</italic> if the latter happens to be randomized. The experiment returns the same bit that
+        <italic>A</italic> returns. In <italic>Experiment Exp</italic><superscript>prp-cpa-0</superscript>(<italic>A</italic>),
+        a permutation <italic>g</italic>: <italic>D</italic> → <italic>D</italic> is chosen at random, and the
+        result bit of <italic>A</italic>’s computation with oracle <italic>g</italic> is returned. The probability
+        is over the choice of <italic>g</italic> and the coins of <italic>A</italic> if any. As before, the measure
+        of how well <italic>A</italic> did at telling the two worlds apart, which we call the
+        <italic>prp-cpa-advantage</italic> of <italic>A</italic>, is the difference between the probabilities that
+        the experiments return 1.
+    </p>
+
+    <p>
+        Conventions regarding resource measures also remain the same as before. Informally, a family
+        <italic>F</italic> is a secure PRP under CPA if <italic>Adv</italic><subscript>F</subscript><superscript>prp-cpa</superscript>(<italic>A</italic>)
+        is “small” for all adversaries using a “practical” amount of resources.
+    </p>
+
+    <title>4.4.2 PRP under CCA</title>
+
+    <p>
+        We fix a family of permutations <italic>F</italic>: <italic>K</italic> × <italic>D</italic> →
+        <italic>D</italic>. (You may want to think <italic>K</italic> = {0,1}<superscript>k</superscript>
+        and <italic>D</italic> = {0,1}<superscript>ℓ</superscript>, since this is the most common case.
+        This time, we do mandate that <italic>F</italic> be a family of permutations.) As before, we consider
+        an adversary <italic>A</italic> that is placed in a room, but now it has oracle access to two functions,
+        <italic>g</italic> and its inverse <italic>g</italic><superscript>−1</superscript>. The manner in which
+        <italic>g</italic> is chosen is the same as in the CPA case, and once <italic>g</italic> is chosen,
+        <italic>g</italic><superscript>−1</superscript> is automatically defined, so we do not have to say how
+        it is chosen.
+    </p>
+
+    <p>
+        <bold>World 0:</bold> The function <italic>g</italic> is drawn at random from
+        <italic>Perm</italic>(<italic>D</italic>), namely via <italic>g</italic> ←$
+        <italic>Perm</italic>(<italic>D</italic>). (So <italic>g</italic> is just a random permutation on
+        <italic>D</italic>.)
+    </p>
+
+    <p>
+        <bold>World 1:</bold> The function <italic>g</italic> is drawn at random from <italic>F</italic>,
+        namely <italic>g</italic> ←$ <italic>F</italic>.
+    </p>
+
+    <p>
+        In World 1 we let <italic>g</italic><superscript>−1</superscript> =
+        <italic>F</italic><subscript>K</subscript><superscript>−1</superscript> be the inverse of the chosen instance,
+        while in World 0 it is the inverse of the chosen random permutation. As before the task facing the
+        adversary <italic>A</italic> is to determine in which world it was placed based on the input-output
+        behavior of its oracles.
+    </p>
+</sec>
+<sec id="4.4.2">
+    <p>
+        <bold>Definition 4.8</bold> Let <italic>F</italic>: <italic>K</italic> × <italic>D</italic> →
+        <italic>D</italic> be a family of permutations, and let <italic>A</italic> be an algorithm that
+        takes an oracle for a function <italic>g</italic>: <italic>D</italic> → <italic>D</italic>, and also
+        an oracle for the function <italic>g</italic><superscript>−1</superscript>: <italic>D</italic> →
+        <italic>D</italic>, and returns a bit. We consider two experiments:
+    </p>
+
+    <p>
+        The <italic>prp-cca-advantage</italic> of <italic>A</italic> is defined as follows.
+    </p>
+
+    <p>
+        The intuition is similar to that for Definition 4.6. The difference is that here the adversary has
+        more power: not only can it query <italic>g</italic>, but it can directly query
+        <italic>g</italic><superscript>−1</superscript>. Conventions regarding resource measures also remain
+        the same as before. However, we will be interested in some additional resource parameters.
+        Specifically, since there are now two oracles, we can count separately the number of queries, and
+        total length of these queries, for each. As usual, informally, a family <italic>F</italic> is a secure
+        PRP under CCA if <italic>Adv</italic><subscript>F</subscript><superscript>prp-cca</superscript>(<italic>A</italic>)
+        is “small” for all adversaries using a “practical” amount of resources.
+    </p>
+
+    <title>4.4.3 Relations between the notions</title>
+
+    <p>
+        If an adversary does not query <italic>g</italic><superscript>−1</superscript> the oracle might as well
+        not be there, and the adversary is effectively mounting a chosen-plaintext attack. Thus we have the
+        following:
+    </p>
+
+    <p>
+        <bold>Proposition 4.9 [PRP-CCA implies PRP-CPA]</bold> Let <italic>F</italic>: <italic>K</italic> ×
+        <italic>D</italic> → <italic>D</italic> be a family of permutations and let <italic>A</italic> be a
+        (PRP-CPA attacking) adversary. Suppose that <italic>A</italic> runs in time <italic>t</italic>, asks
+        <italic>q</italic> queries, and these queries total <italic>μ</italic> bits. Then there exists a
+        (PRP-CCA attacking) adversary <italic>B</italic> that runs in time <italic>t</italic>, asks
+        <italic>q</italic> chosen-plaintext queries, these queries totaling <italic>μ</italic> bits, and asks
+        no chosen-ciphertext queries, where
+    </p>
+
+    <p>
+        Though the technical result is easy, it is worth stepping back to explain its interpretation. The
+        theorem says that if you have an adversary <italic>A</italic> that breaks <italic>F</italic> in the
+        PRP-CPA sense, then you have some <italic>other</italic> adversary <italic>B</italic> breaks
+        <italic>F</italic> in the PRP-CCA sense. Furthermore, the adversary <italic>B</italic> will be just as
+        efficient as the adversary <italic>A</italic> was. As a consequence, if you think there is no
+        reasonable adversary <italic>B</italic> that breaks <italic>F</italic> in the PRP-CCA sense, then you
+        have no choice but to believe that there is no reasonable adversary <italic>A</italic> that breaks
+        <italic>F</italic> in the PRP-CPA sense. The inexistence of a reasonable adversary <italic>B</italic>
+        that breaks <italic>F</italic> in the PRP-CCA sense means that <italic>F</italic> is PRP-CCA secure,
+        while the inexistence of a reasonable adversary <italic>A</italic> that breaks <italic>F</italic> in the
+        PRP-CPA sense means that <italic>F</italic> is PRP-CPA secure. So PRP-CCA security implies PRP-CPA
+        security, and a statement like the proposition above is how, precisely, one makes such a statement.
+    </p>
+</sec>
+</sec>
+<sec id="4.5">
+    <title>4.5 Modeling blockciphers</title>
+
+    <p>
+        One of the primary motivations for the notions of pseudorandom functions (PRFs) and pseudorandom
+        permutations (PRPs) is to model blockciphers and thereby enable the security analysis of protocols
+        that use blockciphers.
+    </p>
+	<p>As discussed in the chapter on blockciphers, classically the security of DES or other blockciphers
+has been looked at only with regard to key recovery. That is, analysis of a blockcipher F has focused
+on the following question: Given some number of input-output examples</p>
+	<p>where K is a random, unknown key, how hard is it to find K? The blockcipher is taken as “secure”
+if the resources required to recover the key are prohibitive. Yet, as we saw, even a cursory glance at
+common blockcipher usages shows that hardness of key recovery is not sufficient for security. We
+had discussed wanting a master security property of blockciphers under which natural usages of
+blockciphers could be proven secure. We suggest that this master property is that the blockcipher
+be a secure PRP, under either CPA or CCA.</p>
+	<p>We cannot prove that specific blockciphers have this property. The best we can do is assume
+they do, and then go on to use them. For quantitative security assessments, we would make specific
+conjectures about the advantage functions of various blockciphers. For example we might conjecture
+something like:</p>
+	<p>for any adversary At,q that runs in time at most t and asks at most q 64-bit oracle queries. Here
+TDES is the time to do one DES computation on our fixed RAM model of computation, and c1,c2
+are some constants depending only on this model. In other words, we are conjecturing that the best
+attacks are either exhaustive key search or linear cryptanalysis. We might be bolder with regard
+to AES and conjecture something like</p>
+	<p>for any adversary Bt,q that runs in time at most t and asks at most q 128-bit oracle queries. We
+could also make similar conjectures regarding the strength of blockciphers as PRPs under CCA
+rather than CPA.</p>
+	<p>for any adversaries At,q,Bt,q running in time at most t and making at most q oracle queries. This is
+due to the birthday attack discussed later. The second term in each formula arises simply because
+the object under consideration is a family of permutations.</p>
+	<p>We stress that these are all conjectures. There could exist highly effective attacks that break
+DES or AES as a PRF without recovering the key. So far, we do not know of any such attacks, but
+the amount of cryptanalytic effort that has focused on this goal is small. Certainly, to assume that
+a blockcipher is a PRF is a much stronger assumption than that it is secure against key recovery.
+Nonetheless, the motivation and arguments we have outlined in favor of the PRF assumption stay,
+and our view is that if a blockcipher is broken as a PRF then it should be considered insecure, and
+a replacement should be sought</p>
+</sec>
+<sec id="4.6">
+    <title>4.6 Example attacks</title>
+
+    <p>
+        Let us illustrate the models by providing adversaries that attack different function families in these
+        models.
+    </p>
+
+    <p>
+        <bold>Example 4.10</bold> We define a family of functions <italic>F</italic>:
+        {0,1}<superscript>k</superscript> × {0,1}<superscript>ℓ</superscript> →
+        {0,1}<superscript>L</superscript> as follows. We let <italic>k</italic> = <italic>Lℓ</italic> and
+        view a <italic>k</italic>-bit key <italic>K</italic> as specifying an <italic>L</italic> row by
+        <italic>ℓ</italic> column matrix of bits. (To be concrete, assume the first <italic>L</italic> bits
+        of <italic>K</italic> specify the first column of the matrix, the next <italic>L</italic> bits of
+        <italic>K</italic> specify the second column of the matrix, and so on.) The input string
+        <italic>X</italic> = <italic>X</italic>[1] … <italic>X</italic>[ℓ] is viewed as a sequence of bits,
+        and the value of <italic>F</italic>(<italic>K</italic>, <italic>x</italic>) is the corresponding
+        matrix-vector product. That is
+    </p>
+
+    <p>
+        where
+    </p>
+
+    <p>
+        Here the bits in the matrix are the bits in the key, and arithmetic is modulo two. The question
+        we ask is whether <italic>F</italic> is a “secure” PRF. We claim that the answer is no. The reason
+        is that one can design an adversary algorithm <italic>A</italic> that achieves a high advantage
+        (close to 1) in distinguishing between the two worlds.
+    </p>
+
+    <p>
+        We observe that for any key <italic>K</italic> we have
+        <italic>F</italic><subscript>K</subscript>(0<superscript>ℓ</superscript>) = 0<superscript>L</superscript>.
+        This is a weakness since a random function of <italic>ℓ</italic>-bits to <italic>L</italic>-bits is
+        very unlikely to return 0<superscript>L</superscript> on input 0<superscript>ℓ</superscript>, and thus
+        this fact can be the basis of a distinguishing adversary. Let us now show how the adversary works.
+        Remember that as per our model it is given an oracle <italic>g</italic>:
+        {0,1}<superscript>ℓ</superscript> → {0,1}<superscript>L</superscript> and will output a bit.
+        Our adversary <italic>D</italic> works as follows:
+    </p>
+
+    <p>
+        <bold>Adversary <italic>D</italic></bold><br/>
+        <italic>Y</italic> ← <italic>g</italic>(0<superscript>ℓ</superscript>)<br/>
+        if <italic>Y</italic> = 0<superscript>L</superscript> then return 1 else return 0
+    </p>
+
+    <p>
+        This adversary queries its oracle at the point 0<superscript>ℓ</superscript>, and denotes by
+        <italic>Y</italic> the <italic>ℓ</italic>-bit string that is returned. If <italic>g</italic> = 0<superscript>ℓ</superscript>
+        it bets that <italic>g</italic> was an instance of the family <italic>F</italic>, and if
+        <italic>g</italic> ≠ 0<superscript>ℓ</superscript> it bets that <italic>g</italic> was a random
+        function. Let us now see how well this adversary does. We claim that
+    </p>
+
+    <p>
+        Why? Look at Experiment Exp<superscript>prf-1</superscript><subscript>F</subscript>(<italic>D</italic>)
+        as defined in Definition 4.6. Here <italic>g</italic> = <italic>F</italic><subscript>K</subscript>
+        for some <italic>K</italic>. In that case it is certainly true that
+        <italic>g</italic>(0<superscript>ℓ</superscript>) = 0<superscript>L</superscript> so by the code we
+        wrote for <italic>D</italic> the latter will return 1. On the other hand look at
+        Experiment Exp<superscript>prf-0</superscript><subscript>F</subscript>(<italic>D</italic>) as defined
+        in Definition 4.6. Here <italic>g</italic> is a random
+    </p>
+	<p>
+        function. As we saw in Example 4.3, the probability that <italic>g</italic>(0<superscript>ℓ</superscript>) = 0<superscript>L</superscript>
+        will be 2<superscript>−L</superscript>, and hence this is the probability that <italic>D</italic> will
+        return 1. Now as per Definition 4.6 we subtract to get
+    </p>
+
+    <p>
+        Now let <italic>t</italic> be the time complexity of <italic>D</italic>. This is
+        <italic>O</italic>(ℓ + <italic>L</italic>) plus the time for one computation of <italic>F</italic>,
+        coming to <italic>O</italic>(ℓ<superscript>2</superscript><italic>L</italic>). The number of queries
+        made by <italic>D</italic> is just one, and the total length of all queries is ℓ. Our conclusion is
+        that there exists an extremely efficient adversary whose prf-advantage is very high (almost one).
+        Thus, <italic>F</italic> is not a secure PRF.
+    </p>
+
+    <p>
+        <bold>Example 4.11</bold> Suppose we are given a secure PRF
+        <italic>F</italic>: {0,1}<superscript>k</superscript> × {0,1}<superscript>ℓ</superscript> →
+        {0,1}<superscript>L</superscript>. We want to use <italic>F</italic> to design a PRF
+        <italic>G</italic>: {0,1}<superscript>k</superscript> × {0,1}<superscript>ℓ</superscript> →
+        {0,1}<superscript>2L</superscript>. The input length of <italic>G</italic> is the same as that of
+        <italic>F</italic> but the output length of <italic>G</italic> is twice that of <italic>F</italic>.
+        We suggest the following candidate construction: for every <italic>k</italic>-bit key <italic>K</italic>
+        and every <italic>ℓ</italic>-bit input <italic>x</italic>
+    </p>
+
+    <p>
+        Here “||” denotes concatenation of strings, and <italic>x̄</italic> denotes the bitwise complement of
+        the string <italic>x</italic>. We ask whether this is a “good” construction. “Good” means that under
+        the assumption that <italic>F</italic> is a secure PRF, <italic>G</italic> should be too. However,
+        this is not true. Regardless of the quality of <italic>F</italic>, the construct <italic>G</italic>
+        is insecure. Let us demonstrate this.
+    </p>
+
+    <p>
+        We want to specify an adversary attacking <italic>G</italic>. Since an instance of <italic>G</italic>
+        maps ℓ bits to 2<italic>L</italic> bits, the adversary <italic>D</italic> will get an oracle for a
+        function <italic>g</italic> that maps ℓ bits to 2<italic>L</italic> bits. In World 0,
+        <italic>g</italic> will be chosen as a random function of ℓ bits to 2<italic>L</italic> bits, while in
+        World 1, <italic>g</italic> will be set to <italic>G</italic><subscript>K</subscript> where
+        <italic>K</italic> is a random <italic>k</italic>-bit key. The adversary must determine in which world
+        it is placed. Our adversary works as follows:
+    </p>
+
+    <p>
+        <bold>Adversary <italic>D</italic></bold><br/>
+        <italic>y</italic><subscript>1</subscript> ← <italic>g</italic>(1<superscript>ℓ</superscript>)<br/>
+        <italic>y</italic><subscript>2</subscript> ← <italic>g</italic>(0<superscript>ℓ</superscript>)<br/>
+        Parse <italic>y</italic><subscript>1</subscript> as
+        <italic>y</italic><subscript>1</subscript> = <italic>y</italic><subscript>1,1</subscript> ||
+        <italic>y</italic><subscript>1,2</subscript> with
+        |<italic>y</italic><subscript>1,1</subscript>| = |<italic>y</italic><subscript>1,2</subscript>| = <italic>L</italic><br/>
+        Parse <italic>y</italic><subscript>2</subscript> as
+        <italic>y</italic><subscript>2</subscript> = <italic>y</italic><subscript>2,1</subscript> ||
+        <italic>y</italic><subscript>2,2</subscript> with
+        |<italic>y</italic><subscript>2,1</subscript>| = |<italic>y</italic><subscript>2,2</subscript>| = <italic>L</italic><br/>
+        if <italic>y</italic><subscript>1,1</subscript> = <italic>y</italic><subscript>2,2</subscript> then return 1 else return 0
+    </p>
+
+    <p>
+        This adversary queries its oracle at the point 1<superscript>ℓ</superscript> to get back
+        <italic>y</italic><subscript>1</subscript> and then queries its oracle at the point 0<superscript>ℓ</superscript>
+        to get back <italic>y</italic><subscript>2</subscript>. Notice that 1<superscript>ℓ</superscript> is
+        the bitwise complement of 0<superscript>ℓ</superscript>. The adversary checks whether the first half of
+        <italic>y</italic><subscript>1</subscript> equals the second half of <italic>y</italic><subscript>2</subscript>,
+        and if so bets that it is in World 1. Let us now see how well this adversary does. We claim that
+    </p>
+
+    <p>
+        Why? Look at Experiment Exp<superscript>prf-1</superscript><subscript>G</subscript>(<italic>D</italic>)
+        as defined in Definition 4.6. Here <italic>g</italic> = <italic>G</italic><subscript>K</subscript> for
+        some <italic>K</italic>. In that case we have
+    </p>
+	<p>by definition of the family G. Notice that the first half of GK(1) is the same as the second half
+of GK(0). So D will return 1. On the other hand look at Experiment Expprf-0
+G (D)asdefinedin
+Definition 4.6. Here g is a random function. So the values g(1)andg(0) are both random and
+independent 2L bit strings. What is the probability that the first half of the first string equals
+the second half of the second string? It is exactly the probability that two randomly chosen L-bit
+strings are equal, and this is 2−L. So this is the probability that D will return 1. Now as per
+Definition 4.6 we subtract to get</p>
+<p>Now let t be the time complexity of D. This is O( +L) plus the time for two computations of G,
+coming to O( +L) plus the time for four computations of F. The number of queries made by D
+is two, and the total length of all queries is 2 . Thus we have exhibited an efficient adversary with
+a very high prf-advantage, showing that G is not a secure PRF</p>
+
+</sec>
+
+
+<sec id="sec4_7">
+        <title>4.7 Security against key recovery</title>
+
+        <p>We have mentioned several times that security against key recovery is not sufficient as a notion of security for a blockcipher. However it is certainly necessary: if key recovery is easy, the blockcipher should be declared insecure. We have indicated that we want to adopt as notion of security for a blockcipher the notion of a PRF or a PRP. If this is to be viable, it should be the case that any function family that is insecure under key recovery is also insecure as a PRF or PRP. In this section we verify this simple fact. Doing so will enable us to exercise the method of reductions.</p>
+
+        <p>We begin by formalizing security against key recovery. We consider an adversary that, based on input-output examples of an instance FK of family F, tries to find K. Its advantage is defined as the probability that it succeeds in finding K. The probability is over the random choice of K, and any random choices of the adversary itself.</p>
+
+        <p>We give the adversary oracle access to FK so that it can obtain input-output examples of its choice. We do not constrain the adversary with regard to the method it uses. This leads to the following definition.</p>
+
+        <definition>
+            <title>Definition 4.12</title>
+            <p>Let F: K × D → R be a family of functions, and let B be an algorithm that takes an oracle for a function g: D → R and outputs a string. We consider the experiment:</p>
+
+            <experiment>
+                <name>Expkr_F(B)</name>
+                <step>K ←$ Keys(F)</step>
+                <step>K' ← B<sub>F<sub>K</sub></sub></step>
+                <step>If K' = K then return 1 else return 0</step>
+            </experiment>
+
+            <p>The kr-advantage of B is defined as:</p>
+            <formula>Advkr_F(B) = Pr[Expkr_F(B) = 1]</formula>
+        </definition>
+
+        <p>This definition has been made general enough to capture all types of key-recovery attacks. Any of the classical attacks such as exhaustive key search, differential cryptanalysis or linear cryptanalysis correspond to different, specific choices of adversary B. They fall in this framework because all have the goal of finding the key K based on some number of input-output examples of an instance FK of the cipher.</p>
+
+        <p>To illustrate let us see what are the implications of the classical key-recovery attacks on DES for the value of the key-recovery advantage function of DES. Assuming the exhaustive key-search attack is always successful based on testing two input-output examples leads to the fact that there exists an adversary B such that Advkr_DES(B) = 1 and B makes two oracle queries and has running time about 2^55 times the time T_DES for one computation of DES. On the other hand, linear cryptanalysis implies that there exists an adversary B such that Advkr_DES(B) ≥ 1/2 and B makes 2^44 oracle queries and has running time about 2^44 times the time T_DES for one computation of DES.</p>
+
+        <example>
+            <title>Example 4.13</title>
+
+            <p>Let F: {0, 1}^k × {0, 1}^l → {0, 1}^L be the family of functions from Example 4.10. We saw that its prf-advantage was very high. Let us now compute its kr-advantage.</p>
+
+            <algorithm>
+                <name>Adversary B</name>
+                <step>K' ← ε</step>
+                <step>for j = 1,...,l do</step>
+                <step>y_j ← F_K(e_j)</step>
+                <step>K' ← K' || y_j</step>
+                <step>return K'</step>
+            </algorithm>
+
+            <p>The adversary B invokes its oracle to compute the output of the function on input e_j. The result, y_j, is exactly the j-th column of the matrix associated to the key K. The matrix entries are concatenated to yield K', which is returned as the key.</p>
+
+            <p>Since the adversary always finds the key we have:</p>
+            <formula>Advkr_F(B) = 1</formula>
+
+            <p>The time-complexity of this adversary is t = O(l²L) since it makes q = l calls to its oracle and each computation of F_K takes O(lL) time.</p>
+        </example>
+
+        <proposition>
+            <title>Proposition 4.14</title>
+
+            <p>Let F: K × D → R be a family of functions, and let B be a key-recovery adversary against F. Assume B’s running time is at most t and it makes at most q &lt; |D| oracle queries.</p>
+
+            <p>Then there exists a PRF adversary A against F such that A has running time at most t plus the time for one computation of F, makes at most q + 1 oracle queries, and:</p>
+
+            <formula>Advkr_F(B) ≤ Advprf_F(A) + 1/|R|</formula>
+
+            <p>If D = R then there also exists a PRP CPA adversary A such that:</p>
+
+            <formula>Advkr_F(B) ≤ Advprp-cpa_F(A) + 1/(|D| − q)</formula>
+        </proposition>
+
+        <p>The Proposition implies that if a family of functions is a secure PRF or PRP then it is also secure against all key-recovery attacks.</p>
+
+        <proof>
+            <p>Adversary A runs B and simulates oracle access using its own oracle g.</p>
+
+            <algorithm>
+                <name>Adversary A</name>
+                <step>i ← 0</step>
+                <step>Run B</step>
+                <step>When B queries x:</step>
+                <step>i ← i + 1</step>
+                <step>x_i ← x</step>
+                <step>y_i ← g(x_i)</step>
+                <step>Return y_i</step>
+                <step>When B outputs K'</step>
+                <step>Choose x not in {x₁,...,x_q}</step>
+                <step>y ← g(x)</step>
+                <step>If F(K', x) = y then return 1 else return 0</step>
+            </algorithm>
+        </proof>
+
+        <example>
+            <title>Example 4.15</title>
+
+            <p>Define the blockcipher E: {0, 1}^k × {0, 1}^n → {0, 1}^n by E_K(x) = x for all keys K.</p>
+
+            <p>Then for any adversary B:</p>
+            <formula>Advkr_E(B) = 2^(-k)</formula>
+
+            <p>But there exists an adversary A such that:</p>
+            <formula>Advprp-cpa_E(A) ≥ 1 − 2^(-n)</formula>
+ 
+            <p>This shows that a cipher can be secure against key recovery yet insecure as a PRP.</p>
+        </example>
+
+    </sec>
+
+
+
+    <sec id="sec4_8">
+        <title>4.8 Birthday Attack</title>
+
+        <p>Suppose E: {0, 1}^k × {0, 1}^n → {0, 1}^n is a family of permutations, meaning a blockcipher. If we are given an oracle g: {0, 1}^n → {0, 1}^n which is either an instance of E or a random function, there is a simple test to determine which of these it is.</p>
+
+        <p>Query the oracle at distinct points x₁, x₂,...,x_q, and get back values y₁, y₂,...,y_q. You know that if g were a permutation, the values y₁, y₂,...,y_q must be distinct. If g was a random function, they may or may not be distinct. So, if they are distinct, bet on a permutation.</p>
+
+        <p>Surprisingly, this is a pretty good adversary, as we will argue below. Roughly, it takes q = √(2^n) queries to get an advantage that is quite close to 1. The reason is the birthday paradox. If you are not familiar with this, you may want to look at the appendix on the birthday problem and then come back to the following.</p>
+
+        <p>This tells us that an instance of a blockcipher can be distinguished from a random function based on seeing a number of input-output examples which is approximately 2^(n/2). This has important consequences for the security of blockcipher based protocols.</p>
+
+        <proposition>
+            <title>Proposition 4.16</title>
+
+            <p>Let E: {0, 1}^k × {0, 1}^n → {0, 1}^n be a family of permutations. Suppose q satisfies 2 ≤ q ≤ 2^((n+1)/2). Then there is an adversary A, making q oracle queries and having running time about that to do q computations of E, such that:</p>
+
+            <formula>Advprf_E(A) ≥ 0.3 · (q(q − 1) / 2^n)</formula>
+        </proposition>
+
+        <proof>
+            <title>Proof of Proposition 4.16</title>
+
+            <p>Adversary A is given an oracle g: {0, 1}^n → {0, 1}^n and works like this:</p>
+
+            <algorithm>
+                <name>Adversary A</name>
+                <step>for i = 1,...,q do</step>
+                <step>Let x_i be the i-th n-bit string in lexicographic order</step>
+                <step>y_i ← g(x_i)</step>
+                <step>if y₁,...,y_q are all distinct then return 1, else return 0</step>
+            </algorithm>
+
+            <p>Let us now justify Equation (4.5). Letting N = 2^n, we claim that:</p>
+
+            <formula>Pr[Expprf-1_E(A) = 1] = 1</formula>
+            <formula>Pr[Expprf-0_E(A) = 1] = 1 − C(N, q)</formula>
+
+            <p>Here C(N, q), as defined in the appendix on the birthday problem, is the probability that some bin gets two or more balls in the experiment of randomly throwing q balls into N bins.</p>
+
+            <p>Subtracting, we get:</p>
+
+            <formula>
+                Advprf_E(A) = Pr[Expprf-1_E(A)=1] − Pr[Expprf-0_E(A)=1] = C(N, q)
+            </formula>
+
+            <p>Using the birthday bound:</p>
+
+            <formula>Advprf_E(A) ≥ 0.3 · (q(q − 1) / 2^n)</formula>
+
+            <p>Equation (4.6) is clear because in World 1, g = E_K for some key K, and since E is a family of permutations, g is a permutation, and thus y₁,...,y_q are all distinct.</p>
+
+            <p>Now, suppose A is in World 0, so that g is a random function of n bits to n bits. Since g is a random function and x₁,...,x_q are distinct, y₁,...,y_q are random, independently distributed values in {0, 1}^n.</p>
+
+            <p>Thus we are looking at the birthday problem. We are throwing q balls into N = 2^n bins and asking what is the probability of there being no collisions, meaning no bin contains two or more balls. This is 1 − C(N, q), justifying Equation (4.7).</p>
+        </proof>
+
+    </sec>
+
+<sec number="4.9">
+    <title>The PRP/PRF Switching Lemma</title>
+
+    <p>
+        When we analyse blockcipher-based constructions, we find a curious dichotomy: 
+        <emphasis>PRPs</emphasis> are what most naturally model blockciphers, but analyses are often 
+        considerably simpler and more natural assuming the blockcipher is a <emphasis>PRF</emphasis>. 
+        To bridge the gap, we relate the prp-security of a blockcipher to its prf-security. 
+        The following says, roughly, these two measures are always close—they don’t differ 
+        by more than the amount given by the birthday attack. Thus a particular family of 
+        permutations <emphasis>E</emphasis> may have prf-advantage that exceeds its prp-advantage, 
+        but not by more than a small bound related to the number of queries and block size.
+    </p>
+
+    <p>
+        Bellare and Rogaway
+    </p>
+
+    <sec>
+        <title>Lemma 4.17 [PRP/PRF Switching Lemma]</title>
+
+        <p>
+            Let E be a function family mapping n-bit inputs to n-bit outputs. Let A be an adversary 
+            that asks at most q oracle queries.
+        </p>
+
+        <p>
+            The difference between the probability of A distinguishing a random function and a random 
+            permutation is bounded by a small value depending on q and n.
+        </p>
+
+        <p>
+            As a consequence, the difference between PRF advantage and PRP advantage is also bounded 
+            by the same quantity.
+        </p>
+    </sec>
+
+    <sec>
+        <title>Game Playing Argument</title>
+
+        <p>
+            The proof introduces a technique that we shall use repeatedly: a game-playing argument. 
+            We compare what happens when an adversary interacts with a random permutation oracle 
+            versus a random function oracle.
+        </p>
+
+        <p>
+            These interactions are modeled as two games. The games are written in a way that highlights 
+            when their behaviors differ. Whenever the behavior differs, a flag called 
+            <emphasis>bad</emphasis> is set.
+        </p>
+
+        <p>
+            The probability that this flag is set is used to bound the difference in the adversary’s output 
+            between the two games.
+        </p>
+    </sec>
+
+    <sec>
+        <title>Proof</title>
+
+        <p>
+            We aim to show that the difference between the adversary’s success probabilities in the two 
+            settings is bounded.
+        </p>
+
+        <p>
+            We assume that the adversary only queries valid n-bit inputs and does not repeat queries, 
+            since repeating queries yields the same result in both cases.
+        </p>
+
+        <p>
+            Instead of interacting directly with a random function or permutation, we model the interaction 
+            using two games: Game P and Game R.
+        </p>
+    </sec>
+
+    <sec>
+        <title>Game Definitions</title>
+
+        <codeblock>
+Initialization:
+bad ← false
+for X in all n-bit strings:
+    π(X) ← undefined
+
+When A asks query X:
+    choose random Y
+    if Y already in range:
+        bad ← true
+        choose new Y (only in Game P)
+    π(X) ← Y
+    return Y
+        </codeblock>
+
+        <p>
+            Game P ensures outputs are unique, while Game R allows repeated outputs.
+        </p>
+    </sec>
+
+    <sec>
+        <title>Game Behavior</title>
+
+        <p>
+            In Game R, each query returns an independent random value, which simulates a random function.
+        </p>
+
+        <p>
+            In Game P, each query returns a unique value, simulating a random permutation.
+        </p>
+
+        <p>
+            Therefore, the adversary’s behavior in each game corresponds exactly to interacting with 
+            a random function or permutation respectively.
+        </p>
+    </sec>
+
+    <sec>
+        <title>Bounding the Difference</title>
+
+        <p>
+            The difference in the adversary’s success between the two games is bounded by the probability 
+            that the flag <emphasis>bad</emphasis> is set.
+        </p>
+
+        <p>
+            This flag is set when a collision occurs, meaning the same output is generated more than once.
+        </p>
+
+        <p>
+            If no collision occurs, both games behave identically, and the adversary cannot distinguish 
+            between them.
+        </p>
+    </sec>
+
+    <sec>
+        <title>Final Bound</title>
+
+        <p>
+            The probability of a collision increases with the number of queries. Using a summation argument, 
+            this probability can be bounded by a value proportional to the square of the number of queries 
+            divided by the size of the output space.
+        </p>
+
+        <p>
+            This establishes that the difference between PRF and PRP advantages is small.
+        </p>
+
+        <p>
+            This completes the proof.
+        </p>
+    </sec>
+
+    <sec>
+        <title>Conclusion</title>
+
+        <p>
+            The PRP/PRF switching lemma is one of the central tools for understanding block-cipher-based 
+            protocols, and the game-playing method is a fundamental technique used in cryptographic proofs.
+        </p>
+    </sec>
+
+</sec>
+
+
+<sec id="4.10">
+
+    <title>Unix One-Way Function</title>
+
+    <p>
+        The framework for the Unix password-hashing scheme is this. We fix some function h: {0,1}k → {0,1}L, which we call the password hashing function. A user U chooses a k-bit password K, and the system stores in the password file the value y = h(K) together with the user’s name U.
+    </p>
+
+    <p>
+        When the user logs in he or she is prompted for a user name U and a password K. The system uses the user U to retrieve y, and then the system computes h(K) and declares the user to be authentic if and only if this value equals y.
+    </p>
+
+    <p>
+        The idea of this system—instead of storing (U, K) itself—is that a party who obtains (U, y) still cannot gain trivial entry into the system: they must still find a K such that h(K) = y.
+    </p>
+
+    <p>
+        Assume the attacker gets access to the password file and hence to y. The attacker’s task is thus to find K given y. The attacker knows the function h, since this is public code. However, we assume the attacker does not have any further powers, such as the use of Trojan horses.
+    </p>
+
+    <p>
+        Security in this model would require that it be computationally infeasible to recover K from y. Thus h must be chosen to make this true.
+    </p>
+
+    <example>
+        <description>A simple example choice of h is:</description>
+        <formula>h(K) = DES_K(0^64)</formula>
+        <details>In this example, k = 56 and L = 64.</details>
+    </example>
+
+    <p>
+        The actual choice made by Unix is somewhat more complex, involving something called a “salt,” which customizes the function h to each user U. It also involves iterating the block cipher multiple times.
+    </p>
+
+    <p>
+        However, this does not change the core idea of the analysis, so we consider the simplified version described above.
+    </p>
+
+    <p>
+        The security of this scheme depends on the security of DES. To prove anything meaningful about the security of the simplified password scheme, we must assume properties about DES.
+    </p>
+
+    <p>
+        The appropriate assumption is that DES behaves as a secure pseudorandom permutation (PRP). Under this assumption, we analyze the security of the password hashing scheme.
+    </p>
+	<p>We provide a formalization below that is more specific. Function h: {0,1}k →{0,1}L is one
+way if it is hard, given y, to compute a point x such that h(x)=y, when y was chosen by drawing
+x at random from {0,1}k and setting y = h(x)</p>
+</sec>
+<sec>
+
+    <title>Definition 4.18</title>
+
+    <p>
+        Let h: {0,1}k → {0,1}L be a function, and let I be an algorithm that on input an L-bit string returns a k-bit string. We consider the experiment:
+    </p>
+
+    <experiment name="Exp_owf_h(I)">
+
+        <step>K ← {0,1}k</step>
+        <step>y ← h(K)</step>
+        <step>x ← I(y)</step>
+        <step>If h(x) = y then return 1 else return 0</step>
+
+    </experiment>
+
+    <p>
+        The owf-advantage of I is defined as:
+    </p>
+
+    <formula>
+        Adv_owf^h(I) = Pr[Exp_owf_h(I) = 1]
+    </formula>
+
+    <p>
+        For any t, the owf-advantage of I is defined via:
+    </p>
+
+    <formula>
+        Adv_owf^h(t) = max { Adv_owf^h(I) }
+    </formula>
+
+    <p>
+        where the maximum is over all I having time-complexity t.
+    </p>
+
+    <p>
+        As usual, a one-way function is understood to be one for which Adv_owf^h(t) is “small” for practical values of t.
+    </p>
+
+    <p>
+        We want to show that if h is defined via h(K) = F_K(0^l) for a secure PRF F: {0,1}k × {0,1}l → {0,1}L then h is one-way.
+    </p>
+
+    <p>
+        We remark that one must look carefully at the models to know how to interpret the impact of such a result on the actual password scheme.
+    </p>
+
+    <p>
+        Showing that h is a one-way function amounts to saying that the password scheme is secure if passwords are randomly chosen k-bit keys where k is the block length of the block cipher.
+    </p>
+
+    <p>
+        In real life, passwords are often not random, and in that case this result does not apply.
+    </p>
+
+    <p>
+        It also does not take into consideration other issues about password usage, such as the possibility of compromise of the channel over which the user conveys the password to the server.
+    </p>
+
+    <p>
+        However, the result here is still useful and serves to illustrate an application of PRFs.
+    </p>
+
+</sec>
+<sec id="theorem4.19">
+
+    <title>Theorem 4.19</title>
+
+    <p>
+        Let F : {0,1}^k × {0,1}^l → {0,1}^L be a family of functions, and define h : {0,1}^k → {0,1}^L via h(K) = F(K, 0^l) for all K ∈ {0,1}^k. Then we have:
+    </p>
+
+    <formula>
+        Adv_owf^h(t) ≤ 1 / (1 − 2^(k−L)) · Adv_prf^F(t', 1, l)
+    </formula>
+
+    <p>
+        under the assumption that k ≤ L − 1. Here t' is t plus the time for one computation of F.
+    </p>
+
+    <p>
+        As per the theorem, Adv_owf^h(t) can only be marginally more than Adv_prf^F(t', 1, l).
+    </p>
+
+    <p>
+        Specifically, Adv_owf^h(t) can be at most twice Adv_prf^F(t', 1, l), because k ≤ L − 1 implies:
+    </p>
+
+    <formula>
+        1 / (1 − 2^(k−L)) ≤ 2
+    </formula>
+
+</sec>
+
+<sec>
+
+    <p>
+        So if F is secure, meaning Adv_prf^F(t', 1, l) is low, Adv_owf^h(t) is also low, and hence h is secure.
+    </p>
+
+    <p>
+        It is thus a proof of security, showing that h is one-way if F is a secure PRF.
+    </p>
+
+    <p>
+        Notice that security of a family F against key-recovery does not imply that the associated function h defined in the theorem is one-way, exactly due to the fact that one-wayness declares the adversary successful even if it recovers a key K' different from the K under which its challenge y = F(K, 0^l) was computed.
+    </p>
+
+    <p>
+        However, security as a PRF is strong enough to rule out even recovery of this different key.
+    </p>
+
+</sec>
+
+<sec id="proof4.19">
+
+    <title>Proof of Theorem 4.19</title>
+
+    <p>
+        We associate to any adversary I attempting to invert h an adversary D1 attacking F such that:
+    </p>
+
+    <formula>
+        Adv_owf^h(I) ≤ 1 / (1 − 2^(k−L)) · Adv_prf^F(D1)
+    </formula>
+
+    <p>
+        Furthermore, D1 makes only one oracle query, this of length l bits, and has time-complexity t'
+        which is the time-complexity of I plus the time for one computation of F.
+        Taking maximums in the usual way yields Equation (4.17), so it remains to provide D1 such that Equation (4.18) is true.
+    </p>
+
+    <p>
+        This adversary takes an oracle for a function g : {0,1}^l → {0,1}^L and works as follows:
+    </p>
+
+    <algorithm>
+        <step>y ← g(0^l)</step>
+        <step>x ← I(y)</step>
+        <step>If F(x,0^l) = y then return 1 else return 0</step>
+    </algorithm>
+
+    <p>
+        The adversary queries its oracle g at 0^l to get back a value it calls y, and then applies the inverting algorithm I to y to get back a value x.
+        If I successfully inverted h at y our adversary bets that g is an instance of F, and otherwise it bets that g is an instance of Func(l,L).
+    </p>
+
+    <p>
+        To compute the advantage of this adversary it is convenient to set:
+    </p>
+
+    <formula>
+        ε = Adv_owf^h(I)
+    </formula>
+
+    <p>Now we claim that:</p>
+
+    <formula>
+        Pr[Exp_prf-1(D1) = 1] = ε
+    </formula>
+
+    <formula>
+        Pr[Exp_prf-0(D1) = 1] ≤ (2^k / 2^L) ε
+    </formula>
+
+    <p>
+        We will justify these claims shortly, but first let us use them to conclude.
+    </p>
+
+    <formula>
+        Adv_prf^F(D1) = Pr[Exp_prf-1(D1)=1] − Pr[Exp_prf-0(D1)=1]
+    </formula>
+
+    <formula>
+        ≥ ε − (2^k / 2^L) ε
+    </formula>
+
+    <formula>
+        = (1 − 2^(k−L)) ε
+    </formula>
+
+    <p>
+        Now, we divide both sides by 1 − 2^(k−L) to get:
+    </p>
+
+    <formula>
+        ε ≤ 1 / (1 − 2^(k−L)) · Adv_prf^F(D1)
+    </formula>
+
+    <p>
+        which is exactly Equation (4.18). There is a subtle point here that should be noted.
+        This step is only correct if the quantity 1 − 2^(k−L) by which we are dividing is non-zero and in fact positive.
+        The fact that 1 − 2^(k−L) is positive is true by our assumption that k ≤ L − 1.
+    </p>
+
+    <p>
+        It remains to justify Equations (4.19) and (4.20).
+    </p>
+
+    <p>
+        We claim that Experiment Exp_prf-1(D1) ends up faithfully mimicking Experiment Exp_owf(I).
+        Indeed, Experiment Exp_prf-1(D1) begins by selecting a random k-bit key K, so that y = F(K,0^l).
+        By definition of this means that y = h(K), so y is distributed the same way in the two experiments.
+        Then, both experiments run I and return 1 if and only if I is successful, so the probability that they return 1 is the same.
+    </p>
+
+    <p>
+        Now suppose D1 is in World 0, meaning g : {0,1}^l → {0,1}^L is a random function.
+        We want to upper bound the probability that Exp_prf-0(D1) returns 1.
+        Since g is random, y will be uniformly distributed over {0,1}^L.
+        Thus we want to upper bound:
+    </p>
+
+    <formula>
+        δ = Pr[y ← {0,1}^L ; x ← I(y) : F(x,0^l) = y]
+    </formula>
+
+    <p>
+        The notation here means that we first pick y at random from {0,1}^L, then set x to I(y),
+        and then ask what is the probability that F(x,0^l) equals y.
+        Since the algorithm I might be randomized, the probability is not only over the choice of y,
+        but also over the random coins tossed by I itself.
+    </p>
+
+    <p>
+        For simplicity we first prove Equation (4.20) in the case where I is deterministic.
+        In this case it is convenient to define the sets:
+    </p>
+
+    <formula>
+        X = { x ∈ {0,1}^k : h(I(h(x))) = h(x) }
+    </formula>
+
+    <formula>
+        Y = { y ∈ {0,1}^L : h(I(y)) = y }
+    </formula>
+
+    <p>
+        Then:
+    </p>
+
+    <formula>
+        δ = |Y| / 2^L ≤ |X| / 2^L = (2^k / 2^L) ε
+    </formula>
+
+    <p>
+        The fact that |Y| ≤ |X| follows from the fact that h is a function.
+        This is called the image of X under h.
+        Then observe two things: |h(X)| ≤ |X| and h(X) = Y.
+    </p>
+
+    <p>
+        That completes the proof for the case where I is deterministic.
+        Let us now briefly indicate why Equation (4.20) remains true when I is randomized.
+    </p>
+
+    <p>
+        In this case, when I is run on input y, it tosses coins to get a random string R,
+        and bases its computation on both y and R, returning a value x that is a function of both y and R.
+    </p>
+
+    <p>
+        There are many different possible x values that it might return on input y.
+        We have no idea exactly how I uses R or how it performs its computation,
+        but we can still assess the probabilities we need to assess.
+    </p>
+
+    <formula>
+        P_y(x) = Pr[R ← {0,1}^* : I(y;R) = x]
+    </formula>
+
+    <p>
+        Now for any y ∈ {0,1}^L we let:
+    </p>
+
+    <formula>
+        h⁻¹(y) = { x ∈ {0,1}^k : h(x) = y }
+    </formula>
+
+    <formula>
+        Y* = { y ∈ {0,1}^L : h⁻¹(y) ≠ ∅ }
+    </formula>
+
+    <p>
+        Thus h⁻¹(y) is the set of all pre-images of y under h,
+        while Y* is the image of {0,1}^k under h.
+    </p>
+
+    <p>
+        We now apply Equation (4.22) and derive:
+    </p>
+
+    <formula>
+        δ = Σ_y Σ_{x ∈ h⁻¹(y)} P_y(x) · (1 / 2^L)
+    </formula>
+
+    <formula>
+        ≤ (2^k / 2^L) ε
+    </formula>
+
+    <p>
+        The equation for δ used in the first line comes about by looking at the probability that I succeeds
+        for a given value of y, and then summing this over all y-values weighted by probability 2^-L.
+    </p>
+
+    <p>
+        We then restrict the sum to values y ∈ Y* since others contribute zero.
+        Then we factor out 2^k / 2^L and extend the sum again.
+    </p>
+
+    <p>
+        In the last sum, we are summing the probability that I succeeds for a given value of y,
+        weighted by the probability that y would be produced under the experiment of choosing x at random
+        and setting y = h(x), namely as in Experiment Exp_owf(I), and thus recover ε.
+    </p>
+
+</sec>
+
+
+<sec id="sec4_11">
+    <title><b><label>4.11</label> Historicalnotes</b></title>
+    <p>TheconceptofpseudorandomfunctionsisduetoGoldreich,GoldwasserandMicali [17],whilethat
+ofpseudorandompermutationisduetoLubyandRackoff[25]. Theseworksarehowever inthe
+complexity-theoreticor“asymptotic”setting,whereoneconsidersaninfinitesequenceof families
+ratherthanjustonefamily,anddefinessecuritybysayingthatpolynomial-timeadversarieshave
+“negligible”advantage. Incontrastourapproachismotivatedbythedesiretomodelblockciphers
+andiscalledthe“concretesecurity”approach. Itoriginateswith[2]. Definitions4.6and4.7are
+from[2],asarePropositions4.16and4.17.</p>
+</sec>
+
+<sec id="sec4_12">
+    <title><b><label>4.12</label>  Problems</b></title>
+    <p><b>Problem 4.1</b> Let E: {0,1}k×{0,1}n→{0,1}n be a secure PRP. Consider the family of permutations E: {0,1}k×{0,1}2n→{0,1}2n defined by ∀x,x'∈{0,1}n by
+ EK(x || x') = EK(x) || EK(x⊕x').
+ Show that E is not a secure PRP.</p>
+ <p><b>Problem 4.2</b> Consider the following block cipher E: {0,1}3×{0,1}2→{0,1}2</p>
+ <table>
+  <thead>
+    <tr>
+      <th>key</th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>0</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>3</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+ <p>(Theeightpossiblekeysaretheeightrows, andeachrowshowswherethepointstowhich0, 1,
+2, and3map.) Compute themaximal prp-advantageanadversarycanget (a)withonequery,
+(b)withfourqueries,and(c)withtwoqueries.</p>
+<p><b>Problem 4.3</b>resentasecureconstructionfor theproblemofExample4.11. That is, givena
+PRFF: {0,1}k×{0,1}n→{0,1}n, constructaPRFG: {0,1}k×{0,1}n→{0,1}2nwhichisa
+securePRFaslongasF issecure.</p>
+<p><b>Problem 4.4</b> Design a blockcipher E : {0,1}k ×{0,1}128 →{0,1}128 that is secure (up to a
+large number of queries) against non-adaptive adversaries, but is completely insecure (even for
+two queries) against an adaptive adversary. (A non-adaptive adversary readies all her questions
+M1,...,Mq, in advance, getting back EK(M1),...,EK(Mq). An adaptive adversary is the sort we
+have dealt with throughout: each query may depend on prior answers.)</p>
+ <p><b>Problem 4.5</b>  Let a[i] denote the i-th bit of a binary string i, where 1 ≤ i ≤|a|. The inner product
+of n-bit binary strings a,b is
+a, b = a[1]b[1] ⊕ a[2]b[2] ⊕ ··· ⊕a[n]b[n] .
+A family of functions F: {0,1}k ×{0,1}→{0,1}L is said to be inner-product preserving if for
+every K ∈{0,1}k and every distinct x1,x2 ∈{0,1}−{0} we have
+F(K,x1),F(K,x2) = x1,x2 .
+Prove that if F is inner-product preserving then there exists an adversary A, making at most two
+oracle queries and having running time 2 · TF + O( ), where TF denotes the time to perform one
+computation of F, such that
+
+Explain in a sentence why this shows that if F is inner-product preserving then F is not a secure
+PRF.</p>
+<p><b>Problem 4.6</b> Let E: {0,1}k ×{0,1}→{0,1} be a blockcipher. The two-fold cascade of E is
+the blockcipher E(2): {0,1}2k ×{0,1}→{0,1} defined by
+
+for all K1,K2 ∈{0,1}k and all x ∈{0,1}. Prove that if E is a secure PRP then so is E(2).</p>
+<p><b>Problem 4.7</b>Let A be a adversary that makes at most q total queries to its two oracles, f and g,
+where f,g : {0,1}n →{0,1}n. Assume that A never asks the same query X to both of its oracles.
+
+Prove a good upper bound for Adv(A), say Adv(A) ≤ q2/2n</p>
+<p><b>Problem 4.8</b>  Let F: {0,1}k ×{0,1} →{0,1} be a family of functions and r ≥ 1 an integer.
+The r-round Feistel cipher associated to F is the family of permutations F(r): {0,1}rk×{0,1}2→
+{0,1}2 defined as follows for any K1,...,Kr ∈{0,1}k and input x ∈{0,1}2 :
+<sec>
+    <p><b>(a)</b> Prove that there exists an adversary A, making at most two oracle queries and having running
+time about that to do two computations of F, such that</p>
+<p><b>(b)</b>Prove that there exists an adversary A, making at most two queries to its first oracle and one
+to its second oracle, and having running time about that to do three computations of F or
+F−1, such that</p>
+
+</sec></p>
+<p><b>Problem 4.9</b> Let E: K×{0,1}n →{0,1}n be a function family and let A be an adversary that
+asks at most q queries. In trying to construct a proof that |Advprp
+Michael and Peter put forward an argument a fragment of which is as follows:</p>
+<p>Consider an adversary A thatasksatmostq oracle queries to a function ρ, where ρ is
+determined by randomly sampling from Func(n). Let C (for “collision”) be the event
+that A asks some two distinct queries X and Xand the oracle returns the same answer.
+Then clearly</p>
+<p>Show that Michael and Peter have it all wrong: prove that Pr[π $
+sarily the same as Pr[ρ $
+←Perm(n): Aπ⇒1] is not neces
+←Func(n): Aρ⇒1 |C]. Do this by selecting a number n and constructing
+an adversary A for which the left and right sides of the equation above are unequal.</p>
+
+</sec>
+
+
+
+</sec>
+
+</body>
+
+</book>

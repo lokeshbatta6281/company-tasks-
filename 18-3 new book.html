@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book-part
+    PUBLIC "-//DTD CUP-BITS Book Interchange DTD v1.2//EN" "https://dtd.cambridge.org/schemas/2021/09/CUP-BITS-book1.dtd"
+    []>
+<book-part book-part-type="chapter" id="chap95" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <book-part-meta>
+        <title-group>
+            <label> <b>CHAPTER 4</b></label>
+
+        </title-group>
+    </book-part-meta>
+
+    <body>
+        <section>
+            <label>4.3</label>
+            <title>Pseudorandom Functions</title>
+            <p>Apseudorandomfunctionisafamilyoffunctionswiththepropertythattheinput-outputbehavior
+                ofarandominstanceof thefamilyis“computationallyindistinguishable”fromthatofarandom
+                function. Someone who has only black-box access to a function, meaning can only feed it inputs
+                and get outputs, has a hard time telling whether the function in question is a random instance of
+                the family in question or a random function. The purpose of this section is to arrive at a suitable
+                definition of this notion. Later we will look at motivation and applications.</p>
+            <p>We fix a family of functions F: K×D → R. (You may want to think K = {0,1}k, D = {0,1}
+                and R = {0,1}L for some integers k, ,L ≥ 1.) Imagine that you are in a room which contains a
+                terminal connected to a computer outside your room. You can type something into your terminal
+                and send it out, and an answer will come back. The allowed questions you can type must be
+                elements of the domain D, and the answers you get back will be elements of the range R. The
+                computer outside your room implements a function g: D → R, so that whenever you type a value X
+                you get back g(X). However, your only access to g is via this interface, so the only thing you can
+                see is the input-output behavior of g. We consider two different ways in which g will be chosen,
+                giving rise to two different “worlds.”</p>
+            <p><b>World 0:</b> The function g is drawn at random from Func(D,R), namely, the function g is selected
+                via g $←Func(D,R).</p>
+            <p><b>World 1:</b> The function g is drawn at random from F, namely, the function g is selected via g $← F.
+                (Recall this means that a key is chosen via K $←Kand then g is set to FK.)</p>
+            <p>Wou are not told which of the two worlds was chosen. The choice of world, and of the corresponding
+                function g, is made before you enter the room, meaning before you start typing questions. Once
+                made, however, these choices are fixed until your “session” is over. Your job is to discover which
+                world you are in. To do this, the only resource available to you is your link enabling you to provide
+                values X and get back g(X). After trying some number of values of your choice, you must make a
+                decision regarding which world you are in. The quality of pseudorandom family F can be thought
+                of as measured by the difficulty of telling, in the above game, whether you are in World 0 or in
+                World 1.</p>
+            <p>In the formalization, the entity referred to as “you” above is an algorithm called the adversary.
+                The adversary algorithm A may be randomized. We formalize the ability to query g as giving A
+                an oracle which takes input any string X ∈ D and returns g(X). We write Ag to mean that
+                adversary A is being given oracle access to function g. (It can only interact with the function by
+                giving it inputs and examining the outputs for those inputs; it cannot examine the function directly
+                in any way.) Algorithm A can decide which queries to make, perhaps based on answers received
+                to previous queries. Eventually, it outputs a bit b which is its decision as to which world it is in.
+                Outputting the bit “1” means that A “thinks” it is in world 1; outputting the bit “0” means that A
+                thinks it is in world 0. The following definition associates to any such adversary a number between
+                0 and 1 that is called its prf-advantage, and is a measure of how well the adversary is doing at
+                determining which world it is in. Further explanations follow the definition.</p>
+            <p><b>Definition 4.6</b> Let F: K×D →R be a family of functions, and let A be an algorithm that takes
+                an oracle for a function g: D → R, and returns a bit. We consider two experiments</p>
+            <p>It should be noted that the family F is public. The adversary A, and anyone else, knows the
+                description of the family and is capable, given values K,X, of computing F(K,X).</p>
+            <p>The worlds are captured by what we call experiments. The first experiment picks a random
+                instance FK of family F and then runs adversary A with oracle g = FK. Adversary A interacts
+                with its oracle, querying it and getting back answers, and eventually outputs a “guess” bit. The
+                experiment returns the same bit. The second experiment picks a random function g: D → R and
+                runs A with this as oracle, again returning A’s guess bit. Each experiment has a certain probability
+                of returning 1. The probability is taken over the random choices made in the experiment. Thus, for
+                the first experiment, the probability is over the choice of K and any random choices that A might
+                make, for A is allowed to be a randomized algorithm. In the second experiment, the probability is
+                over the random choice of g and any random choices that A makes. These two probabilities should
+                be evaluated separately; the two experiments are completely different.</p>
+            <p>To see how well A does at determining which world it is in, we look at the difference in the
+                probabilities that the two experiments return 1. If A is doing a good job at telling which world it
+                is in, it would return 1 more often in the first experiment than in the second. So the difference is
+                a measure of how well A is doing. We call this measure the prf-advantage of A. Think of it as the
+                probability that A “breaks” the scheme F, with “break” interpreted in a specific, technical way
+                based on the definition.</p>
+            <p>ifferent adversaries will have different advantages. There are two reasons why one adversary
+                may achieve a greater advantage than another. One is that it is more “clever” in the questions it
+                asks and the way it processes the replies to determine its output. The other is simply that it asks
+                more questions, or spends more time processing the replies. Indeed, we expect that as an adversary
+                sees more and more input-output examples of g, or spends more computing time, its ability to tell
+                which world it is in should go up.</p>
+            <p>The “security” of family F as a pseudorandom function must thus be thought of as depending
+                on the resources allowed to the attacker. We may want to want to know, for any given resource
+                limitations, what is the prf-advantage achieved by the most “clever” adversary amongst all those
+                who are restricted to the given resource limits.</p>
+            <p>The choice of resources to consider can vary. One resource of interest is the time-complexity t
+                of A. Another resource of interest is the number of queries q that A asks of its oracle. Another
+                resource of interest is the total length µ of all of A’s queries. When we state results, we will pay
+                attention to such resources, showing how they influence maximal adversarial advantage.</p>
+            <p>Let us explain more about the resources we have mentioned, giving some important conventions
+                underlying their measurement. The first resource is the time-complexity of A. To make sense of this
+                we first need to fix a model of computation. We fix some RAM model, as discussed in Chapter 1.
+                Think of the model used in your algorithms courses, often implicitly, so that you could measure
+                the running time. However, we adopt the convention that the time-complexity of A refers not just
+                to the running time of A, but to the maximum of the running times of the two experiments in the
+                definition, plus the size of the code of A. In measuring the running time of the first experiment,
+                we must count the time to choose the key K at random, and the time to compute the value FK(x)
+                for any query x made by A to its oracle. In measuring the running time of the second experiment,
+                we count the time to choose the random function g in a dynamic way, meaning we count the cost
+                of maintaining a table of values of the form (X,g(X)). Entries are added to the table as g makes
+                queries. A new entry is made by picking the output value at random.</p>
+            <p>The number of queries made by A captures the number of input-output examples it sees. In
+                general, not all strings in the domain must have the same length, and hence we also measure the
+                sum of the lengths of all queries made.</p>
+            <p>The strength of this definition lies in the fact that it does not specify anything about the kinds
+                of strategies that can be used by a adversary; it only limits its resources. A adversary can use
+                whatever means desired to distinguish the function as long as it stays within the specified resource
+                bounds.</p>
+            <p>What do we mean by a “secure” PRF? Definition 4.6 does not have any explicit condition or
+                statement regarding when F should be considered “secure.” It only associates to any adversary
+                A attacking F a prf-advantage function. Intuitively, F is “secure” if the value of the advantage
+                function is “low” for all adversaries whose resources are “practical.”</p>
+            <p>This is, of course, not formal. However, we wish to keep it this way because it better reflects
+                reality. In real life, security is not some absolute or boolean attribute; security is a function of the
+                resources invested by an attacker. All modern cryptographic systems are breakable in principle; it
+                is just a question of how long it takes.</p>
+            <p>This is our first example of a cryptographic definition, and it is worth spending time to study
+                and understand it. We will encounter many more as we go along. Towards this end let us summarize
+                the main features of the definitional framework as we will see them arise later. First, there are
+                experiments, involving an adversary. Then, there is some advantage function associated to an
+                adversary which returns the probability that the adversary in question “breaks” the scheme. These
+                two components will be present in all definitions. What varies is the experiments; this is where we
+                pin down how we measure security.</p>
+        </section>
+        <section>
+            <title><b><label>4.11</label> Historicalnotes</b></title>
+            <p>TheconceptofpseudorandomfunctionsisduetoGoldreich,GoldwasserandMicali [17],whilethat
+                ofpseudorandompermutationisduetoLubyandRackoff[25]. Theseworksarehowever inthe
+                complexity-theoreticor“asymptotic”setting,whereoneconsidersaninfinitesequenceof families
+                ratherthanjustonefamily,anddefinessecuritybysayingthatpolynomial-timeadversarieshave
+                “negligible”advantage. Incontrastourapproachismotivatedbythedesiretomodelblockciphers
+                andiscalledthe“concretesecurity”approach. Itoriginateswith[2]. Definitions4.6and4.7are
+                from[2],asarePropositions4.16and4.17.</p>
+        </section>
+        <section>
+            <title><b><label>4.12</label> Problems</b></title>
+            <p><b>Problem 4.1</b> Let E: {0,1}k×{0,1}n→{0,1}n be a secure PRP. Consider the family of permutations E:
+                {0,1}k×{0,1}2n→{0,1}2n defined by ∀x,x'∈{0,1}n by
+                EK(x || x') = EK(x) || EK(x⊕x').
+                Show that E is not a secure PRP.</p>
+            <p><b>Problem 4.2</b> Consider the following block cipher E: {0,1}3×{0,1}2→{0,1}2</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>key</th>
+                        <th>0</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>(Theeightpossiblekeysaretheeightrows, andeachrowshowswherethepointstowhich0, 1,
+                2, and3map.) Compute themaximal prp-advantageanadversarycanget (a)withonequery,
+                (b)withfourqueries,and(c)withtwoqueries.</p>
+            <p><b>Problem 4.3</b>resentasecureconstructionfor theproblemofExample4.11. That is, givena
+                PRFF: {0,1}k×{0,1}n→{0,1}n, constructaPRFG: {0,1}k×{0,1}n→{0,1}2nwhichisa
+                securePRFaslongasF issecure.</p>
+            <p><b>Problem 4.4</b> Design a blockcipher E : {0,1}k ×{0,1}128 →{0,1}128 that is secure (up to a
+                large number of queries) against non-adaptive adversaries, but is completely insecure (even for
+                two queries) against an adaptive adversary. (A non-adaptive adversary readies all her questions
+                M1,...,Mq, in advance, getting back EK(M1),...,EK(Mq). An adaptive adversary is the sort we
+                have dealt with throughout: each query may depend on prior answers.)</p>
+            <p><b>Problem 4.5</b> Let a[i] denote the i-th bit of a binary string i, where 1 ≤ i ≤|a|. The inner product
+                of n-bit binary strings a,b is
+                a, b = a[1]b[1] ⊕ a[2]b[2] ⊕ ··· ⊕a[n]b[n] .
+                A family of functions F: {0,1}k ×{0,1}→{0,1}L is said to be inner-product preserving if for
+                every K ∈{0,1}k and every distinct x1,x2 ∈{0,1}−{0} we have
+                F(K,x1),F(K,x2) = x1,x2 .
+                Prove that if F is inner-product preserving then there exists an adversary A, making at most two
+                oracle queries and having running time 2 · TF + O( ), where TF denotes the time to perform one
+                computation of F, such that
+
+                Explain in a sentence why this shows that if F is inner-product preserving then F is not a secure
+                PRF.</p>
+            <p><b>Problem 4.6</b> Let E: {0,1}k ×{0,1}→{0,1} be a blockcipher. The two-fold cascade of E is
+                the blockcipher E(2): {0,1}2k ×{0,1}→{0,1} defined by
+
+                for all K1,K2 ∈{0,1}k and all x ∈{0,1}. Prove that if E is a secure PRP then so is E(2).</p>
+            <p><b>Problem 4.7</b>Let A be a adversary that makes at most q total queries to its two oracles, f and g,
+                where f,g : {0,1}n →{0,1}n. Assume that A never asks the same query X to both of its oracles.
+
+                Prove a good upper bound for Adv(A), say Adv(A) ≤ q2/2n</p>
+            <p><b>Problem 4.8</b> Let F: {0,1}k ×{0,1} →{0,1} be a family of functions and r ≥ 1 an integer.
+                The r-round Feistel cipher associated to F is the family of permutations F(r): {0,1}rk×{0,1}2→
+                {0,1}2 defined as follows for any K1,...,Kr ∈{0,1}k and input x ∈{0,1}2 :
+            <section>
+                <p><b>(a)</b> Prove that there exists an adversary A, making at most two oracle queries and having
+                    running
+                    time about that to do two computations of F, such that</p>
+                <p><b>(b)</b>Prove that there exists an adversary A, making at most two queries to its first oracle and
+                    one
+                    to its second oracle, and having running time about that to do three computations of F or
+                    F−1, such that</p>
+
+            </section>
+            </p>
+            <p><b>Problem 4.9</b> Let E: K×{0,1}n →{0,1}n be a function family and let A be an adversary that
+                asks at most q queries. In trying to construct a proof that |Advprp
+                Michael and Peter put forward an argument a fragment of which is as follows:</p>
+            <p>Consider an adversary A thatasksatmostq oracle queries to a function ρ, where ρ is
+                determined by randomly sampling from Func(n). Let C (for “collision”) be the event
+                that A asks some two distinct queries X and Xand the oracle returns the same answer.
+                Then clearly</p>
+            <p>Show that Michael and Peter have it all wrong: prove that Pr[π $
+                sarily the same as Pr[ρ $
+                ←Perm(n): Aπ⇒1] is not neces
+                ←Func(n): Aρ⇒1 |C]. Do this by selecting a number n and constructing
+                an adversary A for which the left and right sides of the equation above are unequal.</p>
+
+        </section>
+    </body>
+</book-part>

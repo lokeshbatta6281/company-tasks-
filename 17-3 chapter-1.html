@@ -1,0 +1,701 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//DTD CUP-BITS Book Interchange DTD v1.2//EN"
+"https://dtd.cambridge.org/schemas/2021/09/CUP-BITS-book1.dtd">
+
+<book xmlns:xlink="http://www.w3.org/1999/xlink">
+
+
+<book-part book-part-type="chapter" id="chap4">
+
+    <book-part-meta>
+        <title-group>
+            <label>CHAPTER 1</label>
+        </title-group>
+    </book-part-meta>
+</book-part>
+
+<body>
+<sec>
+    <title>Introduction</title>
+    <p>Historically, cryptography arose as a means to enable parties to maintain privacy of the information
+they send to each other, even in the presence of an adversary with access to the communication
+channel. While providing privacy remains a central goal, the field has expandeded to encompass
+many others, including not just other goals of communication security, such as guaranteeing integrity and authenticity of communications, but many more sophisticated and fascinating goals.</p>
+
+<p>Once largely the domain of the military, cryptography is now in widespread use, and you are
+likely to have used it even if you don&#x2019;st know it. When you shop on the Internet, for example to buy
+a book at www.amazon.com, cryptography is used to ensure privacy of your credit card number as
+it travels from you to the shop&#x2019;ss server. Or, in electronic banking, cryptography is used to ensure
+that your checks cannot be forged.</p>
+
+<p>Cryptography has been used almost since writing was invented. For the larger part of its
+history, cryptography remained an art, a game of ad hoc designs and attacks. Although the field
+retains some of this flavor, the last twenty-five years have brought in something new. The art of
+cryptography has now been supplemented with a legitimate science. In this course we shall focus
+on that science, which is modern cryptography.</p>
+
+<p>Modern cryptography is a remarkable discipline. It is a cornerstone of computer and communications security, with end products that are imminently practical. Yet its study touches on branches
+of mathematics that may have been considered esoteric, and it brings together fields like number
+theory, computational-complexity theory, and probabiltity theory. This course is your invitation
+to this fascinating field.</p>
+
+   <sec>
+      <title><label>1.1</label> Goals and settings</title>
+      <p>Modern cryptography addresses a wide range of problems. But the most basic problem remains
+the classical one of ensuring security of communication across an insecure medium. To describe it,
+let&#x2019;ss introduce the first two members of our cast of characters: our sender, S, and our receiver, R.
+(Sometimes people call these characters Alice, A, and Bob, B. Alice and Bob figure in many works
+on cryptography. But we&#x2019;sre going to want the letter A for someone else, anyway.) The sender and
+receiver want to communicate with each other.</p>
+<fig id="fig_1_1">
+  <label>Figure 1.1</label>
+  <caption>Several cryptographic goals aim to imitate some aspect of an ideal channel connecting
+a sender S to a receiver R.
+  </caption>
+  <graphic xlink:href="figure1_1.jpg"/>
+</fig>
+
+<p>THE IDEAL CHANNEL. Imagine our two parties are provided with a dedicated, untappable, impenetrable pipe or tube into which the sender can whisper a message and the receiver will hear it. Nobody else can look inside the pipe or change what&#x2019;ss there. This pipe provides the perfect medium, available only to the sender and receiver, as though they were alone in the world. It is an “ideal” communication channel from the security point of view.</p>
+
+<p>Unfortunately, in real life, there are no ideal channels connecting the pairs of parties that might like to communicate with each other. Usually such parties are communicating over some public network like the Internet.</p>
+
+<p>The most basic goal of cryptography is to provide such parties with a means to imbue their communications with security properties akin to those provided by the ideal channel.</p>
+
+<p>At this point we should introduce the third member of our cast. This is our adversary, denoted A. An adversary models the source of all possible threats. We imagine the adversary as having access to the network and wanting to compromise the security of the parties communications in some way.</p>
+
+<p>Not all aspects of an ideal channel can be emulated. Instead, cryptographers distill a few central security goals and try to achieve them. The first such goal is privacy. Providing privacy means hiding the content of a transmission from the adversary. The second goal is authenticity or integrity. We want the receiver, upon receiving a communication purporting to be from the sender, to have a way of assuring itself that it really did originate with the sender, and was not sent by the adversary, or modified en route from the sender to the receiver.</p>
+
+<p>PROTOCOLS. In order to achieve security goals such as privacy or authenticity, cryptography supplies the sender and receiver with a protocol. A protocol is just a collection of programs (equivalently, algorithms, software), one for each party involved. In our case, there would be some program for the sender to run, and another for the receiver to run. The sender&#x2019;ss program tells her how to package, or encapsulate, her data for transmission. The receiver&#x2019;ss program tells him how to decapsulate the received package to recover the data together possibly with associated information telling her whether or not to regard it as authentic. Both programs are a function of some cryptographic keys as we discuss next.</p>
+
+<p>TRUST MODELS. It is not hard to convince yourself that in order to communicate securely, there must be something that a party knows, or can do, that the adversary does not know, or cannot do. There has to be some “asymmetry” between the situation in which the parties find themselves and the situation in which the adversary finds itself.</p>
+
+<p>The trust model specifies who, initially, has what keys. There are two central trust models: the symmetric (or shared-key) trust model and the asymmetric (or public-key) trust model. We look at them, and the cryptographic problems they give rise to, in turn.</p>
+
+<fig id="fig_1_2">
+  <label>Figure 1.2</label>
+  <caption> Elementary notation from formal-language theory</caption>
+  <graphic xlink:href="figure1_2.jpg"/>
+</fig>
+
+<sec>
+    <title><label>1.1.1</label>The symmetric setting</title>
+    <p>In practice, the simplest and also most common setting is that the sender and receiver share a key that the adversary does not know. This is called the <i>symmetric setting</i> or symmetric trust model. The encapsulation and decapsulation procedures above would both depend on this same shared key. The shared key is usually a uniformly distributed random string having some number of bits, say k. Recall that a string is just a sequence of bits. (For language-theoretic background, see Fig. 1.2.) The sender and receiver must somehow use the key K to overcome the presence of the adversary.</p>
+
+<p>One might ask how the symmetric setting is realized. Meaning, how do a sender and receiver initially come into possession of a key unknown to the adversary? We will discuss this later. For now, we will assume that the sender and receiver share a key, and that the adversary does not know this key.</p>
+
+<p>In cryptography we assume that the secret key is kept securely by the party using it. If it is kept on a computer, we assume that the adversary cannot penetrate these machines and recover the key. Ensuring that this assumption is true is the domain of computer system security.</p>
+
+<p>Let us now take a closer look at secure protocols in the symmetric setting. We&#x2019;sll describe these problems quite informally, but we&#x2019;sll be returning to them later in our studies, where they&#x2019;sll get a much more thorough treatment.</p>
+
+<p><i>SYMMETRIC ENCRYPTION SCHEMES.</i> A protocol used to provide privacy in the symmetric setting is called a <i>symmetric encryption scheme</i>. When we specify such a scheme Π, we must specify three algorithms, so that the scheme is a triple of algorithms, Π = (K, E, D). The encapsulation algorithm we discussed above is, in this context, called an <i>encryption algorithm</i>, and is the algorithm E. The message M that the sender wishes to transmit is usually referred to as a <i>plaintext</i>. The sender encrypts her plaintext under the shared key K by applying E to K and M to obtain a <i>ciphertext</i> C. The ciphertext is transmitted to the receiver. The above-mentioned decapsulation procedure, in this context, is called a <i>decryption algorithm</i>, and is the algorithm D. The receiver applies D to K and C. The decryption process must be successful, indicated by its returning a plaintext, M. But, if successful, it ought to return the message that was originally encrypted. The first algorithm in Π is the key generation algorithm which specifies the manner in which the key is to be chosen. In most cases this algorithm simply returns a random string of length the key length.</p>
+
+<p>The encryption scheme does not tell the adversary what to do. It does not say how the key is to be generated, nor how the sender and receiver behave. And it does not say how messages are transmitted. It only says how keys are generated and how the data is processed.</p>
+
+<p><i>WHAT IS PRIVACY?</i> The goal of a symmetric encryption scheme is that an adversary who obtains the ciphertext be unable to learn anything about the plaintext. What exactly this means, however, is not clear, and obtaining a definition of privacy will be an important objective in later chapters.</p>
+
+<p>One thing encryption does not do is hide the length of a plaintext string. This is usually recoverable from the length of the ciphertext string.</p>
+
+<p>A more complete but informal notion of privacy requires that an adversary, whether or not he knows the key, should not be able to distinguish between ciphertexts corresponding to two chosen plaintexts. However, this idea needs a precise definition to make sense.</p>
+
+<p>For now, we will just say that an adversary attacking the privacy of an encryption scheme is passive, merely obtaining and examining ciphertexts. In fact, this might not be the case at all. We will consider adversaries that are much more powerful than that.</p>
+
+<p><i>MESSAGE AUTHENTICITY.</i> In the message-authentication problem the receiver gets some message which is claimed to have originated with a particular sender. The channel on which this message flows is insecure. Thus the receiver S wants to distinguish the case in which the message really did originate with the claimed sender S from the case in which the message originated with some imposter, A. In such a case we consider the design of an encapsulation mechanism with the property that unauthentic transmissions lead to the decapsulation algorithm outputting the special symbol ⊥.</p>
+
+<p>The most common tool for solving the message-authentication problem in the symmetric setting is a <i>message authentication scheme</i>, also called a <i>message authentication code</i> (MAC). Such a scheme is specified by a triple of algorithms, Π = (K, T, V). When the sender wants to send a 
+    <br/>
+
+    <figure>
+    <label>Figure 1.3</label>
+    <caption> Symmetric encryption. The sender and the receiver share a secret key, K. The adversary
+lacks this key. The message M is the plaintext; the message C is the ciphertext.</caption>
+    <graphic xlink:href="fig1_3.jpg" mime-subtype="png"/>
+</figure>
+
+<figure>
+    <label>Figure 1.4</label>
+    <caption> A message authentication code. The tag σ accompanies the message M. The receiver
+R uses it to decide if the message really did originate with the sender S with whom he shares the
+key K.</caption>
+    <graphic xlink:href="fig1_4.jpg" mime-subtype="png"/>
+</figure>
+
+    message M to the receiver she computes a “tag,” σ, by applying T to the shared key K and
+the message M, and then transmits the pair (M,σ). (The encapsulation procedure referred to
+above thus consists of taking M and returning this pair. The tag is also called a MAC.) The
+computation of the MAC might be probabilistic or use state, just as with encryption. Or it may
+well be deterministic. The receiver, on receipt of M and σ, uses the key K to check if the tag
+is OK by applying the verification algorithm V to K,M and σ. If this algorithms returns 1, he
+accepts M as authentic; otherwise, he regards M as a forgery. An appropriate reaction might range
+from ignoring the bogus message to tearing down the connection to alerting a responsible party
+about the possible mischief. See Figure 1.4.</p>
+
+</sec>
+
+<sec>
+    <title><label>1.1.2</label>The asymmetric setting</title>
+    <p>A shared key K between the sender and the receiver is not the only way to create the information
+asymmetry that we need between the parties and the adversary. In the asymmetric setting, also
+called the public-key setting, a party possesses a pair of keys—a public key, pk, and an associated
+secret key, sk. A party&#x2019;ss public key is made publicly known and bound to its identity. For example,
+a party&#x2019;ss public key might be published in a phone book.</p>
+<p>The problems that arise are the same as before, but the difference in the setting leads to the
+    <br/>
+
+    <figure>
+    <label>Figure 1.5</label>
+    <caption> Asymmetric encryption. The receiver R has a public key, pkR, which the sender knows
+belongs to R. The receiver also has a corresponding secret key, skR.</caption>
+    <graphic xlink:href="fig1_5.jpg" mime-subtype="png"/>
+</figure>
+
+development of different kinds of tools.</p>
+
+<p>Asymmetric encryption. The sender is assumed to be able to obtain an authentic copy pkR of
+the receiver&#x2019;ss public key. (The adversary is assumed to know pkR too.) To send a secret message
+M to the receiver the sender computes a ciphertext C ←EpkR
+(M) and sends C to the receiver.
+When the receiver receives a ciphertext C he computes M ←DskR
+(C). The asymmetric encryption
+scheme Π = (K,E,D) is specified by the algorithms for key generation, encryption and decryption.
+For a picture of encryption in the public-key setting, see Fig. 1.5.</p>
+<p>The idea of public-key cryptography, and the fact that we can actually realize this goal, is
+remarkable. You&#x2019;sve never met the receiver before. But you can send him a secret message by
+looking up some information in a phone book and then using this information to help you garble
+up the message you want to send. The intended receiver will be able to understand the content of
+your message, but nobody else will. The idea of public-key cryptography is due to Whitfield Diffie
+and Martin Hellman and was published in 1976 [10].</p>
+<p>Digital signatures. The tool for solving the message-authentication problem in the asymmetric
+setting is a digital signature. Here the sender has a public key pkS and a corresponding secret key
+skS. The receiver is assumed to know the key pkS and that it belongs to party S. (The adversary
+is assumed to know pkS too.) When the sender wants to send a message M she attaches to it
+some extra bits, σ, which is called a signature for the message and is computed as a function of
+M and skS by applying to them a signing algorithm Sign. The receiver, on receipt of M and σ,
+checks if it is OK using the public key of the sender, pkS, by applying a verification algorithm
+V. If this algorithm accepts, the receiver regards M as authentic; otherwise, he regards M as an
+attempted forgery. The digital signature scheme Π = (K,Sign,V) is specified by the algorithms for
+key generation, signing and verifying. A picture is given in Fig. 1.6.</p>
+<p>One difference between a MAC and a digital signature concerns what is called non-repudiation.
+With aMACanyonewhocanverify a tagged message can also produce one, and so a tagged message
+would seem to be of little use in proving authenticity in a court of law. But with a digitally-signed
+message the only party who should be able to produce a message that verifies under public key
+pkS is the party S herself. Thus if the signature scheme is good, party S cannot just maintain that
+the receiver, or the one presenting the evidence, concocted it. If signature σ authenticates M with <br />
+
+<figure>
+    <label>Figure 1.6</label>
+    <caption> A digital signature scheme. The signature σ accompanies the message M. The receiver
+R uses it to decide if the message really did originate with the sender S with has public key pkS.</caption>
+    <graphic xlink:href="fig1_6.jpg" mime-subtype="png"/>
+</figure>
+
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>symmetric trust model</th>
+      <th>asymmetric trust model</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>message privacy</td>
+      <td>symmetric (a.k.a. privatekey) encryption</td>
+      <td>asymmetric (a.k.a. publickey) encryption</td>
+    </tr>
+
+    <tr>
+      <td>message authenticity</td>
+      <td>message authentication code (MAC)</td>
+      <td>digital signature scheme</td>
+    </tr>
+  </tbody>
+</table>
+
+<figure>
+    <label>Figure 1.7</label>
+    <caption> Summary of main goals and trust models.</caption>
+    <graphic xlink:href="fig1_7.jpg" mime-subtype="png"/>
+</figure>
+
+respect to public key pkS, then it is only S that should have been able to devise σ. The sender
+cannot refute that. Probably the sender S can claim that the key skS was stolen from her. Perhaps
+this, if true, might still be construed the sender&#x2019;ss fault.</p>
+</sec>
+
+<sec>
+    <title><label>1.1.3</label>Summary</title>
+    <p>To summarize, there are two common aims concerned with mimicking an ideal channel: achieving
+message privacy and achieving message authenticity. There are two main trust models in which
+we are interested in achieving these goals: the symmetric trust model and the asymmetric trust
+model. The tools used to achieve these four goals are named as shown in Fig. 1.7.</p>
+</sec>
+
+   </sec>
+   
+
+
+
+
+<sec>
+    <title><label>1.3</label>What cryptography is about</title>
+    <p>Let us now move away from the particular examples we have given and ask what, in general, is
+cryptography about?</p>
+
+<sec>
+    <title><label>1.3.1</label>Protocols, parties and adversaries</title>
+    <p>Briefly, cryptography is about constructing and analyzing protocols which overcome the influence
+of adversaries. In the last sections we gave examples of several different protocol problems, and a
+couple of different protocols</p>
+
+<p>Suppose that you are trying to solve some cryptographic problem. The problem will usually
+involve some number of parties. Us cryptographers often like to anthropomorphize our parties,
+giving them names like “Alice” and “Bob” and referring to them as though they are actual people.
+We do this because it&#x2019;ss convenient and fun. But you shouldn&#x2019;st think that it means that the parties
+are really human beings. They might be—but they could be lots of other things, too. Like a cell
+phone, a computer, a processes running on a computer, an institution, or maybe a little gadget
+sitting on the top of your television set.</p>
+
+<p>We usually think of the parties as the “good guys,” and we want to help them accomplish their
+goal. We do this by making a protocol for the parties to use</p>
+
+<p>A protocol tells each party how to behave. A protocol is essentially a program, but it&#x2019;ss a
+distributed program. Here are some features of protocols for you to understand.</p>
+
+<p>A protocol instructs the parties what to do. It doesn&#x2019;st tell the adversary what to do. That is
+up to her.</p>
+
+<p>A protocol can be probabilistic. This means that it can make random choices. To formalize this
+we usually assume that the model of computation that allows a party to specify a number n ≥ 2
+and then obtain a random value i ← { $ 0, 1,...,n−1}. This notation means that i is a random value
+from the indicated set, all values being equally likely</p>
+
+<p>A protocol can be stateful. This means that when a party finishes what he is doing he can
+retain some information for the next time that he is active. When that party runs again he will
+remember the state that he was last in. So, for example, you could have a party that knows “this
+is the first time I&#x2019;sve been run,” “this is the second time I&#x2019;sve been run,” and so on</p>
+
+<p>When we formalize protocols, they are usually tuples of algorithms. But the actual formalization
+will vary from problem to problem. For example, a protocol for symmetric encryption isn&#x2019;st the
+same “type” of thing as a protocol for a telephone coin flip.</p>
+
+<p>Another word for a protocol is a scheme. We&#x2019;sll use the two words interchangeably. So an
+encryption scheme is a protocol for encryption, and a message-authentication scheme is a protocol
+for message authentication. For us, a function, computed by a deterministic, sequential algorithm,
+is also a protocol. It&#x2019;ss a particularly simple kind of protocol.</p>
+
+<p>How can we devise and analyze protocols? The first step is to try to understand the threats and
+the goals for our particular problem. Once we have a good idea about these, we can try to find a
+protocol solution.</p>
+
+<p>The adversary is the agent that embodies the “source” of the threat. Adversaries aim to defeat
+our protocol&#x2019;ss goals. Protocols, in turn, are designed to to surmount the behavior of adversaries.
+It is a game—a question of who is more clever, protocol designer or adversary.</p>
+
+<p>The adversary is usually what we focus on. In rigorous formalizations of cryptographic problems,
+the parties may actually vanish, being “absorbed” into the formalization. But the adversary will
+never vanish. She will be at center stage.</p>
+
+<p>Cryptography is largely about thinking about the adversary. What can she do, and what can&#x2019;st
+she do? What is she trying to accomplish? We have to answer these questions before we can get
+very far.</p>
+
+<p>Just as we warned that one shouldn&#x2019;st literally regard our parties as people, so too for the adversary. The adversary might represent an actual person, but it might just as well be an automated
+attack program, a competitor&#x2019;ss company, a criminal organization, a government institution, one
+or more of the protocol&#x2019;ss legitimate parties, a group of friendly hackers, or merely some unlucky
+circumstances conspiring together, not controlled by any intelligence at all.</p>
+
+<p>By imagining a powerful adversary we take a pessimistic view about what might go wrong. We
+aim to succeed even if someone is out to get us. Maybe nobody is out to get us. In that case,
+we should at least be achieving high reliability. After all, if a powerful adversary can&#x2019;st succeed in
+disrupting our endeavors, then neither will noisy lines, transmission errors due to software bugs,
+unlucky message delivery times, careless programmers sending improperly formatted messages, and
+so forth.</p>
+
+<p>When we formalize adversaries they will be random access machines (RAMs) with access to an
+oracle.</p>
+
+</sec>
+
+<sec>
+    <title><label>1.3.2</label>Cryptography and computer security</title>
+    <p>Good protocols are an essential tool for making secure computing systems. Badly designed protocols
+are easily exploited to break into computer systems, to eavesdrop on phone calls, to steal services,
+and so forth. Good protocol design is also hard. It is easy to under-estimate the task and quickly
+come up with ad hoc protocols that later turn out to be wrong. In industry, the necessary time
+and expertise for proper protocol design is typically under-estimated, often at future cost. It takes
+knowledge, effort and ingenuity to do the job right.</p>
+
+<p>Security has many facets. For a system to be secure, many factors must combine. For example,
+it should not be possible for hackers to exploit bugs, break into your system, and use your account.
+They shouldn&#x2019;st be able to buy off your system administrator. They shouldn&#x2019;st be able to steal your
+back-up tapes. These things lie in the realm of system security.</p>
+
+<p>The cryptographic protocol is just one piece of the puzzle. If it is poorly designed, the attacker
+will exploit that. For example, suppose the protocol transmits your password in the clear (that
+is, in a way that anyone watching can understand what it is). That&#x2019;ss a protocol problem, not a
+system problem. And it will certainly be exploited.</p>
+
+<p>The security of the system is only as strong as its weakest link. This is a big part of the difficulty
+of building a secure system. To get security we need to address all the problems: how do we secure
+our machines against intruders, how do we administer machines to maintain security, how do we
+design good protocols, and so on. All of these problems are important, but we will not address all
+of these problems here. This course is about the design of secure protocols. We usually have to
+assume that the rest of the system is competent at doing its job.</p>
+
+<p>We make this assumption because it provides a natural abstraction boundary in dealing with the
+enormous task of providing security. Computer system security is a domain of a different nature,
+requiring different tools and expertise. Security can be best addressed by splitting it into more
+manageable components.</p>
+
+</sec>
+
+<sec>
+    <title><label>1.3.3</label>The rules of the game</title>
+    <p>Cryptography has rules. The first rule is that we may only try to overcome the adversary by means
+of protocols. We aren&#x2019;st allowed to overcome the adversary by intimidating her, arresting her, or
+putting poison in her coffee. These methods might be effective, but they are not cryptography.</p>
+
+<p>Another rule that most cryptographers insist on is to make the protocols public. That which
+must be secret should be embodied in keys. Keys are data, not algorithms. Why do we insist that
+our protocols be public? There are several reasons. A resourceful adversary will likely find out
+what the protocol is anyway, since it usually has to be embodied in many programs or machines;
+trying to hide the protocol description is likely to be costly or infeasible. More than that, the
+attempt to hide the protocol makes one wonder if you&#x2019;sve achieved security or just obfuscation.
+Peer review and academic work cannot progress in the absence of known mechanisms, so keeping
+cryptographic methods secret is often seen as anti-intellectual and a sign that ones work will not
+hold up to serious scrutiny</p>
+
+<p>Government organizations that deal in cryptography often do not make their mechanisms public.
+For them, learning the cryptographic mechanism is one more hoop that that the adversary must
+jump through. Why give anything away? Some organizations may have other reasons for not
+wanting mechanisms to be public, like a fear of disseminating cryptographic know-how, or a fear
+that the organization&#x2019;ss abilities, or inabilities, will become better understood.</p>
+
+</sec>
+
+</sec>
+
+
+<sec>
+    <title><label>1.4</label>Approaches to the study of cryptography</title>
+<p>Here we very briefly discuss the history of cryptography, and then at two development paradigms,
+namely cryptanalysis-driven design and proof-driven design.</p>
+
+<sec>
+<title><label>1.4.1</label>Phases in cryptography&#x2019;ss development</title>
+
+<p>The history of cryptography can roughly be divided into three stages. In the first, early stage,
+algorithms had to be implementable with paper and ink. Julius Caesar used cryptograms. His and
+other early symmetric encryption schemes often took the form of substitution ciphers. In such a
+scheme, a key is a permutation π: Σ → Σ (meaning, a one-to-one, onto map from the alphabet to
+itself). A symbol σ ∈ Σ is encrypted as π(σ), and a piece of text is encrypted by encrypting each
+symbol in it. Decryption is done using the map π−1. As we will see, however, such schemes are
+not very secure. The system can be strengthened in various ways, but none too effective.</p>
+
+<p>The second age of cryptography was that of cryptographic engines. This is associated to the
+period of the World War II, and the most famous crypto engine was the German Enigma machine.
+How its codes were broken is a fascinating story</p>
+
+<p>The last stage is modern cryptography. Its central feature is the reliance on mathematics
+and electronic computers. Computers enabled the use of much more sophisticated encryption
+algorithms, and mathematics told us how to design them. It is during this most recent stage that
+cryptography becomes much more a science.</p>
+</sec>
+
+<sec>
+    <title><label>1.4.1</label>Cryptanalysis-driven design</title>
+    <p>Traditionally, cryptographic mechanisms have been designed by focusing on concrete attacks and
+how to defeat them. The approach has worked something like this.</p>
+<ol type="1">
+    <li>(1) A cryptographic goal is recognized.</li>
+
+    <figure>
+    <label>Figure 1.9</label>
+    <caption> The classical-cryptography approach.</caption>
+    <graphic xlink:href="fig1_9.jpg" mime-subtype="png"/>
+</figure>
+
+    <li>(2) A solution is offered.</li>
+    <li>(3) One searches for an attack on the proposed solution.</li>
+    <li>(4) When one is found, if it is deemed damaging or indicative of a potential weakness, you go back
+to Step 2 and try to come up with a better solution. The process then continues.</li>
+</ol>
+
+<p>Sometimes one finds protocol problems in the form of subtle mathematical relationships that
+allow one to subvert the protocol&#x2019;ss aims. Sometimes, instead, one “jumps out of the system,”
+showing that some essential cryptographic issue was overlooked in the design, application, or implementation of the cryptography.</p>
+
+<p>Some people like to use the word cryptography to refer to the making of cryptographic mechanisms, cryptanalysis to refer to the attacking of cryptographic mechanisms, and cryptology to refer
+to union. Under this usage, we&#x2019;sve been saying “cryptography” in many contexts where “cryptology”
+would be more accurate. Most cryptographers don&#x2019;st observe this distinction between the words
+“cryptography” and “cryptology,” so neither will we.</p>
+
+<p>There are some difficulties with the approach of cryptanalysis-drive design. The obvious problem
+is that one never knows if things are right, nor when one is finished! The process should iterate
+until one feels “confident” that the solution is adequate. But one has to accept that design errors
+might come to light at any time. If one is making a commercial product one must eventually say
+that enough is enough, ship the product, and hope for the best. With luck, no damaging attacks
+will subsequently emerge. But sometimes they do, and when this happens the company that owns
+the product may find it difficult or impossible to effectively fix the fielded solution. They might
+try to keep secret that there is a good attack, but it is not easy to keep secret such a thing. See
+Figure 1.9.</p>
+
+<p>Doing cryptanalysis well takes a lot of cleverness, and it is not clear that insightful cryptanalysis
+is a skill that can be effectively taught. Sure, one can study the most famous attacks—but will
+they really allow you to produce a new, equally insightful one? Great cleverness and mathematical prowess seem to be the requisite skills, not any specific piece of knowledge. Perhaps for these
+reasons, good cryptanalysts are very valuable. Maybe you have heard of Adi Shamir or Don
+Coppersmith, both renowned cryptanalysts.</p>
+
+<p>Sadly, it is hard to base a science on an area where assurance is obtained by knowing that
+Coppersmith thought about a mechanism and couldn&#x2019;st find an attack. We need to pursue things
+differently.</p>
+
+</sec>
+
+<sec>
+    <title><label>1.4.3</label> security for symmetric encryption</title>
+    <p>The “systematic” approach to cryptography, where proofs and definitions play a visible role, begins
+in the work of Claude Shannon. Shannon was not only the father of information theory, but he
+might also be said to be the father of the modern-era of cryptography.</p>
+
+<p>Let&#x2019;ss return to the problem of symmetric encryption. Security, we have said, means defeating
+an adversary, so we have to specify what is it the adversary wants to do. As we have mentioned
+before, we need some formal way of saying what it means for the scheme to be secure. The idea of
+Shannon, which we consider in more depth later, is to say that a scheme is perfectly secure if, for
+any two messages M1, M2, and any ciphertext C, the latter is just as likely to show up when M1 is
+encrypted as when M2 is encrypted. Here, likelihood means the probability, taken over the choice
+of key, and coins tossed by the encryption algorithm, if any</p>
+
+<p>Perfect security is a very powerful guarantee; indeed, in some sense, the best one can hope for.
+However, it has an important limitation, namely that, to achieve it, the number of message bits
+that one can encrypt cannot exceed the number of bits in the key. But if we want to do practical
+cryptography, we must be able to use a single short key to encrypt lots of bits. This means that
+we will not be able to achieve Shannon&#x2019;ss perfect security. We must seek a different paradigm and
+a different notion of security that although “imperfect” is good enough.</p>
+
+</sec>
+
+<sec>
+    <title><label>1.4.4</label>Computational-complexity theory</title>
+
+    <p>Modern cryptography introduces a new dimension: the amount of computing power available to an
+adversary. It seeks to have security as long as adversaries don&#x2019;st have “too much” computing time.
+Schemes are breakable “in principle,” but not in practice. Attacks are infeasible, not impossible.</p>
+    
+    <p>This is a radical shift from many points of view. It takes cryptography from the realm of
+information theory into the realm of computer science, and complexity theory in particular, since
+that is where we study how hard problems are to solve as a function of the computational resources
+invested. And it changes what we can efficiently achieve.</p>
+
+<ul type="none">
+    We will want to be making statements like this:
+    <li>Assuming the adversary uses no more than t computing cycles, her probability of breaking the scheme is at most t/2200.</li>
+</ul>
+
+<p>Notice again the statement is probabilistic. Almost all of our statements will be.</p>
+<ul type="none">
+    <li>Notice another important thing. Nobody said anything about how the adversary operates.
+What algorithm, or technique, does she use? We do not know anything about that. The statement
+holds nonetheless. So it is a very strong statement.</li>
+    <li>It should be clear that, in practice, a statement like the one above would be good enough. As
+the adversary works harder, her chance of breaking the scheme increases, and if the adversary had
+2200 computing cycles at her disposal, we&#x2019;sd have no security left at all. But nobody has that much
+computing power.</li>
+    <li>Now we must ask ourselves how we can hope to get protocols with such properties. The
+legitimate parties must be able to efficiently execute the protocol instructions: their effort should
+be reasonable. But somehow, the task for the adversary must be harder.</li>
+</ul>
+
+</sec>
+
+<sec>
+    <title><label>1.4.5</label> primitives</title>
+  <p>We want to make a distinction between the protocols that that we use and those that we are designing. At the lowest level are what we call <i>atomic primitives</i>. Higher level protocols are built on top of these.</p>
+
+  <p>What's the distinction? Perhaps the easiest way to think of it is that the protocols we build address a <i>cryptographic problem</i> of interest. They say how to encrypt, how to authenticate, how to distribute a key. We build our protocols out of atomic primitives. <i>Atomic primitives</i> are protocols in their own right, but they are simpler protocols. Atomic primitives have some sort of <i>"hardness"</i> or <i>"security"</i> properties, but by themselves they don't solve any problem of interest. They must be properly used to achieve some useful end.</p>
+
+  <p>In the early days nobody bothered to make such a distinction between protocols and the primitives that used them. And if you think of the <i>one-time pad</i> encryption method, there is really just one object, the protocol itself.</p>
+
+  <p>Atomic primitives are drawn from two sources: engineered constructs and mathematical problems. In the first class fall standard <i>blockciphers</i> such as the well-known <i>DES algorithm</i>. In the second class falls the <i>RSA function</i>. We'll be looking at both types of primitives later.</p>
+
+  <p>The computational nature of modern cryptography means that one must find, and base cryptography on, computationally hard problems. Suitable ones are not so commonplace. Perhaps the first thought one might have for a source of computationally hard problems is <i>NP-complete problems</i>. Indeed, early cryptosystems tried to use these, particularly the <i>Knapsack problem</i>. However, these efforts have mostly failed. One reason is that <i>NP-complete</i> problems, although apparently hard to solve in the worst-case, may be easy on the average.</p>
+
+  <p>An example of a more suitable primitive is a <i>one-way function</i>. This is a function <i>f: D -> R</i> mapping some domain <i>D</i> to some range <i>R</i> with two properties:</p>
+
+  <p>(1) <i>f</i> is easy to compute: there is an efficient algorithm that given <i>x ∈ D</i> outputs <i>y = f(x) ∈ R</i>.</p>
+  <p>(2) <i>f</i> is hard to invert: an adversary <i>I</i> given a random <i>y ∈ R</i> has a hard time figuring out a point <i>x</i> such that <i>f(x) = y</i>, as long as her computing time is restricted.</p>
+
+  <p>The above is not a formal definition. The latter, which we will see later, will talk about probabilities. The input <i>x</i> will be chosen at random, and we will then talk of the probability an adversary can invert the function at <i>y = f(x)</i>, as a function of the time for which she is allowed to compute.</p>
+
+  <p>Can we find objects with this strange asymmetry? It is sometimes said that one-way functions are obvious from real life: it is easier to break a glass than to put it together again. But we want concrete <i>mathematical functions</i> that we can implement in systems.</p>
+
+  <p>One source of examples is <i>number theory</i>, and this illustrates the important interplay between number theory and cryptography. A lot of cryptography has been done using number theory. And there is a very simple one-way function based on number theory—something you already know quite well.</p>
+
+  <p>Multiplication! The function <i>f</i> takes as input two numbers, <i>a</i> and <i>b</i>, and multiplies them together to get <i>N = ab</i>. There is no known algorithm that given a random <i>N = ab</i>, always and quickly recovers a pair of numbers (not 1 and <i>N</i>, of course!) that are factors of <i>N</i>. This "backwards direction" is the <i>factoring problem</i>, and it has remained unsolved for hundreds of years.</p>
+
+  <p>Here is another example. Let <i>p</i> be a prime. The set <i>Zp* = {1, ..., p-1}</i> turns out to be a group under multiplication modulo <i>p</i>. We fix an element <i>g ∈ Zp*</i> which generates the group (that is, <i>{g^0, g^1, g^2, ..., g^{p-2}}</i> is all of <i>Zp*</i>) and consider the function <i>f: {0, ..., p-2} -> Zp*</i> defined by <i>f(x) = g^x mod p</i>. This is called the <i>discrete exponentiation function</i>, and its inverse is called the <i>discrete logarithm function</i>: <i>log_g(y)</i> is the value <i>x</i> such that <i>y = g^x</i>. It turns out there is no known fast algorithm that computes discrete logarithms, either. This means that for large enough <i>p</i> (say 1000 bits) the task is infeasible, given current computing power, even in thousands of years. So this is another one-way function.</p>
+
+  <p>It should be emphasized though that these functions have not been proven to be hard functions to invert. Like <i>P versus NP</i>, whether or not there is a good one-way function out there is an open question. We have some candidate examples, and we work with them. Thus, cryptography is build on <i>assumptions</i>. If the assumptions are wrong, a lot of protocols might fail. In the meantime we live with them.</p>
+</sec>
+
+<sec>
+    <title><label>1.4.6</label> The provable-security approach</title>
+
+    <p>While there are several different ways in which proofs can be effective tools in cryptography, we will generally follow the proof-using tradition which has come to be known as <i>“provable security.”</i> Provable security emerged in 1982, with the work of <i>Shafi Goldwasser</i> and <i>Silvio Micali</i>. At that time, Goldwasser and Micali were graduate students at UC Berkeley. They, and their advisor <i>Manuel Blum</i>, wanted to put public-key encryption on a scientifically firm basis. And they did that, effectively creating a new viewpoint on what cryptography is really about.</p>
+
+  <p>We have explained above that we like to start from <i>atomic primitives</i> and transform them into protocols. Now good atomic primitives are rare, as are the people who are good at making and attacking them. Certainly, an important effort in cryptography is to design new atomic primitives, and to analyze the old ones. This, however, is not the part of cryptography that this course will focus on. One reason is that the weak link in real-world cryptography seems to be between atomic primitives and protocols. It is in this transformation that the bulk of security flaws arise. And there is a science that can do something about it, namely, <i>provable security</i>.</p>
+
+  <p>We will view a cryptographer as an engine for turning atomic primitives into protocols. That is, we focus on protocol design under the assumption that good atomic primitives exist. Some examples of the kinds of questions we are interested in are these. What is the best way to encrypt a large text file using <i>DES</i>, assuming <i>DES</i> is secure? What is the best way to design a signature scheme using <i>multiplication</i>, assuming that multiplication is one-way? How <i>“secure”</i> are known methods for these tasks? What do such questions even mean, and can we find a good framework in which to ask and answer them?</p>
+
+  <p>A poorly designed protocol can be insecure even though the underlying atomic primitive is good. The fault is not of the underlying atomic primitive, but that primitive was somehow misused.</p>
+
+  <p>Indeed, lots of protocols have been broken, yet the good atomic primitives, like <i>DES</i> and <i>multiplication</i> and <i>RSA</i>, have never been convincingly broken. We would like to build on the strength of such primitives in such a way that protocols can <i>“inherit”</i> this strength, not lose it.</p> 
+  
+  <p>The <i>provable-security</i> paradigm lets us do that.</p>
+
+    <figure>
+    <label>Figure 1.10</label>
+    <caption>The provable-security paradigm.</caption>
+    <graphic xlink:href="fig1_10.jpg" mime-subtype="png"/>
+</figure>
+
+<p>The <i>provable-security</i> paradigm is as follows. Take some goal, like achieving privacy via symmetric encryption. The first step is to make a formal adversarial model and define what it <i>means</i> for an encryption scheme to be secure. The definition explains exactly <i>when</i>—on which runs—the adversary is successful.</p>
+
+  <p>With a definition in hand, a particular protocol, based on some particular atomic primitive, can be put forward. It is then analyzed from the point of view of meeting the definition. The plan is now show security via a <i>reduction</i>. A reduction shows that the <i>only way</i> to defeat the protocol is to break the underlying atomic primitive. Thus we will also need a formal definition of what the atomic primitive is supposed to do.</p>
+
+  <p>A reduction is a proof that if the atomic primitive does the job it is supposed to do, then the protocol we have made does the job that it is supposed to do. Believing this, it is no longer necessary to directly cryptanalyze the protocol: if you were to find a weakness in it, you would have unearthed one in the underlying atomic primitive. So if one is going to do cryptanalysis, one might as well focus on the atomic primitive. And if we believe the latter is secure, then we <i>know</i>, without further cryptanalysis of the protocol, that the protocol is secure, too.</p>
+
+  <p>A picture for the provable-security paradigm might look like Fig. 1.10.</p>
+
+  <p>In order to do a reduction one must have a formal notion of what is meant by the security of the underlying atomic primitive: what attacks, exactly, does it withstand? For example, we might assume that <i>RSA</i> is a one-way function.</p>
+
+  <p>Here is another way of looking at what reductions do. When I give you a reduction from the onewayness of <i>RSA</i> to the security of my protocol, I am giving you a transformation with the following property. Suppose you claim to be able to break my protocol <i>P</i>. Let <i>A</i> be the adversary that you have that does this. My transformation takes <i>A</i> and turns it into another adversary, <i>A'</i>, that breaks <i>RSA</i>. Conclusion: as long as we believe you can't break <i>RSA</i>, there could be no such adversary <i>A</i>. In other words, my protocol is secure.</p>
+
+  <p>Those familiar with the theory of <i>NP-completeness</i> will recognize that the basic idea of reductions is the same. When we provide a reduction from <i>SAT</i> to some computational problem <i>Ξ</i> we are saying our <i>Ξ</i> is hard unless <i>SAT</i> is easy; when we provide a reduction from <i>RSA</i> to our protocol <i>Π</i>, we are saying that <i>Π</i> is secure unless <i>RSA</i> is easy to invert. The analogy is further spelled out in Fig. 1.11, for the benefit of those of you familiar with the notion of <i>NP-Completeness</i>.</p>
+  
+<table>
+
+  <tbody>
+    <tr>
+      <td>We think that computational problem Ξ
+can&#x2019;st be solved in polynomial time.</td>
+      <td>We think that cryptographic protocol Π
+can&#x2019;st be effectively attacked.</td>
+    </tr>
+
+    <tr>
+      <td>We believe this because if Ξ could be
+solved in polynomial time, then so could
+SAT (say).</td>
+      <td>We believe this because if Π could be effectively attacked, then so could RSA (say).</td>
+    </tr>
+
+    <tr>
+      <td>To show this we reduce SAT to Ξ: we
+show that if somebody could solve Ξ in
+polynomial time, then they could solve
+SAT in polynomial time, too.</td>
+      <td>To show this we reduce RSA to Π: we
+show that if somebody could break Π
+by effective means, then they could break
+RSA by effective means, too.</td>
+    </tr>
+  </tbody>
+</table>
+
+    <figure>
+    <label>Figure 1.11</label>
+    <caption>The analogy between reductionist-cryptography and NP-Completeness.</caption>
+    <graphic xlink:href="fig1_11.jpg" mime-subtype="png"/>
+</figure>
+
+  <p>Experience has taught us that the particulars of reductions in cryptography are a little harder to comprehend than they were in elementary complexity theory. Part of the difficulty lies in the fact that every problem domain will have it's own unique notion of what is an <i>“effective attack.”</i> It's rather like having a different <i>“version”</i> of the notion of <i>NP-Completeness</i> as you move from one problem to another. We will also be concerned with the <i>quality</i> of reductions. One could have concerned oneself with this in complexity theory, but it's not usually done. For doing practical work in cryptography, however, paying attention to the <i>quality</i> of reductions is important. Given these difficulties, we will proceed rather slowly through the ideas. Don't worry; you will get it (even if you never heard of <i>NP-Completeness</i>).</p>
+
+  <p>The concept of using reductions in cryptography is a beautiful and powerful idea. Some of us by now are so used to it that we can forget how innovative it was! And for those not used to it, it can be hard to understand (or, perhaps, believe) at first hearing—perhaps because it delivers so much. Protocols designed this way truly have superior security guarantees.</p>
+
+  <p>In some ways the term <i>“provable security”</i> is misleading. As the above indicates, what is probably the central step is providing a model and definition, which does not involve proving anything. And then, one does not <i>“prove a scheme secure:”</i> one provides a reduction of the security of the scheme to the security of some underlying atomic primitive. For that reason, we sometimes use the term <i>“reductionist security”</i> instead of <i>“provable security”</i> to refer to this genre of work.</p>
+
+</sec>
+
+<sec>
+    <title><label>1.4.7</label>Theory for practice</title>
+
+      <p>As you have by now inferred, this course emphasizes general principles, not specific systems. We will not be talking about the latest holes in <i>sendmail</i> or <i>Netscape</i>, how to configure <i>PGP</i>, or the latest attack against the <i>ISO 9796 signature standard</i>. This kind of stuff is interesting and useful, but it is also pretty <i>transitory</i>. Our focus is to understand the fundamentals, so that we know how to deal with new problems as they arise.</p>
+
+  <p>We want to make this clear because cryptography and security are now quite hyped topic. There are many buzzwords floating around. Maybe someone will ask you if, having taken a course, you know one of them, and you will not have heard of it. Don't be alarmed. Often these buzzwords don't mean much.</p>
+
+  <p>This is a <i>theory</i> course. Make no mistake about that! Not in the sense that we don't care about practice, but in the sense that we approach practice by trying to understand the fundamentals and how to apply them. Thus the main goal is to understand the theory of protocol design, and how to apply it. We firmly believe it is via an understanding of the theory that good design comes. If you know the theory you can apply it anywhere; if you only know the latest technology your knowledge will soon by obsolete. We will see how the theory and the practice can contribute to each other, refining our understanding of both.</p>
+
+  <p>In assignments you will be asked to prove theorems. There may be a bit of mathematics for you to pick up. But more than that, there is <i>“mathematical thinking.”</i></p>
+
+  <p>Don't be alarmed if what you find in these pages contradicts <i>“conventional wisdom.”</i> Conventional wisdom is often wrong! And often the standard texts give an impression that the field is the domain of experts, where to know whether something works or not, you must consult an expert or the recent papers to see if an attack has appeared. The difference in our approach is that you will be given reasoning tools, and you can then think for yourself.</p>
+
+  <p>Cryptography is fun. Devising definitions, designing protocols, and proving them correct is a highly creative endeavor. We hope you come to enjoy thinking about this stuff, and that you come to appreciate the elegance in this domain.</p>
+
+</sec>
+
+</sec>
+
+<sec>
+                <title><label>1.5</label>What background do I need?</title>
+                <p>Now that you have had some introduction to the material and themes of the class, you need to
+                    decide whether you should take it. Here are some things to consider in making this decision.</p>
+                <p>A student taking this course is expected to be comfortable with the following kinds of things,
+                    which are covered in various other courses.</p>
+                <p>The first is probability theory. Probability is everywhere in cryptography. You should be
+                    comfortable with ideas like sample spaces, events, experiments, conditional probability, random
+                    variables and their expectations. We won&#x2019;st use anything deep from probability theory, but we will
+                    draw heavily on the language and basic concepts of this field.</p>
+                <p>Youshould know about alphabets, strings and formal languages, in the style of an undergraduate
+                    course in the theory of computation.</p>
+                <p>You should know about algorithms and how to measure their complexity. In particular, you
+                    should have taken and understood at least an undergraduate algorithms class.</p>
+                <p>Most of all you should have general mathematical maturity, meaning, especially, you need to
+                    be able to understand what is (and what is not) a proper definition.</p>
+            </sec>
+
+
+            <sec>
+                <title><b><label>1.6</label>Problems</b></title>
+                <p><label><b>Problem 1.1</b></label> Besides the symmetric and the asymmetric trust models, think of a
+                    couple more
+                    ways to “create asymmetry” between the receiver and the adversary. Show how you would encrypt
+                    a bit in your model.</p>
+                <p><label><b>Problem 1.2</b></label> In the telephone coin-flipping protocol, what should happen if
+                    Alice refuses to send
+                    her second message? Is this potentially damaging?</p>
+                <p><label><b>Problem 1.3</b></label>Argue that what we have said about keeping the algorithm public but
+                    the key secret
+                    is fundamentally meaningless.</p>
+                <p><label><b>Problem 1.4</b></label> A limitation on fixed-time fair-coin-flipping TMs. Consider the
+                    model of computa
+                    tion in which we augment a Turing machine so that it can obtain the output of a random coin flip:
+                    by going into a distinguished state Q$, the next state will be QH with probability 1/2, and the
+                    next state will be QT with probability 1/2. Show that, in this model of computation, there is no
+                    constant-time algorithm to perfectly deal out five cards to each of two players.
+                    (A deck of cards consists of 52 cards, and a perfect deal means that all hands should be equally
+                    likely. Saying that the algorithm is constant-time means that there is some number T such that
+                    the algorithm is guaranteed to stop within T steps.)</p>
+                <p><label><b>Problem 1.5</b></label> Composition of EPT Algorithms. John designs an EPT (expected
+                    polynomial time)
+                    algorithm to solve some computational problem Π—but he assumes that he has in hand a black
+                    box (ie., a unit-time subroutine) which solves some other computational problem, Π. Tedsoon
+                    discovers an EPT algorithm to solve Π. True or false: putting these two pieces together, John and
+                    Ted now have an EPT algorithm for Π. Give a proof or counterexample. <br />
+                    (When we speak of the worst-case running time of machine M we are looking at the function
+                    T(n) which gives, for each n, the maximal time which M might spend on an input of size n: T(n)=
+                    maxx, |x|=n[#StepsM(x)]. When we speak of the expected running time of M we are instead looking
+                    at the function T(n) which gives, for each n, the maximal value among inputs of length n of the
+                    expected value of the running time of M on this input—that is, T(n)=maxx, |x|=nE[#StepsM(x)],
+                    where the expectation is over the random choices made by M.)
+                </p>
+            </sec>
+
+
+</sec> 
+
+</body>
+
+</book>
